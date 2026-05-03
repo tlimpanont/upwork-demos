@@ -1,0 +1,55 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "globalDependencies": [".env", ".env.local"],
+  "globalEnv": [
+    "NODE_ENV",
+    "VERCEL",
+    "VERCEL_ENV",
+    "VERCEL_URL"
+  ],
+  "tasks": {
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "env": [
+        "OPENAI_API_KEY",
+        "DATABASE_URL",
+        "PINECONE_API_KEY",
+        "PINECONE_INDEX_NAME",
+        "BLOB_READ_WRITE_TOKEN",
+        "NEXTAUTH_SECRET",
+        "NEXTAUTH_URL",
+        "STRIPE_SECRET_KEY",
+        "STRIPE_WEBHOOK_SECRET",
+        "STRIPE_PUBLISHABLE_KEY"
+      ]
+    },
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"],
+      "env": [
+        "OPENAI_API_KEY",
+        "DATABASE_URL",
+        "PINECONE_API_KEY",
+        "PINECONE_INDEX_NAME",
+        "BLOB_READ_WRITE_TOKEN",
+        "NEXTAUTH_SECRET",
+        "NEXTAUTH_URL",
+        "STRIPE_SECRET_KEY",
+        "STRIPE_WEBHOOK_SECRET",
+        "STRIPE_PUBLISHABLE_KEY"
+      ]
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "start": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["build"]
+    },
+    "clean": {
+      "cache": false
+    }
+  }
+}

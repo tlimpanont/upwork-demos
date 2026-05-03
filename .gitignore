@@ -1,0 +1,52 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# build output
+.next/
+out/
+build/
+dist/
+
+# turborepo
+.turbo/
+
+# testing
+coverage/
+
+# env (committed: .env.example only)
+.env
+.env.*
+!.env.example
+!.env*.example
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# vercel
+.vercel
+
+# ide / editor
+.idea/
+.vscode/
+*.swp
+
+# claude code
+.claude/
+
+# os
+.DS_Store
+Thumbs.db
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*

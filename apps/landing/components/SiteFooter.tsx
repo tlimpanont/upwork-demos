@@ -2,6 +2,9 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 export default function SiteFooter() {
   const year = new Date().getFullYear();
@@ -28,11 +31,27 @@ export default function SiteFooter() {
           <Typography variant="caption" color="text.secondary">
             © {year} Theuy Limpanont
           </Typography>
-          <Stack direction="row" spacing={2.5}>
+          <Stack
+            direction="row"
+            spacing={2.5}
+            sx={{ alignItems: "center" }}
+          >
             <FooterLink href="/#services">Services</FooterLink>
             <FooterLink href="/#demos">Work</FooterLink>
             <FooterLink href="/case-studies">Case studies</FooterLink>
             <FooterLink href="/#contact">Contact</FooterLink>
+            <Stack direction="row" spacing={0.5} sx={{ ml: 0.5 }}>
+              <SocialIcon
+                href="https://github.com/tlimpanont"
+                label="GitHub"
+                icon={<GitHubIcon fontSize="small" />}
+              />
+              <SocialIcon
+                href="https://www.linkedin.com/in/theuylimpanont/"
+                label="LinkedIn"
+                icon={<LinkedInIcon fontSize="small" />}
+              />
+            </Stack>
           </Stack>
         </Stack>
       </Container>
@@ -50,5 +69,32 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
     >
       {children}
     </Typography>
+  );
+}
+
+function SocialIcon({
+  href,
+  label,
+  icon,
+}: {
+  href: string;
+  label: string;
+  icon: React.ReactNode;
+}) {
+  return (
+    <IconButton
+      component="a"
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+      size="small"
+      sx={{
+        color: "text.secondary",
+        "&:hover": { color: "text.primary" },
+      }}
+    >
+      {icon}
+    </IconButton>
   );
 }

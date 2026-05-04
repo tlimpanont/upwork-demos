@@ -12,9 +12,6 @@ export type DemoApp = {
   deepLink?: string;
 };
 
-// NEXT_PUBLIC_* env vars are statically inlined by Next at build time, so
-// `process.env.X || 'fallback'` resolves to the deployed URL in production
-// and to the local dev port during development.
 export const APPS: readonly DemoApp[] = [
   {
     id: "ai-chatbot",
@@ -29,7 +26,7 @@ export const APPS: readonly DemoApp[] = [
     ],
     cta: "View Live Demo",
     icon: "chat",
-    href: process.env.NEXT_PUBLIC_AI_CHATBOT_URL || "http://localhost:3001",
+    href: "/ai-chatbot",
     deepLink: "/admin",
   },
   {
@@ -45,7 +42,7 @@ export const APPS: readonly DemoApp[] = [
     ],
     cta: "View Live Demo",
     icon: "docs",
-    href: process.env.NEXT_PUBLIC_AI_DOCS_URL || "http://localhost:3002",
+    href: "/ai-docs",
   },
   {
     id: "saas-starter",
@@ -60,7 +57,7 @@ export const APPS: readonly DemoApp[] = [
     ],
     cta: "View Live Demo",
     icon: "building",
-    href: process.env.NEXT_PUBLIC_SAAS_STARTER_URL || "http://localhost:3003",
+    href: "/saas-starter",
     deepLink: "/login",
   },
 ] as const;

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
@@ -5,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
-import ChatBubbleRoundedIcon from "@mui/icons-material/ChatBubbleRounded";
+import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 
 type CTAContent = {
   heading: string;
@@ -39,7 +40,45 @@ export default function CTASection({ content }: { content: CTAContent }) {
               justifyContent: "space-between",
             }}
           >
-            <Stack spacing={1.5} sx={{ maxWidth: 620 }}>
+            <Stack spacing={2.5} sx={{ maxWidth: 620 }}>
+              <Stack direction="row" spacing={1.75} sx={{ alignItems: "center" }}>
+                <Box
+                  sx={{
+                    position: "relative",
+                    width: 48,
+                    height: 48,
+                    borderRadius: "50%",
+                    overflow: "hidden",
+                    flexShrink: 0,
+                    boxShadow: "0 0 0 2px rgba(255,255,255,0.18)",
+                  }}
+                >
+                  <Image
+                    src="/profile-pic-theuy.jpeg"
+                    alt="Theuy Limpanont"
+                    fill
+                    sizes="48px"
+                    style={{ objectFit: "cover" }}
+                  />
+                </Box>
+                <Stack spacing={0.25}>
+                  <Typography
+                    variant="body2"
+                    sx={{ color: "common.white", fontWeight: 700 }}
+                  >
+                    Theuy Limpanont
+                  </Typography>
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      color: "rgba(255,255,255,0.7)",
+                      letterSpacing: "0.04em",
+                    }}
+                  >
+                    Netherlands · CET · Replies within 4h
+                  </Typography>
+                </Stack>
+              </Stack>
               <Typography
                 variant="h2"
                 sx={{ fontSize: { xs: "1.85rem", md: "2.5rem" }, color: "common.white" }}
@@ -79,7 +118,7 @@ export default function CTASection({ content }: { content: CTAContent }) {
                 size="large"
                 variant="outlined"
                 href={content.secondaryCta.href}
-                startIcon={<ChatBubbleRoundedIcon />}
+                startIcon={<CalendarMonthRoundedIcon />}
                 sx={{
                   borderColor: "rgba(255,255,255,0.7)",
                   color: "common.white",

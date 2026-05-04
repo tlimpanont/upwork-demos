@@ -17,17 +17,18 @@ export default function DemoShowcase() {
             variant="overline"
             sx={{ color: "primary.light", letterSpacing: "0.18em", fontWeight: 700 }}
           >
-            Live demos
+            Live capabilities
           </Typography>
           <Typography variant="h2" sx={{ fontSize: { xs: "2rem", md: "2.75rem" } }}>
-            Three working systems
+            See the stack in production
           </Typography>
           <Typography
             color="text.secondary"
             sx={{ maxWidth: 640, fontSize: { xs: "1rem", md: "1.1rem" } }}
           >
-            Click into any demo to use the real product — not a mockup. Each runs on the
-            same Vercel + Postgres + AI stack you'd ship to production.
+            Three real working systems built on the same patterns I ship to clients
+            — customer-support AI, document processing, and multi-tenant SaaS — each
+            running on the same Vercel + Postgres + AI stack I use in production.
           </Typography>
         </Stack>
 

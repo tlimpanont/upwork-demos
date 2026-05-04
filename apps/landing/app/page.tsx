@@ -4,10 +4,12 @@ import { createReader } from "@keystatic/core/reader";
 import keystaticConfig from "../keystatic.config";
 import SiteHeader from "@/components/SiteHeader";
 import HeroSection from "@/components/HeroSection";
+import ServicesSection from "@/components/ServicesSection";
 import DemoShowcase from "@/components/DemoShowcase";
 import CaseStudiesSection from "@/components/CaseStudiesSection";
 import ArchitectureSection from "@/components/ArchitectureSection";
 import TrustSection from "@/components/TrustSection";
+import FAQSection from "@/components/FAQSection";
 import CTASection from "@/components/CTASection";
 import SiteFooter from "@/components/SiteFooter";
 
@@ -41,10 +43,12 @@ export default async function HomePage() {
       <SiteHeader />
       <Box component="main" sx={{ flexGrow: 1 }}>
         <HeroSection content={hero} />
+        <ServicesSection />
         <DemoShowcase />
         <CaseStudiesSection studies={featuredStudies} />
         <ArchitectureSection />
         <TrustSection content={trust} />
+        <FAQSection />
         <CTASection content={cta} />
       </Box>
       <SiteFooter />

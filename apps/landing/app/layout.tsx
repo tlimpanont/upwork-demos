@@ -3,9 +3,23 @@ import Providers from "./Providers";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "AI + SaaS Demo Platform — Production-ready systems",
+  title: "Theuy Limpanont — Senior full-stack and AI engineer",
   description:
-    "AI-powered SaaS systems ready for production: customer support AI, document processing, and multi-tenant SaaS platforms. Built on Next.js, OpenAI, Pinecone, and Vercel.",
+    "Freelance senior engineer building production-grade web platforms and AI systems. Full-stack, end-to-end — typed APIs, real auth, real billing, AI workflows that ship.",
+  openGraph: {
+    title: "Theuy Limpanont — Senior full-stack and AI engineer",
+    description:
+      "Freelance senior engineer building production-grade web platforms and AI systems.",
+    images: ["/profile-pic-theuy.jpeg"],
+    type: "profile",
+  },
+  twitter: {
+    card: "summary",
+    title: "Theuy Limpanont — Senior full-stack and AI engineer",
+    description:
+      "Freelance senior engineer building production-grade web platforms and AI systems.",
+    images: ["/profile-pic-theuy.jpeg"],
+  },
 };
 
 export default function RootLayout({

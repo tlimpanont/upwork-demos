@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import BoltRoundedIcon from "@mui/icons-material/BoltRounded";
+import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 
 export default function SiteHeader() {
   return (
@@ -31,7 +32,7 @@ export default function SiteHeader() {
               <BoltRoundedIcon sx={{ fontSize: 20 }} />
             </Box>
             <Typography variant="h6" sx={{ fontWeight: 800, letterSpacing: "-0.01em" }}>
-              Demo Platform
+              Theuy Limpanont
             </Typography>
           </Stack>
           <Stack
@@ -41,11 +42,19 @@ export default function SiteHeader() {
           >
             <Typography
               component="a"
+              href="/#services"
+              variant="body2"
+              sx={{ color: "text.secondary", "&:hover": { color: "text.primary" } }}
+            >
+              Services
+            </Typography>
+            <Typography
+              component="a"
               href="/#demos"
               variant="body2"
               sx={{ color: "text.secondary", "&:hover": { color: "text.primary" } }}
             >
-              Demos
+              Work
             </Typography>
             <Typography
               component="a"
@@ -54,14 +63,6 @@ export default function SiteHeader() {
               sx={{ color: "text.secondary", "&:hover": { color: "text.primary" } }}
             >
               Case studies
-            </Typography>
-            <Typography
-              component="a"
-              href="/#architecture"
-              variant="body2"
-              sx={{ color: "text.secondary", "&:hover": { color: "text.primary" } }}
-            >
-              Architecture
             </Typography>
             <Typography
               component="a"
@@ -76,9 +77,10 @@ export default function SiteHeader() {
             href="/#contact"
             variant="contained"
             size="small"
+            startIcon={<CalendarMonthRoundedIcon />}
             sx={{ ml: { xs: 1, md: 3 } }}
           >
-            Book a Call
+            Book a call
           </Button>
         </Toolbar>
       </Container>

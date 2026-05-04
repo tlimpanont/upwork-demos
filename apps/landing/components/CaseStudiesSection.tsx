@@ -39,17 +39,17 @@ export default function CaseStudiesSection({ studies }: { studies: readonly Stud
             variant="overline"
             sx={{ color: "primary.light", letterSpacing: "0.18em", fontWeight: 700 }}
           >
-            Case studies
+            Selected work
           </Typography>
           <Typography variant="h2" sx={{ fontSize: { xs: "2rem", md: "2.75rem" } }}>
-            How they were built
+            What I've built
           </Typography>
           <Typography
             color="text.secondary"
             sx={{ maxWidth: 640, fontSize: { xs: "1rem", md: "1.1rem" } }}
           >
-            Deep-dives into the architectural choices, tradeoffs, and edge cases behind
-            each system.
+            Detailed write-ups of the architectural choices, tradeoffs, and edge cases
+            behind real systems.
           </Typography>
         </Stack>
 

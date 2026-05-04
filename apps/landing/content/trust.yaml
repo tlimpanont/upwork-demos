@@ -1,18 +1,21 @@
-overline: Why this matters
-heading: Demos that ship, not toys
+overline: Why work with me
+heading: Hire for outcomes, not output
 points:
-  - icon: verified
-    title: Production-ready architecture
-    body: >-
-      Each demo uses the same patterns we ship to paying customers: typed APIs,
-      server actions, audit-grade auth, and proper error handling.
-  - icon: trendingUp
-    title: Built for scalability
-    body: >-
-      Serverless by default. Postgres scales to millions of rows, Pinecone to
-      billions of vectors, and Vercel handles the traffic spikes for you.
   - icon: rocketLaunch
-    title: Used for real SaaS products
+    title: From zero to production in 6–8 weeks
     body: >-
-      These aren't tutorial apps. The same building blocks power live products —
-      auth, billing, multi-tenant data, and AI workflows that earn revenue.
+      The case studies above are real systems I built end-to-end — auth,
+      billing, AI features, deployed and live. Same speed for your project,
+      with fixed scope and fixed price.
+  - icon: verified
+    title: Senior, no agency tax
+    body: >-
+      Direct access. No PM in the middle, no junior on the keyboard. The
+      architect, the implementer, and the deployer are the same person — so
+      you're not paying for translation between layers.
+  - icon: trendingUp
+    title: Built to hand off, not lock in
+    body: >-
+      Code review and documentation from day one. You can replace me at any
+      point and another engineer can pick up cleanly. No bus factor, no
+      vendor lock-in baked into the architecture.

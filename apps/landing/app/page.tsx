@@ -1,3 +1,4 @@
+import path from "node:path";
 import Box from "@mui/material/Box";
 import { createReader } from "@keystatic/core/reader";
 import keystaticConfig from "../keystatic.config";
@@ -11,7 +12,7 @@ import CTASection from "@/components/CTASection";
 import SiteFooter from "@/components/SiteFooter";
 
 export default async function HomePage() {
-  const reader = createReader(process.cwd(), keystaticConfig);
+  const reader = createReader(path.resolve(process.cwd(), "../.."), keystaticConfig);
   const [hero, trust, cta, caseStudyEntries] = await Promise.all([
     reader.singletons.hero.readOrThrow(),
     reader.singletons.trust.readOrThrow(),

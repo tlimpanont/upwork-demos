@@ -9,7 +9,7 @@ export default config({
   singletons: {
     hero: singleton({
       label: "Hero",
-      path: "content/hero",
+      path: "apps/landing/content/hero",
       format: { data: "yaml" },
       schema: {
         chip: fields.text({
@@ -50,7 +50,7 @@ export default config({
 
     trust: singleton({
       label: "Trust",
-      path: "content/trust",
+      path: "apps/landing/content/trust",
       format: { data: "yaml" },
       schema: {
         overline: fields.text({
@@ -85,7 +85,7 @@ export default config({
 
     cta: singleton({
       label: "CTA",
-      path: "content/cta",
+      path: "apps/landing/content/cta",
       format: { data: "yaml" },
       schema: {
         heading: fields.text({
@@ -120,7 +120,7 @@ export default config({
     caseStudies: collection({
       label: "Case studies",
       slugField: "title",
-      path: "content/case-studies/*",
+      path: "apps/landing/content/case-studies/*",
       format: { contentField: "body" },
       entryLayout: "content",
       schema: {
@@ -146,7 +146,7 @@ export default config({
     blog: collection({
       label: "Blog",
       slugField: "title",
-      path: "content/blog/*",
+      path: "apps/landing/content/blog/*",
       format: { contentField: "body" },
       entryLayout: "content",
       schema: {
@@ -166,7 +166,7 @@ export default config({
     faq: collection({
       label: "FAQ",
       slugField: "question",
-      path: "content/faq/*",
+      path: "apps/landing/content/faq/*",
       format: { contentField: "answer" },
       schema: {
         question: fields.slug({

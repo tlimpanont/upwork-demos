@@ -1,3 +1,4 @@
+import path from "node:path";
 import { notFound } from "next/navigation";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -14,7 +15,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
 export async function generateStaticParams() {
-  const reader = createReader(process.cwd(), keystaticConfig);
+  const reader = createReader(path.resolve(process.cwd(), "../.."), keystaticConfig);
   const entries = await reader.collections.caseStudies.all();
   return entries.map(({ slug }) => ({ slug }));
 }
@@ -25,7 +26,7 @@ export default async function CaseStudyDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const reader = createReader(process.cwd(), keystaticConfig);
+  const reader = createReader(path.resolve(process.cwd(), "../.."), keystaticConfig);
   const entry = await reader.collections.caseStudies.read(slug);
   if (!entry) notFound();
 

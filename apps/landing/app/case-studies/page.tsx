@@ -1,3 +1,4 @@
+import path from "node:path";
 import Link from "next/link";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -15,7 +16,7 @@ export const metadata = {
 };
 
 export default async function CaseStudiesIndexPage() {
-  const reader = createReader(process.cwd(), keystaticConfig);
+  const reader = createReader(path.resolve(process.cwd(), "../.."), keystaticConfig);
   const entries = await reader.collections.caseStudies.all();
 
   const sorted = [...entries].sort((a, b) => {

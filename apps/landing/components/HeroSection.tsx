@@ -7,7 +7,17 @@ import Chip from "@mui/material/Chip";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 
-export default function HeroSection() {
+type HeroContent = {
+  chip: string;
+  headingLead: string;
+  headingAccent: string;
+  subheading: string;
+  primaryCta: { label: string; href: string };
+  secondaryCta: { label: string; href: string };
+  techLabels: readonly string[];
+};
+
+export default function HeroSection({ content }: { content: HeroContent }) {
   return (
     <Box
       component="section"
@@ -25,7 +35,7 @@ export default function HeroSection() {
       <Container>
         <Stack spacing={3.5} sx={{ alignItems: "center", textAlign: "center" }}>
           <Chip
-            label="Production-ready demos · built for clients"
+            label={content.chip}
             sx={{
               bgcolor: "rgba(129,140,248,0.14)",
               color: "primary.light",
@@ -41,7 +51,7 @@ export default function HeroSection() {
               maxWidth: 900,
             }}
           >
-            AI-Powered SaaS Systems{" "}
+            {content.headingLead}{" "}
             <Box
               component="span"
               sx={{
@@ -50,7 +60,7 @@ export default function HeroSection() {
                 WebkitTextFillColor: "transparent",
               }}
             >
-              Ready for Production
+              {content.headingAccent}
             </Box>
           </Typography>
           <Typography
@@ -62,8 +72,7 @@ export default function HeroSection() {
               fontSize: { xs: "1.05rem", md: "1.2rem" },
             }}
           >
-            Customer Support AI, Document Processing, and multi-tenant SaaS platforms —
-            three working systems, one consistent stack, deployed on Vercel.
+            {content.subheading}
           </Typography>
           <Stack
             direction={{ xs: "column", sm: "row" }}
@@ -73,15 +82,15 @@ export default function HeroSection() {
             <Button
               size="large"
               variant="contained"
-              href="#demos"
+              href={content.primaryCta.href}
               endIcon={<ArrowForwardRoundedIcon />}
             >
-              View Demos
+              {content.primaryCta.label}
             </Button>
             <Button
               size="large"
               variant="outlined"
-              href="#contact"
+              href={content.secondaryCta.href}
               startIcon={<CalendarMonthRoundedIcon />}
               sx={{
                 borderColor: "rgba(255, 255, 255, 0.32)",
@@ -92,7 +101,7 @@ export default function HeroSection() {
                 },
               }}
             >
-              Book a Call
+              {content.secondaryCta.label}
             </Button>
           </Stack>
 
@@ -101,7 +110,7 @@ export default function HeroSection() {
             spacing={4}
             sx={{ justifyContent: "center", flexWrap: "wrap", pt: 4 }}
           >
-            {["Next.js 16", "OpenAI", "Pinecone", "Neon Postgres", "Vercel"].map((label) => (
+            {content.techLabels.map((label) => (
               <Typography
                 key={label}
                 variant="caption"

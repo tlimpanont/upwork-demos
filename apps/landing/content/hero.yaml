@@ -1,0 +1,18 @@
+chip: "Production-ready demos · built for clients"
+headingLead: AI-Powered SaaS Systems
+headingAccent: Ready for Production
+subheading: >-
+  Customer Support AI, Document Processing, and multi-tenant SaaS platforms —
+  three working systems, one consistent stack, deployed on Vercel.
+primaryCta:
+  label: View Demos
+  href: "#demos"
+secondaryCta:
+  label: Book a Call
+  href: "#contact"
+techLabels:
+  - Next.js 16
+  - OpenAI
+  - Pinecone
+  - Neon Postgres
+  - Vercel

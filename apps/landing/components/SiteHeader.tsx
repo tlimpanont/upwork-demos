@@ -41,7 +41,7 @@ export default function SiteHeader() {
           >
             <Typography
               component="a"
-              href="#demos"
+              href="/#demos"
               variant="body2"
               sx={{ color: "text.secondary", "&:hover": { color: "text.primary" } }}
             >
@@ -49,7 +49,15 @@ export default function SiteHeader() {
             </Typography>
             <Typography
               component="a"
-              href="#architecture"
+              href="/case-studies"
+              variant="body2"
+              sx={{ color: "text.secondary", "&:hover": { color: "text.primary" } }}
+            >
+              Case studies
+            </Typography>
+            <Typography
+              component="a"
+              href="/#architecture"
               variant="body2"
               sx={{ color: "text.secondary", "&:hover": { color: "text.primary" } }}
             >
@@ -57,7 +65,7 @@ export default function SiteHeader() {
             </Typography>
             <Typography
               component="a"
-              href="#contact"
+              href="/#contact"
               variant="body2"
               sx={{ color: "text.secondary", "&:hover": { color: "text.primary" } }}
             >
@@ -65,7 +73,7 @@ export default function SiteHeader() {
             </Typography>
           </Stack>
           <Button
-            href="#contact"
+            href="/#contact"
             variant="contained"
             size="small"
             sx={{ ml: { xs: 1, md: 3 } }}

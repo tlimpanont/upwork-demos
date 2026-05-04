@@ -1,0 +1,47 @@
+---
+title: RAG customer-support chatbot grounded in your docs
+summary: A streaming AI assistant that answers from an uploaded knowledge base — and tells you when it doesn't know rather than making things up.
+client: Portfolio demo
+stack:
+  - Next.js 16
+  - OpenAI gpt-4o-mini
+  - Pinecone
+  - Neon Postgres
+publishedAt: 2026-05-04
+---
+
+## Why this exists
+
+Most "AI chatbots" are bare wrappers around the model, which means they confidently invent answers the moment a question goes off-topic. For support use cases that's worse than no bot at all. This one is built around the opposite default: answer only from indexed source documents, cite which file the answer came from, and refuse the question if no relevant context is found.
+
+## What's built
+
+- **Drag-and-drop ingestion.** The admin uploads a PDF, TXT, or MD file; the server parses it, chunks it, embeds each chunk, and writes vectors to Pinecone with the source filename in the metadata. Chunk count is tracked in Postgres so the admin UI can show "doc X — 42 chunks" and remove the doc cleanly.
+- **Retrieval-augmented prompting.** Each user message triggers a top-5 vector lookup; the matching chunks are stitched into the system prompt as a `## Knowledge base` block before the model sees the question.
+- **Streaming chat UI.** Tokens stream from the API route to the browser via the Vercel AI SDK, so users see the answer build in real time.
+- **Persona with rules of engagement.** The system prompt defines an `Aria` persona, but more importantly defines what *not* to do — no guessing, no competitor talk, no asking for credentials, escalate after three failed attempts.
+- **Admin console.** `/admin` lists indexed documents with chunk counts, supports delete, and validates upload types before ingestion.
+
+## Technical choices worth calling out
+
+### Pinecone serverless, 1024-dim cosine
+
+The embedding model is `llama-text-embed-v2` (1024 dimensions). Cosine distance over normalised vectors gives stable nearest-neighbour scores, and Pinecone Serverless means there's no idle pod cost between conversations.
+
+### "Don't know" is the default, not the fallback
+
+If retrieval returns zero relevant chunks, the prompt builder strips the knowledge-base block entirely, and the persona's rule kicks in: "Never guess. If you are unsure, say so and suggest the user contact a human agent." This pushes the model toward refusing a question rather than confabulating — the most common production failure mode for support bots.
+
+### Source attribution baked into the prompt
+
+Every retrieved chunk is prefixed with `[1] (from: returns-policy.pdf)` etc. The prompt instructs the model to mention file names naturally ("According to our returns policy…"), so users see *where* an answer came from without needing a UI for it.
+
+### Postgres tracks documents, Pinecone tracks vectors
+
+Two-store design: Pinecone holds the vectors and chunk text; Neon Postgres holds the canonical document record (filename, chunk count, upload time). Listing docs in the admin doesn't hit Pinecone, and deleting a doc cascades both stores in one server action.
+
+## Outcome
+
+The same RAG pipeline drops into client products that need grounded AI Q&A — internal knowledge bases, customer support, document portals — without rewriting the persona logic, retrieval pattern, or two-store data model.
+
+[Live demo →](https://upwork-demos-ai-chatbot.vercel.app)

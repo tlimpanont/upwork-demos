@@ -1,22 +1,50 @@
 import Box from "@mui/material/Box";
+import { createReader } from "@keystatic/core/reader";
+import keystaticConfig from "../keystatic.config";
 import SiteHeader from "@/components/SiteHeader";
 import HeroSection from "@/components/HeroSection";
 import DemoShowcase from "@/components/DemoShowcase";
+import CaseStudiesSection from "@/components/CaseStudiesSection";
 import ArchitectureSection from "@/components/ArchitectureSection";
 import TrustSection from "@/components/TrustSection";
 import CTASection from "@/components/CTASection";
 import SiteFooter from "@/components/SiteFooter";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const reader = createReader(process.cwd(), keystaticConfig);
+  const [hero, trust, cta, caseStudyEntries] = await Promise.all([
+    reader.singletons.hero.readOrThrow(),
+    reader.singletons.trust.readOrThrow(),
+    reader.singletons.cta.readOrThrow(),
+    reader.collections.caseStudies.all(),
+  ]);
+
+  const featuredStudies = [...caseStudyEntries]
+    .sort((a, b) => {
+      const aTime = a.entry.publishedAt ? new Date(a.entry.publishedAt).getTime() : 0;
+      const bTime = b.entry.publishedAt ? new Date(b.entry.publishedAt).getTime() : 0;
+      return bTime - aTime;
+    })
+    .slice(0, 3)
+    .map(({ slug, entry }) => ({
+      slug,
+      title: entry.title,
+      summary: entry.summary,
+      client: entry.client,
+      stack: entry.stack,
+      publishedAt: entry.publishedAt,
+    }));
+
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <SiteHeader />
       <Box component="main" sx={{ flexGrow: 1 }}>
-        <HeroSection />
+        <HeroSection content={hero} />
         <DemoShowcase />
+        <CaseStudiesSection studies={featuredStudies} />
         <ArchitectureSection />
-        <TrustSection />
-        <CTASection />
+        <TrustSection content={trust} />
+        <CTASection content={cta} />
       </Box>
       <SiteFooter />
     </Box>

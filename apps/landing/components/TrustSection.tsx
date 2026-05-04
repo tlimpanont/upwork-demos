@@ -1,3 +1,4 @@
+import type { SvgIconComponent } from "@mui/icons-material";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
@@ -6,25 +7,23 @@ import VerifiedRoundedIcon from "@mui/icons-material/VerifiedRounded";
 import TrendingUpRoundedIcon from "@mui/icons-material/TrendingUpRounded";
 import RocketLaunchRoundedIcon from "@mui/icons-material/RocketLaunchRounded";
 
-const POINTS = [
-  {
-    title: "Production-ready architecture",
-    body: "Each demo uses the same patterns we ship to paying customers: typed APIs, server actions, audit-grade auth, and proper error handling.",
-    Icon: VerifiedRoundedIcon,
-  },
-  {
-    title: "Built for scalability",
-    body: "Serverless by default. Postgres scales to millions of rows, Pinecone to billions of vectors, and Vercel handles the traffic spikes for you.",
-    Icon: TrendingUpRoundedIcon,
-  },
-  {
-    title: "Used for real SaaS products",
-    body: "These aren't tutorial apps. The same building blocks power live products — auth, billing, multi-tenant data, and AI workflows that earn revenue.",
-    Icon: RocketLaunchRoundedIcon,
-  },
-];
+const ICONS: Record<string, SvgIconComponent> = {
+  verified: VerifiedRoundedIcon,
+  trendingUp: TrendingUpRoundedIcon,
+  rocketLaunch: RocketLaunchRoundedIcon,
+};
 
-export default function TrustSection() {
+type TrustContent = {
+  overline: string;
+  heading: string;
+  points: readonly {
+    icon: string;
+    title: string;
+    body: string;
+  }[];
+};
+
+export default function TrustSection({ content }: { content: TrustContent }) {
   return (
     <Box component="section" sx={{ py: { xs: 8, md: 12 } }}>
       <Container>
@@ -36,10 +35,10 @@ export default function TrustSection() {
             variant="overline"
             sx={{ color: "primary.light", letterSpacing: "0.18em", fontWeight: 700 }}
           >
-            Why this matters
+            {content.overline}
           </Typography>
           <Typography variant="h2" sx={{ fontSize: { xs: "2rem", md: "2.75rem" } }}>
-            Demos that ship, not toys
+            {content.heading}
           </Typography>
         </Stack>
 
@@ -50,27 +49,30 @@ export default function TrustSection() {
             gridTemplateColumns: { xs: "1fr", md: "repeat(3, 1fr)" },
           }}
         >
-          {POINTS.map(({ title, body, Icon }) => (
-            <Stack key={title} spacing={2}>
-              <Box
-                sx={{
-                  width: 44,
-                  height: 44,
-                  borderRadius: 2,
-                  bgcolor: "rgba(165,180,252,0.14)",
-                  color: "primary.light",
-                  display: "grid",
-                  placeItems: "center",
-                }}
-              >
-                <Icon />
-              </Box>
-              <Typography variant="h5" component="h3" sx={{ fontWeight: 700 }}>
-                {title}
-              </Typography>
-              <Typography color="text.secondary">{body}</Typography>
-            </Stack>
-          ))}
+          {content.points.map(({ icon, title, body }) => {
+            const Icon = ICONS[icon] ?? VerifiedRoundedIcon;
+            return (
+              <Stack key={title} spacing={2}>
+                <Box
+                  sx={{
+                    width: 44,
+                    height: 44,
+                    borderRadius: 2,
+                    bgcolor: "rgba(165,180,252,0.14)",
+                    color: "primary.light",
+                    display: "grid",
+                    placeItems: "center",
+                  }}
+                >
+                  <Icon />
+                </Box>
+                <Typography variant="h5" component="h3" sx={{ fontWeight: 700 }}>
+                  {title}
+                </Typography>
+                <Typography color="text.secondary">{body}</Typography>
+              </Stack>
+            );
+          })}
         </Box>
       </Container>
     </Box>

@@ -24,13 +24,15 @@ const ICONS: Record<DemoIcon, React.ElementType> = {
   building: ApartmentRoundedIcon,
 };
 
-// Each accent is the WCAG-safe shade. White text on these passes 4.5:1, and the
-// same color used on `${accent}14` tinted bg (chips, icons) passes 4.5:1 too.
-// Lighter tinted backgrounds still feel airy because the alpha is only 8–10%.
-const ACCENT: Record<DemoIcon, string> = {
-  chat: "#4338CA", // indigo-700 — 7.7:1 vs white (matches theme primary)
-  docs: "#0369A1", // sky-700   — 6.5:1 vs white
-  building: "#047857", // emerald-700 — 5.0:1 vs white
+// `base` is used for icon bg fill, hover border, and the contained CTA button
+// background — white text on each base passes ≥4.5:1 contrast.
+// `tint` is the chip/icon-bg text color. In light mode that text sits on a tinted
+// near-white surface, so we keep the dark `base`. In dark mode the same tint
+// sits on a near-black surface, so we flip to the light shade.
+const ACCENT: Record<DemoIcon, { base: string; tintLight: string; tintDark: string }> = {
+  chat: { base: "#4338CA", tintLight: "#4338CA", tintDark: "#A5B4FC" },
+  docs: { base: "#0369A1", tintLight: "#0369A1", tintDark: "#7DD3FC" },
+  building: { base: "#047857", tintLight: "#047857", tintDark: "#6EE7B7" },
 };
 
 export default function DemoCard({ app }: DemoCardProps) {
@@ -49,7 +51,7 @@ export default function DemoCard({ app }: DemoCardProps) {
         "&:hover": {
           transform: "translateY(-4px)",
           boxShadow: 4,
-          borderColor: accent,
+          borderColor: accent.base,
         },
       }}
     >
@@ -63,8 +65,11 @@ export default function DemoCard({ app }: DemoCardProps) {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              bgcolor: `${accent}1A`,
-              color: accent,
+              bgcolor: `${accent.base}1A`,
+              color: accent.tintLight,
+              '[data-mui-color-scheme="dark"] &': {
+                color: accent.tintDark,
+              },
             }}
           >
             <Icon fontSize="medium" />
@@ -73,10 +78,13 @@ export default function DemoCard({ app }: DemoCardProps) {
             size="small"
             label="Live demo"
             sx={{
-              bgcolor: `${accent}14`,
-              color: accent,
+              bgcolor: `${accent.base}14`,
+              color: accent.tintLight,
               fontWeight: 600,
               border: 0,
+              '[data-mui-color-scheme="dark"] &': {
+                color: accent.tintDark,
+              },
             }}
           />
         </Stack>
@@ -105,7 +113,15 @@ export default function DemoCard({ app }: DemoCardProps) {
               sx={{ alignItems: "flex-start" }}
             >
               <CheckCircleRoundedIcon
-                sx={{ fontSize: 18, color: accent, mt: "2px", flexShrink: 0 }}
+                sx={{
+                  fontSize: 18,
+                  color: accent.tintLight,
+                  mt: "2px",
+                  flexShrink: 0,
+                  '[data-mui-color-scheme="dark"] &': {
+                    color: accent.tintDark,
+                  },
+                }}
               />
               <Typography variant="body2" color="text.primary">
                 {feature}
@@ -124,8 +140,8 @@ export default function DemoCard({ app }: DemoCardProps) {
           rel="noopener noreferrer"
           endIcon={<LaunchRoundedIcon />}
           sx={{
-            bgcolor: accent,
-            "&:hover": { bgcolor: accent, filter: "brightness(0.92)" },
+            bgcolor: accent.base,
+            "&:hover": { bgcolor: accent.base, filter: "brightness(0.92)" },
           }}
         >
           {app.cta}

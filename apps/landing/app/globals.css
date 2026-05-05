@@ -9,8 +9,11 @@ body {
 }
 
 a {
-  color: inherit;
   text-decoration: none;
+}
+
+a:not(.MuiButtonBase-root) {
+  color: inherit;
 }
 
 @media (prefers-reduced-motion: no-preference) {

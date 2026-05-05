@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import Providers from "./Providers";
 import "./globals.css";
 
@@ -73,15 +74,21 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0B0F19",
-  colorScheme: "dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#0B0F19" },
+    { media: "(prefers-color-scheme: light)", color: "#FFFFFF" },
+  ],
+  colorScheme: "light dark",
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" data-mui-color-scheme="dark">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <InitColorSchemeScript attribute="data" defaultMode="system" />
+      </head>
       <body>
         <Providers>{children}</Providers>
       </body>

@@ -9,7 +9,9 @@ const inter = Inter({
 });
 
 const theme = createTheme({
-  cssVariables: true,
+  cssVariables: {
+    colorSchemeSelector: "data",
+  },
   colorSchemes: {
     dark: {
       palette: {
@@ -39,6 +41,37 @@ const theme = createTheme({
         action: {
           hover: "rgba(255, 255, 255, 0.06)",
           selected: "rgba(255, 255, 255, 0.10)",
+        },
+      },
+    },
+    light: {
+      palette: {
+        primary: {
+          // primary.light in light mode is used as a TEXT color on white/near-white
+          // surfaces (overlines, chip labels). #4338CA gives ≥7.5:1 contrast on
+          // both #FFFFFF and the chip-tint backgrounds.
+          main: "#4F46E5",
+          light: "#4338CA",
+          dark: "#3730A3",
+          contrastText: "#FFFFFF",
+        },
+        secondary: { main: "#0284C7", light: "#38BDF8" },
+        success: { main: "#059669", light: "#34D399" },
+        warning: { main: "#D97706", light: "#FBBF24" },
+        error: { main: "#DC2626" },
+        background: {
+          default: "#FFFFFF",
+          paper: "#F8FAFC",
+        },
+        text: {
+          primary: "#0B0F19",
+          secondary: "rgba(11, 15, 25, 0.7)",
+          disabled: "rgba(11, 15, 25, 0.45)",
+        },
+        divider: "rgba(11, 15, 25, 0.12)",
+        action: {
+          hover: "rgba(11, 15, 25, 0.04)",
+          selected: "rgba(11, 15, 25, 0.08)",
         },
       },
     },
@@ -80,11 +113,14 @@ const theme = createTheme({
     MuiAppBar: {
       defaultProps: { elevation: 0, color: "transparent", position: "sticky" },
       styleOverrides: {
-        root: {
-          backgroundColor: "rgba(11, 15, 25, 0.72)",
+        root: ({ theme }) => ({
           backdropFilter: "saturate(180%) blur(12px)",
           borderBottom: "1px solid var(--mui-palette-divider)",
-        },
+          backgroundColor: "rgba(11, 15, 25, 0.72)",
+          ...theme.applyStyles("light", {
+            backgroundColor: "rgba(255, 255, 255, 0.85)",
+          }),
+        }),
       },
     },
     MuiContainer: {

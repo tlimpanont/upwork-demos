@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import BoltRoundedIcon from "@mui/icons-material/BoltRounded";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
+import ThemeToggle from "./ThemeToggle";
 
 export default function SiteHeader() {
   return (
@@ -73,15 +74,21 @@ export default function SiteHeader() {
               Contact
             </Typography>
           </Stack>
-          <Button
-            href="/#contact"
-            variant="contained"
-            size="small"
-            startIcon={<CalendarMonthRoundedIcon />}
-            sx={{ ml: { xs: 1, md: 3 } }}
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={{ alignItems: "center", ml: { xs: 1, md: 3 } }}
           >
-            Book a call
-          </Button>
+            <ThemeToggle />
+            <Button
+              href="/#contact"
+              variant="contained"
+              size="small"
+              startIcon={<CalendarMonthRoundedIcon />}
+            >
+              Book a call
+            </Button>
+          </Stack>
         </Toolbar>
       </Container>
     </AppBar>

@@ -15,12 +15,16 @@ import SiteFooter from "@/components/SiteFooter";
 
 export default async function HomePage() {
   const reader = createReader(path.resolve(process.cwd(), "../.."), keystaticConfig);
-  const [hero, trust, cta, caseStudyEntries] = await Promise.all([
-    reader.singletons.hero.readOrThrow(),
-    reader.singletons.trust.readOrThrow(),
-    reader.singletons.cta.readOrThrow(),
-    reader.collections.caseStudies.all(),
-  ]);
+  const [hero, services, architecture, faq, trust, cta, caseStudyEntries] =
+    await Promise.all([
+      reader.singletons.hero.readOrThrow(),
+      reader.singletons.services.readOrThrow(),
+      reader.singletons.architecture.readOrThrow(),
+      reader.singletons.faq.readOrThrow(),
+      reader.singletons.trust.readOrThrow(),
+      reader.singletons.cta.readOrThrow(),
+      reader.collections.caseStudies.all(),
+    ]);
 
   const featuredStudies = [...caseStudyEntries]
     .sort((a, b) => {
@@ -43,12 +47,12 @@ export default async function HomePage() {
       <SiteHeader />
       <Box component="main" sx={{ flexGrow: 1 }}>
         <HeroSection content={hero} />
-        <ServicesSection />
+        <ServicesSection content={services} />
         <DemoShowcase />
         <CaseStudiesSection studies={featuredStudies} />
-        <ArchitectureSection />
+        <ArchitectureSection content={architecture} />
         <TrustSection content={trust} />
-        <FAQSection />
+        <FAQSection content={faq} />
         <CTASection content={cta} />
       </Box>
       <SiteFooter />

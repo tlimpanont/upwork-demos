@@ -1,0 +1,26 @@
+overline: Architecture
+heading: Boring stack, modern tools
+intro: >-
+  One coherent stack across all three demos. Battle-tested infrastructure that
+  scales to production without a rewrite.
+layers:
+  - name: Vercel
+    detail: Serverless edge runtime
+    icon: cloud
+    accent: "#FFFFFF"
+  - name: OpenAI
+    detail: GPT-4o + embeddings
+    icon: psychology
+    accent: "#34D399"
+  - name: Pinecone
+    detail: Vector search
+    icon: hub
+    accent: "#A5B4FC"
+  - name: Neon Postgres
+    detail: Serverless SQL
+    icon: storage
+    accent: "#7DD3FC"
+  - name: Vercel Blob
+    detail: Object storage
+    icon: inventory
+    accent: "#FCD34D"

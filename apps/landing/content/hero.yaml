@@ -18,3 +18,4 @@ techLabels:
   - Pinecone
   - Neon Postgres
   - Vercel
+euRegionNote: "EU-region deployments available — Hetzner, AWS eu-central, Mistral"

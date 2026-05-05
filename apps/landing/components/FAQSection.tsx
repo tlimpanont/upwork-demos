@@ -7,75 +7,16 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 
-type QA = {
-  question: string;
-  answer: string;
+type FAQContent = {
+  overline: string;
+  heading: string;
+  items: readonly {
+    question: string;
+    answer: string;
+  }[];
 };
 
-const FAQ: readonly QA[] = [
-  {
-    question: "How much does an engagement cost?",
-    answer:
-      "Three models, anchored: Fixed-scope project — typically €30,000–€45,000 for an MVP-sized build (auth, billing, one AI feature, deployed end-to-end), quoted after a free 30-minute scoping call. Monthly retainer — €6,500/month for 8 days of senior engineering with a response SLA. Architecture review or consulting — €125/hour, 4-hour minimum, with a written deliverable. All prices excl. 21% VAT (reverse-charged for EU B2B). Bad fits get a referral, not a sales pitch.",
-  },
-  {
-    question: "When can you start? What's your availability?",
-    answer:
-      "I take on one major engagement per quarter so I can give it real attention. Currently accepting one project starting Q3 2026 (July onwards). Smaller pieces — architecture audits, week-long sprints, or retainers with spare capacity — are often available sooner, sometimes within 2–3 weeks. If your timing is tight, ask; I'll tell you honestly whether I can fit it.",
-  },
-  {
-    question: "What stacks and problems do you NOT work on?",
-    answer:
-      "I focus on TypeScript + Node.js + Postgres on the web side, and OpenAI / Anthropic / Pinecone / Vercel for AI. I'm not the right person for: native mobile (iOS / Android), Salesforce or HubSpot customisations, blockchain or web3, ML model training from scratch, or maintaining legacy PHP / Java / .NET systems. If you ask anyway, I'll refer you to someone better suited rather than wasting a call.",
-  },
-  {
-    question: "Will you work alongside our existing dev team?",
-    answer:
-      "Yes — most engagements are augmentation, not solo. I plug into your GitHub, your Slack or Discord, and your ticket system, work in PRs your team reviews, and adapt to your conventions. Often I'm brought in to unblock a specific layer (AI integration, infrastructure, auth) so your in-house team stays focused on product.",
-  },
-  {
-    question: "Do you also do design and UX, or do I need a separate designer?",
-    answer:
-      "Component-level UX, clean MUI / Tailwind interfaces, and reasonable visual polish — yes, included in any build. New brand identity, marketing-grade visual design, or a full design system — that's a designer's job, and I'll happily work with whoever you bring or recommend one from my network.",
-  },
-  {
-    question: "Can I see the source code I'm paying for?",
-    answer:
-      "Yes. Work happens in your GitHub organisation from day one — you own it, I review it through PRs, and you can audit the history at any point. No black-box deliveries, no zip-files-at-the-end-of-the-project.",
-  },
-  {
-    question: "What if my needs change mid-project?",
-    answer:
-      "Fixed-scope projects include a written change-control: any new requirement gets quoted as a small extension before work starts. You always know what you're paying for, and there are no surprise invoices. For retainers, scope is renegotiated month-to-month — you only commit one cycle at a time.",
-  },
-  {
-    question: "How do you handle handover and documentation?",
-    answer:
-      "Documentation is written alongside the code, not in a final-week scramble. On delivery you get a runbook, an architecture diagram, environment variable docs, and a README that lets any senior engineer take over cleanly. You should be able to fire me at any point without losing momentum — that's a feature, not an admission.",
-  },
-  {
-    question: "Do you offer maintenance after launch?",
-    answer:
-      "Yes — usually as a monthly retainer with a response SLA, bug fixes, and small features. Sized to whatever cadence your product needs, without paying for over-capacity. Or you can hand the system to your in-house team and I close out cleanly with a knowledge-transfer week.",
-  },
-  {
-    question: "What if you get sick or unavailable mid-project?",
-    answer:
-      "Real risk for any solo engineer, so the architecture is designed to be picked up by another senior engineer at any moment — clean code, written docs, no clever tricks. For multi-month engagements I introduce a backup engineer from my network at the start. If something happens, you're not stranded with a half-built system.",
-  },
-  {
-    question: "What's your timezone and response time?",
-    answer:
-      "Based in the Netherlands (CET / CEST). Typical response within 4 working hours, same-day for active engagements. Async-first by default — no daily standups unless you want them. I work comfortably with US East Coast and most European timezones.",
-  },
-  {
-    question: "Do you sign NDAs and IP assignment?",
-    answer:
-      "Yes to both, before any code or detail-level discussion. Standard mutual NDA up front; work-for-hire IP assignment in the engagement contract so all delivered code, schemas, and prompts are yours from the moment they're written. Templates available, or I'm happy to sign yours.",
-  },
-];
-
-export default function FAQSection() {
+export default function FAQSection({ content }: { content: FAQContent }) {
   return (
     <Box
       component="section"
@@ -95,15 +36,15 @@ export default function FAQSection() {
             variant="overline"
             sx={{ color: "primary.light", letterSpacing: "0.18em", fontWeight: 700 }}
           >
-            Frequently asked
+            {content.overline}
           </Typography>
           <Typography variant="h2" sx={{ fontSize: { xs: "2rem", md: "2.75rem" } }}>
-            Things clients ask before booking
+            {content.heading}
           </Typography>
         </Stack>
 
         <Stack spacing={1.5}>
-          {FAQ.map(({ question, answer }) => (
+          {content.items.map(({ question, answer }) => (
             <Accordion
               key={question}
               disableGutters

@@ -1,0 +1,42 @@
+overline: How I help
+heading: From idea to production-ready
+intro: >-
+  Three things I'm hired for — and the patterns I bring with me, so you don't
+  pay for me to invent the wheel each engagement.
+items:
+  - title: AI-powered SaaS MVP
+    price: From €30,000
+    duration: "6–8 weeks · fixed scope, fixed price"
+    body: >-
+      Your product, live and earning revenue. Auth, Stripe billing,
+      multi-tenant data, and your first AI feature — all deployed.
+    bullets:
+      - "Auth, RBAC, Stripe Checkout + webhooks"
+      - Multi-tenant Postgres with audit-grade isolation
+      - One AI feature integrated end-to-end
+      - Deployed on Vercel with monitoring
+    icon: layers
+  - title: AI feature for an existing SaaS
+    price: From €15,000
+    duration: "3–4 weeks · drop-in for live products"
+    body: >-
+      Add a production-grade AI capability to your existing app — RAG,
+      structured extraction, or an agent — wired into your auth and billing.
+    bullets:
+      - RAG with grounded citations
+      - Schema-typed extraction (Zod)
+      - Hybrid semantic + numeric search
+      - Eval harness + cost monitoring
+    icon: psychology
+  - title: AI audit & roadmap
+    price: "€125 / hour · from €4,000"
+    duration: "1 week · diagnostic + 90-day plan"
+    body: >-
+      Senior architectural review of your current system or AI strategy. You
+      walk away with a written plan you can hand to any team.
+    bullets:
+      - Code & architecture review
+      - AI cost / quality / latency analysis
+      - 90-day technical roadmap
+      - "Optional: implementation handover"
+    icon: accountTree

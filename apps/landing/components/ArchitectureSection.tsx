@@ -10,49 +10,31 @@ import StorageRoundedIcon from "@mui/icons-material/StorageRounded";
 import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
 import EastRoundedIcon from "@mui/icons-material/EastRounded";
 
-type Layer = {
-  name: string;
-  detail: string;
-  Icon: React.ElementType;
-  accent: string;
+const ICONS: Record<string, React.ElementType> = {
+  cloud: CloudRoundedIcon,
+  psychology: PsychologyRoundedIcon,
+  hub: HubRoundedIcon,
+  storage: StorageRoundedIcon,
+  inventory: InventoryRoundedIcon,
 };
 
-// Light shades of each brand color so icons pop on a dark page surface.
-// Each accent passes ≥ 7:1 against the page background for SC 1.4.11.
-const LAYERS: Layer[] = [
-  {
-    name: "Vercel",
-    detail: "Serverless edge runtime",
-    Icon: CloudRoundedIcon,
-    accent: "#FFFFFF",
-  },
-  {
-    name: "OpenAI",
-    detail: "GPT-4o + embeddings",
-    Icon: PsychologyRoundedIcon,
-    accent: "#34D399",
-  },
-  {
-    name: "Pinecone",
-    detail: "Vector search",
-    Icon: HubRoundedIcon,
-    accent: "#A5B4FC",
-  },
-  {
-    name: "Neon Postgres",
-    detail: "Serverless SQL",
-    Icon: StorageRoundedIcon,
-    accent: "#7DD3FC",
-  },
-  {
-    name: "Vercel Blob",
-    detail: "Object storage",
-    Icon: InventoryRoundedIcon,
-    accent: "#FCD34D",
-  },
-];
+type ArchitectureContent = {
+  overline: string;
+  heading: string;
+  intro: string;
+  layers: readonly {
+    name: string;
+    detail: string;
+    icon: string;
+    accent: string;
+  }[];
+};
 
-export default function ArchitectureSection() {
+export default function ArchitectureSection({
+  content,
+}: {
+  content: ArchitectureContent;
+}) {
   return (
     <Box
       component="section"
@@ -73,17 +55,16 @@ export default function ArchitectureSection() {
             variant="overline"
             sx={{ color: "primary.light", letterSpacing: "0.18em", fontWeight: 700 }}
           >
-            Architecture
+            {content.overline}
           </Typography>
           <Typography variant="h2" sx={{ fontSize: { xs: "2rem", md: "2.75rem" } }}>
-            Boring stack, modern tools
+            {content.heading}
           </Typography>
           <Typography
             color="text.secondary"
             sx={{ maxWidth: 660, fontSize: { xs: "1rem", md: "1.1rem" } }}
           >
-            One coherent stack across all three demos. Battle-tested infrastructure that
-            scales to production without a rewrite.
+            {content.intro}
           </Typography>
         </Stack>
 
@@ -92,64 +73,67 @@ export default function ArchitectureSection() {
           spacing={{ xs: 2, md: 1.5 }}
           sx={{ alignItems: "stretch", justifyContent: "center" }}
         >
-          {LAYERS.map((layer, idx) => (
-            <Stack
-              key={layer.name}
-              direction={{ xs: "row", md: "row" }}
-              spacing={{ xs: 1.5, md: 1 }}
-              sx={{ alignItems: "center", flex: 1 }}
-            >
-              <Paper
-                variant="outlined"
-                sx={{
-                  flex: 1,
-                  p: { xs: 2.5, md: 3 },
-                  borderRadius: 3,
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  textAlign: "center",
-                  gap: 1,
-                  bgcolor: "background.paper",
-                  transition: "transform 180ms ease, border-color 180ms ease",
-                  "&:hover": {
-                    transform: "translateY(-2px)",
-                    borderColor: layer.accent,
-                  },
-                }}
+          {content.layers.map((layer, idx) => {
+            const Icon = ICONS[layer.icon] ?? CloudRoundedIcon;
+            return (
+              <Stack
+                key={layer.name}
+                direction={{ xs: "row", md: "row" }}
+                spacing={{ xs: 1.5, md: 1 }}
+                sx={{ alignItems: "center", flex: 1 }}
               >
-                <Box
+                <Paper
+                  variant="outlined"
                   sx={{
-                    width: 48,
-                    height: 48,
-                    borderRadius: 2,
-                    display: "grid",
-                    placeItems: "center",
-                    bgcolor: `${layer.accent}1F`,
-                    color: layer.accent,
-                    mb: 0.5,
+                    flex: 1,
+                    p: { xs: 2.5, md: 3 },
+                    borderRadius: 3,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    textAlign: "center",
+                    gap: 1,
+                    bgcolor: "background.paper",
+                    transition: "transform 180ms ease, border-color 180ms ease",
+                    "&:hover": {
+                      transform: "translateY(-2px)",
+                      borderColor: layer.accent,
+                    },
                   }}
                 >
-                  <layer.Icon />
-                </Box>
-                <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-                  {layer.name}
-                </Typography>
-                <Typography variant="caption" color="text.secondary">
-                  {layer.detail}
-                </Typography>
-              </Paper>
-              {idx < LAYERS.length - 1 && (
-                <EastRoundedIcon
-                  sx={{
-                    color: "text.secondary",
-                    opacity: 0.5,
-                    display: { xs: "none", md: "block" },
-                  }}
-                />
-              )}
-            </Stack>
-          ))}
+                  <Box
+                    sx={{
+                      width: 48,
+                      height: 48,
+                      borderRadius: 2,
+                      display: "grid",
+                      placeItems: "center",
+                      bgcolor: `${layer.accent}1F`,
+                      color: layer.accent,
+                      mb: 0.5,
+                    }}
+                  >
+                    <Icon />
+                  </Box>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+                    {layer.name}
+                  </Typography>
+                  <Typography variant="caption" color="text.secondary">
+                    {layer.detail}
+                  </Typography>
+                </Paper>
+                {idx < content.layers.length - 1 && (
+                  <EastRoundedIcon
+                    sx={{
+                      color: "text.secondary",
+                      opacity: 0.5,
+                      display: { xs: "none", md: "block" },
+                    }}
+                  />
+                )}
+              </Stack>
+            );
+          })}
         </Stack>
       </Container>
     </Box>

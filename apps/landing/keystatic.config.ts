@@ -45,6 +45,126 @@ export default config({
             itemLabel: (props) => props.value,
           }
         ),
+        euRegionNote: fields.text({
+          label: "EU-region note",
+          multiline: true,
+          defaultValue:
+            "EU-region deployments available — Hetzner, AWS eu-central, Mistral",
+        }),
+      },
+    }),
+
+    services: singleton({
+      label: "Services",
+      path: "apps/landing/content/services",
+      format: { data: "yaml" },
+      schema: {
+        overline: fields.text({ label: "Overline", defaultValue: "How I help" }),
+        heading: fields.text({
+          label: "Heading",
+          defaultValue: "From idea to production-ready",
+        }),
+        intro: fields.text({
+          label: "Intro",
+          multiline: true,
+          defaultValue:
+            "Three things I'm hired for — and the patterns I bring with me, so you don't pay for me to invent the wheel each engagement.",
+        }),
+        items: fields.array(
+          fields.object({
+            title: fields.text({ label: "Title" }),
+            price: fields.text({ label: "Price" }),
+            duration: fields.text({ label: "Duration / scope" }),
+            body: fields.text({ label: "Body", multiline: true }),
+            bullets: fields.array(fields.text({ label: "Bullet" }), {
+              label: "Bullets",
+              itemLabel: (props) => props.value,
+            }),
+            icon: fields.select({
+              label: "Icon",
+              options: [
+                { label: "Layers", value: "layers" },
+                { label: "Psychology", value: "psychology" },
+                { label: "Account tree", value: "accountTree" },
+              ],
+              defaultValue: "layers",
+            }),
+          }),
+          {
+            label: "Services",
+            itemLabel: (props) => props.fields.title.value,
+          }
+        ),
+      },
+    }),
+
+    architecture: singleton({
+      label: "Architecture",
+      path: "apps/landing/content/architecture",
+      format: { data: "yaml" },
+      schema: {
+        overline: fields.text({ label: "Overline", defaultValue: "Architecture" }),
+        heading: fields.text({
+          label: "Heading",
+          defaultValue: "Boring stack, modern tools",
+        }),
+        intro: fields.text({
+          label: "Intro",
+          multiline: true,
+          defaultValue:
+            "One coherent stack across all three demos. Battle-tested infrastructure that scales to production without a rewrite.",
+        }),
+        layers: fields.array(
+          fields.object({
+            name: fields.text({ label: "Name" }),
+            detail: fields.text({ label: "Detail" }),
+            icon: fields.select({
+              label: "Icon",
+              options: [
+                { label: "Cloud", value: "cloud" },
+                { label: "Psychology", value: "psychology" },
+                { label: "Hub", value: "hub" },
+                { label: "Storage", value: "storage" },
+                { label: "Inventory", value: "inventory" },
+              ],
+              defaultValue: "cloud",
+            }),
+            accent: fields.text({
+              label: "Accent (hex)",
+              defaultValue: "#FFFFFF",
+            }),
+          }),
+          {
+            label: "Layers",
+            itemLabel: (props) => props.fields.name.value,
+          }
+        ),
+      },
+    }),
+
+    faq: singleton({
+      label: "FAQ",
+      path: "apps/landing/content/faq",
+      format: { data: "yaml" },
+      schema: {
+        overline: fields.text({
+          label: "Overline",
+          defaultValue: "Frequently asked",
+        }),
+        heading: fields.text({
+          label: "Heading",
+          defaultValue: "Things clients ask before booking",
+        }),
+        items: fields.array(
+          fields.object({
+            question: fields.text({ label: "Question" }),
+            answer: fields.text({ label: "Answer", multiline: true }),
+          }),
+          {
+            label: "Items",
+            itemLabel: (props) => props.fields.question.value,
+          }
+        ),
       },
     }),
 
@@ -163,18 +283,5 @@ export default config({
       },
     }),
 
-    faq: collection({
-      label: "FAQ",
-      slugField: "question",
-      path: "apps/landing/content/faq/*",
-      format: { contentField: "answer" },
-      schema: {
-        question: fields.slug({
-          name: { label: "Question" },
-          slug: { label: "Slug (URL)" },
-        }),
-        answer: fields.markdoc({ label: "Answer" }),
-      },
-    }),
   },
 });

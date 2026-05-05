@@ -16,6 +16,7 @@ type HeroContent = {
   primaryCta: { label: string; href: string };
   secondaryCta: { label: string; href: string };
   techLabels: readonly string[];
+  euRegionNote: string;
 };
 
 export default function HeroSection({ content }: { content: HeroContent }) {
@@ -185,7 +186,7 @@ export default function HeroSection({ content }: { content: HeroContent }) {
             pt: 1.5,
           }}
         >
-          EU-region deployments available — Hetzner, AWS eu-central, Mistral
+          {content.euRegionNote}
         </Typography>
       </Container>
     </Box>

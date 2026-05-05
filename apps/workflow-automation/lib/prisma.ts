@@ -1,13 +1,13 @@
 import { PrismaClient } from "../prisma/generated/client";
 
 declare global {
-  var __prisma: PrismaClient | undefined;
+  var __wfPrisma: PrismaClient | undefined;
 }
 
 export const prisma: PrismaClient =
-  global.__prisma ??
+  global.__wfPrisma ??
   new PrismaClient({
     log: process.env.NODE_ENV === "development" ? ["warn", "error"] : ["error"],
   });
 
-if (process.env.NODE_ENV !== "production") global.__prisma = prisma;
+if (process.env.NODE_ENV !== "production") global.__wfPrisma = prisma;

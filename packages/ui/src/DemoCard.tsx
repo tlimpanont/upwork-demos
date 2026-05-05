@@ -7,6 +7,7 @@ import ChatBubbleRoundedIcon from "@mui/icons-material/ChatBubbleRounded";
 import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";
 import ApartmentRoundedIcon from "@mui/icons-material/ApartmentRounded";
 import ShowChartRoundedIcon from "@mui/icons-material/ShowChartRounded";
+import AltRouteRoundedIcon from "@mui/icons-material/AltRouteRounded";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import type { DemoApp, DemoIcon } from "@repo/config";
 
@@ -19,6 +20,7 @@ const ICONS: Record<DemoIcon, React.ElementType> = {
   docs: DescriptionRoundedIcon,
   building: ApartmentRoundedIcon,
   chart: ShowChartRoundedIcon,
+  route: AltRouteRoundedIcon,
 };
 
 const ACCENT: Record<DemoIcon, { base: string; tintLight: string; tintDark: string }> = {
@@ -26,6 +28,7 @@ const ACCENT: Record<DemoIcon, { base: string; tintLight: string; tintDark: stri
   docs: { base: "#0369A1", tintLight: "#0369A1", tintDark: "#7DD3FC" },
   building: { base: "#047857", tintLight: "#047857", tintDark: "#6EE7B7" },
   chart: { base: "#B45309", tintLight: "#B45309", tintDark: "#FCD34D" },
+  route: { base: "#6D28D9", tintLight: "#6D28D9", tintDark: "#C4B5FD" },
 };
 
 export default function DemoCard({ app }: DemoCardProps) {

@@ -15,6 +15,7 @@
         "OPENAI_API_KEY",
         "DATABASE_URL",
         "ANALYTICS_DATABASE_URL",
+        "WORKFLOW_DATABASE_URL",
         "PINECONE_API_KEY",
         "PINECONE_INDEX_NAME",
         "BLOB_READ_WRITE_TOKEN",
@@ -26,7 +27,8 @@
         "AI_CHATBOT_URL",
         "AI_DOCS_URL",
         "SAAS_STARTER_URL",
-        "ANALYTICS_DASHBOARD_URL"
+        "ANALYTICS_DASHBOARD_URL",
+        "WORKFLOW_AUTOMATION_URL"
       ]
     },
     "build": {
@@ -36,6 +38,7 @@
         "OPENAI_API_KEY",
         "DATABASE_URL",
         "ANALYTICS_DATABASE_URL",
+        "WORKFLOW_DATABASE_URL",
         "PINECONE_API_KEY",
         "PINECONE_INDEX_NAME",
         "BLOB_READ_WRITE_TOKEN",
@@ -47,7 +50,8 @@
         "AI_CHATBOT_URL",
         "AI_DOCS_URL",
         "SAAS_STARTER_URL",
-        "ANALYTICS_DASHBOARD_URL"
+        "ANALYTICS_DASHBOARD_URL",
+        "WORKFLOW_AUTOMATION_URL"
       ]
     },
     "lint": {

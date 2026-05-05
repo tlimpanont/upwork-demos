@@ -1,7 +1,12 @@
-export type DemoIcon = "chat" | "docs" | "building" | "chart";
+export type DemoIcon = "chat" | "docs" | "building" | "chart" | "route";
 
 export type DemoApp = {
-  id: "ai-chatbot" | "ai-docs" | "saas-starter" | "analytics-dashboard";
+  id:
+    | "ai-chatbot"
+    | "ai-docs"
+    | "saas-starter"
+    | "analytics-dashboard"
+    | "workflow-automation";
   name: string;
   tagline: string;
   description: string;
@@ -80,5 +85,21 @@ export const APPS: readonly DemoApp[] = [
     cta: "View Live Demo",
     icon: "chart",
     href: "/analytics-dashboard",
+  },
+  {
+    id: "workflow-automation",
+    name: "AI Workflow Automation",
+    tagline: "AI classifies inputs, deterministic rules route them",
+    description:
+      "Incoming tickets and documents get classified by OpenAI (category, priority, intent), then a deterministic rules engine — not the LLM — decides where they go. Dashboard shows the full pipeline live.",
+    features: [
+      "OpenAI classification with Zod-validated outputs",
+      "Deterministic rules engine in pure TS",
+      "Per-category routing + fallback handler",
+    ],
+    tags: ["OpenAI", "Zod", "Rules engine"],
+    cta: "View Live Demo",
+    icon: "route",
+    href: "/workflow-automation",
   },
 ] as const;

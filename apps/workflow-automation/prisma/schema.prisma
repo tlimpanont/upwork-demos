@@ -1,0 +1,66 @@
+generator client {
+  provider      = "prisma-client-js"
+  output        = "./generated/client"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("WORKFLOW_DATABASE_URL")
+}
+
+enum InputType {
+  support_ticket
+  user_input
+  document
+  system_log
+}
+
+enum Status {
+  pending
+  classified
+  routed
+  completed
+  failed
+}
+
+enum RoutingTarget {
+  finance
+  engineering
+  fraud
+  general
+  escalation
+  unknown
+}
+
+// One row per ingested input. The workflow record IS the audit trail —
+// no separate event log table for the demo.
+model Workflow {
+  id             String         @id @default(cuid())
+  inputType      InputType
+  inputText      String         @db.Text
+
+  // AI classification result; null until the classifier runs.
+  classification Json?
+
+  // Rules engine output; null until the rules engine runs.
+  routedTo       RoutingTarget?
+  matchedRule    String?
+
+  // Lifecycle.
+  status         Status         @default(pending)
+  startedAt      DateTime       @default(now())
+  completedAt    DateTime?
+  durationMs     Int?
+  errorMessage   String?
+
+  // Action layer log: array of { at, action, payload } objects. For the demo
+  // it records what the rules engine *would* have triggered (notify finance,
+  // open Jira, etc.) without actually side-effecting anything.
+  actions        Json           @default("[]")
+
+  @@index([startedAt])
+  @@index([status])
+  @@index([routedTo])
+  @@index([inputType])
+}

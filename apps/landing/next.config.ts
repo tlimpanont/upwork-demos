@@ -5,6 +5,7 @@ const demos = [
   { path: "ai-docs", url: process.env.AI_DOCS_URL || "http://localhost:3002" },
   { path: "saas-starter", url: process.env.SAAS_STARTER_URL || "http://localhost:3003" },
   { path: "analytics-dashboard", url: process.env.ANALYTICS_DASHBOARD_URL || "http://localhost:3004" },
+  { path: "workflow-automation", url: process.env.WORKFLOW_AUTOMATION_URL || "http://localhost:3005" },
 ];
 
 const nextConfig: NextConfig = {

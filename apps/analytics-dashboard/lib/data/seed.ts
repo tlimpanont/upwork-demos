@@ -1,4 +1,4 @@
-import { Channel, Plan } from "@prisma/client";
+import { Channel, Plan } from "../../prisma/generated/client";
 import { faker } from "@faker-js/faker";
 
 // Deterministic seed so the dataset is identical across runs — important for

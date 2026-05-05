@@ -1,6 +1,6 @@
 ---
 title: PDF invoice extraction with hybrid semantic + numeric search
-summary: Drop in an invoice; structured fields are extracted against a Zod schema, embedded for semantic search, and indexed for SQL range queries — the same search box routes both.
+summary: Schema-typed extraction from invoices, embedded for semantic search and indexed for SQL range queries — one search box routes both.
 client: Portfolio demo
 stack:
   - Next.js 16
@@ -10,6 +10,8 @@ stack:
   - Vercel Blob
 publishedAt: 2026-05-04
 ---
+
+For accounts-payable and ops teams that need to query a pile of invoice PDFs by content *and* by amount — "unpaid invoices over €10k", "contracts mentioning indemnity" — without a manual data-entry step in between. The extraction is typed strictly enough that you never store a half-parsed invoice.
 
 ## Pipeline
 
@@ -27,34 +29,19 @@ flowchart LR
   F --> J
 ```
 
-## Why this exists
-
-Document AI demos usually stop at "the model wrote a summary." Real document workflows need exact numbers — totals, tax rates, vendor names — in a queryable shape. This system takes invoices end-to-end: private upload, schema-typed extraction, embedding, and a search endpoint that routes the same query box to either semantic similarity or parameterised SQL depending on what the user typed.
-
 ## What's built
 
-- **Private upload pipeline.** Files land in private Vercel Blob and are served through an authenticated proxy at `/api/documents/:id/file`. The blob URL is never exposed.
-- **AI extraction with strict typing.** `gpt-4o-mini` pulls invoice number, vendor, dates, subtotal, tax rate/amount, total, and line items against a Zod schema. Failures surface as retryable errors rather than silently degraded data.
-- **Hybrid search.** A single search box at `/api/search` auto-detects numeric intent: `"consulting services"` → Pinecone top-5; `"tax 9%"` → `tax_rate BETWEEN 0.085 AND 0.095`; `"over €20,000"` → SQL range query.
+- **Private upload.** Files land in private Vercel Blob, served through an authenticated proxy. Blob URLs never exposed.
+- **Zod-typed extraction.** GPT-4o-mini pulls invoice number, vendor, dates, subtotal, tax rate/amount, total, and line items against a Zod schema. The same schema is the type written to Postgres — no "partially extracted" rows.
+- **Hybrid search router.** A single search box at `/api/search` inspects the query: numeric tokens (currency, percentages, comparisons) → SQL range query against `total_amount` / `tax_rate`; everything else → Pinecone top-5.
 - **Retry & delete.** Failed extractions can be re-run in place; deletes cascade across blob, vectors, and the DB row in one server action.
-- **Synthetic sample data.** The homepage offers a ZIP of three randomly-generated invoice PDFs (via `pdfkit`) so visitors can try the pipeline without bringing their own data.
+- **Sample data.** Homepage offers a ZIP of three randomly-generated invoices (`pdfkit`) so visitors can try the pipeline without their own files.
+- **Index reuse.** 1024-dim embeddings configured to fit the same Pinecone Serverless cosine-1024 index used by the support chatbot — one vector store, two products.
 
-## Technical choices
+## Tradeoffs
 
-### Two retrieval modes, one input box
+- **Zod-enforced all-or-nothing rows.** Failed extractions are visibly retryable; nothing partial reaches the DB to contaminate downstream queries. The cost is occasional re-runs on edge-case PDFs instead of a half-row that "mostly works".
+- **Numeric-token routing for the search box.** Predictable and explainable; mixed queries like "Acme invoices over €10k" fall to one branch only — solvable later with a parser that splits the query, not worth the complexity on day one.
+- **Pinecone index shared with the chatbot.** One vector store serving two products saves operational overhead and a per-product index cost — at the price of coupling their deployment lifecycle. Worth it for a portfolio; revisit if the products diverge.
 
-The naïve approach embeds every query and trusts vector similarity. That fails the moment a user types `"over €20,000"` — the embedding doesn't know what `€` or `>` mean. So the search endpoint inspects the query first: numeric tokens (currency, percentages, comparisons) route to parameterised SQL against `total_amount` / `tax_rate`; everything else routes to Pinecone. Users get one box; the backend picks the right index.
-
-### Zod schema as the contract between LLM and DB
-
-The extraction prompt asks for an object that matches a Zod schema, and that schema is also the type written to Postgres. If GPT returns malformed JSON, parsing fails before any DB write — there's no "partially extracted" row. Same schema doubles as runtime validation on the API responses.
-
-### 1024-dim embeddings to match Pinecone
-
-`text-embedding-3-small` is configured to output 1024 dimensions instead of its default 1536, to fit the Pinecone Serverless cosine-1024 index reused with the support-chatbot demo. One vector store, two products.
-
-## Outcome
-
-The pipeline ships into client products that need typed extraction from documents — invoices, receipts, contracts, forms — without rewriting the schema-driven prompt, the hybrid retrieval router, or the private-blob serving pattern.
-
-[Live demo →](https://upwork-demos-ai-docs.vercel.app)
+[Live demo →](/ai-docs)

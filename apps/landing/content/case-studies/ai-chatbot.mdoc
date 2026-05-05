@@ -10,6 +10,8 @@ stack:
 publishedAt: 2026-05-04
 ---
 
+For support teams whose answers already live in their own docs but cost hours to dig out manually. Built as the smallest RAG pipeline that survives production — ingest, retrieve, cite, refuse on empty — so the engineering work after this is tuning, not architecture.
+
 ## Pipeline
 
 ```mermaid
@@ -22,34 +24,18 @@ flowchart LR
   F --> G[Streaming answer<br/>via Vercel AI SDK]
 ```
 
-## Why this exists
-
-Support chatbots that wrap a model directly invent answers the moment a question goes off-topic. For a support inbox that's worse than no bot at all. This one defaults to refusal: answer only from indexed documents, cite the source file, and say "I don't know" when retrieval finds nothing relevant.
-
 ## What's built
 
-- **Drag-and-drop ingestion.** Admin uploads a file; the server parses, chunks, embeds, and writes vectors to Pinecone with the source filename in metadata. Postgres tracks chunk counts so the admin UI shows "doc X — 42 chunks" and supports clean delete.
-- **Retrieval-augmented prompting.** Each user message triggers a top-5 vector lookup; matching chunks are stitched into the system prompt as a `## Knowledge base` block.
+- **Drag-and-drop ingestion.** Admin uploads a file; server parses, chunks, embeds, writes vectors to Pinecone with the source filename in metadata. Postgres tracks chunk counts; delete cascades both stores in one server action.
+- **Top-5 retrieval per message.** Matching chunks land in the system prompt under `## Knowledge base`, prefixed `[1] (from: returns-policy.pdf)` so the model cites naturally.
 - **Streaming chat UI** via the Vercel AI SDK.
-- **Persona with rules.** The system prompt defines a persona but spends most of its words on what *not* to do — no guessing, no competitor talk, escalate after three failed attempts.
+- **"Don't know" is the default.** Empty retrieval strips the knowledge-base block; the persona's refusal rule takes over instead of letting the model confabulate.
 - **Admin console at `/admin`** with chunk counts, delete, and upload-type validation.
 
-## Technical choices
+## Tradeoffs
 
-### "Don't know" is the default
+- **Top-5 retrieval, no rerank or query rewrite.** Cheap to debug and predictable per question; gives up recall on multi-hop questions where the relevant chunks aren't surfaced by the user's exact phrasing.
+- **Filename citations, not page numbers.** Fine for short policies, weaker on long PDFs where readers want a page jump. Page-level metadata is a one-line ingestion change when the docs justify it.
+- **Refusal is the default on empty retrieval, not a fallback.** Hallucinated policy is worse than a polite "I don't know" — chosen explicitly so the persona never quietly drops back to the model's general training.
 
-If retrieval returns zero relevant chunks, the prompt builder strips the knowledge-base block and the persona's refusal rule takes over. This pushes the model toward refusing rather than confabulating — the most common production failure mode for support bots.
-
-### Source attribution baked into the prompt
-
-Every retrieved chunk is prefixed with `[1] (from: returns-policy.pdf)`. The prompt instructs the model to mention file names naturally ("According to our returns policy…") so users see the source without needing a UI for it.
-
-### Two-store design
-
-Pinecone holds the vectors and chunk text; Neon Postgres holds the canonical document record. Listing in the admin doesn't hit Pinecone, and delete cascades both stores in one server action.
-
-## Outcome
-
-The same RAG pipeline drops into client products that need grounded Q&A — internal knowledge bases, customer support, document portals — without rewriting the persona logic or the two-store model.
-
-[Live demo →](https://upwork-demos-ai-chatbot.vercel.app)
+[Live demo →](/ai-chatbot)

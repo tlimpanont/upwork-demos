@@ -21,7 +21,8 @@
     "db:generate": "prisma generate",
     "db:push": "dotenv -e .env.local -- prisma db push",
     "db:seed": "dotenv -e .env.local -- tsx scripts/seed.ts",
-    "db:reset": "dotenv -e .env.local -- prisma db push --force-reset && npm run db:seed"
+    "db:reset": "dotenv -e .env.local -- prisma db push --force-reset && npm run db:seed",
+    "smoke": "dotenv -e .env.local -- tsx scripts/classify-smoke.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

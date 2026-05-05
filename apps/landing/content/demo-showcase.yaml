@@ -1,6 +1,7 @@
 overline: Live capabilities
 heading: See the stack in production
 intro: >-
-  Three real working systems built on the same patterns I ship to clients —
-  customer-support AI, document processing, and multi-tenant SaaS — each
+  Real working systems built on the same patterns I ship to clients —
+  customer-support AI, document processing, multi-tenant SaaS, and an
+  AI analytics dashboard with a forecasting engine and GraphQL API — each
   running on the same Vercel + Postgres + AI stack I use in production.

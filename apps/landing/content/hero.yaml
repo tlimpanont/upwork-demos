@@ -15,6 +15,7 @@ secondaryCta:
 techLabels:
   - Next.js 16
   - OpenAI
+  - GraphQL
   - Pinecone
   - Neon Postgres
   - Vercel

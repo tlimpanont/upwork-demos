@@ -1,7 +1,7 @@
 overline: Architecture
 heading: Boring stack, modern tools
 intro: >-
-  One coherent stack across all three demos. Battle-tested infrastructure that
+  One coherent stack across every demo. Battle-tested infrastructure that
   scales to production without a rewrite.
 layers:
   - name: Vercel

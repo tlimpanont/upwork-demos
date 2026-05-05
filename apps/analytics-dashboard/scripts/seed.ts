@@ -19,8 +19,9 @@ async function main() {
   await prisma.dailyMetric.createMany({ data: metrics });
 
   console.log("[seed] writing users…");
-  // Chunk to keep the query payload reasonable.
-  const userChunks = chunk(users, 1000);
+  // `plan` is carried on UserRow only to derive RevenueEvents — strip before insert.
+  const userRows = users.map(({ plan: _plan, ...u }) => u);
+  const userChunks = chunk(userRows, 1000);
   for (const c of userChunks) {
     await prisma.user.createMany({ data: c });
   }

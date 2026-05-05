@@ -14,6 +14,7 @@
       "env": [
         "OPENAI_API_KEY",
         "DATABASE_URL",
+        "ANALYTICS_DATABASE_URL",
         "PINECONE_API_KEY",
         "PINECONE_INDEX_NAME",
         "BLOB_READ_WRITE_TOKEN",
@@ -34,6 +35,7 @@
       "env": [
         "OPENAI_API_KEY",
         "DATABASE_URL",
+        "ANALYTICS_DATABASE_URL",
         "PINECONE_API_KEY",
         "PINECONE_INDEX_NAME",
         "BLOB_READ_WRITE_TOKEN",

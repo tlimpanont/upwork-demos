@@ -18,9 +18,10 @@
     "lint": "eslint",
     "clean": "rm -rf .next .turbo",
     "db:generate": "prisma generate",
-    "db:push": "prisma db push",
-    "db:seed": "tsx scripts/seed.ts",
-    "db:reset": "prisma db push --force-reset && npm run db:seed"
+    "db:push": "dotenv -e .env.local -- prisma db push",
+    "db:seed": "dotenv -e .env.local -- tsx scripts/seed.ts",
+    "db:reset": "dotenv -e .env.local -- prisma db push --force-reset && npm run db:seed",
+    "predict:smoke": "tsx scripts/predict-smoke.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -38,6 +39,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv-cli": "^10.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
     "prisma": "^6.18.0",

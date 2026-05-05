@@ -175,6 +175,18 @@ export default function HeroSection({ content }: { content: HeroContent }) {
             </Typography>
           ))}
         </Stack>
+        <Typography
+          variant="caption"
+          sx={{
+            display: "block",
+            textAlign: { xs: "center", md: "left" },
+            color: "text.secondary",
+            opacity: 0.8,
+            pt: 1.5,
+          }}
+        >
+          EU-region deployments available — Hetzner, AWS eu-central, Mistral
+        </Typography>
       </Container>
     </Box>
   );

@@ -4,8 +4,8 @@ body: >-
   email a one-page technical assessment within 24 hours — no charge, no slide
   deck, no obligation. Bad fits get a referral instead of a pitch.
 primaryCta:
-  label: Hire on Upwork
-  href: "https://www.upwork.com/freelancers/~01e2fb2cd37f32f0ad?viewMode=1"
-secondaryCta:
   label: Book a call
   href: "https://cal.com/theuy"
+secondaryCta:
+  label: Hire on Upwork
+  href: "https://www.upwork.com/freelancers/~01e2fb2cd37f32f0ad?viewMode=1"

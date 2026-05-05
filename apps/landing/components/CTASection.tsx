@@ -103,15 +103,12 @@ export default function CTASection({ content }: { content: CTAContent }) {
                 size="large"
                 variant="contained"
                 href={content.primaryCta.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                endIcon={<ArrowForwardRoundedIcon />}
+                startIcon={<CalendarMonthRoundedIcon />}
                 sx={{
-                  // #14A800 is Upwork brand green but only gives 3.16:1 vs white;
-                  // #0E7A00 gives 4.86:1 (passes WCAG AA) while reading as the same green.
-                  bgcolor: "#0E7A00",
-                  color: "common.white",
-                  "&:hover": { bgcolor: "#0A5E00" },
+                  bgcolor: "common.white",
+                  color: "#1F1B6B",
+                  fontWeight: 700,
+                  "&:hover": { bgcolor: "rgba(255,255,255,0.92)" },
                 }}
               >
                 {content.primaryCta.label}
@@ -120,7 +117,9 @@ export default function CTASection({ content }: { content: CTAContent }) {
                 size="large"
                 variant="outlined"
                 href={content.secondaryCta.href}
-                startIcon={<CalendarMonthRoundedIcon />}
+                target="_blank"
+                rel="noopener noreferrer"
+                endIcon={<ArrowForwardRoundedIcon />}
                 sx={{
                   borderColor: "rgba(255,255,255,0.7)",
                   color: "common.white",

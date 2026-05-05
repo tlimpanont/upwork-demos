@@ -10,6 +10,7 @@ import AccountTreeRoundedIcon from "@mui/icons-material/AccountTreeRounded";
 
 type Service = {
   title: string;
+  price: string;
   duration: string;
   body: string;
   bullets: readonly string[];
@@ -19,6 +20,7 @@ type Service = {
 const SERVICES: readonly Service[] = [
   {
     title: "AI-powered SaaS MVP",
+    price: "From €30,000",
     duration: "6–8 weeks · fixed scope, fixed price",
     body: "Your product, live and earning revenue. Auth, Stripe billing, multi-tenant data, and your first AI feature — all deployed.",
     bullets: [
@@ -31,6 +33,7 @@ const SERVICES: readonly Service[] = [
   },
   {
     title: "AI feature for an existing SaaS",
+    price: "From €15,000",
     duration: "3–4 weeks · drop-in for live products",
     body: "Add a production-grade AI capability to your existing app — RAG, structured extraction, or an agent — wired into your auth and billing.",
     bullets: [
@@ -43,6 +46,7 @@ const SERVICES: readonly Service[] = [
   },
   {
     title: "AI audit & roadmap",
+    price: "€125 / hour · from €4,000",
     duration: "1 week · diagnostic + 90-day plan",
     body: "Senior architectural review of your current system or AI strategy. You walk away with a written plan you can hand to any team.",
     bullets: [
@@ -96,7 +100,7 @@ export default function ServicesSection() {
             gridTemplateColumns: { xs: "1fr", md: "repeat(3, 1fr)" },
           }}
         >
-          {SERVICES.map(({ title, duration, body, bullets, Icon }) => (
+          {SERVICES.map(({ title, price, duration, body, bullets, Icon }) => (
             <Paper
               key={title}
               variant="outlined"
@@ -126,10 +130,13 @@ export default function ServicesSection() {
                   <Typography variant="h5" component="h3" sx={{ fontWeight: 700 }}>
                     {title}
                   </Typography>
+                  <Typography sx={{ color: "primary.light", fontWeight: 700 }}>
+                    {price}
+                  </Typography>
                   <Typography
                     variant="caption"
                     sx={{
-                      color: "primary.light",
+                      color: "text.secondary",
                       letterSpacing: "0.06em",
                       textTransform: "uppercase",
                       fontWeight: 600,

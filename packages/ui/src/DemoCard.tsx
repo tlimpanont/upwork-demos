@@ -34,14 +34,12 @@ const ACCENT: Record<DemoIcon, { base: string; tintLight: string; tintDark: stri
 export default function DemoCard({ app }: DemoCardProps) {
   const Icon = ICONS[app.icon];
   const accent = ACCENT[app.icon];
-  const href = app.deepLink ? `${app.href}${app.deepLink}` : app.href;
+  const demoHref = app.deepLink ? `${app.href}${app.deepLink}` : app.href;
+  // Case study slug matches the app id by convention (ai-chatbot.mdoc etc.).
+  const caseStudyHref = `/case-studies/${app.id}`;
 
   return (
     <Box
-      component="a"
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
       sx={{
         display: "flex",
         flexDirection: { xs: "column", sm: "row" },
@@ -52,8 +50,6 @@ export default function DemoCard({ app }: DemoCardProps) {
         border: "1px solid",
         borderColor: "divider",
         bgcolor: "background.paper",
-        textDecoration: "none",
-        color: "inherit",
         transition: "transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease",
         "&:hover": {
           borderColor: accent.base,
@@ -124,23 +120,50 @@ export default function DemoCard({ app }: DemoCardProps) {
 
       <Stack
         direction="row"
-        spacing={0.75}
+        spacing={2}
         sx={{
           alignItems: "center",
           flexShrink: 0,
-          color: accent.tintLight,
-          "[data-dark] &": { color: accent.tintDark },
           alignSelf: { xs: "flex-end", sm: "center" },
         }}
       >
-        <Typography variant="body2" sx={{ fontWeight: 600 }}>
-          View demo
-        </Typography>
-        <ArrowForwardRoundedIcon
-          fontSize="small"
-          className="demo-arrow"
-          sx={{ transition: "transform 180ms ease" }}
-        />
+        <Box
+          component="a"
+          href={caseStudyHref}
+          sx={{
+            color: "text.secondary",
+            textDecoration: "none",
+            fontWeight: 600,
+            fontSize: 14,
+            transition: "color 180ms ease",
+            "&:hover": { color: "text.primary", textDecoration: "underline" },
+          }}
+        >
+          Case study
+        </Box>
+        <Stack
+          component="a"
+          href={demoHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          direction="row"
+          spacing={0.75}
+          sx={{
+            alignItems: "center",
+            color: accent.tintLight,
+            "[data-dark] &": { color: accent.tintDark },
+            textDecoration: "none",
+          }}
+        >
+          <Typography variant="body2" sx={{ fontWeight: 600 }}>
+            View demo
+          </Typography>
+          <ArrowForwardRoundedIcon
+            fontSize="small"
+            className="demo-arrow"
+            sx={{ transition: "transform 180ms ease" }}
+          />
+        </Stack>
       </Stack>
     </Box>
   );

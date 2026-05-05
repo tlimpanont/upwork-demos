@@ -8,6 +8,14 @@ export const typeDefs = /* GraphQL */ `
     flat
   }
 
+  enum Metric {
+    revenue
+    activeUsers
+    newUsers
+    churnRate
+    conversions
+  }
+
   type Trend {
     direction: TrendDirection!
     growthRate: Float!
@@ -25,7 +33,7 @@ export const typeDefs = /* GraphQL */ `
   }
 
   type Prediction {
-    metric: String!
+    metric: Metric!
     predictedValue: Float!
     trend: Trend!
     confidence: Float!
@@ -34,7 +42,7 @@ export const typeDefs = /* GraphQL */ `
   }
 
   type Insight {
-    metric: String!
+    metric: Metric!
     summary: String!
     anomalyNotes: [String!]!
     recommendations: [String!]!
@@ -69,9 +77,9 @@ export const typeDefs = /* GraphQL */ `
     users(limit: Int = 50): [User!]!
     revenue(limit: Int = 100): [Revenue!]!
     metrics(from: String, to: String): [DailyMetric!]!
-    predictions(metric: String!, horizon: Int = 14): Prediction!
-    anomalies(metric: String!): [Anomaly!]!
-    insights(metric: String!): Insight!
+    predictions(metric: Metric!, horizon: Int = 14): Prediction!
+    anomalies(metric: Metric!): [Anomaly!]!
+    insights(metric: Metric!): Insight!
   }
 `;
 

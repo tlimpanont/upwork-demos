@@ -16,7 +16,7 @@ const EXAMPLES: { label: string; query: string }[] = [
   {
     label: "predictions(revenue)",
     query: `{
-  predictions(metric: "revenue") {
+  predictions(metric: revenue) {
     metric
     predictedValue
     confidence
@@ -29,7 +29,7 @@ const EXAMPLES: { label: string; query: string }[] = [
   {
     label: "anomalies(activeUsers)",
     query: `{
-  anomalies(metric: "activeUsers") {
+  anomalies(metric: activeUsers) {
     date
     value
     zScore
@@ -39,7 +39,7 @@ const EXAMPLES: { label: string; query: string }[] = [
   {
     label: "insights(revenue)",
     query: `{
-  insights(metric: "revenue") {
+  insights(metric: revenue) {
     metric
     summary
     anomalyNotes

@@ -33,7 +33,7 @@ const METRIC_META: Record<Metric, { label: string; format: (v: number) => string
 };
 
 const QUERY = /* GraphQL */ `
-  query Dashboard($metric: String!) {
+  query Dashboard($metric: Metric!) {
     metrics {
       date
       revenue

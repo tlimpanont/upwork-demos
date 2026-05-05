@@ -1,0 +1,48 @@
+---
+title: AI analytics dashboard with prediction engine and GraphQL API
+summary: Synthetic SaaS metrics, a deterministic forecasting engine, and a GraphQL API — wired to an AI narrator that explains the numbers without recomputing them.
+client: Portfolio demo
+stack:
+  - Next.js 16
+  - MUI v9
+  - Prisma
+  - Neon Postgres
+  - GraphQL Yoga
+  - OpenAI
+  - Recharts
+publishedAt: 2026-05-05
+---
+
+## Why this exists
+
+Most "AI dashboard" demos hand the LLM raw numbers and let it both calculate and narrate — which means the math is wrong half the time, the answers aren't reproducible, and you can't unit-test any of it. This demo splits those jobs cleanly: a deterministic stats engine does the work, the LLM only writes the prose, and a GraphQL surface makes the boundary visible.
+
+## What's built
+
+- **Synthetic SaaS dataset.** A seeded faker generator produces 365 days of metrics with linear growth, weekly seasonality, three marketing-spike events, a churn dip, and Gaussian noise — plus the matching users and revenue events. Output is byte-identical across runs, so the engine has stable inputs and the smoke tests are reproducible.
+- **Prediction engine.** Pure TypeScript, zero deps. Linear-regression forecasting, z-score anomaly detection over a trailing 14-day window, R²-blended-with-CV confidence scoring, growth-rate classification with a flat band. Every line is readable in a code review.
+- **GraphQL Yoga API.** The same six queries from the spec — `users`, `revenue`, `metrics(from, to)`, `predictions(metric, horizon)`, `anomalies(metric)`, `insights(metric)` — plus richer types (structured `Trend`, list of `ForecastPoint`, structured `Insight`) so the dashboard isn't constrained to flat strings.
+- **AI insights service.** OpenAI receives the *already-computed* numbers and is told, in the system prompt, to never recompute them. Returns strict JSON with summary, anomaly notes, and recommendations. Process-lifetime cache so the dashboard doesn't hit the API on every nav.
+- **Dashboard UI.** Metric switcher, four KPI cards (current, 30-day vs prior, forecast endpoint, confidence), a Recharts time-series with dotted forecast and red anomaly dots, an AI insights panel, and an embedded GraphQL playground with example queries the visitor can run live.
+
+## Technical choices worth calling out
+
+### "AI explains, never calculates" — enforced by architecture
+
+The boundary is structural, not just a system prompt. The engine module exports plain functions over `number[]`. The AI service takes the engine's `Prediction` object and turns it into a user-prompt block. There is no codepath where the LLM produces a number that the dashboard renders — every number is computed in TypeScript first.
+
+### Server-side GraphQL execution for renders
+
+Pages execute the schema directly via `graphql.execute()` instead of round-tripping through `/api/graphql`. The HTTP endpoint exists for the playground, the public API, and external clients, but the dashboard avoids the extra fetch and the dual-render hydration pitfalls that come with it.
+
+### Deterministic seed → testable engine
+
+`mulberry32(42)` PRNG plus `faker.seed(42)` means the dataset is reproducible byte-for-byte. The smoke script asserts concrete invariants on it (revenue trends up, ≥1 spike anomaly detected, 14-day forecast continues upward). Replacing the engine with a different model — `simple-statistics`, ARIMA, Prophet via a Python sidecar — is a one-file swap that the same assertions guard.
+
+### One Postgres per app
+
+The analytics demo uses `ANALYTICS_DATABASE_URL` rather than the shared `DATABASE_URL` the other demo apps use. That isolates seeding (the demo wipes and regenerates on `npm run db:seed`) from anything saas-starter or ai-docs has stored.
+
+## Stack
+
+Next.js 16 App Router · MUI v9 · Recharts · Prisma + Neon Postgres · GraphQL Yoga · OpenAI gpt-4o-mini · `@faker-js/faker` · TypeScript end-to-end.

@@ -24,7 +24,8 @@
         "NEXT_PUBLIC_STRIPE_PRICE_PRO",
         "AI_CHATBOT_URL",
         "AI_DOCS_URL",
-        "SAAS_STARTER_URL"
+        "SAAS_STARTER_URL",
+        "ANALYTICS_DASHBOARD_URL"
       ]
     },
     "build": {
@@ -43,7 +44,8 @@
         "NEXT_PUBLIC_STRIPE_PRICE_PRO",
         "AI_CHATBOT_URL",
         "AI_DOCS_URL",
-        "SAAS_STARTER_URL"
+        "SAAS_STARTER_URL",
+        "ANALYTICS_DASHBOARD_URL"
       ]
     },
     "lint": {

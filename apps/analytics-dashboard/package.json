@@ -1,0 +1,47 @@
+{
+  "name": "upwork-demo-analytics-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI-powered SaaS analytics demo: synthetic data + GraphQL + prediction engine + AI insights.",
+  "license": "MIT",
+  "author": {
+    "name": "Theuy Limpanont",
+    "email": "theuy.limpanont@gmail.com"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "next dev -p 3004",
+    "build": "next build",
+    "start": "next start -p 3004",
+    "lint": "eslint",
+    "clean": "rm -rf .next .turbo",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:seed": "tsx scripts/seed.ts",
+    "db:reset": "prisma db push --force-reset && npm run db:seed"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@faker-js/faker": "^10.0.0",
+    "@mui/icons-material": "^9.0.0",
+    "@mui/material": "^9.0.0",
+    "@mui/material-nextjs": "^9.0.0",
+    "@prisma/client": "^6.18.0",
+    "next": "16.2.4",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.4",
+    "prisma": "^6.18.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5"
+  }
+}

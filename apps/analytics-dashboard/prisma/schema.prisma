@@ -1,0 +1,58 @@
+// Datasource: Neon Postgres in prod; any Postgres in dev. Connection in DATABASE_URL.
+// Generator: TypeScript client into the standard @prisma/client location.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Channel {
+  organic
+  ads
+  referral
+  email
+}
+
+enum Plan {
+  basic
+  pro
+  enterprise
+}
+
+model User {
+  id        String         @id @default(cuid())
+  name      String
+  email     String         @unique
+  createdAt DateTime
+  channel   Channel
+  events    RevenueEvent[]
+
+  @@index([createdAt])
+  @@index([channel])
+}
+
+model RevenueEvent {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  amount    Float
+  plan      Plan
+  timestamp DateTime
+
+  @@index([timestamp])
+  @@index([userId])
+  @@index([plan])
+}
+
+model DailyMetric {
+  date        DateTime @id @db.Date
+  activeUsers Int
+  newUsers    Int
+  churnRate   Float
+  revenue     Float
+  conversions Int
+}

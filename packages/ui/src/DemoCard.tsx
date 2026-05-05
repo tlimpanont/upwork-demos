@@ -11,6 +11,7 @@ import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import ChatBubbleRoundedIcon from "@mui/icons-material/ChatBubbleRounded";
 import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";
 import ApartmentRoundedIcon from "@mui/icons-material/ApartmentRounded";
+import ShowChartRoundedIcon from "@mui/icons-material/ShowChartRounded";
 import LaunchRoundedIcon from "@mui/icons-material/LaunchRounded";
 import type { DemoApp, DemoIcon } from "@repo/config";
 
@@ -22,6 +23,7 @@ const ICONS: Record<DemoIcon, React.ElementType> = {
   chat: ChatBubbleRoundedIcon,
   docs: DescriptionRoundedIcon,
   building: ApartmentRoundedIcon,
+  chart: ShowChartRoundedIcon,
 };
 
 // `base` is used for icon bg fill, hover border, and the contained CTA button
@@ -33,6 +35,7 @@ const ACCENT: Record<DemoIcon, { base: string; tintLight: string; tintDark: stri
   chat: { base: "#4338CA", tintLight: "#4338CA", tintDark: "#A5B4FC" },
   docs: { base: "#0369A1", tintLight: "#0369A1", tintDark: "#7DD3FC" },
   building: { base: "#047857", tintLight: "#047857", tintDark: "#6EE7B7" },
+  chart: { base: "#B45309", tintLight: "#B45309", tintDark: "#FCD34D" },
 };
 
 export default function DemoCard({ app }: DemoCardProps) {

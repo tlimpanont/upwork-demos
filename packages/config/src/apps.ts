@@ -1,7 +1,7 @@
-export type DemoIcon = "chat" | "docs" | "building";
+export type DemoIcon = "chat" | "docs" | "building" | "chart";
 
 export type DemoApp = {
-  id: "ai-chatbot" | "ai-docs" | "saas-starter";
+  id: "ai-chatbot" | "ai-docs" | "saas-starter" | "analytics-dashboard";
   name: string;
   tagline: string;
   description: string;
@@ -59,5 +59,20 @@ export const APPS: readonly DemoApp[] = [
     icon: "building",
     href: "/saas-starter",
     deepLink: "/login",
+  },
+  {
+    id: "analytics-dashboard",
+    name: "AI Analytics Dashboard",
+    tagline: "SaaS analytics with prediction engine + GraphQL + AI insights",
+    description:
+      "A synthetic SaaS dataset, a deterministic forecasting engine, and a GraphQL API — with AI-generated narratives that explain the trend, flag anomalies, and recommend actions.",
+    features: [
+      "Forecasts + anomaly detection in pure TS",
+      "GraphQL Yoga API with live playground",
+      "AI insights layer (OpenAI explains, never calculates)",
+    ],
+    cta: "View Live Demo",
+    icon: "chart",
+    href: "/analytics-dashboard",
   },
 ] as const;

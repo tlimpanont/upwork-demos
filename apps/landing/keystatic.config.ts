@@ -263,25 +263,5 @@ export default config({
       },
     }),
 
-    blog: collection({
-      label: "Blog",
-      slugField: "title",
-      path: "apps/landing/content/blog/*",
-      format: { contentField: "body" },
-      entryLayout: "content",
-      schema: {
-        title: fields.slug({
-          name: { label: "Title" },
-          slug: { label: "Slug (URL)" },
-        }),
-        summary: fields.text({
-          label: "Summary",
-          multiline: true,
-        }),
-        publishedAt: fields.date({ label: "Published" }),
-        body: fields.markdoc({ label: "Body" }),
-      },
-    }),
-
   },
 });

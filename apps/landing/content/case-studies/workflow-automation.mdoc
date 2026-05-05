@@ -1,0 +1,56 @@
+---
+title: AI-assisted incident triage for the support inbox
+summary: Every ticket gets classified by OpenAI; a deterministic rules engine routes the urgent few — fraud, outages, security — into a Slack channel where humans see them in seconds, not after the next queue scan.
+client: Portfolio demo
+stack:
+  - Next.js 16
+  - MUI v9
+  - Prisma
+  - Neon Postgres
+  - OpenAI
+  - Zod
+  - Slack webhooks
+  - Vercel
+publishedAt: 2026-05-05
+---
+
+## Why this exists
+
+Most SaaS support inboxes get a flood of tickets, but only ~5% are actually urgent — fraud reports, production outages, suspicious logins. Today, that 5% gets surfaced by a human scanning the queue, which adds 15–60 minutes of latency. PagerDuty-style integrations exist, but they trigger off infrastructure metrics, not the *content* of customer messages. This demo classifies every incoming ticket and pipes the urgent ones into Slack so engineering and security see them in seconds, not after the next queue scan.
+
+The bigger story is architectural. Most "AI automation" demos let the LLM do everything — classify, route, *and* fire side-effects — which makes the system non-deterministic and untestable. This system splits those jobs by design. The LLM classifies (categorical labels with confidence). A deterministic rules engine routes. A separate delivery layer fires the external action. Each boundary is enforced by the type system, not just a system prompt.
+
+## What's built
+
+- **AI classifier.** OpenAI gpt-4o-mini with `response_format: json_object` and temperature 0.1. Output is Zod-validated; any failure (network, malformed JSON, schema mismatch) drops to a safe `FALLBACK_CLASSIFICATION` so the rules engine never sees garbage.
+- **Rules engine.** Pure TypeScript, ordered rule list. Six rules plus a fallback. Fraud sits above the high-priority short-circuit on purpose — a fraud + high-priority case still goes to the fraud team, not generic escalation.
+- **Slack delivery layer.** When the rules engine routes to `fraud` or `escalation`, the pipeline posts a Block Kit message to a configured Slack webhook with category, priority, intent, confidence, the original input quote, and a link back to the dashboard. Other routes stay queue-only — the goal is high-signal alerts, not generic noise. Failures (Slack down, webhook revoked) are appended to the workflow's action log without breaking the rest of the pipeline.
+- **Synthetic SaaS dataset.** A seeded faker generator (`mulberry32(1337)`) produces 600 historical workflows with realistic shape — time-of-day weighting in business hours, mixed categories (technical 35% / billing 30% / general 20% / fraud 5% / noise 5%), a believable status distribution (~92% completed, 5% failed with realistic error messages, 3% in-progress so the dashboard filters have data), and synthetic Slack delivery outcomes on the fraud/escalation rows.
+- **REST API.** `POST /api/ingest`, `GET /api/workflows` (with `status`, `routedTo`, `category` filters via Postgres jsonb path queries), `GET /api/workflows/[id]`, `GET /api/insights`. Each route is a thin Next 16 route handler over a shared pipeline function.
+- **Dashboard.** Sticky sidebar with status filters, four KPIs (total / success rate / avg processing time / queue depth), an AI insights panel that narrates pre-aggregated metrics, an interactive ingest form that runs the full classify → route → deliver pipeline live, and an expandable workflow table showing classification, matched rule, action log, and Slack delivery status per row.
+
+## Technical choices worth calling out
+
+### "AI classifies, rules route, delivery layer fires" — enforced by types
+
+The rules engine takes a typed `Classification` and returns a typed `RoutingDecision`. The Slack delivery layer takes that `RoutingDecision` and returns a typed `ActionEntry`. There is no codepath where the LLM produces a routing target or fires an external call. The system prompt also enforces the boundary in language ("classify only — do NOT route, respond, or solve") but the type system is the actual guarantee.
+
+### Validate at the system boundary, fall back inside
+
+The classifier exposes `parseClassification(raw)` as a separate pure function — no API call, no side-effects, just JSON.parse + Zod. The smoke suite drives seven malformed inputs through it directly to assert each one falls through to the safe fallback. The Slack delivery layer applies the same pattern: a non-2xx response or thrown fetch becomes a `slack_failed` action entry on the workflow record, and the workflow itself still completes.
+
+### Workflow record IS the audit trail
+
+No separate event log table. Each workflow row carries its full lifecycle in one record: input, classification, routing decision, matched rule, action log (including Slack delivery outcome), status, durations, error message. The dashboard reads it as-is.
+
+### Deterministic seed → testable engine
+
+The seed is byte-identical across runs (`mulberry32(1337)` + `faker.seed(1337)`), so the smoke script can assert exact rule-ordering invariants: nine cases including "fraud beats high priority" and "billing+refund routes to finance, not just billing." Replacing the engine with a different ruleset is a one-file swap that the same assertions guard.
+
+### Per-app Prisma client
+
+Both this demo and the analytics dashboard run Prisma in the same npm workspace. Each generates its client into its own `prisma/generated/client/` directory so the hoisted `@prisma/client` doesn't get clobbered by whichever app generated last.
+
+## Stack
+
+Next.js 16 App Router · MUI v9 · Prisma + Neon Postgres · OpenAI gpt-4o-mini · Zod for I/O validation · Slack incoming webhooks for the delivery layer · `@faker-js/faker` for the seed · TypeScript end-to-end.

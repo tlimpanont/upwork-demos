@@ -88,16 +88,16 @@ export const APPS: readonly DemoApp[] = [
   },
   {
     id: "workflow-automation",
-    name: "AI Workflow Automation",
-    tagline: "AI classifies inputs, deterministic rules route them",
+    name: "AI Incident Triage",
+    tagline: "Urgent tickets get routed to Slack in seconds",
     description:
-      "Incoming tickets and documents get classified by OpenAI (category, priority, intent), then a deterministic rules engine — not the LLM — decides where they go. Dashboard shows the full pipeline live.",
+      "Every incoming ticket gets classified by OpenAI (category, priority, intent). A deterministic rules engine — not the LLM — decides where it goes; fraud and outages fire a Slack alert in the same request. Dashboard shows the full pipeline live.",
     features: [
       "OpenAI classification with Zod-validated outputs",
       "Deterministic rules engine in pure TS",
-      "Per-category routing + fallback handler",
+      "Slack delivery for fraud + escalation routes",
     ],
-    tags: ["OpenAI", "Zod", "Rules engine"],
+    tags: ["OpenAI", "Slack", "Rules engine"],
     cta: "View Live Demo",
     icon: "route",
     href: "/workflow-automation",

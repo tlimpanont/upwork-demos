@@ -324,10 +324,37 @@ export function buildWorkflows(): WorkflowRow[] {
     const route = SEED_ROUTING.find((r) => r.match(classification));
     const routedTo = route?.to ?? FALLBACK.to;
     const matchedRule = route?.rule ?? FALLBACK.rule;
-    const actions = (route?.actions ?? FALLBACK.actions)(classification).map((a) => ({
+    const actions: ActionEntry[] = (route?.actions ?? FALLBACK.actions)(classification).map((a) => ({
       ...a,
       at: new Date(startedAt.getTime() + 50 + Math.floor(rng() * 200)).toISOString(),
     }));
+
+    // Synthetic Slack delivery for fraud + escalation routes — ~85% delivered,
+    // ~10% failed, ~5% skipped (simulates "webhook not configured at the time").
+    // Marked synthetic so it's clear these weren't real network calls.
+    if (routedTo === "fraud" || routedTo === "escalation") {
+      const r = rng();
+      const at = new Date(startedAt.getTime() + 250 + Math.floor(rng() * 400)).toISOString();
+      if (r < 0.85) {
+        actions.push({
+          at,
+          action: "slack_delivered",
+          payload: { status: 200, target: routedTo, synthetic: true },
+        });
+      } else if (r < 0.95) {
+        actions.push({
+          at,
+          action: "slack_failed",
+          payload: { status: 502, body: "Bad Gateway", synthetic: true },
+        });
+      } else {
+        actions.push({
+          at,
+          action: "slack_skipped",
+          payload: { reason: "SLACK_WEBHOOK_URL not configured", synthetic: true },
+        });
+      }
+    }
 
     // ~92% completed, 5% failed, 3% in-progress (split across pending/classified/routed
     // so the dashboard's status filters have data).

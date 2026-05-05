@@ -6,6 +6,8 @@ export type DemoApp = {
   tagline: string;
   description: string;
   features: readonly string[];
+  // Short stack/tech labels shown as compact chips on the demo row.
+  tags: readonly string[];
   cta: string;
   icon: DemoIcon;
   href: string;
@@ -24,6 +26,7 @@ export const APPS: readonly DemoApp[] = [
       "Document-grounded responses (no hallucinations)",
       "OpenAI + Pinecone vector search",
     ],
+    tags: ["RAG", "OpenAI", "Pinecone"],
     cta: "View Live Demo",
     icon: "chat",
     href: "/ai-chatbot",
@@ -40,6 +43,7 @@ export const APPS: readonly DemoApp[] = [
       "Hybrid semantic + exact-numeric search",
       "Vercel Blob storage + Pinecone index",
     ],
+    tags: ["GPT-4o", "Vercel Blob", "Pinecone"],
     cta: "View Live Demo",
     icon: "docs",
     href: "/ai-docs",
@@ -55,6 +59,7 @@ export const APPS: readonly DemoApp[] = [
       "Role-based access control (RBAC)",
       "Multi-tenant data isolation",
     ],
+    tags: ["NextAuth v5", "Stripe", "RBAC"],
     cta: "View Live Demo",
     icon: "building",
     href: "/saas-starter",
@@ -71,6 +76,7 @@ export const APPS: readonly DemoApp[] = [
       "GraphQL Yoga API with live playground",
       "AI insights layer (OpenAI explains, never calculates)",
     ],
+    tags: ["Prisma", "GraphQL", "Forecasting"],
     cta: "View Live Demo",
     icon: "chart",
     href: "/analytics-dashboard",

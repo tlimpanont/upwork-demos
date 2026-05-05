@@ -98,6 +98,28 @@ export default config({
       },
     }),
 
+    demoShowcase: singleton({
+      label: "Demo showcase",
+      path: "apps/landing/content/demo-showcase",
+      format: { data: "yaml" },
+      schema: {
+        overline: fields.text({
+          label: "Overline",
+          defaultValue: "Live capabilities",
+        }),
+        heading: fields.text({
+          label: "Heading",
+          defaultValue: "See the stack in production",
+        }),
+        intro: fields.text({
+          label: "Intro",
+          multiline: true,
+          defaultValue:
+            "Three real working systems built on the same patterns I ship to clients — customer-support AI, document processing, and multi-tenant SaaS — each running on the same Vercel + Postgres + AI stack I use in production.",
+        }),
+      },
+    }),
+
     architecture: singleton({
       label: "Architecture",
       path: "apps/landing/content/architecture",

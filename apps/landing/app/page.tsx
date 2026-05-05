@@ -15,16 +15,25 @@ import SiteFooter from "@/components/SiteFooter";
 
 export default async function HomePage() {
   const reader = createReader(path.resolve(process.cwd(), "../.."), keystaticConfig);
-  const [hero, services, architecture, faq, trust, cta, caseStudyEntries] =
-    await Promise.all([
-      reader.singletons.hero.readOrThrow(),
-      reader.singletons.services.readOrThrow(),
-      reader.singletons.architecture.readOrThrow(),
-      reader.singletons.faq.readOrThrow(),
-      reader.singletons.trust.readOrThrow(),
-      reader.singletons.cta.readOrThrow(),
-      reader.collections.caseStudies.all(),
-    ]);
+  const [
+    hero,
+    services,
+    demoShowcase,
+    architecture,
+    faq,
+    trust,
+    cta,
+    caseStudyEntries,
+  ] = await Promise.all([
+    reader.singletons.hero.readOrThrow(),
+    reader.singletons.services.readOrThrow(),
+    reader.singletons.demoShowcase.readOrThrow(),
+    reader.singletons.architecture.readOrThrow(),
+    reader.singletons.faq.readOrThrow(),
+    reader.singletons.trust.readOrThrow(),
+    reader.singletons.cta.readOrThrow(),
+    reader.collections.caseStudies.all(),
+  ]);
 
   const featuredStudies = [...caseStudyEntries]
     .sort((a, b) => {
@@ -48,7 +57,7 @@ export default async function HomePage() {
       <Box component="main" sx={{ flexGrow: 1 }}>
         <HeroSection content={hero} />
         <ServicesSection content={services} />
-        <DemoShowcase />
+        <DemoShowcase content={demoShowcase} />
         <CaseStudiesSection studies={featuredStudies} />
         <ArchitectureSection content={architecture} />
         <TrustSection content={trust} />

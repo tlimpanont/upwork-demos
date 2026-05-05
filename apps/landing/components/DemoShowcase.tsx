@@ -5,7 +5,13 @@ import Typography from "@mui/material/Typography";
 import { APPS } from "@repo/config";
 import { DemoCard } from "@repo/ui";
 
-export default function DemoShowcase() {
+type DemoShowcaseContent = {
+  overline: string;
+  heading: string;
+  intro: string;
+};
+
+export default function DemoShowcase({ content }: { content: DemoShowcaseContent }) {
   return (
     <Box component="section" id="demos" sx={{ py: { xs: 8, md: 12 } }}>
       <Container>
@@ -17,18 +23,16 @@ export default function DemoShowcase() {
             variant="overline"
             sx={{ color: "primary.light", letterSpacing: "0.18em", fontWeight: 700 }}
           >
-            Live capabilities
+            {content.overline}
           </Typography>
           <Typography variant="h2" sx={{ fontSize: { xs: "2rem", md: "2.75rem" } }}>
-            See the stack in production
+            {content.heading}
           </Typography>
           <Typography
             color="text.secondary"
             sx={{ maxWidth: 640, fontSize: { xs: "1rem", md: "1.1rem" } }}
           >
-            Three real working systems built on the same patterns I ship to clients
-            — customer-support AI, document processing, and multi-tenant SaaS — each
-            running on the same Vercel + Postgres + AI stack I use in production.
+            {content.intro}
           </Typography>
         </Stack>
 

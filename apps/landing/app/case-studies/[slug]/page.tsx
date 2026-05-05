@@ -13,6 +13,8 @@ import { createReader } from "@keystatic/core/reader";
 import keystaticConfig from "../../../keystatic.config";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import MermaidDiagram from "@/components/MermaidDiagram";
+import { markdocConfig } from "@/lib/markdoc-config";
 
 export async function generateStaticParams() {
   const reader = createReader(path.resolve(process.cwd(), "../.."), keystaticConfig);
@@ -31,8 +33,10 @@ export default async function CaseStudyDetailPage({
   if (!entry) notFound();
 
   const { node } = await entry.body();
-  const renderable = Markdoc.transform(node);
-  const rendered = Markdoc.renderers.react(renderable, React);
+  const renderable = Markdoc.transform(node, markdocConfig);
+  const rendered = Markdoc.renderers.react(renderable, React, {
+    components: { MermaidDiagram },
+  });
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>

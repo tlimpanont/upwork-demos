@@ -1,6 +1,6 @@
 ---
 title: Multi-tenant SaaS starter with Stripe billing
-summary: A production-shaped SaaS foundation — auth, workspaces, role-based access, and Stripe-billed subscriptions on a serverless stack.
+summary: A SaaS foundation tested against the messy parts — multi-tenant isolation, dropped webhooks, last-admin guards, edge-runtime middleware.
 client: Portfolio demo
 stack:
   - Next.js 16
@@ -12,37 +12,52 @@ stack:
 publishedAt: 2026-05-04
 ---
 
+## Pipeline
+
+```mermaid
+flowchart LR
+  A[Request] --> B[Edge middleware<br/>Auth.js v5]
+  B --> C{Authenticated?}
+  C -- no --> D[Redirect /login]
+  C -- yes --> E[Org context<br/>signed cookie + DB check]
+  E --> F[RBAC: can&#40;role, perm&#41;]
+  F --> G[Org-scoped<br/>Postgres queries]
+  H[Stripe Checkout] --> I[Webhook<br/>signature verified]
+  I --> J[Subscription<br/>per workspace]
+  J -.-> K[Sync from Stripe<br/>recovery path]
+```
+
 ## Why this exists
 
-Most "SaaS boilerplates" stop at a logged-in dashboard. The hard parts of a real product — multi-tenant isolation, Stripe edge cases, last-admin guards, edge-safe middleware — only show up after the demo screenshots are done. This starter goes there on purpose.
+Most "SaaS boilerplates" stop at a logged-in dashboard. The hard parts of a real product — multi-tenant isolation, Stripe edge cases, last-admin guards, edge-safe middleware — only show up after the screenshots are done. This starter goes there on purpose.
 
 ## What's built
 
-- **Email/password auth** with bcrypt and JWT sessions, edge-compatible middleware that protects `/dashboard/*`.
+- **Email/password auth** with bcrypt and JWT sessions; edge-compatible middleware protects `/dashboard/*`.
 - **Multi-tenant by design.** Every server query is scoped by an active-organization context derived from a signed cookie *and* re-validated as a real membership on every request. Org IDs are never accepted from the client.
 - **RBAC** with `admin` / `member` roles and a `can(role, permission)` helper.
 - **Workspace switcher** in the topbar; users belong to many organizations.
-- **Member invites, role changes, removal** — with a "last admin" guard so a workspace can never become admin-less.
+- **Member invites, role changes, removal** with a "last admin" guard so a workspace can never become admin-less.
 - **Stripe-billed subscriptions per workspace** — Checkout, Customer Portal, signature-verified webhooks.
-- **"Sync from Stripe" recovery** — pulls truth from Stripe when a webhook was missed.
-- **Settings** — display name, password change, workspace rename, danger-zone deletion that cancels the Stripe sub on the way out.
+- **"Sync from Stripe" recovery** that pulls truth from Stripe when a webhook was missed.
+- **Settings**: display name, password change, workspace rename, danger-zone deletion that cancels the Stripe sub on the way out.
 
-## Technical choices worth calling out
+## Technical choices
 
 ### Stripe is the source of truth, not the local DB
 
-The duplicate-subscription guard, the "Sync from Stripe" button, and the webhook handler all derive state by asking Stripe — never the local DB. Webhooks can be dropped (especially in dev when `stripe listen` isn't running); the recovery paths assume that and reconcile from Stripe rather than papering over inconsistency.
+The duplicate-subscription guard, the "Sync from Stripe" button, and the webhook handler derive state by asking Stripe — never the local DB. Webhooks can be dropped (especially in dev when `stripe listen` isn't running); the recovery paths assume that and reconcile from Stripe rather than papering over inconsistency.
 
 ### Edge-safe middleware split
 
-Auth.js v5 middleware runs in the Edge runtime where `pg` and `bcrypt` aren't available. `lib/auth.config.ts` is the edge-safe shared config used by `proxy.ts`; `lib/auth.ts` extends it with the credentials provider and Postgres lookup. Same callbacks, same JWT, two execution environments.
+Auth.js v5 middleware runs in the Edge runtime where `pg` and `bcrypt` aren't available. `lib/auth.config.ts` is the edge-safe shared config used by the proxy; `lib/auth.ts` extends it with the credentials provider and Postgres lookup. Same callbacks, same JWT, two execution environments.
 
 ### Last-admin guard, transactional
 
-`changeMemberRole` and `removeMember` open a transaction, count current admins, and refuse the operation if it would leave the workspace admin-less. Means an admin can't lock themselves out by demoting themselves when they're the only one.
+`changeMemberRole` and `removeMember` open a transaction, count current admins, and refuse the operation if it would leave the workspace admin-less. An admin can't lock themselves out by demoting the only one.
 
 ## Outcome
 
-The same building blocks ship into client SaaS products without rework — auth, billing, and tenant isolation that have been tested against the Stripe sandbox and held up under real failure modes (dropped webhooks, double-clicked Checkout buttons, mid-cancel role changes).
+The same building blocks ship into client SaaS products without rework — auth, billing, and tenant isolation that held up against the Stripe sandbox under real failure modes (dropped webhooks, double-clicked Checkout buttons, mid-cancel role changes).
 
 [Live demo →](https://upwork-demos-saas-starter.vercel.app)

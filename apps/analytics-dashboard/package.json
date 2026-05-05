@@ -17,6 +17,7 @@
     "start": "next start -p 3004",
     "lint": "eslint",
     "clean": "rm -rf .next .turbo",
+    "postinstall": "prisma generate",
     "db:generate": "prisma generate",
     "db:push": "dotenv -e .env.local -- prisma db push",
     "db:seed": "dotenv -e .env.local -- tsx scripts/seed.ts",

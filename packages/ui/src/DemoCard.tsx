@@ -67,7 +67,7 @@ export default function DemoCard({ app }: DemoCardProps) {
               justifyContent: "center",
               bgcolor: `${accent.base}1A`,
               color: accent.tintLight,
-              '[data-mui-color-scheme="dark"] &': {
+              "[data-dark] &": {
                 color: accent.tintDark,
               },
             }}
@@ -82,7 +82,7 @@ export default function DemoCard({ app }: DemoCardProps) {
               color: accent.tintLight,
               fontWeight: 600,
               border: 0,
-              '[data-mui-color-scheme="dark"] &': {
+              "[data-dark] &": {
                 color: accent.tintDark,
               },
             }}
@@ -118,7 +118,7 @@ export default function DemoCard({ app }: DemoCardProps) {
                   color: accent.tintLight,
                   mt: "2px",
                   flexShrink: 0,
-                  '[data-mui-color-scheme="dark"] &': {
+                  "[data-dark] &": {
                     color: accent.tintDark,
                   },
                 }}

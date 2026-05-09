@@ -23,7 +23,6 @@ export type DemoApp = {
   cta: string;
   icon: DemoIcon;
   href: string;
-  deepLink?: string;
   // Port the app binds to in local dev. The landing redirect uses this when
   // running locally so /<id> hits http://localhost:<devPort> instead of the
   // production subdomain.
@@ -46,7 +45,6 @@ export const APPS: readonly DemoApp[] = [
     cta: "View Live Demo",
     icon: "chat",
     href: "/ai-chatbot",
-    deepLink: "/admin",
     devPort: 3001,
   },
   {
@@ -81,7 +79,6 @@ export const APPS: readonly DemoApp[] = [
     cta: "View Live Demo",
     icon: "building",
     href: "/saas-starter",
-    deepLink: "/login",
     devPort: 3003,
   },
   {
@@ -133,7 +130,6 @@ export const APPS: readonly DemoApp[] = [
     cta: "View Live Demo",
     icon: "target",
     href: "/ai-lead-qualification",
-    deepLink: "/dashboard",
     devPort: 3006,
   },
 ] as const;

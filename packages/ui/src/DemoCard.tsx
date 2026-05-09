@@ -37,7 +37,7 @@ const ACCENT: Record<DemoIcon, { base: string; tintLight: string; tintDark: stri
 export default function DemoCard({ app }: DemoCardProps) {
   const Icon = ICONS[app.icon];
   const accent = ACCENT[app.icon];
-  const demoHref = app.deepLink ? `${app.href}${app.deepLink}` : app.href;
+  const demoHref = app.href;
   // Case study slug matches the app id by convention (ai-chatbot.mdoc etc.).
   const caseStudyHref = `/case-studies/${app.id}`;
 

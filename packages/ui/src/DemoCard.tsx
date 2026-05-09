@@ -45,10 +45,10 @@ export default function DemoCard({ app }: DemoCardProps) {
     <Box
       sx={{
         display: "flex",
-        flexDirection: { xs: "column", sm: "row" },
-        alignItems: { xs: "flex-start", sm: "center" },
-        gap: { xs: 2, sm: 3 },
+        flexDirection: "column",
+        gap: 2,
         p: { xs: 2.5, md: 3 },
+        height: "100%",
         borderRadius: 3,
         border: "1px solid",
         borderColor: "divider",
@@ -78,33 +78,27 @@ export default function DemoCard({ app }: DemoCardProps) {
         <Icon fontSize="medium" />
       </Box>
 
-      <Stack spacing={0.5} sx={{ flex: 1, minWidth: 0 }}>
-        <Stack
-          direction="row"
-          spacing={1.25}
-          sx={{ alignItems: "center", flexWrap: "wrap", rowGap: 0.5 }}
-        >
-          <Typography variant="subtitle1" sx={{ fontWeight: 700, lineHeight: 1.3 }}>
-            {app.name}
-          </Typography>
-          <Stack direction="row" spacing={0.5} sx={{ flexWrap: "wrap", rowGap: 0.5 }}>
-            {app.tags.map((t) => (
-              <Chip
-                key={t}
-                size="small"
-                label={t}
-                variant="outlined"
-                sx={{
-                  height: 22,
-                  fontSize: 11,
-                  fontWeight: 600,
-                  letterSpacing: "0.02em",
-                  borderColor: "divider",
-                  color: "text.secondary",
-                }}
-              />
-            ))}
-          </Stack>
+      <Stack spacing={1} sx={{ flex: 1, minWidth: 0 }}>
+        <Typography variant="subtitle1" sx={{ fontWeight: 700, lineHeight: 1.3 }}>
+          {app.name}
+        </Typography>
+        <Stack direction="row" spacing={0.5} sx={{ flexWrap: "wrap", rowGap: 0.5 }}>
+          {app.tags.map((t) => (
+            <Chip
+              key={t}
+              size="small"
+              label={t}
+              variant="outlined"
+              sx={{
+                height: 22,
+                fontSize: 11,
+                fontWeight: 600,
+                letterSpacing: "0.02em",
+                borderColor: "divider",
+                color: "text.secondary",
+              }}
+            />
+          ))}
         </Stack>
         <Typography
           variant="body2"
@@ -126,8 +120,11 @@ export default function DemoCard({ app }: DemoCardProps) {
         spacing={2}
         sx={{
           alignItems: "center",
-          flexShrink: 0,
-          alignSelf: { xs: "flex-end", sm: "center" },
+          justifyContent: "space-between",
+          pt: 1,
+          mt: "auto",
+          borderTop: "1px solid",
+          borderColor: "divider",
         }}
       >
         <Box

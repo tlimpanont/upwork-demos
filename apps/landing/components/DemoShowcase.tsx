@@ -36,11 +36,21 @@ export default function DemoShowcase({ content }: { content: DemoShowcaseContent
           </Typography>
         </Stack>
 
-        <Stack spacing={1.75} sx={{ maxWidth: 880, mx: "auto" }}>
+        <Box
+          sx={{
+            display: "grid",
+            gap: { xs: 2, md: 2.5 },
+            gridTemplateColumns: {
+              xs: "1fr",
+              sm: "repeat(2, 1fr)",
+              md: "repeat(3, 1fr)",
+            },
+          }}
+        >
           {APPS.map((app) => (
             <DemoCard key={app.id} app={app} />
           ))}
-        </Stack>
+        </Box>
       </Container>
     </Box>
   );

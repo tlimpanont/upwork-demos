@@ -4,7 +4,8 @@ export type DemoIcon =
   | "building"
   | "chart"
   | "route"
-  | "target";
+  | "target"
+  | "eye";
 
 export type DemoApp = {
   id:
@@ -13,7 +14,8 @@ export type DemoApp = {
     | "saas-starter"
     | "analytics-dashboard"
     | "workflow-automation"
-    | "ai-lead-qualification";
+    | "ai-lead-qualification"
+    | "anomaly-detection";
   name: string;
   tagline: string;
   description: string;
@@ -131,5 +133,22 @@ export const APPS: readonly DemoApp[] = [
     icon: "target",
     href: "/ai-lead-qualification",
     devPort: 3006,
+  },
+  {
+    id: "anomaly-detection",
+    name: "AI Anomaly Detection",
+    tagline: "Image-sequence anomaly detection on MongoDB Atlas Vector Search",
+    description:
+      "Upload chronological image sequences, annotate normal and anomalous regions on a Konva canvas, then train an embedding-based detector. New images are scored by cosine distance from the project's normal-cluster centroid, with per-tile heatmaps and bounding boxes derived from contiguous high-distance regions.",
+    features: [
+      "OpenAI vision captions + text-embedding-3-small over Atlas Vector Search",
+      "Konva-based bounding-box and polygon annotation tools",
+      "Per-tile heatmap overlays + human-correction feedback loop",
+    ],
+    tags: ["MongoDB Atlas", "Vector Search", "Konva"],
+    cta: "View Live Demo",
+    icon: "eye",
+    href: "/anomaly-detection",
+    devPort: 3007,
   },
 ] as const;

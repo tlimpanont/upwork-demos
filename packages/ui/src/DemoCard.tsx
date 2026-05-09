@@ -9,6 +9,7 @@ import ApartmentRoundedIcon from "@mui/icons-material/ApartmentRounded";
 import ShowChartRoundedIcon from "@mui/icons-material/ShowChartRounded";
 import AltRouteRoundedIcon from "@mui/icons-material/AltRouteRounded";
 import GpsFixedRoundedIcon from "@mui/icons-material/GpsFixedRounded";
+import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import type { DemoApp, DemoIcon } from "@repo/config";
 
@@ -23,6 +24,7 @@ const ICONS: Record<DemoIcon, React.ElementType> = {
   chart: ShowChartRoundedIcon,
   route: AltRouteRoundedIcon,
   target: GpsFixedRoundedIcon,
+  eye: VisibilityRoundedIcon,
 };
 
 const ACCENT: Record<DemoIcon, { base: string; tintLight: string; tintDark: string }> = {
@@ -32,6 +34,7 @@ const ACCENT: Record<DemoIcon, { base: string; tintLight: string; tintDark: stri
   chart: { base: "#B45309", tintLight: "#B45309", tintDark: "#FCD34D" },
   route: { base: "#6D28D9", tintLight: "#6D28D9", tintDark: "#C4B5FD" },
   target: { base: "#BE185D", tintLight: "#BE185D", tintDark: "#F9A8D4" },
+  eye: { base: "#0E7490", tintLight: "#0E7490", tintDark: "#67E8F9" },
 };
 
 export default function DemoCard({ app }: DemoCardProps) {

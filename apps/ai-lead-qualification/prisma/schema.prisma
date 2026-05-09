@@ -1,0 +1,65 @@
+// SQLite for zero-config demo: arrays stored as JSON-encoded strings,
+// integration logs stored as JSON. Swap to postgres + native arrays/Json
+// for production without changing the application boundary.
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  id          String  @id @default(cuid())
+  name        String
+  company     String?
+  email       String
+  phone       String?
+  companySize String?
+  budget      String?
+  inquiry     String
+  // JSON-encoded string[] of selected services. Helper in lib/db parses on read.
+  services    String  @default("[]")
+
+  // AI qualification — null until the qualification engine runs.
+  aiScore           Int?
+  aiConfidence      Float?  // 0..1 — how confident the model is in its score
+  qualification     String? // "Hot" | "Warm" | "Cold"
+  aiSummary         String?
+  aiUrgency         String?
+  recommendedAction String?
+  // JSON-encoded string[] of AI-generated tags.
+  aiTags            String  @default("[]")
+  // Step-by-step why-this-score, surfaced verbatim in the lead detail page.
+  aiReasoning       String?
+  // JSON-encoded array of { category, strength, note } — the structured fit
+  // analysis the model produced. Renders as a signals matrix on the detail page.
+  aiSignals         String  @default("[]")
+  // Estimated annual contract value (USD). Null when the model can't infer.
+  aiDealSizeUsd     Int?
+  // Drafted first-touch follow-up email the AE can copy/edit and send.
+  aiFollowUpEmail   String?
+  // Which provider produced this — "openai" or "stub" (deterministic fallback).
+  aiSource          String?
+
+  // Lifecycle.
+  status String @default("new") // new | contacted | qualified | converted | dropped
+  owner  String? // Mock CRM owner assignment.
+
+  // Integration delivery log: JSON array of { at, integration, status, message }.
+  // Records what the dispatcher fanned out to (HubSpot, Salesforce, Slack, email).
+  integrationLog String @default("[]")
+
+  // Free-form notes the rep can add from the lead detail page (JSON array).
+  notes String @default("[]")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([createdAt])
+  @@index([status])
+  @@index([qualification])
+}

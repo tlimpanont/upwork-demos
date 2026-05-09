@@ -1,0 +1,22 @@
+{
+  "name": "embeddings_vector_index",
+  "type": "vectorSearch",
+  "definition": {
+    "fields": [
+      {
+        "type": "vector",
+        "path": "vector",
+        "numDimensions": 1536,
+        "similarity": "cosine"
+      },
+      {
+        "type": "filter",
+        "path": "projectId"
+      },
+      {
+        "type": "filter",
+        "path": "label"
+      }
+    ]
+  }
+}

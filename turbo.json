@@ -24,12 +24,7 @@
         "AUTH_URL",
         "STRIPE_SECRET_KEY",
         "STRIPE_WEBHOOK_SECRET",
-        "NEXT_PUBLIC_STRIPE_PRICE_PRO",
-        "AI_CHATBOT_URL",
-        "AI_DOCS_URL",
-        "SAAS_STARTER_URL",
-        "ANALYTICS_DASHBOARD_URL",
-        "WORKFLOW_AUTOMATION_URL"
+        "NEXT_PUBLIC_STRIPE_PRICE_PRO"
       ]
     },
     "build": {
@@ -48,12 +43,7 @@
         "AUTH_URL",
         "STRIPE_SECRET_KEY",
         "STRIPE_WEBHOOK_SECRET",
-        "NEXT_PUBLIC_STRIPE_PRICE_PRO",
-        "AI_CHATBOT_URL",
-        "AI_DOCS_URL",
-        "SAAS_STARTER_URL",
-        "ANALYTICS_DASHBOARD_URL",
-        "WORKFLOW_AUTOMATION_URL"
+        "NEXT_PUBLIC_STRIPE_PRICE_PRO"
       ]
     },
     "lint": {

@@ -1,0 +1,55 @@
+---
+title: AI lead qualification with a structured-output pipeline
+summary: Inbound forms hit OpenAI for a structured qualification — score, signals matrix, est. ARR, follow-up email — then a tier-driven dispatcher fans out to mock HubSpot, Salesforce, Slack, and email. Every signal ties to a quoted phrase; every dispatch is logged.
+client: Portfolio demo
+stack:
+  - Next.js 16
+  - React 19
+  - shadcn/ui
+  - Tailwind v4
+  - Prisma
+  - SQLite
+  - OpenAI structured outputs
+  - Zod
+  - Recharts
+  - Vercel
+publishedAt: 2026-05-09
+---
+
+For inbound-heavy B2B teams whose AEs spend half their day triaging junk before they get to the qualified deals — and whose sales ops keeps meaning to wire up an AI scorer but defaults to keyword regex because shipping it once and watching it drift is less painful than shipping it twice. The interesting design choice is using OpenAI's `json_schema strict` mode so the response shape is guaranteed at the API layer, then a deterministic stub fallback so the demo runs end-to-end without an API key.
+
+## Pipeline
+
+```mermaid
+flowchart LR
+  A[Public form] --> B[Pipeline ingest<br/>persist as 'new']
+  B --> C[OpenAI qualifier<br/>json_schema strict]
+  C --> D[Zod safeParse<br/>second-line validation]
+  D --> E[(SQLite)]
+  D --> F{Tier policy<br/>Hot / Warm / Cold}
+  F -- Hot --> G[Salesforce + Slack<br/>+ HubSpot + email]
+  F -- Warm --> H[HubSpot + nurture]
+  F -- Cold --> I[Self-serve only]
+  G --> E
+  H --> E
+  I --> E
+```
+
+## What's built
+
+- **AI qualifier with structured outputs.** OpenAI gpt-4o-mini, `response_format: { type: "json_schema", strict: true }` — the API guarantees the response matches the schema. Zod is a second-line check against tampered or stale fields.
+- **Ten-field extraction, not five.** Score + confidence (0–1), 2–4-sentence audit-trail reasoning, urgency, recommended action, tags, a structured signals matrix across six categories (fit / budget / intent / urgency / authority / risk) where every claim ties to a quoted phrase, est. ARR anchored on size × budget, and a tone-matched follow-up email draft per tier.
+- **Deterministic stub fallback.** Same shape, derived from keyword heuristics over budget/size/urgency. Activates when `OPENAI_API_KEY` is unset or the call fails — the dashboard always has data to render and the form never blocks on the AI.
+- **Tier-driven CRM dispatch.** Each integration adapter exports `{ shouldFire, deliver }`. Hot fans out to Salesforce + Slack + HubSpot + email; Warm to HubSpot + nurture; Cold to self-serve. Every step writes a `delivered | skipped | failed` entry to the lead's integration log.
+- **Auditable lead detail.** Score + confidence + urgency + est. ARR header, "Why this score" reasoning, signals matrix with category icons and strength dots, AI-drafted follow-up with copy + mailto buttons, full activity timeline, status select, and rep notes.
+- **Insights without recomputation.** AI insights page narrates pre-aggregated metrics — tag counts, service mix, industry conversion, MoM score delta — never recomputes them. Same boundary as the qualifier: the LLM explains, the database calculates.
+- **Single ingest entry point.** `lib/pipeline.ts:ingestLead` is called by the public-form server action; any future REST or webhook endpoint hits the same function, so qualification + dispatch behave identically across channels.
+
+## Tradeoffs
+
+- **Structured outputs over `json_object`.** The API enforces the schema instead of just "valid JSON" — costs a few tokens of latency in negotiation, removes a class of failure modes, and lets the schema document itself for future model upgrades.
+- **Stub fallback that mirrors shape.** The demo never blocks on the model, but a quietly-stubbed lead is only distinguishable in the UI by the "Heuristic stub" badge — `aiSource` is the metric to watch, not pipeline uptime.
+- **SQLite + JSON-encoded array columns.** Zero-config for a demo. `lib/db/lead.ts:hydrateLead` is the single boundary that parses the JSON strings; consumers see real arrays. Swap to Postgres + native arrays when productionizing — the application boundary doesn't move.
+- **Mock CRM adapters with realistic logs.** Each adapter records what it *would* have sent. The contract — `IntegrationLogEntry` — is what real adapters would return, so dashboards keep working when `deliver()` actually hits HubSpot/Salesforce/Slack APIs.
+
+[Live demo →](/ai-lead-qualification)

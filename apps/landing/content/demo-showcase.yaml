@@ -3,6 +3,8 @@ heading: See the stack in production
 intro: >-
   Real working systems built on the same patterns I ship to clients —
   customer-support AI, document processing, multi-tenant SaaS, an AI
-  analytics dashboard with a forecasting engine and GraphQL API, and
-  AI-assisted incident triage with Slack delivery — each running on the
-  same Vercel + Postgres + AI stack I use in production.
+  analytics dashboard with a forecasting engine and GraphQL API,
+  AI-assisted incident triage with Slack delivery, and an AI lead
+  qualifier that scores inbound and fans out to your CRM in seconds —
+  each running on the same Vercel + Postgres + AI stack I use in
+  production.

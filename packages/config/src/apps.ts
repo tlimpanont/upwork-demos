@@ -1,4 +1,10 @@
-export type DemoIcon = "chat" | "docs" | "building" | "chart" | "route";
+export type DemoIcon =
+  | "chat"
+  | "docs"
+  | "building"
+  | "chart"
+  | "route"
+  | "target";
 
 export type DemoApp = {
   id:
@@ -6,7 +12,8 @@ export type DemoApp = {
     | "ai-docs"
     | "saas-starter"
     | "analytics-dashboard"
-    | "workflow-automation";
+    | "workflow-automation"
+    | "ai-lead-qualification";
   name: string;
   tagline: string;
   description: string;
@@ -17,6 +24,10 @@ export type DemoApp = {
   icon: DemoIcon;
   href: string;
   deepLink?: string;
+  // Port the app binds to in local dev. The landing redirect uses this when
+  // running locally so /<id> hits http://localhost:<devPort> instead of the
+  // production subdomain.
+  devPort: number;
 };
 
 export const APPS: readonly DemoApp[] = [
@@ -36,6 +47,7 @@ export const APPS: readonly DemoApp[] = [
     icon: "chat",
     href: "/ai-chatbot",
     deepLink: "/admin",
+    devPort: 3001,
   },
   {
     id: "ai-docs",
@@ -52,6 +64,7 @@ export const APPS: readonly DemoApp[] = [
     cta: "View Live Demo",
     icon: "docs",
     href: "/ai-docs",
+    devPort: 3002,
   },
   {
     id: "saas-starter",
@@ -69,6 +82,7 @@ export const APPS: readonly DemoApp[] = [
     icon: "building",
     href: "/saas-starter",
     deepLink: "/login",
+    devPort: 3003,
   },
   {
     id: "analytics-dashboard",
@@ -85,6 +99,7 @@ export const APPS: readonly DemoApp[] = [
     cta: "View Live Demo",
     icon: "chart",
     href: "/analytics-dashboard",
+    devPort: 3004,
   },
   {
     id: "workflow-automation",
@@ -101,5 +116,24 @@ export const APPS: readonly DemoApp[] = [
     cta: "View Live Demo",
     icon: "route",
     href: "/workflow-automation",
+    devPort: 3005,
+  },
+  {
+    id: "ai-lead-qualification",
+    name: "AI Lead Qualification",
+    tagline: "Score inbound leads and fan them out to your CRM in <5s",
+    description:
+      "Public form runs an OpenAI structured-output qualifier — score, confidence, signals matrix, est. ARR, follow-up email draft — then a tier-driven dispatcher pushes Hot leads to Salesforce + Slack, Warm into HubSpot + nurture, Cold to self-serve. Every signal ties to a quoted phrase; every dispatch is logged.",
+    features: [
+      "OpenAI structured outputs (json_schema strict) + Zod parse",
+      "Mock HubSpot / Salesforce / Slack / email fan-out per tier",
+      "Auditable signals + AI-drafted follow-up email per lead",
+    ],
+    tags: ["OpenAI", "Structured outputs", "CRM"],
+    cta: "View Live Demo",
+    icon: "target",
+    href: "/ai-lead-qualification",
+    deepLink: "/dashboard",
+    devPort: 3006,
   },
 ] as const;

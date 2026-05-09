@@ -2,7 +2,7 @@ import type { Lead } from "../../prisma/generated/client";
 import type { Signal } from "../ai/qualify";
 
 // SQLite stores arrays/objects as JSON-encoded strings. These helpers are the
-// single boundary between the wire format and the in-app shape — every read
+// single boundary between the wire format and the in-app shape; every read
 // path goes through `hydrateLead` so consumers see real arrays and objects.
 
 export type IntegrationLogEntry = {

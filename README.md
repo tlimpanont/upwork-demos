@@ -4,7 +4,7 @@ A Turborepo monorepo bundling three production-ready demo apps and a commercial
 landing page that showcases them as a unified platform.
 
 Each demo runs the same stack you'd ship to a client (Next.js 16 · TypeScript · Vercel ·
-Postgres · OpenAI), so they're real working systems — not tutorials.
+Postgres · OpenAI), so they're real working systems, not tutorials.
 
 ## Apps
 
@@ -23,8 +23,8 @@ Postgres · OpenAI), so they're real working systems — not tutorials.
 | [`@repo/ui`](./packages/ui) | Shared MUI components (`DemoCard`) consumed by `landing` |
 | [`@repo/lib`](./packages/lib) | Tiny utility helpers (`cx`, `absoluteUrl`) |
 
-Each consuming app declares them in `transpilePackages` in its `next.config.ts` —
-no separate build step.
+Each consuming app declares them in `transpilePackages` in its `next.config.ts`,
+so there's no separate build step.
 
 ## Quick start
 
@@ -32,7 +32,7 @@ no separate build step.
 # 1. Install everything (single hoisted node_modules at root)
 npm install
 
-# 2. Configure secrets — copy and fill in
+# 2. Configure secrets: copy and fill in
 cp .env.example .env.local
 
 # 3. Run any single app
@@ -45,7 +45,7 @@ npm run dev --workspace=saas-starter  # http://localhost:3003
 npm run dev
 ```
 
-## Env strategy — one `.env.local`, symlinked
+## Env strategy: one `.env.local`, symlinked
 
 The root `.env.local` is the **single source of truth** for every app. Each app's
 `apps/<app>/.env.local` is a symlink to it:
@@ -66,11 +66,11 @@ See [`.env.example`](./.env.example) for the full list of supported variables.
 
 ### Required variables by app
 
-- **`ai-chatbot`, `ai-docs`** — `OPENAI_API_KEY`, `DATABASE_URL`, `PINECONE_API_KEY`,
+- **`ai-chatbot`, `ai-docs`**: `OPENAI_API_KEY`, `DATABASE_URL`, `PINECONE_API_KEY`,
   `PINECONE_INDEX_NAME`, `BLOB_READ_WRITE_TOKEN`
-- **`saas-starter`** — `DATABASE_URL`, `AUTH_SECRET`, `AUTH_URL`,
+- **`saas-starter`**: `DATABASE_URL`, `AUTH_SECRET`, `AUTH_URL`,
   `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `NEXT_PUBLIC_STRIPE_PRICE_PRO`
-- **`landing`** — none required for local dev; in production set
+- **`landing`**: none required for local dev; in production set
   `NEXT_PUBLIC_AI_CHATBOT_URL`, `NEXT_PUBLIC_AI_DOCS_URL`, `NEXT_PUBLIC_SAAS_STARTER_URL`
   to point demo cards at their deployed URLs
 
@@ -97,9 +97,9 @@ upwork-demos/
 │   ├── ai-docs/            ← PDF processing (port 3002)
 │   └── saas-starter/       ← multi-tenant SaaS (port 3003)
 ├── packages/
-│   ├── config/             ← @repo/config — APPS catalog
-│   ├── ui/                 ← @repo/ui    — shared MUI components
-│   └── lib/                ← @repo/lib   — utility helpers
+│   ├── config/             ← @repo/config: APPS catalog
+│   ├── ui/                 ← @repo/ui:     shared MUI components
+│   └── lib/                ← @repo/lib:    utility helpers
 ├── .env.local              ← single source of truth (gitignored)
 ├── .env.example            ← documents required env vars
 ├── package.json            ← npm workspaces + turbo scripts

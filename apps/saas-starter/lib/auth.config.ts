@@ -1,6 +1,6 @@
 import type { NextAuthConfig } from "next-auth";
 
-// Edge-safe NextAuth config — no Node-only modules (pg, bcrypt) so it can run
+// Edge-safe NextAuth config: no Node-only modules (pg, bcrypt) so it can run
 // inside `middleware.ts`. The full credentials provider is added in lib/auth.ts.
 export const authConfig = {
   session: { strategy: "jwt" },

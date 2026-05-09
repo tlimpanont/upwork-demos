@@ -33,7 +33,7 @@ export type ClassifyResult = {
   rawResponse?: string;
 };
 
-const SYSTEM_PROMPT = `You classify incoming SaaS messages so a deterministic rules engine can route them. You ONLY classify — you do NOT route, respond, or solve.
+const SYSTEM_PROMPT = `You classify incoming SaaS messages so a deterministic rules engine can route them. You ONLY classify. You do NOT route, respond, or solve.
 
 Return STRICT JSON with exactly these fields:
 - type: one of "support_ticket" | "user_input" | "document" | "system_log"
@@ -74,7 +74,7 @@ export async function classify(input: ClassifyInput): Promise<ClassifyResult> {
   return { ...parsed, rawResponse: raw };
 }
 
-// Pure function — separated so smoke tests can hit it without an OpenAI call.
+// Pure function: separated so smoke tests can hit it without an OpenAI call.
 export function parseClassification(raw: string): {
   classification: Classification;
   fallback: boolean;

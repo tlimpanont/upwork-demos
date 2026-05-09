@@ -95,7 +95,7 @@ export default async function HomePage({
             </Typography>
             <Typography color="text.secondary">
               OpenAI classifies inputs (category, priority, intent). A deterministic
-              rules engine — never the LLM — decides where they go.
+              rules engine, never the LLM, decides where they go.
             </Typography>
           </Stack>
 

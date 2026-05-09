@@ -130,7 +130,7 @@ const TEMPLATES: readonly Template[] = [
     category: "general",
     intent: "feedback",
     templates: [
-      "Quick feedback — the new onboarding flow is much smoother than before. Nice work.",
+      "Quick feedback: the new onboarding flow is much smoother than before. Nice work.",
       "The empty state on the Reports page is confusing for new users.",
     ],
   },
@@ -153,7 +153,7 @@ const TEMPLATES: readonly Template[] = [
     ],
   },
   {
-    // Intentionally noisy / malformed inputs — exercises the fallback handler.
+    // Intentionally noisy / malformed inputs to exercise the fallback handler.
     inputType: "user_input",
     category: "unknown",
     intent: "noise",
@@ -329,7 +329,7 @@ export function buildWorkflows(): WorkflowRow[] {
       at: new Date(startedAt.getTime() + 50 + Math.floor(rng() * 200)).toISOString(),
     }));
 
-    // Synthetic Slack delivery for fraud + escalation routes — ~85% delivered,
+    // Synthetic Slack delivery for fraud + escalation routes: ~85% delivered,
     // ~10% failed, ~5% skipped (simulates "webhook not configured at the time").
     // Marked synthetic so it's clear these weren't real network calls.
     if (routedTo === "fraud" || routedTo === "escalation") {

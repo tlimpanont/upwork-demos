@@ -21,7 +21,7 @@ export function FollowUpEmail({
     setTimeout(() => setCopied(false), 1500);
   }
 
-  const subject = `Re: your inquiry — quick next step`;
+  const subject = `Re: your inquiry, quick next step`;
   const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(
     subject,
   )}&body=${encodeURIComponent(body)}`;

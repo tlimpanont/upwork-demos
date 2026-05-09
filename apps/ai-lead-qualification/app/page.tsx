@@ -94,7 +94,7 @@ function Hero() {
         </h1>
         <p className="mx-auto mt-5 max-w-xl text-balance text-base text-muted-foreground md:text-lg">
           Lumen reads every inbound inquiry, scores fit and intent, then routes
-          the qualified ones into HubSpot, Salesforce, Slack, and email — in
+          the qualified ones into HubSpot, Salesforce, Slack, and email in
           under 5 seconds, without your AEs lifting a finger.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -124,7 +124,7 @@ function Features() {
     {
       icon: Brain,
       title: "AI qualification, not keyword rules",
-      desc: "Score every lead 0–100 on fit, urgency, and budget signals. Catches what regex misses — context, tone, and intent.",
+      desc: "Score every lead 0 to 100 on fit, urgency, and budget signals. Catches what regex misses: context, tone, and intent.",
     },
     {
       icon: Send,
@@ -139,7 +139,7 @@ function Features() {
     {
       icon: Database,
       title: "Pipeline-grade dashboards",
-      desc: "Score distribution, qualification breakdown, source attribution. Filterable, sortable, exportable — built for the head of sales.",
+      desc: "Score distribution, qualification breakdown, source attribution. Filterable, sortable, exportable, built for the head of sales.",
     },
     {
       icon: Mail,
@@ -149,7 +149,7 @@ function Features() {
     {
       icon: Rocket,
       title: "Drop-in for your existing stack",
-      desc: "Form embed, REST API, or webhook. Connect HubSpot/Salesforce/Slack in minutes — or run side-by-side with your current routing.",
+      desc: "Form embed, REST API, or webhook. Connect HubSpot/Salesforce/Slack in minutes, or run side-by-side with your current routing.",
     },
   ];
 
@@ -520,7 +520,7 @@ const SAMPLE_LEADS = [
     company: "Northwind Robotics",
     score: 92,
     tier: "Hot" as const,
-    action: "Book discovery call this week — Q2 deadline",
+    action: "Book discovery call this week (Q2 deadline)",
   },
   {
     name: "David Reyes",
@@ -534,7 +534,7 @@ const SAMPLE_LEADS = [
     company: "Glint Commerce",
     score: 84,
     tier: "Hot" as const,
-    action: "Route to enterprise AE — explicit budget",
+    action: "Route to enterprise AE (explicit budget)",
   },
   {
     name: "Peter Voss",

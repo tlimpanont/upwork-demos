@@ -19,7 +19,7 @@ export type SystemInsights = {
 };
 
 // Same boundary as analytics-dashboard's insights service: this layer never
-// computes metrics — it only narrates pre-aggregated numbers from the DB.
+// computes metrics. It only narrates pre-aggregated numbers from the DB.
 
 let _client: OpenAI | null = null;
 function client(): OpenAI {
@@ -74,7 +74,7 @@ export async function narrate(metrics: SystemMetrics): Promise<SystemInsights> {
       {
         role: "system",
         content:
-          "You narrate operational metrics for an AI workflow automation system. The numbers are PRE-COMPUTED — never recompute or contradict them. Speak plainly to a SaaS ops lead. Output STRICT JSON with three fields: summary (1–3 sentences on overall health), bottlenecks (array of 0–4 short strings calling out specific routing queues, categories, or failure modes that look congested or risky), recommendations (2–4 concrete operational suggestions). If everything looks healthy, return an empty bottlenecks array.",
+          "You narrate operational metrics for an AI workflow automation system. The numbers are PRE-COMPUTED. Never recompute or contradict them. Speak plainly to a SaaS ops lead. Output STRICT JSON with three fields: summary (1 to 3 sentences on overall health), bottlenecks (array of 0 to 4 short strings calling out specific routing queues, categories, or failure modes that look congested or risky), recommendations (2 to 4 concrete operational suggestions). If everything looks healthy, return an empty bottlenecks array.",
       },
       { role: "user", content: prompt },
     ],

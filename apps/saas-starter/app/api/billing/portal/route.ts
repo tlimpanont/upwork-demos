@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     origin,
   });
   if (!session) {
-    return error("No customer record yet — subscribe first", 400);
+    return error("No customer record yet. Subscribe first.", 400);
   }
   return json(session);
 }

@@ -29,7 +29,7 @@ export async function setActiveOrganizationAction(formData: FormData) {
   const session = await auth();
   if (!session?.user?.id) throw new Error("Unauthenticated");
 
-  // Validate the user is a member — never trust the form value.
+  // Validate the user is a member; never trust the form value.
   const membership = await getMembership(session.user.id, orgId);
   if (!membership) throw new Error("Not a member of that organization");
 

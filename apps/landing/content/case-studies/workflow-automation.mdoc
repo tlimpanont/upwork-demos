@@ -1,6 +1,6 @@
 ---
 title: AI-assisted incident triage for the support inbox
-summary: Every ticket is classified by OpenAI; a deterministic rules engine routes the urgent few — fraud, outages, security — into Slack so humans see them in seconds, not after the next queue scan.
+summary: Every ticket is classified by OpenAI; a deterministic rules engine routes the urgent few (fraud, outages, security) into Slack so humans see them in seconds, not after the next queue scan.
 client: Portfolio demo
 stack:
   - Next.js 16
@@ -14,7 +14,7 @@ stack:
 publishedAt: 2026-05-05
 ---
 
-For internal-tools teams that already have an OpenAI key, a Slack workspace, and a queue of tickets — and want the pipeline they keep meaning to build but don't have time to build a fourth time. The interesting design choice is the boundary: the LLM produces a structured classification, never a routing decision; rules decide where it goes; types make it impossible to skip a stage.
+For internal-tools teams that already have an OpenAI key, a Slack workspace, and a queue of tickets, and want the pipeline they keep meaning to build but don't have time to build a fourth time. The interesting design choice is the boundary: the LLM produces a structured classification, never a routing decision; rules decide where it goes; types make it impossible to skip a stage.
 
 ## Pipeline
 
@@ -32,17 +32,17 @@ flowchart LR
 ## What's built
 
 - **AI classifier.** OpenAI gpt-4o-mini with `response_format: json_object` and temperature 0.1. Output is Zod-validated; any failure (network, malformed JSON, schema mismatch) drops to a safe `FALLBACK_CLASSIFICATION` so the rules engine never sees garbage.
-- **Rules engine.** Pure TypeScript, ordered rule list. Six rules plus a fallback. Fraud sits above the high-priority short-circuit on purpose — a fraud + high-priority case still goes to the fraud team, not generic escalation.
+- **Rules engine.** Pure TypeScript, ordered rule list. Six rules plus a fallback. Fraud sits above the high-priority short-circuit on purpose, so a fraud + high-priority case still goes to the fraud team, not generic escalation.
 - **Slack delivery.** Fraud and escalation routes post a Block Kit message with category, priority, intent, confidence, and the original input. Other routes stay queue-only. Failures append to the action log without breaking the pipeline.
 - **REST API.** `POST /api/ingest`, `GET /api/workflows` (with filters via Postgres jsonb path queries), `GET /api/workflows/[id]`, `GET /api/insights`.
 - **Dashboard.** Sidebar status filters, four KPIs, AI insights panel, an interactive ingest form that runs classify → route → deliver live, expandable workflow table with Slack delivery status per row.
 - **Synthetic SaaS dataset.** 600 historical workflows with realistic time-of-day patterns, mixed categories, and synthetic Slack outcomes on the fraud/escalation rows so the dashboard has data on first load.
-- **Three boundaries enforced by types.** `Classification` → rules engine → `RoutingDecision` → Slack layer → `ActionEntry`. There is no codepath where the LLM produces a routing target or fires an external call. The workflow record is the audit trail — input, classification, matched rule, action log, durations, error message — all in one row.
+- **Three boundaries enforced by types.** `Classification` → rules engine → `RoutingDecision` → Slack layer → `ActionEntry`. There is no codepath where the LLM produces a routing target or fires an external call. The workflow record is the audit trail (input, classification, matched rule, action log, durations, error message), all in one row.
 
 ## Tradeoffs
 
-- **Two stages, not one prompt.** The LLM produces a classification; deterministic rules produce the routing decision. The extra step buys an auditable, testable boundary that changes without a model retrain when a rule shifts — and a fraud rule above the high-priority short-circuit that nobody can accidentally re-order in a prompt edit.
-- **Fallback classification on any LLM failure.** The pipeline never blocks, which is the right call for a routing layer — but a quietly-fallback'd ticket only surfaces via the action log, so the fallback rate is the metric to watch, not pipeline uptime.
+- **Two stages, not one prompt.** The LLM produces a classification; deterministic rules produce the routing decision. The extra step buys an auditable, testable boundary that changes without a model retrain when a rule shifts. It also gives you a fraud rule above the high-priority short-circuit that nobody can accidentally re-order in a prompt edit.
+- **Fallback classification on any LLM failure.** The pipeline never blocks, which is the right call for a routing layer. The catch is that a quietly-fallback'd ticket only surfaces via the action log, so the fallback rate is the metric to watch, not pipeline uptime.
 - **Synthetic Slack outcomes on historical rows.** First-load polish for the dashboard so a reviewer doesn't have to seed Slack to see the system work; trades realism for demo legibility.
 
 [Live demo →](/workflow-automation)

@@ -15,7 +15,7 @@ interface UploadBoxProps {
   onUploadComplete?: () => void;
 }
 
-// Concurrent uploads cap — protects against OpenAI/Vercel Blob rate limits and
+// Concurrent uploads cap: protects against OpenAI/Vercel Blob rate limits and
 // avoids hammering the serverless function with 20 files at once.
 const MAX_CONCURRENCY = 3;
 

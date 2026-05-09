@@ -21,7 +21,7 @@ export type RoutingDecision = {
 };
 
 // Ordered: highest-priority rule first. The route() function picks the first
-// match — fraud beats high-priority because we always want fraud handled by
+// match. Fraud beats high-priority because we always want fraud handled by
 // the fraud team even when it also looks urgent.
 export const RULES: readonly Rule[] = [
   {

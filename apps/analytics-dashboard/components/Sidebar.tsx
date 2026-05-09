@@ -150,7 +150,7 @@ function NavLink({
   target?: string;
 }) {
   // Nest Link around Box rather than passing `component={Link}`. Sidebar is a
-  // server component and MUI's Box is a client component — passing the Link
+  // server component and MUI's Box is a client component; passing the Link
   // function across that boundary throws "Functions cannot be passed directly
   // to Client Components".
   return (

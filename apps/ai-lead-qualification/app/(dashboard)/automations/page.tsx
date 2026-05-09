@@ -24,7 +24,7 @@ import { cn } from "@/lib/utils/cn";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Automations — Lumen" };
+export const metadata = { title: "Automations · Lumen" };
 
 type Automation = {
   id: IntegrationLogEntry["integration"];
@@ -199,7 +199,7 @@ export default async function AutomationsPage() {
           <CardContent className="space-y-1.5">
             {flatLog.length === 0 ? (
               <p className="rounded-md border border-dashed border-border/60 px-4 py-8 text-center text-sm text-muted-foreground">
-                No automation events yet — submit a lead to see the pipeline run.
+                No automation events yet. Submit a lead to see the pipeline run.
               </p>
             ) : (
               flatLog.slice(0, 30).map((log, i) => (

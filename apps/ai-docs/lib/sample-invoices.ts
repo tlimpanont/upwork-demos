@@ -111,7 +111,7 @@ function buildInvoice(doc: PDFKit.PDFDocument, data: InvoiceData) {
 
   doc.rect(0, 760, 595, 82).fill("#f0f9ff");
   doc.font("Helvetica").fontSize(8).fillColor("#6b7280")
-    .text(`Thank you for your business — ${vendor.name}`, 50, 773, { align: "center", width: 495 })
+    .text(`Thank you for your business · ${vendor.name}`, 50, 773, { align: "center", width: 495 })
     .text(`Questions? Contact us at ${vendor.email}`, 50, 785, { align: "center", width: 495 });
 }
 
@@ -181,7 +181,7 @@ function makeAcme(): InvoiceData {
     },
     invoice: { number: num, date, due: addDays(date, 30) },
     items: [
-      { description: "Enterprise SaaS License — Annual Subscription (Pro Tier)", qty: 1, price: rp(12000, 0.3) },
+      { description: "Enterprise SaaS License - Annual Subscription (Pro Tier)", qty: 1, price: rp(12000, 0.3) },
       { description: `Onboarding & Implementation Services (${hrs} hrs @ $${rate.toFixed(0)}/hr)`, qty: hrs, price: rate },
       { description: "Custom API Integration Module", qty: 1, price: rp(3500, 0.3) },
       { description: "Priority Support Package (12 months)", qty: 1, price: rp(1800, 0.2) },
@@ -219,8 +219,8 @@ function makeNorthStar(): InvoiceData {
     invoice: { number: num, date, due: addDays(date, 30) },
     items: [
       { description: "Strategic IT Roadmap Assessment (Phase 1)", qty: 1, price: rp(8500, 0.3) },
-      { description: `Senior Consultant — Project Management (${seniorHrs} hrs @ $${seniorRate.toFixed(0)}/hr)`, qty: seniorHrs, price: seniorRate },
-      { description: `Business Analyst — Requirements Gathering (${analystHrs} hrs @ $${analystRate.toFixed(0)}/hr)`, qty: analystHrs, price: analystRate },
+      { description: `Senior Consultant - Project Management (${seniorHrs} hrs @ $${seniorRate.toFixed(0)}/hr)`, qty: seniorHrs, price: seniorRate },
+      { description: `Business Analyst - Requirements Gathering (${analystHrs} hrs @ $${analystRate.toFixed(0)}/hr)`, qty: analystHrs, price: analystRate },
       { description: `Executive Workshop Facilitation (${workshopDays} day${workshopDays > 1 ? "s" : ""})`, qty: workshopDays, price: rp(2200, 0.2) },
       { description: "Deliverable: IT Strategy Document & Roadmap Report", qty: 1, price: rp(1500, 0.25) },
     ],
@@ -255,10 +255,10 @@ function makePeak(): InvoiceData {
     },
     invoice: { number: num, date, due: addDays(date, 30) },
     items: [
-      { description: "Ergonomic Office Chair — Model ErgoPlus 3000 (Black)", qty: chairs, price: rp(489.99, 0.15) },
-      { description: "Standing Desk Converter — 32-inch Dual Monitor", qty: desks, price: rp(229.5, 0.15) },
+      { description: "Ergonomic Office Chair - Model ErgoPlus 3000 (Black)", qty: chairs, price: rp(489.99, 0.15) },
+      { description: "Standing Desk Converter - 32-inch Dual Monitor", qty: desks, price: rp(229.5, 0.15) },
       { description: "Wireless Keyboard & Mouse Combo (Business Edition)", qty: keyboards, price: rp(78.0, 0.15) },
-      { description: "27-inch LED Monitor — 4K UHD, USB-C", qty: monitors, price: rp(345.0, 0.15) },
+      { description: "27-inch LED Monitor - 4K UHD, USB-C", qty: monitors, price: rp(345.0, 0.15) },
       { description: "Cable Management Kit (per workstation)", qty: cables, price: rp(24.99, 0.1) },
       { description: "Delivery & Installation Service", qty: 1, price: rp(350.0, 0.2) },
     ],

@@ -49,7 +49,7 @@ export default function RootLayout({
         </nav>
         <main className="flex-1">{children}</main>
         <footer className="text-center text-xs text-gray-500 py-6 border-t border-gray-200">
-          AI Document Processing System — Powered by OpenAI + Vercel
+          AI Document Processing System · Powered by OpenAI + Vercel
         </footer>
       </body>
     </html>

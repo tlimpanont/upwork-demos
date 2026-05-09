@@ -1,13 +1,13 @@
 import type { Classification } from "../ai/classifier";
 import type { RoutingDecision, ActionEntry } from "../rules-engine";
 
-// Routing targets that earn a Slack post. Everything else stays queue-only —
-// the goal is high-signal "wake someone up" alerts, not generic noise.
+// Routing targets that earn a Slack post. Everything else stays queue-only.
+// The goal is high-signal "wake someone up" alerts, not generic noise.
 const SLACK_TARGETS = new Set(["fraud", "escalation"]);
 
 const TITLES: Record<string, { emoji: string; title: string }> = {
   fraud: { emoji: "🚨", title: "Fraud detected" },
-  escalation: { emoji: "⚠️", title: "Urgent ticket — needs oncall" },
+  escalation: { emoji: "⚠️", title: "Urgent ticket: needs oncall" },
 };
 
 export type DeliveryArgs = {
@@ -18,7 +18,7 @@ export type DeliveryArgs = {
 
 // Returns null when the rule didn't qualify for Slack delivery (so we don't
 // log noise on every billing/general workflow). Otherwise returns a single
-// action entry — success, failure, or skipped-because-not-configured — that
+// action entry (success, failure, or skipped-because-not-configured) that
 // gets appended to the workflow's action log.
 export async function deliverToSlack(
   args: DeliveryArgs,

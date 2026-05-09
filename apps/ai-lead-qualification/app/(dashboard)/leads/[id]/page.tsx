@@ -48,7 +48,7 @@ export async function generateMetadata({
 }) {
   const { id } = await params;
   const lead = await prisma.lead.findUnique({ where: { id } });
-  return { title: lead ? `${lead.name} — Lumen` : "Lead — Lumen" };
+  return { title: lead ? `${lead.name} · Lumen` : "Lead · Lumen" };
 }
 
 export default async function LeadDetailPage({
@@ -139,7 +139,7 @@ export default async function LeadDetailPage({
 
               <Field label="Summary">
                 <p className="text-sm leading-relaxed">
-                  {lead.aiSummary ?? "Pending — qualification has not run yet."}
+                  {lead.aiSummary ?? "Pending. Qualification has not run yet."}
                 </p>
               </Field>
 
@@ -181,7 +181,7 @@ export default async function LeadDetailPage({
                 </CardTitle>
                 <CardDescription>
                   Structured fit analysis the AI extracted from the inquiry.
-                  Each claim ties to a quoted phrase or paraphrase — the score
+                  Each claim ties to a quoted phrase or paraphrase, so the score
                   is auditable.
                 </CardDescription>
               </CardHeader>
@@ -255,7 +255,7 @@ export default async function LeadDetailPage({
             <CardHeader>
               <CardTitle>Notes</CardTitle>
               <CardDescription>
-                Internal notes — not visible to the lead.
+                Internal notes, not visible to the lead.
               </CardDescription>
             </CardHeader>
             <CardContent>

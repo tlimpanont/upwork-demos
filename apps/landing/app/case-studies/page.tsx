@@ -12,7 +12,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
 export const metadata = {
-  title: "Case studies — AI + SaaS Demo Platform",
+  title: "Case studies · AI + SaaS Demo Platform",
 };
 
 export default async function CaseStudiesIndexPage() {

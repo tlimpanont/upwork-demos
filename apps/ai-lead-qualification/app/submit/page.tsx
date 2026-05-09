@@ -3,7 +3,7 @@ import { ArrowLeft, ShieldCheck, Zap, Brain } from "lucide-react";
 import { LeadForm } from "@/components/forms/lead-form";
 
 export const metadata = {
-  title: "Get qualified — Lumen",
+  title: "Get qualified · Lumen",
   description:
     "Submit an inquiry and our AI will qualify, score, and route it in seconds.",
 };
@@ -29,7 +29,7 @@ export default function SubmitPage() {
           </h1>
           <p className="mt-3 text-base text-muted-foreground">
             Our AI will read your inquiry, score it, and route it to the right
-            person — same flow we sell to customers.
+            person. Same flow we sell to customers.
           </p>
           <ul className="mt-5 grid gap-3 text-sm text-muted-foreground sm:grid-cols-3">
             <Trust icon={Brain} label="GPT-4o-mini qualifier" />

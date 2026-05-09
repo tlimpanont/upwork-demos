@@ -1,15 +1,15 @@
 overline: How I help
 heading: From idea to production-ready
 intro: >-
-  Three things I'm hired for — and the patterns I bring with me, so you don't
-  pay for me to invent the wheel each engagement.
+  Three things I'm hired for, plus the patterns I bring along so you don't
+  pay for me to reinvent the wheel each engagement.
 items:
   - title: AI-powered SaaS MVP
     price: From €30,000
     duration: "6–8 weeks · fixed scope, fixed price"
     body: >-
       Your product, live and earning revenue. Auth, Stripe billing,
-      multi-tenant data, and your first AI feature — all deployed.
+      multi-tenant data, and your first AI feature, all deployed.
     bullets:
       - "Auth, RBAC, Stripe Checkout + webhooks"
       - Multi-tenant Postgres with audit-grade isolation
@@ -20,8 +20,8 @@ items:
     price: From €15,000
     duration: "3–4 weeks · drop-in for live products"
     body: >-
-      Add a production-grade AI capability to your existing app — RAG,
-      structured extraction, or an agent — wired into your auth and billing.
+      Add a production-grade AI capability (RAG, structured extraction, or
+      an agent) to your existing app, wired into your auth and billing.
     bullets:
       - RAG with grounded citations
       - Schema-typed extraction (Zod)

@@ -1,6 +1,6 @@
 ---
 title: PDF invoice extraction with hybrid semantic + numeric search
-summary: Schema-typed extraction from invoices, embedded for semantic search and indexed for SQL range queries — one search box routes both.
+summary: Schema-typed extraction from invoices, embedded for semantic search and indexed for SQL range queries. One search box routes both.
 client: Portfolio demo
 stack:
   - Next.js 16
@@ -11,7 +11,7 @@ stack:
 publishedAt: 2026-05-04
 ---
 
-For accounts-payable and ops teams that need to query a pile of invoice PDFs by content *and* by amount — "unpaid invoices over €10k", "contracts mentioning indemnity" — without a manual data-entry step in between. The extraction is typed strictly enough that you never store a half-parsed invoice.
+For accounts-payable and ops teams that need to query a pile of invoice PDFs by content *and* by amount, like "unpaid invoices over €10k" or "contracts mentioning indemnity", without a manual data-entry step in between. The extraction is typed strictly enough that you never store a half-parsed invoice.
 
 ## Pipeline
 
@@ -32,16 +32,16 @@ flowchart LR
 ## What's built
 
 - **Private upload.** Files land in private Vercel Blob, served through an authenticated proxy. Blob URLs never exposed.
-- **Zod-typed extraction.** GPT-4o-mini pulls invoice number, vendor, dates, subtotal, tax rate/amount, total, and line items against a Zod schema. The same schema is the type written to Postgres — no "partially extracted" rows.
+- **Zod-typed extraction.** GPT-4o-mini pulls invoice number, vendor, dates, subtotal, tax rate/amount, total, and line items against a Zod schema. The same schema is the type written to Postgres, so there are no "partially extracted" rows.
 - **Hybrid search router.** A single search box at `/api/search` inspects the query: numeric tokens (currency, percentages, comparisons) → SQL range query against `total_amount` / `tax_rate`; everything else → Pinecone top-5.
 - **Retry & delete.** Failed extractions can be re-run in place; deletes cascade across blob, vectors, and the DB row in one server action.
 - **Sample data.** Homepage offers a ZIP of three randomly-generated invoices (`pdfkit`) so visitors can try the pipeline without their own files.
-- **Index reuse.** 1024-dim embeddings configured to fit the same Pinecone Serverless cosine-1024 index used by the support chatbot — one vector store, two products.
+- **Index reuse.** 1024-dim embeddings configured to fit the same Pinecone Serverless cosine-1024 index used by the support chatbot. One vector store, two products.
 
 ## Tradeoffs
 
 - **Zod-enforced all-or-nothing rows.** Failed extractions are visibly retryable; nothing partial reaches the DB to contaminate downstream queries. The cost is occasional re-runs on edge-case PDFs instead of a half-row that "mostly works".
-- **Numeric-token routing for the search box.** Predictable and explainable; mixed queries like "Acme invoices over €10k" fall to one branch only — solvable later with a parser that splits the query, not worth the complexity on day one.
-- **Pinecone index shared with the chatbot.** One vector store serving two products saves operational overhead and a per-product index cost — at the price of coupling their deployment lifecycle. Worth it for a portfolio; revisit if the products diverge.
+- **Numeric-token routing for the search box.** Predictable and explainable; mixed queries like "Acme invoices over €10k" fall to one branch only. Solvable later with a parser that splits the query, but not worth the complexity on day one.
+- **Pinecone index shared with the chatbot.** One vector store serving two products saves operational overhead and a per-product index cost, at the price of coupling their deployment lifecycle. Worth it for a portfolio; revisit if the products diverge.
 
 [Live demo →](/ai-docs)

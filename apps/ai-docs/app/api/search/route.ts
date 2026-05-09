@@ -76,7 +76,7 @@ export async function POST(request: NextRequest) {
 
     // ── branch A: numeric filter query → Postgres SQL ─────────────────────────
     if (hasFilters(filters)) {
-      // Each bound is null when the corresponding filter is absent — the
+      // Each bound is null when the corresponding filter is absent. The
       // WHERE clause then short-circuits that condition. This keeps the query
       // fully parameterized (no sql.unsafe / string concatenation).
       const taxLo = filters.tax_rate !== undefined ? filters.tax_rate - 0.005 : null;

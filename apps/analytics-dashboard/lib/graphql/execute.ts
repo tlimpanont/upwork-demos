@@ -2,7 +2,7 @@ import { execute, parse, type DocumentNode } from "graphql";
 import { schema } from "./schema";
 import { createContext } from "./context";
 
-// Server-only direct executor — skips the HTTP round-trip that
+// Server-only direct executor: skips the HTTP round-trip that
 // /api/graphql uses, so dashboard renders pull data straight from the
 // schema with the same resolvers and context the wire API uses.
 export async function executeGraphQL<T = unknown>(

@@ -19,7 +19,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 
-export const metadata = { title: "Settings — Lumen" };
+export const metadata = { title: "Settings · Lumen" };
 
 export default function SettingsPage() {
   return (

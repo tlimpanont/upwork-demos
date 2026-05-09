@@ -4,7 +4,7 @@ import Providers from "./Providers";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Acme SaaS — Multi-tenant starter",
+  title: "Acme SaaS · Multi-tenant starter",
   description:
     "Production-ready multi-tenant SaaS starter: auth, billing, admin dashboard.",
 };

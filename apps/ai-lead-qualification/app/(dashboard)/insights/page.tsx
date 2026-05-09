@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils/cn";
 import { formatNumber } from "@/lib/utils/format";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: "AI insights — Lumen" };
+export const metadata = { title: "AI insights · Lumen" };
 
 export default async function InsightsPage() {
   const metrics = await loadInsightsMetrics();
@@ -128,7 +128,7 @@ export default async function InsightsPage() {
             <CardContent className="space-y-3">
               {metrics.topIndustries.length === 0 ? (
                 <p className="text-sm text-muted-foreground">
-                  Not enough data yet — add 10+ leads.
+                  Not enough data yet. Add 10+ leads.
                 </p>
               ) : (
                 metrics.topIndustries.map((i) => (

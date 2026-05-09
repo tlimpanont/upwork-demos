@@ -3,7 +3,7 @@ import { sql, initializeDatabase } from "@/lib/db";
 
 export async function GET(request: NextRequest) {
   try {
-    // Auto-create tables on first use — idempotent, safe to run every time
+    // Auto-create tables on first use; idempotent, safe to run every time
     await initializeDatabase();
 
     const { searchParams } = new URL(request.url);

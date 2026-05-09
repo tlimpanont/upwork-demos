@@ -53,7 +53,7 @@ async function main() {
     },
     {
       heading: "Damaged or Defective Items",
-      body: "If you received a damaged or defective item, contact support@shop.example.com within 7 days of delivery. Include your order number and photos of the damage. We will ship a replacement at no cost or issue a full refund — your choice. You do not need to return the damaged item.",
+      body: "If you received a damaged or defective item, contact support@shop.example.com within 7 days of delivery. Include your order number and photos of the damage. We will ship a replacement at no cost or issue a full refund, whichever you prefer. You do not need to return the damaged item.",
     },
     {
       heading: "Exchanges",
@@ -92,7 +92,7 @@ async function main() {
     },
   ]);
 
-  await createPDF("product-faq.pdf", "Product FAQ — SmartHome Hub X1", [
+  await createPDF("product-faq.pdf", "Product FAQ · SmartHome Hub X1", [
     {
       heading: "What is the SmartHome Hub X1?",
       body: "The SmartHome Hub X1 is a central control device for your smart home ecosystem. It supports Zigbee, Z-Wave, Wi-Fi, and Bluetooth protocols, allowing you to connect and automate up to 200 devices from a single app. It also works with Amazon Alexa, Google Assistant, and Apple HomeKit.",

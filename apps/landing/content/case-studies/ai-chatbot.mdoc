@@ -10,7 +10,7 @@ stack:
 publishedAt: 2026-05-04
 ---
 
-For support teams whose answers already live in their own docs but cost hours to dig out manually. Built as the smallest RAG pipeline that survives production — ingest, retrieve, cite, refuse on empty — so the engineering work after this is tuning, not architecture.
+For support teams whose answers already live in their own docs but cost hours to dig out manually. Built as the smallest RAG pipeline that survives production: ingest, retrieve, cite, refuse on empty. The engineering work after this is tuning, not architecture.
 
 ## Pipeline
 
@@ -36,6 +36,6 @@ flowchart LR
 
 - **Top-5 retrieval, no rerank or query rewrite.** Cheap to debug and predictable per question; gives up recall on multi-hop questions where the relevant chunks aren't surfaced by the user's exact phrasing.
 - **Filename citations, not page numbers.** Fine for short policies, weaker on long PDFs where readers want a page jump. Page-level metadata is a one-line ingestion change when the docs justify it.
-- **Refusal is the default on empty retrieval, not a fallback.** Hallucinated policy is worse than a polite "I don't know" — chosen explicitly so the persona never quietly drops back to the model's general training.
+- **Refusal is the default on empty retrieval, not a fallback.** Hallucinated policy is worse than a polite "I don't know". This is chosen explicitly so the persona never quietly drops back to the model's general training.
 
 [Live demo →](/ai-chatbot)

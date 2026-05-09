@@ -221,8 +221,8 @@ export default function IngestForm() {
                   "text.secondary";
                 const note =
                   slack.action === "slack_delivered" ? "Slack notification delivered" :
-                  slack.action === "slack_failed" ? "Slack delivery failed — workflow record kept" :
-                  "Slack skipped — set SLACK_WEBHOOK_URL to enable";
+                  slack.action === "slack_failed" ? "Slack delivery failed; workflow record kept" :
+                  "Slack skipped. Set SLACK_WEBHOOK_URL to enable.";
                 return (
                   <Typography variant="caption" sx={{ fontWeight: 700, color: tone }}>
                     {note}

@@ -2,16 +2,16 @@ overline: Why work with me
 heading: Hire for outcomes, not output
 points:
   - icon: rocketLaunch
-    title: From zero to production in 6–8 weeks
+    title: From zero to production in 6 to 8 weeks
     body: >-
-      The case studies above are real systems I built end-to-end — auth,
+      The case studies above are real systems I built end-to-end. Auth,
       billing, AI features, deployed and live. Same speed for your project,
       with fixed scope and fixed price.
   - icon: verified
     title: Senior, no agency tax
     body: >-
       Direct access. No PM in the middle, no junior on the keyboard. The
-      architect, the implementer, and the deployer are the same person — so
+      architect, the implementer, and the deployer are the same person, so
       you're not paying for translation between layers.
   - icon: trendingUp
     title: Built to hand off, not lock in

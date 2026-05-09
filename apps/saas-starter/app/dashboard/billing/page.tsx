@@ -226,7 +226,7 @@ export default async function BillingPage({
       ) : null}
       {status === "canceled" ? (
         <Alert severity="info" sx={{ mb: 2 }}>
-          Checkout was canceled — no charge was made.
+          Checkout was canceled. No charge was made.
         </Alert>
       ) : null}
 

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { sql } from "@/lib/db";
 import { streamFromBlob } from "@/lib/storage";
 
-// Proxies the private blob through the server — blob_url is never sent to clients.
+// Proxies the private blob through the server; blob_url is never sent to clients.
 export async function GET(
   _request: NextRequest,
   { params }: { params: Promise<{ id: string }> }

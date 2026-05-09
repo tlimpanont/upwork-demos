@@ -4,7 +4,7 @@ import Providers from "./Providers";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Workflow Automation — AI-classified, rules-routed",
+  title: "Workflow Automation · AI-classified, rules-routed",
   description:
     "AI classifies inputs, deterministic rules route them, the dashboard shows the full pipeline.",
 };

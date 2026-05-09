@@ -13,7 +13,7 @@ export default function NewOrganizationPage() {
           Create a new workspace
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Each workspace is fully isolated — its own members, billing, and data.
+          Each workspace is fully isolated, with its own members, billing, and data.
         </Typography>
       </Stack>
       <Card>

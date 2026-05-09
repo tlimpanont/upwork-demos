@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AuthForm } from "@/components/forms/auth-form";
 
-export const metadata = { title: "Reset password — Lumen" };
+export const metadata = { title: "Reset password · Lumen" };
 
 export default function ForgotPasswordPage() {
   return (
@@ -12,7 +12,7 @@ export default function ForgotPasswordPage() {
       <CardHeader>
         <CardTitle className="text-2xl">Reset your password</CardTitle>
         <CardDescription>
-          We&apos;ll send a reset link to your work email. (Demo — no email is sent.)
+          We&apos;ll send a reset link to your work email. (Demo: no email is sent.)
         </CardDescription>
       </CardHeader>
       <CardContent>

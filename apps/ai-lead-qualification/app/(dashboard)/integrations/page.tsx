@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Mail, MessageSquare, Plug, Send, Webhook } from "lucide-react";
 
-export const metadata = { title: "Integrations — Lumen" };
+export const metadata = { title: "Integrations · Lumen" };
 
 const INTEGRATIONS = [
   {
@@ -51,7 +51,7 @@ const INTEGRATIONS = [
     category: "Outbound",
     status: "connected" as const,
     description:
-      "Tiered drip sequences via SendGrid / Postmark — config-driven per qualification.",
+      "Tiered drip sequences via SendGrid / Postmark, config-driven per qualification.",
     lastSync: "Just now",
   },
   {
@@ -125,7 +125,7 @@ export default function IntegrationsPage() {
                 Looking for an integration that&apos;s not here?
               </h3>
               <p className="mt-1 text-sm text-muted-foreground">
-                Lumen ships REST + webhooks — anything addressable over HTTP can
+                Lumen ships REST + webhooks. Anything addressable over HTTP can
                 be wired up in an afternoon.
               </p>
             </div>

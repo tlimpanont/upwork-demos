@@ -3,7 +3,7 @@ import path from "node:path";
 import { ImageResponse } from "next/og";
 
 export const runtime = "nodejs";
-export const alt = "Theuy Limpanont — Senior full-stack and AI engineer";
+export const alt = "Theuy Limpanont · Senior full-stack and AI engineer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

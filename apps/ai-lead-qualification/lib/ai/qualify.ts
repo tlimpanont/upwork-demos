@@ -20,7 +20,7 @@ export const SignalStrengthEnum = z.enum(["weak", "moderate", "strong"]);
 export const SignalSchema = z.object({
   category: SignalCategoryEnum,
   strength: SignalStrengthEnum,
-  // What in the inquiry triggered this signal — quoted phrase or short
+  // What in the inquiry triggered this signal: quoted phrase or short
   // paraphrase. Renders as evidence under each signal in the UI.
   note: z.string().min(1).max(160),
 });
@@ -33,14 +33,14 @@ export const QualificationAISchema = z.object({
   summary: z.string().min(1).max(400),
   urgency: z.enum(["low", "medium", "high"]),
   recommendedAction: z.string().min(1).max(220),
-  // Step-by-step why-this-score the AE sees verbatim. Plain English, 2–4
-  // short sentences. Not a chain-of-thought trace — a tight justification.
+  // Step-by-step why-this-score the AE sees verbatim. Plain English, 2 to 4
+  // short sentences. Not a chain-of-thought trace, just a tight justification.
   reasoning: z.string().min(1).max(800),
   tags: z.array(z.string().min(1).max(40)).min(2).max(8),
-  // Structured fit analysis — every claim ties to a signal so the score
+  // Structured fit analysis: every claim ties to a signal so the score
   // is auditable.
   signals: z.array(SignalSchema).min(2).max(8),
-  // Estimated ARR in USD. -1 means "can't infer" — the model's escape hatch
+  // Estimated ARR in USD. -1 means "can't infer", the model's escape hatch
   // (json_schema strict can't express nullable on number, so we sentinel it).
   dealSizeUsd: z.number().int().min(-1).max(10_000_000),
   // First-touch follow-up email the AE can copy/edit. Empty string means the
@@ -61,7 +61,7 @@ export type LeadInput = {
   name: string;
   company: string | null;
   email: string;
-  // Optional. Not surfaced to the AI prompt — used downstream by the
+  // Optional. Not surfaced to the AI prompt; used downstream by the
   // pipeline so the dispatcher and CRM payloads can carry it.
   phone?: string | null;
   companySize: string | null;
@@ -105,7 +105,7 @@ const RESPONSE_JSON_SCHEMA = {
     recommendedAction: {
       type: "string",
       description:
-        "One concrete next step the AE should take. Be specific: 'Book a 30-min discovery call this week — Q2 launch deadline'.",
+        "One concrete next step the AE should take. Be specific: 'Book a 30-min discovery call this week, Q2 launch deadline'.",
     },
     reasoning: {
       type: "string",
@@ -156,7 +156,7 @@ const RESPONSE_JSON_SCHEMA = {
     followUpEmail: {
       type: "string",
       description:
-        "Personalized first-touch email the AE can copy/edit. Match tone to qualification tier — directly book a call for Hot, propose a low-friction next step for Warm, send self-serve resources for Cold. Empty string for spam/junk.",
+        "Personalized first-touch email the AE can copy/edit. Match tone to qualification tier: directly book a call for Hot, propose a low-friction next step for Warm, send self-serve resources for Cold. Empty string for spam/junk.",
     },
   },
   required: [
@@ -175,7 +175,7 @@ const RESPONSE_JSON_SCHEMA = {
 
 const SYSTEM_PROMPT = `You are a senior B2B SaaS sales qualifier. You read inbound lead inquiries and produce a structured analysis used to drive routing, AE assignment, and the AE's first-touch email.
 
-Be honest about ambiguity — drop confidence rather than overclaiming. Penalize gibberish, students/job-seekers, and freeloaders explicitly.
+Be honest about ambiguity. Drop confidence rather than overclaiming. Penalize gibberish, students/job-seekers, and freeloaders explicitly.
 
 Heuristics:
 - Stated budget + named decision-maker + clear use case + a deadline → score 85+, urgency "high".
@@ -276,7 +276,7 @@ function serializeInput(input: LeadInput): string {
 
 // ---------- Deterministic stub fallback ----------------------------------
 // Mirrors the AI's output shape so the demo runs without an API key. Far
-// less nuanced than the model — but produces internally-consistent results
+// less nuanced than the model, but produces internally-consistent results
 // the dashboards can render against.
 
 export function stubAnalyze(input: LeadInput): QualificationAI {
@@ -311,7 +311,7 @@ export function stubAnalyze(input: LeadInput): QualificationAI {
     signals.push({
       category: "budget",
       strength: "weak",
-      note: "No budget signal — exploratory inquiry",
+      note: "No budget signal, exploratory inquiry",
     });
   }
 
@@ -362,7 +362,7 @@ export function stubAnalyze(input: LeadInput): QualificationAI {
     signals.push({
       category: "urgency",
       strength: "weak",
-      note: "Exploratory language — no timeline",
+      note: "Exploratory language with no timeline",
     });
   }
 
@@ -374,7 +374,7 @@ export function stubAnalyze(input: LeadInput): QualificationAI {
     signals.push({
       category: "risk",
       strength: "strong",
-      note: "Inquiry mentions student/portfolio/free — likely not a buyer",
+      note: "Inquiry mentions student/portfolio/free, likely not a buyer",
     });
   }
 
@@ -416,7 +416,7 @@ export function stubAnalyze(input: LeadInput): QualificationAI {
     signals.push({
       category: "intent",
       strength: "weak",
-      note: "Generic inquiry — no strong signal in either direction",
+      note: "Generic inquiry with no strong signal in either direction",
     });
   }
 
@@ -444,7 +444,7 @@ export function stubAnalyze(input: LeadInput): QualificationAI {
 function buildStubSummary(input: LeadInput, tier: QualificationTier): string {
   const company = input.company ? ` from ${input.company}` : "";
   if (tier === "Hot") {
-    return `${input.name}${company} looks like a fit — clear use case, budget signals present.`;
+    return `${input.name}${company} looks like a fit. Clear use case, budget signals present.`;
   }
   if (tier === "Warm") {
     return `${input.name}${company} is interested but early-stage. Worth a discovery call.`;
@@ -458,7 +458,7 @@ function buildStubAction(
 ): string {
   if (tier === "Hot")
     return urgency === "high"
-      ? "Book a 30-min discovery call this week — they have a deadline."
+      ? "Book a 30-min discovery call this week, they have a deadline."
       : "Book a 30-min discovery call.";
   if (tier === "Warm")
     return "Send pricing PDF + a relevant case study, then follow up in 5 days.";
@@ -507,7 +507,7 @@ function buildStubEmail(input: LeadInput, tier: QualificationTier): string {
   if (tier === "Hot") {
     return `Hi ${first},
 
-Thanks for the note — it sounds like ${input.company ?? "your team"} has a clear timeline and the volume to make AI scoring pay off quickly.
+Thanks for the note. It sounds like ${input.company ?? "your team"} has a clear timeline and the volume to make AI scoring pay off quickly.
 
 I'd like to walk through how this would plug into your stack on a 30-minute call. Does Tuesday or Thursday next week work?
 
@@ -515,18 +515,18 @@ If you'd rather skim first: I can send our enterprise security brief + two refer
 
 Either way, here's the calendar link: lumen.app/book/discovery.
 
-— Lumen Sales`;
+Lumen Sales`;
   }
   return `Hi ${first},
 
-Appreciate the note. It sounds like you're in the research phase — totally fair. Two things that usually help at this stage:
+Appreciate the note. It sounds like you're in the research phase, which is totally fair. Two things that usually help at this stage:
 
 1. A 5-minute Loom of the qualifier in action on a sample inquiry close to yours.
 2. Pricing + integration brief (PDF, no gating).
 
 Want me to send both? If anything specific would speed up your eval, just tell me.
 
-— Lumen Sales`;
+Lumen Sales`;
 }
 
 function dedupe<T>(arr: T[]): T[] {

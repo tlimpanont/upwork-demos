@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AuthForm } from "@/components/forms/auth-form";
 
-export const metadata = { title: "Create an account — Lumen" };
+export const metadata = { title: "Create an account · Lumen" };
 
 export default function RegisterPage() {
   return (
@@ -12,7 +12,7 @@ export default function RegisterPage() {
       <CardHeader>
         <CardTitle className="text-2xl">Create your workspace</CardTitle>
         <CardDescription>
-          Spin up a Lumen workspace in seconds. (Demo — no real account is created.)
+          Spin up a Lumen workspace in seconds. (Demo: no real account is created.)
         </CardDescription>
       </CardHeader>
       <CardContent>

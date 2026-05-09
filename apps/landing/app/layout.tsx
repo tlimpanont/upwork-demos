@@ -5,7 +5,7 @@ import "./globals.css";
 
 const SITE_URL = "https://upwork-demos-landing.vercel.app";
 const SITE_NAME = "Theuy Limpanont";
-const SITE_TITLE = "Theuy Limpanont — Senior full-stack and AI engineer";
+const SITE_TITLE = "Theuy Limpanont · Senior full-stack and AI engineer";
 const SITE_DESCRIPTION =
   "Freelance senior engineer building production-grade web platforms and AI systems for SaaS founders and product teams. Typed APIs, real auth, real billing, AI workflows that ship.";
 

@@ -1,6 +1,6 @@
 import { Pinecone, type PineconeRecord } from "@pinecone-database/pinecone";
 
-// Index must be 1024 dims — matches text-embedding-3-small with dimensions: 1024
+// Index must be 1024 dims to match text-embedding-3-small with dimensions: 1024
 const pinecone = new Pinecone({ apiKey: process.env.PINECONE_API_KEY! });
 
 export function getIndex() {

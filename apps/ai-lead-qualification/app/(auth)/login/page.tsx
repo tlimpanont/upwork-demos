@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AuthForm } from "@/components/forms/auth-form";
 
-export const metadata = { title: "Sign in — Lumen" };
+export const metadata = { title: "Sign in · Lumen" };
 
 export default function LoginPage() {
   return (
@@ -12,7 +12,7 @@ export default function LoginPage() {
       <CardHeader>
         <CardTitle className="text-2xl">Welcome back</CardTitle>
         <CardDescription>
-          Sign in to your Lumen workspace. (Demo — any credentials work.)
+          Sign in to your Lumen workspace. (Demo: any credentials work.)
         </CardDescription>
       </CardHeader>
       <CardContent>

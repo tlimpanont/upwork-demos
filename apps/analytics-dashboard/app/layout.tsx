@@ -4,7 +4,7 @@ import Providers from "./Providers";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Analytics Dashboard — AI-powered SaaS demo",
+  title: "Analytics Dashboard · AI-powered SaaS demo",
   description:
     "Synthetic SaaS analytics with prediction engine, GraphQL API, and AI-generated insights.",
 };

@@ -2,12 +2,12 @@
 
 A polished SaaS MVP that demonstrates an end-to-end inbound pipeline:
 
-1. **Capture** — public form collects lead details and inquiry text.
-2. **Qualify** — OpenAI scores fit, urgency, and budget; assigns a Hot/Warm/Cold tier; produces a 2-sentence summary, recommended action, and tags.
-3. **Route** — qualified leads are fanned out to mock HubSpot, Salesforce, Slack, and email integrations under deterministic policies (Hot fans out everywhere; Warm hits CRM + nurture; Cold gets self-serve).
-4. **Surface** — a dashboard renders KPIs, charts, a filterable leads table, lead-detail timelines, automation logs, and AI-generated insights.
+1. **Capture**: public form collects lead details and inquiry text.
+2. **Qualify**: OpenAI scores fit, urgency, and budget; assigns a Hot/Warm/Cold tier; produces a 2-sentence summary, recommended action, and tags.
+3. **Route**: qualified leads are fanned out to mock HubSpot, Salesforce, Slack, and email integrations under deterministic policies (Hot fans out everywhere; Warm hits CRM + nurture; Cold gets self-serve).
+4. **Surface**: a dashboard renders KPIs, charts, a filterable leads table, lead-detail timelines, automation logs, and AI-generated insights.
 
-The whole flow runs in under five seconds end-to-end, and **works without an OpenAI API key** — the qualifier falls back to a deterministic heuristic stub so the demo stays interactive.
+The whole flow runs in under five seconds end-to-end, and **works without an OpenAI API key**. The qualifier falls back to a deterministic heuristic stub so the demo stays interactive.
 
 ---
 
@@ -47,7 +47,7 @@ Pages of interest:
 | URL | What it is |
 | --- | --- |
 | `/` | Landing page (hero, features, dashboard preview, CTA) |
-| `/submit` | Public lead capture form — runs the full pipeline on submit |
+| `/submit` | Public lead capture form that runs the full pipeline on submit |
 | `/dashboard` | KPIs, leads-over-time, score distribution, qualification mix |
 | `/leads` | Filterable, sortable, searchable leads table |
 | `/leads/[id]` | Full lead detail: AI analysis, inquiry, timeline, notes |
@@ -55,7 +55,7 @@ Pages of interest:
 | `/automations` | Per-integration delivery stats and recent automation log |
 | `/integrations` | Cards for HubSpot, Salesforce, Slack, email, custom webhook |
 | `/settings` | Profile, API keys, qualifier model config (visual) |
-| `/login`, `/register`, `/forgot-password` | Stubbed auth — any submit routes to `/dashboard` |
+| `/login`, `/register`, `/forgot-password` | Stubbed auth: any submit routes to `/dashboard` |
 
 ## Architecture
 
@@ -98,13 +98,13 @@ scripts/seed.ts                   30 hand-crafted leads across SaaS/agency/enter
 
 `lib/pipeline.ts → ingestLead()` is the single ingest entry point. Both the public form's server action and (if you add one) any REST/webhook endpoint call this same function. That keeps qualification + dispatch identical across every channel a lead can come from.
 
-The qualifier is split between `lib/ai/qualify.ts` (OpenAI + Zod-validated parsing) and a **deterministic stub** in the same file. If `OPENAI_API_KEY` isn't set or the call fails, the stub takes over — heuristic over budget/size/urgency keywords — so the rest of the pipeline always has a valid `Qualification` object to dispatch on.
+The qualifier is split between `lib/ai/qualify.ts` (OpenAI + Zod-validated parsing) and a **deterministic stub** in the same file. If `OPENAI_API_KEY` isn't set or the call fails, the stub takes over with heuristics over budget/size/urgency keywords, so the rest of the pipeline always has a valid `Qualification` object to dispatch on.
 
 ### Mock CRM integrations
 
 Each integration in `lib/crm/` exports an `Integration` object with `shouldFire(qualification)` and `deliver({ lead, qualification })`. The dispatcher in `dispatch.ts` walks the list, records `delivered` / `skipped` / `failed` for every step, and returns an `IntegrationLogEntry[]` that gets persisted on the lead.
 
-Real integrations would replace the body of `deliver()` with actual API calls. The contract — the entry it returns — would not change, so dashboards keep working.
+Real integrations would replace the body of `deliver()` with actual API calls. The contract (the entry it returns) would not change, so dashboards keep working.
 
 ## Environment variables
 
@@ -115,6 +115,6 @@ Real integrations would replace the body of `deliver()` with actual API calls. T
 
 ## Notes
 
-- **Auth** is intentionally stubbed for the demo — `/login` accepts any input and routes to `/dashboard`. Wiring real NextAuth is a one-day job and out of scope here.
+- **Auth** is intentionally stubbed for the demo: `/login` accepts any input and routes to `/dashboard`. Wiring real NextAuth is a one-day job and out of scope here.
 - **SQLite** stores `services`, `aiTags`, `integrationLog`, and `notes` as JSON-encoded strings. `lib/db/lead.ts:hydrateLead` is the single boundary that parses them; every read path goes through it.
-- The qualifier is intentionally model-agnostic — only the parsing layer in `qualify.ts` knows the shape. Swap models in `settings` (visual) or directly in code.
+- The qualifier is intentionally model-agnostic. Only the parsing layer in `qualify.ts` knows the shape. Swap models in `settings` (visual) or directly in code.

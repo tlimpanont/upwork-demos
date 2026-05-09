@@ -117,7 +117,7 @@ export async function POST(request: NextRequest) {
     console.error("[process]", error);
 
     if (documentId) {
-      // Persist a short, user-safe summary — no stack traces or internal paths.
+      // Persist a short, user-safe summary; no stack traces or internal paths.
       const safeMessage =
         error instanceof Error ? error.message.slice(0, 200) : "Processing failed";
       await sql`

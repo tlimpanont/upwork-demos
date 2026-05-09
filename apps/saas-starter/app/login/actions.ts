@@ -34,6 +34,6 @@ export async function loginAction(
     if (error instanceof AuthError) {
       return { error: "Invalid email or password" };
     }
-    throw error; // includes Next's redirect — must propagate
+    throw error; // includes Next's redirect, must propagate
   }
 }

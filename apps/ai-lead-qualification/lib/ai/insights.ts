@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 
-// Same boundary as the qualifier: this layer never computes metrics — it
+// Same boundary as the qualifier: this layer never computes metrics. It
 // only narrates pre-aggregated numbers. If OPENAI_API_KEY isn't set, return
 // a deterministic stub narrative so the demo still has interesting copy.
 
@@ -11,7 +11,7 @@ export type InsightsMetrics = {
   topTags: { tag: string; count: number }[];
   topServices: { service: string; count: number }[];
   topIndustries: { industry: string; conversionRate: number; count: number }[];
-  scoreDelta: number; // 0..1 — change in avg score over last 30 vs prev 30
+  scoreDelta: number; // 0..1 change in avg score over last 30 vs prev 30
 };
 
 export type Insights = {
@@ -86,7 +86,7 @@ export async function generateInsights(
         {
           role: "system",
           content:
-            "You narrate inbound-pipeline insights for a head of sales. The numbers are PRE-COMPUTED — never recompute or contradict them. Return STRICT JSON with two fields: summary (2–3 sentences on what's working and what isn't) and recommendations (3–5 concrete, specific suggestions a sales lead can act on this week). Be plain — no marketing fluff, no hedging.",
+            "You narrate inbound-pipeline insights for a head of sales. The numbers are PRE-COMPUTED. Never recompute or contradict them. Return STRICT JSON with two fields: summary (2 to 3 sentences on what's working and what isn't) and recommendations (3 to 5 concrete, specific suggestions a sales lead can act on this week). Be plain. No marketing fluff, no hedging.",
         },
         { role: "user", content: prompt },
       ],
@@ -143,17 +143,17 @@ function buildStubRecommendations(m: InsightsMetrics): string[] {
   const out: string[] = [];
   if (m.qualifiedRate < 0.3) {
     out.push(
-      "Conversion is below 30%. Tighten the form copy to filter out tire-kickers earlier — add a required budget/timeline question.",
+      "Conversion is below 30%. Tighten the form copy to filter out tire-kickers earlier. Add a required budget/timeline question.",
     );
   } else if (m.qualifiedRate > 0.6) {
     out.push(
-      "Conversion is unusually high (>60%). Consider broadening top-of-funnel — your form may be filtering too aggressively.",
+      "Conversion is unusually high (>60%). Consider broadening top-of-funnel. Your form may be filtering too aggressively.",
     );
   }
   const topIndustry = m.topIndustries[0];
   if (topIndustry && topIndustry.conversionRate > 0.5) {
     out.push(
-      `Double down on the ${topIndustry.industry} segment in outbound — it converts at ${(topIndustry.conversionRate * 100).toFixed(0)}% vs portfolio average.`,
+      `Double down on the ${topIndustry.industry} segment in outbound. It converts at ${(topIndustry.conversionRate * 100).toFixed(0)}% vs portfolio average.`,
     );
   }
   if (m.topTags.some((t) => t.tag === "no-budget" && t.count > m.total * 0.2)) {
@@ -163,17 +163,17 @@ function buildStubRecommendations(m: InsightsMetrics): string[] {
   }
   if (m.topTags.some((t) => t.tag === "compliance")) {
     out.push(
-      "Compliance keeps showing up in tags — produce a one-page SOC 2 / GDPR brief and link it from the form.",
+      "Compliance keeps showing up in tags. Produce a one-page SOC 2 / GDPR brief and link it from the form.",
     );
   }
   if (m.scoreDelta < -0.05) {
     out.push(
-      "Avg score is trending down. Audit recent campaigns that drove inbound — quality may have shifted.",
+      "Avg score is trending down. Audit recent campaigns that drove inbound. Quality may have shifted.",
     );
   }
   if (out.length < 3) {
     out.push(
-      "Set up Slack notifications for any lead with score 90+ — those need <1hr response time to convert.",
+      "Set up Slack notifications for any lead with score 90+. Those need <1hr response time to convert.",
     );
   }
   return out.slice(0, 5);

@@ -85,7 +85,7 @@ function Message() {
 }
 
 export default function Chat() {
-  // Defaults to /api/chat — matches our route
+  // Defaults to /api/chat to match our route
   const runtime = useChatRuntime();
 
   return (

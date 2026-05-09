@@ -2,7 +2,7 @@ chip: "Available · accepting one project this quarter"
 headingLead: Senior full-stack
 headingAccent: and AI engineer
 subheading: >-
-  I'm Theuy — senior full-stack and AI engineer based in the Netherlands. I
+  I'm Theuy, a senior full-stack and AI engineer based in the Netherlands. I
   work with scale-ups and product teams across Europe on the parts that
   decide whether software lasts: typed APIs, secure auth, billing that
   survives an audit, AI features that hold up in production. Direct contact,
@@ -20,4 +20,4 @@ techLabels:
   - Pinecone
   - Neon Postgres
   - Vercel
-euRegionNote: "EU-region deployments available — Hetzner, AWS eu-central, Mistral"
+euRegionNote: "EU-region deployments available: Hetzner, AWS eu-central, Mistral"

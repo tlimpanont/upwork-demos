@@ -23,7 +23,7 @@ import { Badge } from "@/components/ui/badge";
 import { qualificationBadgeVariant } from "@/components/leads/qualification-badge";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Dashboard — Lumen" };
+export const metadata = { title: "Dashboard · Lumen" };
 
 export default async function DashboardPage() {
   const [kpis, scoreDist, byDay, qualMix, recentRaw] = await Promise.all([
@@ -74,7 +74,7 @@ export default async function DashboardPage() {
             <CardHeader>
               <CardTitle>Leads over time</CardTitle>
               <CardDescription>
-                Total submissions and qualified leads — last 30 days.
+                Total submissions and qualified leads in the last 30 days.
               </CardDescription>
             </CardHeader>
             <CardContent>

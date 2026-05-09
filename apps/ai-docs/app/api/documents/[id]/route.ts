@@ -60,7 +60,7 @@ export async function DELETE(
 
     const { blob_url } = docResult[0] as { blob_url: string };
 
-    // Best-effort cleanup of external resources — log but don't fail the
+    // Best-effort cleanup of external resources: log but don't fail the
     // delete if blob/vector store is unreachable, so the DB row can still
     // be removed and won't be orphaned.
     await Promise.all([

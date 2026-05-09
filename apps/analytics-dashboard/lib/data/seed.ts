@@ -1,7 +1,7 @@
 import { Channel, Plan } from "../../prisma/generated/client";
 import { faker } from "@faker-js/faker";
 
-// Deterministic seed so the dataset is identical across runs — important for
+// Deterministic seed so the dataset is identical across runs. Important for
 // the prediction engine's regression tests and for repeatable demo screenshots.
 export const FAKER_SEED = 42;
 
@@ -41,7 +41,7 @@ export type RevenueEventRow = {
   timestamp: Date;
 };
 
-// Deterministic PRNG for the parts that shouldn't depend on faker — keeps the
+// Deterministic PRNG for the parts that shouldn't depend on faker. Keeps the
 // trend/spike math reproducible even if faker's internal sequence shifts.
 function mulberry32(seed: number) {
   let t = seed;

@@ -2,7 +2,7 @@ import { prisma } from "./prisma";
 import { hydrateLead } from "./lead";
 import type { InsightsMetrics } from "../ai/insights";
 
-// Industry inference is heuristic — the demo doesn't ask for industry on the
+// Industry inference is heuristic; the demo doesn't ask for industry on the
 // form. We tag from company size + service mix to keep the dashboards
 // interesting without changing the schema.
 const INDUSTRY_HEURISTICS: { industry: string; match: RegExp }[] = [

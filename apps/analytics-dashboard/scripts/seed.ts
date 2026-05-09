@@ -19,7 +19,7 @@ async function main() {
   await prisma.dailyMetric.createMany({ data: metrics });
 
   console.log("[seed] writing users…");
-  // `plan` is carried on UserRow only to derive RevenueEvents — strip before insert.
+  // `plan` is carried on UserRow only to derive RevenueEvents; strip before insert.
   const userRows = users.map(({ plan: _plan, ...u }) => u);
   const userChunks = chunk(userRows, 1000);
   for (const c of userChunks) {

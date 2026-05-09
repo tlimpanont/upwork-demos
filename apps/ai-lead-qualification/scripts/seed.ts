@@ -27,7 +27,7 @@ const SEED: SeedLead[] = [
       budget: "$100k+",
       services: ["AI lead qualification", "CRM automation", "Custom integrations"],
       inquiry:
-        "We're a robotics SaaS scaling from 200 to 800 inbound leads/month. Sales is drowning in low-fit demos. Need to qualify and route faster. Q2 launch deadline. Looking to start ASAP — already have HubSpot + Slack stack in place.",
+        "We're a robotics SaaS scaling from 200 to 800 inbound leads/month. Sales is drowning in low-fit demos. Need to qualify and route faster. Q2 launch deadline. Looking to start ASAP. Already have HubSpot + Slack stack in place.",
     },
     overrideScore: 92,
   },
@@ -59,7 +59,7 @@ const SEED: SeedLead[] = [
       budget: "$100k+",
       services: ["AI lead qualification", "Sales analytics"],
       inquiry:
-        "Enterprise ecommerce platform — 700-person org. Our AEs spend half their day on lead triage. Need to plug AI scoring into Salesforce. Budget secured, decision by end of Q1.",
+        "Enterprise ecommerce platform, 700-person org. Our AEs spend half their day on lead triage. Need to plug AI scoring into Salesforce. Budget secured, decision by end of Q1.",
     },
     overrideScore: 89,
   },
@@ -106,7 +106,7 @@ const SEED: SeedLead[] = [
       budget: "$100k+",
       services: ["AI lead qualification", "CRM automation", "Custom integrations"],
       inquiry:
-        "Compliance is non-negotiable — we're a fintech, need SOC 2 + GDPR. Production launch tied to a board commitment for Q2. Existing Salesforce + Marketo stack. Have a named exec sponsor.",
+        "Compliance is non-negotiable. We're a fintech, need SOC 2 + GDPR. Production launch tied to a board commitment for Q2. Existing Salesforce + Marketo stack. Have a named exec sponsor.",
     },
     overrideScore: 95,
   },
@@ -218,7 +218,7 @@ const SEED: SeedLead[] = [
       budget: "$5k–$25k",
       services: ["CRM automation"],
       inquiry:
-        "Sales consulting boutique. We resell tools to clients — would I get an agency discount? Not urgent but interested.",
+        "Sales consulting boutique. We resell tools to clients. Would I get an agency discount? Not urgent but interested.",
     },
     overrideScore: 51,
   },
@@ -234,7 +234,7 @@ const SEED: SeedLead[] = [
       budget: "$100k+",
       services: ["AI lead qualification", "Custom integrations", "Sales analytics"],
       inquiry:
-        "Enterprise bank. We have an in-house compliance review process — need a vendor that can support GDPR + ISO 27001. Quarterly procurement cycle. Looking for a 12-month commitment.",
+        "Enterprise bank. We have an in-house compliance review process. Need a vendor that can support GDPR + ISO 27001. Quarterly procurement cycle. Looking for a 12-month commitment.",
     },
     overrideScore: 88,
   },

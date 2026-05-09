@@ -131,7 +131,7 @@ console.log("[parser] ✓ valid JSON passes the schema");
 // ---- live classifier (only if API key is set) ---------------------------
 
 if (process.env.OPENAI_API_KEY) {
-  console.log("\n[ai] OPENAI_API_KEY present — running live classification samples…");
+  console.log("\n[ai] OPENAI_API_KEY present, running live classification samples…");
   const samples = [
     {
       type: "support_ticket" as const,
@@ -145,7 +145,7 @@ if (process.env.OPENAI_API_KEY) {
     },
     {
       type: "support_ticket" as const,
-      text: "There's a login from another country I don't recognise — please lock my account immediately.",
+      text: "There's a login from another country I don't recognise. Please lock my account immediately.",
       expectFamily: ["fraud"],
     },
     {
@@ -167,7 +167,7 @@ if (process.env.OPENAI_API_KEY) {
     );
   }
 } else {
-  console.log("\n[ai] OPENAI_API_KEY not set — skipping live classifier checks");
+  console.log("\n[ai] OPENAI_API_KEY not set, skipping live classifier checks");
 }
 
 console.log("\n[smoke] all checks passed");

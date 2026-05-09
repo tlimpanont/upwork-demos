@@ -140,7 +140,7 @@ export default async function HomePage({
                 {meta.label}
               </Typography>
               <Typography color="text.secondary">
-                Predictions and anomalies from a deterministic engine. AI narrates the numbers — never recomputes them.
+                Predictions and anomalies from a deterministic engine. AI narrates the numbers and never recomputes them.
               </Typography>
             </Stack>
             {/* Mobile-only: sidebar is hidden on small screens, expose the switcher inline. */}

@@ -9,7 +9,7 @@ export type Trend = {
   intercept: number;
 };
 
-// Anything between ±0.05% per day is treated as flat — below that the slope is
+// Anything between ±0.05% per day is treated as flat. Below that the slope is
 // indistinguishable from baseline noise on most SaaS series.
 const FLAT_THRESHOLD = 0.0005;
 

@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Theuy Limpanont — Senior full-stack and AI engineer",
+    name: "Theuy Limpanont · Senior full-stack and AI engineer",
     short_name: "Theuy Limpanont",
     description:
       "Freelance senior engineer building production-grade web platforms and AI systems for SaaS founders and product teams.",

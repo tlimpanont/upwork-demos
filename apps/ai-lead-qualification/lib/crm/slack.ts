@@ -12,7 +12,7 @@ export const slack: Integration = {
       at: new Date().toISOString(),
       integration: "slack",
       status: "delivered",
-      message: `Notified #sales-hot: ${lead.name}${company} — score ${qualification.score}, urgency ${qualification.urgency}`,
+      message: `Notified #sales-hot: ${lead.name}${company} (score ${qualification.score}, urgency ${qualification.urgency})`,
     };
   },
 };

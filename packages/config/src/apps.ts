@@ -52,7 +52,7 @@ export const APPS: readonly DemoApp[] = [
     name: "AI Document Processing",
     tagline: "Extract structured data from PDFs using AI",
     description:
-      "Drop in invoices and business documents — GPT-4o extracts vendor, totals, tax, and line items into structured JSON, then indexes everything for hybrid semantic + numeric search.",
+      "Drop in invoices and business documents. GPT-4o extracts vendor, totals, tax, and line items into structured JSON, then indexes everything for hybrid semantic + numeric search.",
     features: [
       "Invoice parsing with structured outputs",
       "Hybrid semantic + exact-numeric search",
@@ -86,7 +86,7 @@ export const APPS: readonly DemoApp[] = [
     name: "AI Analytics Dashboard",
     tagline: "SaaS analytics with prediction engine + GraphQL + AI insights",
     description:
-      "A synthetic SaaS dataset, a deterministic forecasting engine, and a GraphQL API — with AI-generated narratives that explain the trend, flag anomalies, and recommend actions.",
+      "A synthetic SaaS dataset, a deterministic forecasting engine, and a GraphQL API, with AI-generated narratives that explain the trend, flag anomalies, and recommend actions.",
     features: [
       "Forecasts + anomaly detection in pure TS",
       "GraphQL Yoga API with live playground",
@@ -103,7 +103,7 @@ export const APPS: readonly DemoApp[] = [
     name: "AI Incident Triage",
     tagline: "Urgent tickets get routed to Slack in seconds",
     description:
-      "Every incoming ticket gets classified by OpenAI (category, priority, intent). A deterministic rules engine — not the LLM — decides where it goes; fraud and outages fire a Slack alert in the same request. Dashboard shows the full pipeline live.",
+      "Every incoming ticket gets classified by OpenAI (category, priority, intent). A deterministic rules engine (not the LLM) decides where it goes; fraud and outages fire a Slack alert in the same request. Dashboard shows the full pipeline live.",
     features: [
       "OpenAI classification with Zod-validated outputs",
       "Deterministic rules engine in pure TS",
@@ -120,7 +120,7 @@ export const APPS: readonly DemoApp[] = [
     name: "AI Lead Qualification",
     tagline: "Score inbound leads and fan them out to your CRM in <5s",
     description:
-      "Public form runs an OpenAI structured-output qualifier — score, confidence, signals matrix, est. ARR, follow-up email draft — then a tier-driven dispatcher pushes Hot leads to Salesforce + Slack, Warm into HubSpot + nurture, Cold to self-serve. Every signal ties to a quoted phrase; every dispatch is logged.",
+      "Public form runs an OpenAI structured-output qualifier (score, confidence, signals matrix, est. ARR, follow-up email draft), then a tier-driven dispatcher pushes Hot leads to Salesforce + Slack, Warm into HubSpot + nurture, Cold to self-serve. Every signal ties to a quoted phrase; every dispatch is logged.",
     features: [
       "OpenAI structured outputs (json_schema strict) + Zod parse",
       "Mock HubSpot / Salesforce / Slack / email fan-out per tier",

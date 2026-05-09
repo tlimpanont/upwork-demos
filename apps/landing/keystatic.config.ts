@@ -28,7 +28,7 @@ export default config({
           label: "Subheading",
           multiline: true,
           defaultValue:
-            "Customer Support AI, Document Processing, and multi-tenant SaaS platforms — three working systems, one consistent stack, deployed on Vercel.",
+            "Customer Support AI, Document Processing, and multi-tenant SaaS platforms. Three working systems, one consistent stack, deployed on Vercel.",
         }),
         primaryCta: fields.object({
           label: fields.text({ label: "Label", defaultValue: "View Demos" }),
@@ -49,7 +49,7 @@ export default config({
           label: "EU-region note",
           multiline: true,
           defaultValue:
-            "EU-region deployments available — Hetzner, AWS eu-central, Mistral",
+            "EU-region deployments available: Hetzner, AWS eu-central, Mistral",
         }),
       },
     }),
@@ -68,7 +68,7 @@ export default config({
           label: "Intro",
           multiline: true,
           defaultValue:
-            "Three things I'm hired for — and the patterns I bring with me, so you don't pay for me to invent the wheel each engagement.",
+            "Three things I'm hired for, plus the patterns I bring along so you don't pay for me to reinvent the wheel each engagement.",
         }),
         items: fields.array(
           fields.object({
@@ -115,7 +115,7 @@ export default config({
           label: "Intro",
           multiline: true,
           defaultValue:
-            "Three real working systems built on the same patterns I ship to clients — customer-support AI, document processing, and multi-tenant SaaS — each running on the same Vercel + Postgres + AI stack I use in production.",
+            "Three real working systems built on the same patterns I ship to clients: customer-support AI, document processing, and multi-tenant SaaS. Each runs on the same Vercel + Postgres + AI stack I use in production.",
         }),
       },
     }),
@@ -238,7 +238,7 @@ export default config({
           label: "Body",
           multiline: true,
           defaultValue:
-            "Available for SaaS builds, AI integrations, and platform engineering work. Start with a 30-minute call — no pitch deck, just a working session.",
+            "Available for SaaS builds, AI integrations, and platform engineering work. Start with a 30-minute call. No pitch deck, just a working session.",
         }),
         primaryCta: fields.object({
           label: fields.text({ label: "Label", defaultValue: "Hire on Upwork" }),

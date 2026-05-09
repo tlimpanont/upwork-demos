@@ -1,5 +1,5 @@
 // Pin locale to en-US so the same Date renders identically on the server
-// and on the client — otherwise React hydration mismatches every time the
+// and on the client. Otherwise React hydration mismatches every time the
 // browser locale isn't en-US (en-GB, fr-FR, etc.).
 
 const DATETIME_FMT = new Intl.DateTimeFormat("en-US", {

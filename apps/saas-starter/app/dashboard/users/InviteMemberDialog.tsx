@@ -53,8 +53,8 @@ export default function InviteMemberDialog({ canInvite }: { canInvite: boolean }
                 required
               />
               <FormField name="role" label="Role" select defaultValue="member">
-                <MenuItem value="member">Member — read access</MenuItem>
-                <MenuItem value="admin">Admin — full access</MenuItem>
+                <MenuItem value="member">Member (read access)</MenuItem>
+                <MenuItem value="admin">Admin (full access)</MenuItem>
               </FormField>
             </Stack>
           </DialogContent>

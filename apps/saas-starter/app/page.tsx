@@ -16,7 +16,7 @@ export default function Home() {
           </Typography>
           <Typography variant="h6" sx={{ color: "text.secondary", fontWeight: 400 }}>
             Authentication, organizations, role-based access, Stripe billing, and an admin
-            dashboard — all serverless and Vercel-ready.
+            dashboard. All serverless and Vercel-ready.
           </Typography>
           <Stack direction="row" spacing={1.5}>
             <Button size="large" variant="contained" href="/dashboard">

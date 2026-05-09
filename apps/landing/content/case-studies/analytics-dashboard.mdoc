@@ -33,13 +33,13 @@ flowchart LR
 - **GraphQL Yoga API.** Six queries (`users`, `revenue`, `metrics(from,to)`, `predictions(metric,horizon)`, `anomalies(metric)`, `insights(metric)`) with structured `Trend`, `ForecastPoint`, and `Insight` types.
 - **AI insights service.** OpenAI receives the *already-computed* numbers and is told never to recompute them. Process-lifetime cache.
 - **Dashboard.** Metric switcher, four KPIs, Recharts time-series with dotted forecast and anomaly dots, AI insights panel, embedded GraphQL playground.
-- **"AI explains, never calculates" — enforced by types.** The engine module exports plain functions over `number[]`. The AI service takes the engine's `Prediction` object and turns it into a user-prompt block. There is no codepath where the LLM produces a number the dashboard renders.
+- **"AI explains, never calculates", enforced by types.** The engine module exports plain functions over `number[]`. The AI service takes the engine's `Prediction` object and turns it into a user-prompt block. There is no codepath where the LLM produces a number the dashboard renders.
 - **Server-side GraphQL execution** via `graphql.execute()`; the HTTP endpoint stays for the playground and external clients.
 
 ## Tradeoffs
 
 - **Linear regression and z-score, not ARIMA or Prophet.** Interpretable, dependency-free, and good enough for the demo's signal shape. The engine boundary is plain `(number[]) => Prediction`, so a heavier model swaps in without touching the AI service or the GraphQL schema.
-- **LLM never produces numbers — enforced by types.** Costs nothing in flexibility because arithmetic was the wrong job for the model in the first place; the constraint pays off on every refactor that might otherwise tempt a "quick" math call.
+- **LLM never produces numbers, enforced by types.** Costs nothing in flexibility because arithmetic was the wrong job for the model in the first place; the constraint pays off on every refactor that might otherwise tempt a "quick" math call.
 - **Seeded synthetic dataset.** Byte-identical across runs, which is great for code review and screenshots and useless as a load or anomaly-detection stress test. Bring real data for that conversation.
 
 [Live demo →](/analytics-dashboard)

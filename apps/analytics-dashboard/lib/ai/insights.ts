@@ -7,7 +7,7 @@ export type Insights = {
   recommendations: string[];
 };
 
-// Strict separation: this layer NEVER computes predictions or anomalies — it
+// Strict separation: this layer NEVER computes predictions or anomalies. It
 // only narrates pre-computed numbers from the engine. Keeps the architectural
 // boundary the demo is built around.
 
@@ -24,7 +24,7 @@ function client(): OpenAI {
 
 // Process-lifetime cache. The seeded dataset is deterministic, so the same
 // (metric, first-forecast-date, confidence) triple always means the same
-// inputs — safe to memoise without invalidation logic for the demo.
+// inputs, so it's safe to memoise without invalidation logic for the demo.
 const cache = new Map<string, Insights>();
 
 function cacheKey(p: Prediction): string {
@@ -67,7 +67,7 @@ export async function generateInsights(p: Prediction): Promise<Insights> {
       {
         role: "system",
         content:
-          "You are a SaaS analytics narrator. The numbers below are PRE-COMPUTED by a deterministic statistics engine — never recompute or contradict them. Speak plainly to a SaaS founder. Output STRICT JSON with three fields: summary (1–3 sentences), anomalyNotes (array of strings, each calling out one anomaly with date and a likely business cause), recommendations (2–4 short business-action strings).",
+          "You are a SaaS analytics narrator. The numbers below are PRE-COMPUTED by a deterministic statistics engine. Never recompute or contradict them. Speak plainly to a SaaS founder. Output STRICT JSON with three fields: summary (1 to 3 sentences), anomalyNotes (array of strings, each calling out one anomaly with date and a likely business cause), recommendations (2 to 4 short business-action strings).",
       },
       { role: "user", content: prompt },
     ],

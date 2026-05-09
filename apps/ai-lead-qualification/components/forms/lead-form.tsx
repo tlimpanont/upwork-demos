@@ -67,7 +67,7 @@ export function LeadForm() {
             <CheckCircle2 className="h-6 w-6 text-emerald-300" />
           </div>
           <div className="space-y-1">
-            <h3 className="text-xl font-semibold">Thanks — got it.</h3>
+            <h3 className="text-xl font-semibold">Thanks, got it.</h3>
             <p className="text-sm text-muted-foreground">
               Our AI just qualified your inquiry and routed it to the right
               team. You&apos;ll hear from us within one business day.
@@ -189,7 +189,7 @@ export function LeadForm() {
           >
             <Textarea
               rows={6}
-              placeholder="We're a 200-person SaaS scaling from 100 to 500 inbound leads/month. We need to qualify and route faster — sales is drowning in low-fit demos. Looking to start in Q2."
+              placeholder="We're a 200-person SaaS scaling from 100 to 500 inbound leads/month. We need to qualify and route faster, sales is drowning in low-fit demos. Looking to start in Q2."
               {...register("inquiry")}
             />
           </Field>
@@ -204,8 +204,8 @@ export function LeadForm() {
         <p className="flex items-center gap-2 text-xs text-muted-foreground">
           <Sparkles className="h-3.5 w-3.5 text-primary" />
           <span>
-            Submitting runs the AI qualifier and routes you to the right team —
-            usually under 5 seconds.
+            Submitting runs the AI qualifier and routes you to the right team,
+            usually in under 5 seconds.
           </span>
         </p>
         <Button

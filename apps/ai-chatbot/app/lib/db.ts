@@ -13,7 +13,7 @@ export function getDb(): NeonQueryFunction<false, false> {
   return _sql;
 }
 
-// Convenience tagged-template helper — lazily resolves the connection on first use.
+// Convenience tagged-template helper that lazily resolves the connection on first use.
 // The Proxy target must be a function for the `apply` trap to fire.
 export const sql: NeonQueryFunction<false, false> = new Proxy(
   function () {} as unknown as NeonQueryFunction<false, false>,

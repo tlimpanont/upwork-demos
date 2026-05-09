@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-// Visual-only auth — the demo skips real NextAuth wiring. Submitting routes
+// Visual-only auth: the demo skips real NextAuth wiring. Submitting routes
 // straight to the dashboard so the rest of the demo flow stays interactive.
 export function AuthForm({
   children,

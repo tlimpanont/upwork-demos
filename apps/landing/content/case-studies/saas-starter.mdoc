@@ -1,6 +1,6 @@
 ---
 title: Multi-tenant SaaS starter with Stripe billing
-summary: Auth, workspaces, RBAC, and Stripe-billed subscriptions tested against the messy parts — dropped webhooks, last-admin guards, edge-runtime middleware.
+summary: Auth, workspaces, RBAC, and Stripe-billed subscriptions tested against the messy parts: dropped webhooks, last-admin guards, edge-runtime middleware.
 client: Portfolio demo
 stack:
   - Next.js 16
@@ -12,7 +12,7 @@ stack:
 publishedAt: 2026-05-04
 ---
 
-The boring B2B foundation that has to work on day one so a founder can ship the product on top, not under it. The interesting bits aren't the features — they're the failure modes: a dropped Stripe webhook, an admin who removes themselves, a session that has to validate on the edge before `pg` or `bcrypt` are reachable.
+The boring B2B foundation that has to work on day one so a founder can ship the product on top, not under it. The interesting bits aren't the features. They're the failure modes: a dropped Stripe webhook, an admin who removes themselves, a session that has to validate on the edge before `pg` or `bcrypt` are reachable.
 
 ## Pipeline
 
@@ -35,7 +35,7 @@ flowchart LR
 - **Multi-tenant by design.** Every server query is scoped by an active-organization context derived from a signed cookie *and* re-validated as a real membership on every request. Org IDs are never accepted from the client.
 - **RBAC** with `admin` / `member` and a `can(role, permission)` helper.
 - **Member invites, role changes, removal** with a transactional last-admin guard so a workspace can never become admin-less.
-- **Stripe-billed subscriptions per workspace** — Checkout, Customer Portal, signature-verified webhooks, "Sync from Stripe" recovery for missed events. Stripe is the source of truth: duplicate-subscription guards and recovery paths derive state by asking Stripe, never the local DB.
+- **Stripe-billed subscriptions per workspace.** Checkout, Customer Portal, signature-verified webhooks, "Sync from Stripe" recovery for missed events. Stripe is the source of truth: duplicate-subscription guards and recovery paths derive state by asking Stripe, never the local DB.
 - **Edge-safe middleware split.** `lib/auth.config.ts` is the edge-safe shared config used by the proxy (where `pg` and `bcrypt` aren't available); `lib/auth.ts` extends it with the credentials provider. Same callbacks, same JWT, two execution environments.
 - **Settings**: display name, password change, workspace rename, danger-zone deletion that cancels the Stripe sub on the way out.
 - **EU-region deployable out of the box.** Neon's eu-central regions and Vercel's fra1 functions cover the data-residency clauses most B2B buyers want; nothing in the hot path is pinned to a US region.
@@ -43,7 +43,7 @@ flowchart LR
 ## Tradeoffs
 
 - **Email/password + bcrypt, not magic links or passkeys.** Boring, portable, deployable without a third-party identity provider. The Auth.js v5 wiring leaves a clean slot for OAuth or WebAuthn the first time a customer asks.
-- **Stripe is the source of truth, not the local DB.** "Sync from Stripe" is one API call per recovery — cheap insurance against dropped webhooks and the only honest answer to "what does this customer actually have access to right now". The DB is a cache, treated as one.
-- **Edge-safe config split.** `lib/auth.config.ts` exists *because* `pg` and `bcrypt` can't bundle on the edge runtime — duplicating one config file is the cost of running auth in middleware before the heavy modules load.
+- **Stripe is the source of truth, not the local DB.** "Sync from Stripe" is one API call per recovery: cheap insurance against dropped webhooks and the only honest answer to "what does this customer actually have access to right now". The DB is a cache, treated as one.
+- **Edge-safe config split.** `lib/auth.config.ts` exists *because* `pg` and `bcrypt` can't bundle on the edge runtime; duplicating one config file is the cost of running auth in middleware before the heavy modules load.
 
 [Live demo →](/saas-starter)

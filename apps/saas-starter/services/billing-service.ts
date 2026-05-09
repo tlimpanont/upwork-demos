@@ -147,7 +147,7 @@ export async function resyncFromStripe(
     return null;
   }
 
-  // Always scan all subscriptions on the customer — never trust the pinned ID,
+  // Always scan all subscriptions on the customer; never trust the pinned ID,
   // which can be stale (e.g. webhook for an early sub never delivered).
   const list = await stripe.subscriptions.list({
     customer: existing.stripe_customer_id,
@@ -184,7 +184,7 @@ export async function resyncFromStripe(
   let subscription: Stripe.Subscription | null = live ?? sorted[0] ?? null;
 
   if (!subscription) {
-    // Nothing on Stripe — flatten the local row to a "no subscription" state
+    // Nothing on Stripe; flatten the local row to a "no subscription" state
     // but keep the customer ID so the next subscribe reuses it.
     await query(
       `update subscriptions
@@ -229,7 +229,7 @@ export async function syncSubscriptionFromStripe(
     (subscription.metadata?.organization_id as string | undefined) ??
     null;
   if (!organizationId) {
-    // Nothing to attribute this to — log and skip.
+    // Nothing to attribute this to. Log and skip.
     console.warn(
       "[billing] subscription event missing organization_id metadata",
       subscription.id,

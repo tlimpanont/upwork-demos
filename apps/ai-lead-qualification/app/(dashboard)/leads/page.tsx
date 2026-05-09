@@ -4,7 +4,7 @@ import { Topbar } from "@/components/dashboard/topbar";
 import { LeadsTable } from "@/components/leads/leads-table";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Leads — Lumen" };
+export const metadata = { title: "Leads · Lumen" };
 
 export default async function LeadsPage() {
   const raw = await prisma.lead.findMany({ orderBy: { createdAt: "desc" } });

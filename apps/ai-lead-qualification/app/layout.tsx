@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Lumen — AI Lead Qualification & CRM Automation",
+  title: "Lumen · AI Lead Qualification & CRM Automation",
   description:
-    "Capture inbound leads, score them with AI, and route the qualified ones into HubSpot, Salesforce, Slack, and email — automatically.",
+    "Capture inbound leads, score them with AI, and route the qualified ones into HubSpot, Salesforce, Slack, and email automatically.",
 };
 
 export default function RootLayout({

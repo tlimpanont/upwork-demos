@@ -1,14 +1,14 @@
 # AI Document Processing System
 
-Upload PDF invoices and business documents — AI extracts structured data (vendor, amounts, tax, line items) instantly. Search across processed documents with natural language *or* exact numeric filters (e.g. "tax 9%", "over $20,000").
+Upload PDF invoices and business documents. AI extracts structured data (vendor, amounts, tax, line items) instantly. Search across processed documents with natural language *or* exact numeric filters (e.g. "tax 9%", "over $20,000").
 
 ## Features
 
-- **Private upload** — files stored in private Vercel Blob, served via authenticated proxy
-- **AI extraction** — GPT-4o-mini extracts invoice number, vendor, dates, subtotal, tax rate/amount, total, and line items against a strict Zod schema
-- **Hybrid search** — semantic vector search for concepts, parameterized SQL filters for exact numbers (tax %, amount ranges)
-- **Retry & delete** — reprocess failed documents in-place; delete removes blob + vectors + DB row
-- **Sample data** — download a ZIP of 3 randomly-generated invoice PDFs from the homepage to try the pipeline end-to-end
+- **Private upload**: files stored in private Vercel Blob, served via authenticated proxy
+- **AI extraction**: GPT-4o-mini extracts invoice number, vendor, dates, subtotal, tax rate/amount, total, and line items against a strict Zod schema
+- **Hybrid search**: semantic vector search for concepts, parameterized SQL filters for exact numbers (tax %, amount ranges)
+- **Retry & delete**: reprocess failed documents in-place; delete removes blob + vectors + DB row
+- **Sample data**: download a ZIP of 3 randomly-generated invoice PDFs from the homepage to try the pipeline end-to-end
 
 ## Stack
 
@@ -43,7 +43,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-The database tables are created automatically on first request — no manual migration needed.
+The database tables are created automatically on first request, so no manual migration is needed.
 
 ## API Reference
 

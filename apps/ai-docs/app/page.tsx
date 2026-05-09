@@ -15,7 +15,7 @@ export default function HomePage() {
         </h1>
         <p className="text-lg text-gray-600 max-w-xl mx-auto">
           Upload a PDF invoice or business document. Our AI extracts structured
-          data instantly — vendor, amounts, line items, and more.
+          data instantly: vendor, amounts, line items, and more.
         </p>
       </div>
 
@@ -47,7 +47,7 @@ export default function HomePage() {
             <div>
               <p className="font-semibold text-gray-900">No invoice handy?</p>
               <p className="text-sm text-gray-500 mt-0.5 max-w-sm">
-                Download 3 realistic sample invoices as a ZIP — then upload them above to see the full AI pipeline in action.
+                Download 3 realistic sample invoices as a ZIP, then upload them above to see the full AI pipeline in action.
               </p>
               <div className="flex flex-wrap gap-1.5 mt-2.5">
                 {["Acme Software · $28,620", "NorthStar Consulting · $21,235", "Peak Supplies · $13,993"].map((s) => (
@@ -76,17 +76,17 @@ export default function HomePage() {
           {
             icon: "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z",
             title: "Private Secure Upload",
-            desc: "PDF, PNG, or JPEG files stored in a private Vercel Blob — never publicly accessible. Files are proxied server-side on demand.",
+            desc: "PDF, PNG, or JPEG files stored in a private Vercel Blob, never publicly accessible. Files are proxied server-side on demand.",
           },
           {
             icon: "M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z",
             title: "AI Data Extraction",
-            desc: "GPT-4o-mini extracts invoice number, vendor name, date, line items, and total — structured and validated against a strict schema.",
+            desc: "GPT-4o-mini extracts invoice number, vendor name, date, line items, and total. Structured and validated against a strict schema.",
           },
           {
             icon: "M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4",
             title: "Structured Storage & Retry",
-            desc: "Extracted fields persisted in Neon Postgres. Failed extractions show a Retry button — reprocess any document without re-uploading.",
+            desc: "Extracted fields persisted in Neon Postgres. Failed extractions show a Retry button so you can reprocess any document without re-uploading.",
           },
           {
             icon: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z",

@@ -21,7 +21,7 @@ export default function AdminPage() {
       const data = await res.json();
       setSources(data.sources ?? []);
     } catch {
-      // table may not exist yet — ignore until DB is set up
+      // table may not exist yet; ignore until DB is set up
     } finally {
       setLoading(false);
     }

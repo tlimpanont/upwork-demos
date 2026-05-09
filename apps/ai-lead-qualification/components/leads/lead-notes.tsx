@@ -59,7 +59,7 @@ export function LeadNotes({
         <Textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Add a note for the team — context, follow-up details, objections heard…"
+          placeholder="Add a note for the team: context, follow-up details, objections heard…"
           rows={3}
         />
         <div className="flex justify-end">

@@ -12,7 +12,7 @@ export type Integration = {
   id: IntegrationLogEntry["integration"];
   label: string;
   // True if this integration should fire for the given qualification.
-  // The demo wires deterministic policies — Hot fans out everywhere,
+  // The demo wires deterministic policies: Hot fans out everywhere,
   // Warm hits CRM + email, Cold only logs.
   shouldFire: (q: Qualification) => boolean;
   deliver: (input: DispatchInput) => Promise<IntegrationLogEntry>;

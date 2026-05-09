@@ -1,6 +1,6 @@
 import type { Integration } from "./types";
 
-// Mock Salesforce adapter. Only fires for Hot leads — matches the policy
+// Mock Salesforce adapter. Only fires for Hot leads, matching the policy
 // that AE-owned pipeline only ingests qualified opportunities.
 export const salesforce: Integration = {
   id: "salesforce",

@@ -1,0 +1,60 @@
+---
+title: Image-sequence anomaly detection on MongoDB Atlas Vector Search
+summary: Caption-then-embed pipeline that learns from a project's normal frames and scores new images by cosine distance from the centroid. Per-tile heatmaps, polygon annotations, and a human-correction loop that feeds back into the next training run.
+client: Portfolio demo
+stack:
+  - Next.js 16
+  - React 19
+  - MongoDB Atlas
+  - Atlas Vector Search
+  - OpenAI gpt-4o-mini
+  - text-embedding-3-small
+  - react-konva
+  - Vercel Blob
+  - Auth.js v5
+  - Recharts
+publishedAt: 2026-05-10
+---
+
+For inspection-heavy teams that already have piles of "before" imagery (solar arrays, weld stations, X-rays, ag-tech flyovers) and need a reviewable second opinion before a human looks. The interesting design choice is caption-then-embed: a vision model writes a one-paragraph description of the image (or region), and a text embedder turns that into the vector. Image embeddings come and go at OpenAI; this two-step path is stable and the intermediate caption is a free diagnostic when you're debugging a false positive.
+
+## Pipeline
+
+```mermaid
+flowchart LR
+  A[Upload sequence] --> B[Private<br/>Vercel Blob]
+  B --> C[Annotate<br/>react-konva]
+  C --> D[gpt-4o-mini<br/>caption per region]
+  D --> E[text-embedding-3-small<br/>1536-dim vector]
+  E --> F[(Atlas Vector<br/>Search index)]
+  F --> G[Train: centroid +<br/>μ + 2σ threshold]
+  H[New image] --> I[Whole-image embed]
+  I --> J{Below threshold?}
+  J -- yes --> K[Mark normal]
+  J -- no --> L[4×4 tile sweep]
+  L --> M[BFS bbox derivation]
+  M --> N[Heatmap + bboxes]
+  N --> O[Reviewer approves<br/>or corrects]
+  O --> C
+```
+
+## What's built
+
+- **Caption-then-embed training.** `gpt-4o-mini` captions each annotation region in plain English ("close-up of a solar panel cell with diagonal cracking and soot deposit"). `text-embedding-3-small` turns the caption into a 1536-dim vector stored in MongoDB with `projectId` + `label` filters. The vector index is defined once at `db/atlas-vector-index.json` and provisioned via `npm run db:vector-index`.
+- **Sequence-aware split.** Train/val/test is 60/20/20 by `sequenceId`, not per-image. Frames from one capture flight stay in one partition, so the val/test metrics don't quietly inflate from temporal autocorrelation across adjacent frames.
+- **Centroid + threshold model.** The normal split is averaged into a single centroid; the threshold is `mean + 2σ` over the held-out normal cosine distances, floored at `0.05`. Precision, recall, and F1 are computed on the held-out anomalies. Every model row records its version, threshold, and metrics so dashboards can diff them.
+- **Whole-image-first detection.** Before paying for 16 tile embeddings, score the whole image once. If it's below threshold, write a single "normal" result and stop. If it's above, run a 4×4 sweep, project tile distances into a heatmap grid, and derive bounding boxes via a connected-component BFS over alarm-scoring tiles.
+- **Konva annotation canvas.** `react-konva` mounted client-only (`dynamic({ ssr: false })`) with a discriminated-union shape schema: `bounding_box` is drag-to-create, `polygon` is click-to-add + double-click-to-close. Every annotation tags `source: "human" | "human-correction"`.
+- **Review loop that closes.** The detect page shows the source image with a translucent-red heatmap and bbox overlays. Reviewers approve as-is or relabel; either path writes new annotations with `source: "human-correction"` so the next training run picks them up. Approving a "normal" detection is a no-op by design — there's nothing to learn from a confirmed normal.
+- **Stub fallback for cold installs.** When `OPENAI_API_KEY` is unset, the embedder falls back to a deterministic hash-based pseudo-embedding (FNV-style). The training + detection pipelines run end-to-end so the demo works on a fresh clone before you've wired Atlas.
+- **JSON / CSV / PDF export.** A reports route emits the full detection log in three formats; `pdfkit` renders a one-page summary with model metadata and the top 200 detection rows for sharing with stakeholders.
+
+## Tradeoffs
+
+- **Caption-then-embed vs. direct image embeddings.** Two API calls per region instead of one, plus a measurable token bill on a busy day. Bought in exchange for an intermediate human-readable caption that makes false positives diagnose themselves, and a vector store you can swap to any text embedder without re-architecting.
+- **Centroid + threshold, not a classifier.** One-class anomaly detection: cheap, transparent, and works from a few dozen normals. Trades raw accuracy for cold-start speed and explainability. If a project accumulates thousands of labeled anomalies, swap the model layer for a fine-tuned classifier — the schema and review loop don't have to move.
+- **4×4 tile grid, not a learned segmenter.** Hand-tuned spatial resolution. Good enough to point a reviewer at the right corner of the frame; not pixel-precise. The BFS step merges contiguous alarm tiles into bounding boxes, so the UI shows regions rather than blocky cells.
+- **Vercel Blob proxy, not direct URLs.** Images are served through an authenticated `/api/images/[id]/file` proxy so blob URLs never leak. Adds one server hop per render in exchange for not having to think about signed-URL expiry.
+- **Atlas Vector Search, not pgvector.** Picked because the rest of the data model fits naturally into MongoDB documents (heatmap cells as flat arrays, annotation shapes as discriminated unions). The price is a stronger vendor lock-in than Postgres + pgvector would have been.
+
+[Live demo →](/anomaly-detection)

@@ -39,7 +39,7 @@ export default function SiteFooter() {
             <FooterLink href="/#services">Services</FooterLink>
             <FooterLink href="/#demos">Work</FooterLink>
             <FooterLink href="/case-studies">Case studies</FooterLink>
-            <FooterLink href="/#contact">Contact</FooterLink>
+            <FooterLink href="/contact">Contact</FooterLink>
             <Stack direction="row" spacing={0.5} sx={{ ml: 0.5 }}>
               <SocialIcon
                 href="https://github.com/tlimpanont"

@@ -67,7 +67,7 @@ export default function SiteHeader() {
             </Typography>
             <Typography
               component="a"
-              href="/#contact"
+              href="/contact"
               variant="body2"
               sx={{ color: "text.secondary", "&:hover": { color: "text.primary" } }}
             >
@@ -81,7 +81,7 @@ export default function SiteHeader() {
           >
             <ThemeToggle />
             <Button
-              href="/#contact"
+              href="https://cal.com/theuy"
               variant="contained"
               size="small"
               startIcon={<CalendarMonthRoundedIcon />}

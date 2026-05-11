@@ -7,5 +7,5 @@ primaryCta:
   label: Book a Discovery Call
   href: "https://cal.com/theuy"
 secondaryCta:
-  label: Message on LinkedIn
-  href: "https://www.linkedin.com/in/theuylimpanont/"
+  label: Send a Message
+  href: "/contact"

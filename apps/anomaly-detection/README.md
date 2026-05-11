@@ -117,6 +117,48 @@ without manual setup.
   a 3-project skeleton (solar / manufacturing / medical) with empty
   sequences. Useful for the very first run before a dump exists.
 
+### Nightly demo reset on Vercel
+
+The deployed app re-seeds itself every night so visitors always land on a
+clean baseline. Three pieces make this work:
+
+1. **`/api/admin/seed`** — a protected route (`app/api/admin/seed/route.ts`)
+   that runs the same `runSeed()` function the CLI uses. Auth is
+   `Authorization: Bearer ${CRON_SECRET}`.
+2. **`vercel.json` cron** — schedules the reset for `0 3 * * *` (03:00
+   UTC). Vercel Cron automatically signs the request with the `CRON_SECRET`
+   env var when it's set in the project's environment.
+3. **`outputFileTracingIncludes`** in `next.config.ts` — tells Next.js to
+   bundle the `scripts/baseline/` directory into the serverless function
+   output. Without this the cron would run against an empty function bundle
+   and silently fall back to the 3-project skeleton.
+
+To enable on a new deploy:
+
+```bash
+# Generate a secret
+openssl rand -base64 32
+
+# In Vercel project settings → Environment Variables, add:
+#   CRON_SECRET = <the generated value>
+#   MONGODB_URI, AUTH_SECRET, BLOB_READ_WRITE_TOKEN, etc. as usual
+
+# Trigger a deploy. Vercel will register the cron from vercel.json
+# automatically. To verify, hit the endpoint manually:
+curl -X POST -H "Authorization: Bearer $CRON_SECRET" \
+  https://<your-deployment>.vercel.app/api/admin/seed
+```
+
+Notes:
+- Pro plan caps function duration at 300s (set in `vercel.json`). Hobby
+  caps at 60s — re-uploading 192 images may exceed that. If you're on
+  Hobby and the cron fails on timeouts, run the seed manually from your
+  laptop instead (`npm run db:seed` with prod env vars).
+- The cron drops the demo user's existing data on every run, including
+  any annotations or detections a visitor produced during the day. That's
+  intentional for a public demo; comment out the cron entry in
+  `vercel.json` if you'd rather persist changes.
+
 Pages of interest:
 
 | URL | What it is |

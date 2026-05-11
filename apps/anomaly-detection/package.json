@@ -18,8 +18,7 @@
     "lint": "eslint",
     "clean": "rm -rf .next .turbo",
     "db:vector-index": "dotenv -e .env.local -- tsx scripts/create-vector-index.ts",
-    "db:seed": "dotenv -e .env.local -- tsx scripts/seed.ts",
-    "db:dump": "dotenv -e .env.local -- tsx scripts/dump.ts"
+    "db:seed": "dotenv -e .env.local -- tsx scripts/seed.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

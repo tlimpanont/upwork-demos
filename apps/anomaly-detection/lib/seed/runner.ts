@@ -3,12 +3,40 @@ import { resolve } from "node:path";
 import { hash } from "bcryptjs";
 import { MongoClient, ObjectId, type Db } from "mongodb";
 import { put } from "@vercel/blob";
+import sharp from "sharp";
 
-// Shared runner used by both the CLI seed script and the protected admin
-// endpoint that the Vercel cron hits nightly. Keeps the behaviour
-// identical regardless of which surface invokes it.
+// Shared seed runner used by both the CLI (`npm run db:seed`) and the
+// protected /api/admin/seed endpoint that the Vercel cron hits nightly.
+//
+// What the seed does:
+//   1. Drop every project-scoped collection (users are preserved).
+//   2. Upsert the demo user with a fast 8-round bcrypt hash.
+//   3. Create one Solar project + one sequence using hardcoded metadata.
+//   4. Re-upload every JPEG under scripts/baseline/images/ to Vercel Blob
+//      in parallel and insert the corresponding image rows.
+//
+// No annotations or detections are seeded — the demo starts with a clean
+// workspace so visitors see the full Detect → Annotate → Train loop on
+// empty state.
 
 const BLOB_PREFIX = "anomaly-detection";
+
+// Hardcoded project metadata for the one project the demo ships with.
+// Edit here to change the seeded title / description / detection rule.
+const SOLAR_PROJECT = {
+  name: "Solar project",
+  description:
+    "Thermal sweep of a solar panel array. Demo workspace pre-loaded with 192 chronologically ordered frames — hit Detect on any image to localize hotspots, soot streaks, or other anomalies against the saved detection rule.",
+  anomalyDescription: "dark spot, crack, soot streak, debris",
+  domain: "solar" as const,
+  sequenceName: "Site A",
+};
+
+// First frame in the seeded sequence is stamped with this date; subsequent
+// frames are stamped one minute later each to keep the chronological
+// viewer ordering deterministic.
+const SEQUENCE_BASE_DATE = new Date("2026-05-01T09:00:00Z");
+const SEQUENCE_FRAME_INTERVAL_MS = 60_000;
 
 export type SeedOptions = {
   mongoUri: string;
@@ -16,12 +44,11 @@ export type SeedOptions = {
   demoEmail: string;
   demoPassword: string;
   demoName?: string;
-  // Absolute path to the directory that contains baseline.json and the
-  // images/ subdirectory. The CLI passes scripts/baseline; the serverless
-  // function passes a path inside the deployed function bundle.
+  // Absolute path to the directory that contains the `images/` subfolder
+  // with the baseline JPEGs.
   baselineDir: string;
-  // Optional logger; falls through to console.log so the CLI keeps its
-  // streaming output.
+  // Optional logger; defaults to console.log so the CLI sees streaming
+  // output and the serverless endpoint can route to its own sink.
   log?: (message: string) => void;
 };
 
@@ -42,18 +69,40 @@ export async function runSeed(opts: SeedOptions): Promise<SeedResult> {
     await client.connect();
     const db = client.db(opts.dbName);
     await ensureIndexes(db);
+    await wipeOperationalCollections(db, log);
 
     const ownerId = await upsertDemoUser(db, opts);
     log(`[seed] demo user ${opts.demoEmail} (${ownerId.toHexString()})`);
 
-    const baseline = await tryLoadBaseline(opts.baselineDir);
-    if (!baseline) {
-      throw new Error(
-        `Baseline not found at ${opts.baselineDir}/baseline.json. ` +
-          "Run `npm run db:dump` first or restore the file from the repo.",
-      );
-    }
-    return await restoreFromBaseline(db, ownerId, baseline, opts.baselineDir, log);
+    const projectId = await createSolarProject(db, ownerId);
+    log(`[seed] project ${SOLAR_PROJECT.name} (${projectId.toHexString()})`);
+
+    const sequenceId = await createSequence(
+      db,
+      projectId,
+      SOLAR_PROJECT.sequenceName,
+    );
+    log(
+      `[seed] sequence ${SOLAR_PROJECT.sequenceName} (${sequenceId.toHexString()})`,
+    );
+
+    const { reuploaded, skipped } = await uploadAndInsertImages(
+      db,
+      projectId,
+      sequenceId,
+      opts.baselineDir,
+      log,
+    );
+
+    return {
+      ok: true,
+      projects: 1,
+      sequences: 1,
+      images: reuploaded,
+      annotations: 0,
+      imagesReuploaded: reuploaded,
+      imagesSkipped: skipped,
+    };
   } finally {
     await client.close();
   }
@@ -65,24 +114,34 @@ async function ensureIndexes(db: Db) {
   await db.collection("sequences").createIndex({ projectId: 1, createdAt: -1 });
   await db.collection("images").createIndex({ sequenceId: 1, capturedAt: 1 });
   await db.collection("images").createIndex({ projectId: 1 });
-  await db.collection("annotations").createIndex({ imageId: 1, createdAt: 1 });
-  await db.collection("annotations").createIndex({ projectId: 1 });
+}
+
+async function wipeOperationalCollections(
+  db: Db,
+  log: (m: string) => void,
+): Promise<void> {
+  log("[seed] dropping all project-scoped data (users preserved).");
+  await Promise.all([
+    db.collection("annotations").deleteMany({}),
+    db.collection("images").deleteMany({}),
+    db.collection("sequences").deleteMany({}),
+    db.collection("embeddings").deleteMany({}),
+    db.collection("detections").deleteMany({}),
+    db.collection("models").deleteMany({}),
+    db.collection("pipelineRuns").deleteMany({}),
+    db.collection("projects").deleteMany({}),
+  ]);
 }
 
 async function upsertDemoUser(
   db: Db,
   opts: SeedOptions,
 ): Promise<ObjectId> {
-  // Lower bcrypt cost factor for the public demo user. bcryptjs is pure JS
-  // and runs ~10× slower than native bcrypt; at the default 12 rounds the
-  // compare on every demo login takes ~500–800ms on Vercel hardware,
-  // which is the main reason the "Sign in as demo" button feels sluggish.
-  // The demo password is publicly published in the README anyway, so a
-  // smaller cost factor doesn't reduce real security here.
+  // 8-round bcrypt: ~60ms compare on Vercel hardware instead of the ~500ms
+  // we'd pay at 12 rounds. The demo password is public so a higher cost
+  // factor offers no real security benefit.
   const passwordHash = await hash(opts.demoPassword, 8);
   const users = db.collection("users");
-  // Replace the password hash on every seed so a stale 12-round hash from
-  // an older seed gets refreshed to the faster 8-round one.
   const result = await users.findOneAndUpdate(
     { email: opts.demoEmail.toLowerCase() },
     {
@@ -99,138 +158,79 @@ async function upsertDemoUser(
   return result._id as ObjectId;
 }
 
-type Baseline = {
-  version: number;
-  generatedAt: string;
-  projects: Array<{
-    slug: string;
-    name: string;
-    description: string | null;
-    anomalyDescription: string | null;
-    domain: string;
-  }>;
-  sequences: Array<{
-    projectSlug: string;
-    slug: string;
-    name: string;
-  }>;
-  images: Array<{
-    sequenceSlug: string;
-    projectSlug: string;
-    slug: string;
-    bytesFile: string | null;
-    width: number;
-    height: number;
-    capturedAt: string;
-  }>;
-  annotations: Array<{
-    imageSlug: string;
-    projectSlug: string;
-    sequenceSlug: string;
-    label: "normal" | "anomaly";
-    shape: unknown;
-    comment: string | null;
-    source: "human" | "human-correction";
-  }>;
-};
-
-async function tryLoadBaseline(baselineDir: string): Promise<Baseline | null> {
-  try {
-    const raw = await readFile(resolve(baselineDir, "baseline.json"), "utf-8");
-    return JSON.parse(raw) as Baseline;
-  } catch (err) {
-    if ((err as NodeJS.ErrnoException).code === "ENOENT") return null;
-    throw err;
-  }
-}
-
-async function listAvailableImageBytes(baselineDir: string): Promise<Set<string>> {
-  try {
-    const entries = await readdir(resolve(baselineDir, "images"));
-    return new Set(entries);
-  } catch {
-    return new Set();
-  }
-}
-
-async function restoreFromBaseline(
+async function createSolarProject(
   db: Db,
   ownerId: ObjectId,
-  baseline: Baseline,
+): Promise<ObjectId> {
+  const _id = new ObjectId();
+  const now = new Date();
+  await db.collection("projects").insertOne({
+    _id,
+    ownerId,
+    name: SOLAR_PROJECT.name,
+    description: SOLAR_PROJECT.description,
+    anomalyDescription: SOLAR_PROJECT.anomalyDescription,
+    domain: SOLAR_PROJECT.domain,
+    createdAt: now,
+    updatedAt: now,
+  });
+  return _id;
+}
+
+async function createSequence(
+  db: Db,
+  projectId: ObjectId,
+  name: string,
+): Promise<ObjectId> {
+  const _id = new ObjectId();
+  await db.collection("sequences").insertOne({
+    _id,
+    projectId,
+    name,
+    imageCount: 0,
+    createdAt: new Date(),
+  });
+  return _id;
+}
+
+// Worker-pool image upload + bulk Mongo insert. The dominant cost is the
+// blob round trip; 10 concurrent uploads cuts wall time from ~60-120s to
+// ~10-15s for 192 frames.
+const UPLOAD_CONCURRENCY = 10;
+
+async function uploadAndInsertImages(
+  db: Db,
+  projectId: ObjectId,
+  sequenceId: ObjectId,
   baselineDir: string,
   log: (m: string) => void,
-): Promise<SeedResult> {
-  log(
-    `[seed] restoring baseline · ${baseline.projects.length} projects · ` +
-      `${baseline.sequences.length} sequences · ${baseline.images.length} images · ` +
-      `${baseline.annotations.length} annotations`,
-  );
+): Promise<{ reuploaded: number; skipped: number }> {
+  const imagesDir = resolve(baselineDir, "images");
+  let filenames: string[];
+  try {
+    filenames = (await readdir(imagesDir)).filter((f) =>
+      /\.(jpe?g|png|webp)$/i.test(f),
+    );
+  } catch {
+    log(`[seed] no images directory at ${imagesDir}; skipping.`);
+    return { reuploaded: 0, skipped: 0 };
+  }
+  // Deterministic order so capturedAt timestamps line up with filenames
+  // across re-seeds.
+  filenames.sort();
 
-  const projects = db.collection("projects");
-  const sequences = db.collection("sequences");
-  const images = db.collection("images");
-  const annotations = db.collection("annotations");
-
-  // Wipe every operational collection regardless of owner. Anything that
-  // accumulated from previous sessions — orphaned projects, half-trained
-  // models, AI annotations, pipeline runs — gets removed so the seed
-  // produces a single deterministic state. The `users` collection is the
-  // one thing we keep, so registered accounts survive the reset.
-  log("[seed] dropping all project-scoped data (users preserved).");
-  await Promise.all([
-    annotations.deleteMany({}),
-    images.deleteMany({}),
-    sequences.deleteMany({}),
-    db.collection("embeddings").deleteMany({}),
-    db.collection("detections").deleteMany({}),
-    db.collection("models").deleteMany({}),
-    db.collection("pipelineRuns").deleteMany({}),
-    projects.deleteMany({}),
-  ]);
-
-  const availableImageBytes = await listAvailableImageBytes(baselineDir);
-
-  // Slug → ObjectId maps so FKs get rewired as we insert in dependency
-  // order (projects → sequences → images → annotations).
-  const projectIdBySlug = new Map<string, ObjectId>();
-  const sequenceIdBySlug = new Map<string, ObjectId>();
-  const imageIdBySlug = new Map<string, ObjectId>();
-
-  const now = new Date();
-  for (const p of baseline.projects) {
-    const _id = new ObjectId();
-    projectIdBySlug.set(p.slug, _id);
-    await projects.insertOne({
-      _id,
-      ownerId,
-      name: p.name,
-      description: p.description,
-      anomalyDescription: p.anomalyDescription,
-      domain: p.domain,
-      createdAt: now,
-      updatedAt: now,
-    });
+  if (filenames.length === 0) {
+    log(`[seed] images directory is empty; skipping.`);
+    return { reuploaded: 0, skipped: 0 };
   }
 
-  for (const s of baseline.sequences) {
-    const projectId = projectIdBySlug.get(s.projectSlug);
-    if (!projectId) continue;
-    const _id = new ObjectId();
-    sequenceIdBySlug.set(s.slug, _id);
-    await sequences.insertOne({
-      _id,
-      projectId,
-      name: s.name,
-      imageCount: 0,
-      createdAt: new Date(),
-    });
-  }
+  type Pending = { idx: number; filename: string };
+  const queue: Pending[] = filenames.map((filename, idx) => ({
+    idx,
+    filename,
+  }));
 
-  // Images: re-upload in parallel with a worker pool, then bulk-insert the
-  // Mongo rows. The dominant cost is the round trip to Vercel Blob — at 10
-  // concurrent uploads, 192 images go through in ~10-15s instead of the
-  // ~60-120s the sequential loop took.
-  type PendingImage = {
+  type ImageDoc = {
     _id: ObjectId;
     sequenceId: ObjectId;
     projectId: ObjectId;
@@ -240,160 +240,77 @@ async function restoreFromBaseline(
     capturedAt: Date;
     uploadedAt: Date;
   };
-  const imageDocs: PendingImage[] = [];
-  const seqImageCount = new Map<string, number>();
+  const imageDocs: ImageDoc[] = [];
   let reuploaded = 0;
-  let skippedNoBytes = 0;
-  const seedTs = Date.now();
-
-  const queue = baseline.images
-    .map((i) => {
-      const projectId = projectIdBySlug.get(i.projectSlug);
-      const sequenceId = sequenceIdBySlug.get(i.sequenceSlug);
-      if (!projectId || !sequenceId) return null;
-      return { i, projectId, sequenceId };
-    })
-    .filter(
-      (
-        x,
-      ): x is {
-        i: Baseline["images"][number];
-        projectId: ObjectId;
-        sequenceId: ObjectId;
-      } => x !== null,
-    );
-
-  // Reserve image _ids up front so the seqImageCount + annotation FK maps
-  // can be built without waiting for uploads to finish.
-  for (const { i } of queue) {
-    imageIdBySlug.set(i.slug, new ObjectId());
-    seqImageCount.set(
-      i.sequenceSlug,
-      (seqImageCount.get(i.sequenceSlug) ?? 0) + 1,
-    );
-  }
-
-  const CONCURRENCY = 10;
+  let skipped = 0;
   let cursor = 0;
   let lastLogged = 0;
+  const seedTs = Date.now();
   const total = queue.length;
-  const workers = Array.from({ length: Math.min(CONCURRENCY, total) }).map(
-    async () => {
-      while (cursor < total) {
-        const idx = cursor++;
-        const { i, projectId, sequenceId } = queue[idx];
-        const _id = imageIdBySlug.get(i.slug)!;
-        let blobKey = `${BLOB_PREFIX}/${projectId.toHexString()}/seed-${i.slug}.jpg`;
-        if (i.bytesFile && availableImageBytes.has(i.bytesFile)) {
-          try {
-            const buf = await readFile(
-              resolve(baselineDir, "images", i.bytesFile),
-            );
-            const key = `${BLOB_PREFIX}/${projectId.toHexString()}/${seedTs}-${i.slug}.jpg`;
-            await put(key, buf, {
-              access: "private",
-              contentType: "image/jpeg",
-              addRandomSuffix: false,
-            });
-            blobKey = key;
-            reuploaded += 1;
-          } catch (err) {
-            log(
-              `[seed] upload failed for ${i.bytesFile}: ${err instanceof Error ? err.message : err}`,
-            );
-            skippedNoBytes += 1;
-          }
-        } else {
-          skippedNoBytes += 1;
+
+  const workers = Array.from({
+    length: Math.min(UPLOAD_CONCURRENCY, total),
+  }).map(async () => {
+    while (cursor < total) {
+      const idx = cursor++;
+      const { filename } = queue[idx];
+      try {
+        const buf = await readFile(resolve(imagesDir, filename));
+        // Read dimensions from the rotated (post-EXIF) bytes so what we
+        // store matches what the vision model and Konva canvas later see.
+        const meta = await sharp(buf).rotate().metadata();
+        const width = meta.width ?? 0;
+        const height = meta.height ?? 0;
+        if (!width || !height) {
+          log(`[seed] skipping ${filename} (unreadable dimensions)`);
+          skipped += 1;
+          continue;
         }
+        const key = `${BLOB_PREFIX}/${projectId.toHexString()}/${seedTs}-${idx
+          .toString()
+          .padStart(4, "0")}.jpg`;
+        await put(key, buf, {
+          access: "private",
+          contentType: "image/jpeg",
+          addRandomSuffix: false,
+        });
         imageDocs.push({
-          _id,
+          _id: new ObjectId(),
           sequenceId,
           projectId,
-          blobKey,
-          width: i.width,
-          height: i.height,
-          capturedAt: new Date(i.capturedAt),
+          blobKey: key,
+          width,
+          height,
+          capturedAt: new Date(
+            SEQUENCE_BASE_DATE.getTime() + idx * SEQUENCE_FRAME_INTERVAL_MS,
+          ),
           uploadedAt: new Date(),
         });
-
-        // Sparse progress log so the JobsClient (or CLI) shows movement
-        // without spamming the console.
-        const done = imageDocs.length;
-        if (done - lastLogged >= 20 || done === total) {
-          lastLogged = done;
-          log(`[seed]   uploaded ${done}/${total} images`);
-        }
+        reuploaded += 1;
+      } catch (err) {
+        log(
+          `[seed] upload failed for ${filename}: ${err instanceof Error ? err.message : err}`,
+        );
+        skipped += 1;
       }
-    },
-  );
+      const done = reuploaded + skipped;
+      if (done - lastLogged >= 20 || done === total) {
+        lastLogged = done;
+        log(`[seed]   uploaded ${done}/${total} images`);
+      }
+    }
+  });
   await Promise.all(workers);
 
   if (imageDocs.length > 0) {
-    await images.insertMany(imageDocs, { ordered: false });
+    await db.collection("images").insertMany(imageDocs, { ordered: false });
+    await db
+      .collection("sequences")
+      .updateOne(
+        { _id: sequenceId },
+        { $set: { imageCount: imageDocs.length } },
+      );
   }
 
-  // Update sequence counts in one go.
-  await Promise.all(
-    [...seqImageCount.entries()].map(([slug, count]) => {
-      const seqId = sequenceIdBySlug.get(slug);
-      if (!seqId) return Promise.resolve();
-      return sequences.updateOne({ _id: seqId }, { $set: { imageCount: count } });
-    }),
-  );
-
-  // Annotations: bulk insert. Skip rows whose parent images/sequences were
-  // dropped (defensive — shouldn't happen with the filtered baseline).
-  const annotationDocs = baseline.annotations
-    .map((a) => {
-      const imageId = imageIdBySlug.get(a.imageSlug);
-      const projectId = projectIdBySlug.get(a.projectSlug);
-      const sequenceId = sequenceIdBySlug.get(a.sequenceSlug);
-      if (!imageId || !projectId || !sequenceId) return null;
-      return {
-        _id: new ObjectId(),
-        imageId,
-        projectId,
-        sequenceId,
-        label: a.label,
-        shape: a.shape,
-        comment: a.comment,
-        source: a.source,
-        createdAt: new Date(),
-      };
-    })
-    .filter((d) => d !== null) as Array<{
-    _id: ObjectId;
-    imageId: ObjectId;
-    projectId: ObjectId;
-    sequenceId: ObjectId;
-    label: "normal" | "anomaly";
-    shape: unknown;
-    comment: string | null;
-    source: "human" | "human-correction";
-    createdAt: Date;
-  }>;
-  if (annotationDocs.length > 0) {
-    await annotations.insertMany(annotationDocs, { ordered: false });
-  }
-  const annotationCount = annotationDocs.length;
-
-  log(
-    `[seed] restored: ${baseline.projects.length} projects, ` +
-      `${baseline.sequences.length} sequences, ` +
-      `${reuploaded} images re-uploaded` +
-      (skippedNoBytes > 0 ? ` (${skippedNoBytes} without bytes)` : "") +
-      `, ${annotationCount} annotations.`,
-  );
-
-  return {
-    ok: true,
-    projects: baseline.projects.length,
-    sequences: baseline.sequences.length,
-    images: baseline.images.length,
-    annotations: annotationCount,
-    imagesReuploaded: reuploaded,
-    imagesSkipped: skippedNoBytes,
-  };
+  return { reuploaded, skipped };
 }
-

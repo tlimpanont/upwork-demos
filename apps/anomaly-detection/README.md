@@ -85,37 +85,34 @@ npm run dev
 Sign in as `demo@anomaly.local` / `demo1234` — the login page also has a
 **Sign in as demo** button that fills the form and submits in one click.
 
-## Demo dataset (dump / restore)
+## Demo dataset
 
-The repo ships with a baseline dataset under `scripts/baseline/` that
-`npm run db:seed` restores into the demo workspace. The baseline includes
-projects, sequences, images, annotations, and detection rules captured at
-a known good state, so a fresh deploy can show off the full workflow
-without manual setup.
+The repo ships with the baseline JPEGs under `scripts/baseline/images/`
+(192 frames, ~50 MB). `npm run db:seed` produces a clean demo workspace
+from them:
 
-- **Snapshot the current state** (Mongo + the bytes of every image in
-  Vercel Blob):
-  ```bash
-  npm run db:dump
-  ```
-  This writes `scripts/baseline/baseline.json` plus
-  `scripts/baseline/images/<imageId>.jpg`. AI annotations are promoted
-  to `human-correction` on the way out so the seeded baseline starts
-  with confirmed ground truth, not stale machine suggestions.
+```
+npm run db:seed
+```
 
-- **Restore the baseline**:
-  ```bash
-  npm run db:seed
-  ```
-  Drops the demo user's existing data, re-uploads each baseline image
-  into the current blob store under fresh keys, and re-inserts every
-  project / sequence / image / annotation with new ObjectIds.
-  Embeddings, models, detections, and pipeline runs are intentionally
-  *not* restored — they're regenerated on first use.
+Each run:
 
-- If `scripts/baseline/baseline.json` is missing, `db:seed` falls back to
-  a 3-project skeleton (solar / manufacturing / medical) with empty
-  sequences. Useful for the very first run before a dump exists.
+1. Drops every project-scoped collection (`projects`, `sequences`,
+   `images`, `annotations`, `embeddings`, `detections`, `models`,
+   `pipelineRuns`). The `users` collection is preserved.
+2. Upserts the demo user (`demo@anomaly.local` / `demo1234` by default).
+3. Creates a single **Solar project** with a hardcoded name, description,
+   and detection rule (see `SOLAR_PROJECT` in `lib/seed/runner.ts`).
+4. Creates a single sequence (`Site A`).
+5. Reads every JPEG under `scripts/baseline/images/`, extracts width /
+   height with sharp, uploads each one to Vercel Blob (10 in parallel),
+   and bulk-inserts the image rows with chronological `capturedAt`
+   timestamps. No annotations are seeded — the demo starts on empty
+   review state so visitors see the full Detect → Annotate → Train loop.
+
+Edit `SOLAR_PROJECT` in `lib/seed/runner.ts` to change the seeded title,
+description, or detection rule. Drop new JPEGs into `scripts/baseline/images/`
+to grow the seeded sequence.
 
 ### Nightly demo reset on Vercel
 

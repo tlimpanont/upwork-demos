@@ -2,10 +2,24 @@
 
 import { useEffect, useRef, useState } from "react";
 import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
+import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import OpenInNewRoundedIcon from "@mui/icons-material/OpenInNewRounded";
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
+import RestartAltRoundedIcon from "@mui/icons-material/RestartAltRounded";
+import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
+// Interactive mermaid renderer.
+//
+// Wraps the rendered SVG in a pan/zoom container so reviewers can scroll-
+// wheel-zoom or click-drag to inspect a busy flowchart. The SVG itself
+// stays vector (CSS transforms scale, not rasterize), so text remains
+// crisp at every zoom level. A toolbar overlays the bottom-right corner
+// with explicit zoom-in / zoom-out / reset / "open externally" actions
+// for keyboard / touch users who can't easily wheel-zoom.
 export default function MermaidDiagram({ source }: { source: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [error, setError] = useState<string | null>(null);
@@ -18,9 +32,6 @@ export default function MermaidDiagram({ source }: { source: string }) {
     (async () => {
       try {
         const mermaid = (await import("mermaid")).default;
-        // Detect color scheme from the document attribute Providers sets, fall
-        // back to media query, fall back to dark (the page surface is dark by
-        // default in this theme).
         const html = document.documentElement;
         const isLight =
           html.getAttribute("data-mui-color-scheme") === "light" ||
@@ -32,9 +43,6 @@ export default function MermaidDiagram({ source }: { source: string }) {
           securityLevel: "strict",
           theme: isLight ? "default" : "dark",
           fontFamily: "inherit",
-          // Bigger base font + more node spacing so text in the flowchart
-          // nodes stays readable when the diagram is rendered inside the
-          // case-study reading column.
           fontSize: 18,
           flowchart: {
             nodeSpacing: 60,
@@ -82,34 +90,113 @@ export default function MermaidDiagram({ source }: { source: string }) {
         border: "1px solid",
         borderColor: "divider",
         bgcolor: "background.paper",
+        position: "relative",
       }}
     >
-      <Box
-        ref={ref}
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          // Generous min-height so even simple flowcharts get a big-enough
-          // canvas to read at a comfortable text size. The SVG grows up
-          // to fill it while preserving its own aspect ratio.
-          minHeight: { xs: 360, sm: 460, md: 560 },
-          overflow: "auto",
-          "& svg": {
-            maxWidth: "100%",
-            height: "auto",
-            minHeight: { xs: 320, sm: 420, md: 520 },
-          },
-        }}
-      />
+      <TransformWrapper
+        initialScale={1}
+        minScale={0.5}
+        maxScale={4}
+        wheel={{ step: 0.15 }}
+        doubleClick={{ mode: "reset" }}
+        panning={{ velocityDisabled: true }}
+      >
+        {({ zoomIn, zoomOut, resetTransform }) => (
+          <>
+            <Box
+              sx={{
+                position: "relative",
+                height: { xs: 360, sm: 460, md: 560 },
+                overflow: "hidden",
+                borderRadius: 2,
+                bgcolor: "transparent",
+                // The TransformComponent renders a 100%/100% inner wrapper,
+                // so we anchor its size via the parent.
+                "& .react-transform-wrapper, & .react-transform-component": {
+                  width: "100%",
+                  height: "100%",
+                },
+                "& svg": {
+                  maxWidth: "none",
+                  height: "auto",
+                },
+                cursor: "grab",
+                "&:active": { cursor: "grabbing" },
+              }}
+            >
+              <TransformComponent
+                wrapperStyle={{ width: "100%", height: "100%" }}
+                contentStyle={{
+                  width: "100%",
+                  height: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Box ref={ref} />
+              </TransformComponent>
+            </Box>
+
+            {/* Floating toolbar overlay. */}
+            <Stack
+              direction="row"
+              spacing={0.5}
+              sx={{
+                position: "absolute",
+                bottom: 12,
+                left: 12,
+                p: 0.5,
+                borderRadius: 2,
+                bgcolor: "background.paper",
+                border: "1px solid",
+                borderColor: "divider",
+                backdropFilter: "blur(6px)",
+              }}
+            >
+              <Tooltip title="Zoom out">
+                <IconButton size="small" onClick={() => zoomOut()}>
+                  <RemoveRoundedIcon fontSize="small" />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Zoom in">
+                <IconButton size="small" onClick={() => zoomIn()}>
+                  <AddRoundedIcon fontSize="small" />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Reset (or double-click)">
+                <IconButton size="small" onClick={() => resetTransform()}>
+                  <RestartAltRoundedIcon fontSize="small" />
+                </IconButton>
+              </Tooltip>
+            </Stack>
+          </>
+        )}
+      </TransformWrapper>
+
+      <Typography
+        variant="caption"
+        sx={{ display: "block", mt: 1, color: "text.secondary" }}
+      >
+        Scroll to zoom · click-drag to pan · double-click to reset.
+      </Typography>
+
       {error && (
-        <Typography variant="caption" color="warning.main" sx={{ display: "block", mt: 1 }}>
+        <Typography
+          variant="caption"
+          color="warning.main"
+          sx={{ display: "block", mt: 1 }}
+        >
           Couldn&apos;t render diagram: {error}
         </Typography>
       )}
       <Stack
         direction="row"
-        sx={{ alignItems: "center", justifyContent: "flex-end", mt: 1.5 }}
+        sx={{
+          alignItems: "center",
+          justifyContent: "flex-end",
+          mt: 1.5,
+        }}
       >
         <Box
           component="a"
@@ -135,8 +222,7 @@ export default function MermaidDiagram({ source }: { source: string }) {
   );
 }
 
-// mermaid.live's URL accepts a base64-encoded JSON state in the hash. No pako
-// dependency needed for the base64 form.
+// mermaid.live's URL accepts a base64-encoded JSON state in the hash.
 function buildPlaygroundUrl(source: string): string {
   const state = {
     code: source,

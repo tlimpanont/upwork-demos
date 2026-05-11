@@ -99,12 +99,16 @@ export default function MermaidDiagram({ source }: { source: string }) {
         maxScale={4}
         wheel={{ step: 0.15 }}
         doubleClick={{ mode: "reset" }}
-        // Two layers of "no easing":
-        //   - panning.velocityDisabled stops the gesture from picking up
-        //     speed mid-drag.
-        //   - velocityAnimation.disabled stops the post-release glide
-        //     (the bounce/snap-back the user was seeing).
-        // With both off, the SVG stops dead where the cursor stopped.
+        // The "snap back to centre on release" behaviour comes from
+        // limitToBounds (default true) — the library pulls the content
+        // back inside the visible viewport when you let go past the edge.
+        // Turning it off lets the SVG stay exactly where the cursor stops,
+        // even if part of it lies outside the stage. velocityDisabled +
+        // velocityAnimation kill the residual glide / momentum so there's
+        // no easing after release either.
+        limitToBounds={false}
+        centerZoomedOut={false}
+        centerOnInit={false}
         panning={{ velocityDisabled: true }}
         velocityAnimation={{ disabled: true }}
       >

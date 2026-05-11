@@ -55,6 +55,11 @@ export function LoginForm({
           <dt className="text-muted-foreground">password</dt>
           <dd>{demoPassword}</dd>
         </dl>
+        <p className="mt-2 text-[10px] text-muted-foreground">
+          First sign-in after a deploy can take a few seconds while the
+          serverless function spins up and the Atlas connection warms.
+          Subsequent loads are instant.
+        </p>
         <div className="mt-3 flex flex-wrap gap-2">
           <Button
             type="button"

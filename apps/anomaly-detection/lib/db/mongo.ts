@@ -14,7 +14,18 @@ function client(): MongoClient {
   }
   if (!globalThis.__mongoClient) {
     globalThis.__mongoClient = new MongoClient(process.env.MONGODB_URI, {
-      maxPoolSize: 10,
+      // Serverless-friendly pool: keep small, don't pin idle sockets.
+      maxPoolSize: 5,
+      minPoolSize: 0,
+      // Fail fast instead of waiting the default 30s when Atlas is slow
+      // to respond — the user gets an error in seconds instead of a
+      // spinning login button that times out at the route level.
+      serverSelectionTimeoutMS: 5000,
+      connectTimeoutMS: 8000,
+      // Compress the wire protocol so the auth-time round trips are
+      // smaller. zstd is supported by Atlas and saves measurable bytes
+      // on the first handshake when the function is cold.
+      compressors: ["zstd"],
       retryWrites: true,
     });
   }

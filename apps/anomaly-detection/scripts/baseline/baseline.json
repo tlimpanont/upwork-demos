@@ -1,28 +1,7 @@
 {
   "version": 1,
-  "generatedAt": "2026-05-11T12:45:58.527Z",
+  "generatedAt": "2026-05-11T16:01:06.967Z",
   "projects": [
-    {
-      "slug": "6a00e090c9e61645182fa64d",
-      "name": "Solar Farm — Module Hotspots",
-      "description": "Thermal imagery of a 12 MW PV array. Train against clean module sweeps from before commissioning, then sweep weekly inspection flights for hotspots, soiling streaks, and PID-pattern shading.",
-      "anomalyDescription": null,
-      "domain": "solar"
-    },
-    {
-      "slug": "6a00e090c9e61645182fa64e",
-      "name": "Manufacturing — Weld Bead Inspection",
-      "description": "Robot-cell stills from the post-weld station. Normal beads form the training set; flag undercut, porosity, and spatter clusters before parts move to paint.",
-      "anomalyDescription": null,
-      "domain": "manufacturing"
-    },
-    {
-      "slug": "6a00e090c9e61645182fa64f",
-      "name": "Medical — Chest X-Ray Triage",
-      "description": "Anonymized chest radiographs for clinician-in-the-loop triage. Trained on radiologist-confirmed normals; surfaces candidate regions for review rather than diagnoses.",
-      "anomalyDescription": null,
-      "domain": "medical"
-    },
     {
       "slug": "6a01c15df63486714ee3636a",
       "name": "Solar project",
@@ -32,46 +11,6 @@
     }
   ],
   "sequences": [
-    {
-      "projectSlug": "6a00e090c9e61645182fa64d",
-      "slug": "6a00e0903792cb44051dbb00",
-      "name": "Weekly inspection — 2025-09-09"
-    },
-    {
-      "projectSlug": "6a00e090c9e61645182fa64d",
-      "slug": "6a00e0903792cb44051dbaff",
-      "name": "Weekly inspection — 2025-09-02"
-    },
-    {
-      "projectSlug": "6a00e090c9e61645182fa64d",
-      "slug": "6a00e0903792cb44051dbafe",
-      "name": "Baseline sweep — 2025-08-12"
-    },
-    {
-      "projectSlug": "6a00e090c9e61645182fa64e",
-      "slug": "6a00e0903792cb44051dbb03",
-      "name": "Line B — Calibration run"
-    },
-    {
-      "projectSlug": "6a00e090c9e61645182fa64e",
-      "slug": "6a00e0903792cb44051dbb02",
-      "name": "Line A — Shift 2"
-    },
-    {
-      "projectSlug": "6a00e090c9e61645182fa64e",
-      "slug": "6a00e0903792cb44051dbb01",
-      "name": "Line A — Shift 1"
-    },
-    {
-      "projectSlug": "6a00e090c9e61645182fa64f",
-      "slug": "6a00e0903792cb44051dbb05",
-      "name": "Cohort B — 2025-Q4"
-    },
-    {
-      "projectSlug": "6a00e090c9e61645182fa64f",
-      "slug": "6a00e0903792cb44051dbb04",
-      "name": "Cohort A — 2025-Q3"
-    },
     {
       "projectSlug": "6a01c15df63486714ee3636a",
       "slug": "6a01c16df63486714ee3636b",

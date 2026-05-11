@@ -2,7 +2,10 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { formatDateTimeUTC } from "@/lib/utils/date";
+import {
+  formatDateTimeUTC,
+  formatShortDateTimeUTC,
+} from "@/lib/utils/date";
 
 type ImageSummary = {
   id: string;
@@ -140,30 +143,47 @@ export function SequenceViewer({
         ) : (
           <div
             ref={thumbStripRef}
-            className="mx-auto flex max-w-[560px] gap-1.5 overflow-x-auto px-1 pb-1"
+            className="mx-auto flex max-w-[560px] items-start gap-2 overflow-x-auto px-1 pb-1"
           >
-            {images.map((img, i) => (
-              <button
-                key={img.id}
-                type="button"
-                data-thumb={i}
-                onClick={() => setIndex(i)}
-                aria-label={`Go to image ${i + 1}`}
-                className={`relative h-12 w-12 shrink-0 overflow-hidden rounded-md border transition-colors ${
-                  i === clampedIndex
-                    ? "border-primary ring-1 ring-primary/60"
-                    : "border-border/40 hover:border-border"
-                }`}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={`/api/images/${img.id}/file`}
-                  alt=""
-                  className="h-full w-full object-cover"
-                  loading="lazy"
-                />
-              </button>
-            ))}
+            {images.map((img, i) => {
+              const active = i === clampedIndex;
+              return (
+                <button
+                  key={img.id}
+                  type="button"
+                  data-thumb={i}
+                  onClick={() => setIndex(i)}
+                  aria-label={`Go to image ${i + 1}`}
+                  title={formatDateTimeUTC(img.capturedAt)}
+                  className="flex shrink-0 flex-col items-center gap-1"
+                >
+                  <span
+                    className={`relative block h-12 w-12 overflow-hidden rounded-md border transition-colors ${
+                      active
+                        ? "border-primary ring-1 ring-primary/60"
+                        : "border-border/40 hover:border-border"
+                    }`}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={`/api/images/${img.id}/file`}
+                      alt=""
+                      className="h-full w-full object-cover"
+                      loading="lazy"
+                    />
+                  </span>
+                  <span
+                    className={`whitespace-nowrap text-[9px] tabular-nums leading-none ${
+                      active
+                        ? "font-medium text-foreground"
+                        : "text-muted-foreground"
+                    }`}
+                  >
+                    {formatShortDateTimeUTC(img.capturedAt)}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         )
       ) : null}

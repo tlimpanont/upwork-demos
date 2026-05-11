@@ -141,7 +141,16 @@ export default function MermaidDiagram({ source }: { source: string }) {
                   justifyContent: "center",
                 }}
               >
-                <Box ref={ref} />
+                {/* Outer gutter around the SVG so the diagram's edges
+                    aren't flush with the container border. Lets the user
+                    pan a little past the SVG's edge and still see its
+                    outer nodes clearly. */}
+                <Box
+                  ref={ref}
+                  sx={{
+                    p: { xs: 3, sm: 4, md: 5 },
+                  }}
+                />
               </TransformComponent>
             </Box>
 

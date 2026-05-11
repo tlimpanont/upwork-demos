@@ -12,14 +12,13 @@ items:
     answer: >-
       EU-region deployments by default (Hetzner, AWS eu-central, Mistral)
       with GDPR-aware architecture. Customer data is stored in your tenant
-      or your cloud account, not ours. Standard practices include
-      role-based access, encrypted secrets, audit logging on every
-      mutation, and signed integration adapters. Mutual NDA and
-      work-for-hire IP assignment are signed before any code or sensitive
-      detail is shared.
+      or your cloud account, never mine. Standard practices include
+      role-based access, encrypted secrets, audit logging on every mutation,
+      and signed integration adapters. Mutual NDA and work-for-hire IP
+      assignment are signed before any code or sensitive detail is shared.
   - question: How do you integrate with our existing systems?
     answer: >-
-      We integrate with ERPs (SAP, Microsoft Dynamics, Exact Online), CRMs
+      I integrate with ERPs (SAP, Microsoft Dynamics, Exact Online), CRMs
       (HubSpot, Salesforce), data warehouses, identity providers, and any
       system that exposes a REST, GraphQL, or webhook surface. Each
       integration is built behind a typed adapter with retry, idempotency,
@@ -29,22 +28,31 @@ items:
     answer: >-
       You do. Work happens in your GitHub organisation from day one, under
       a work-for-hire IP assignment. You own the source, the database
-      schemas, the prompts, and any model artefacts produced. No
-      black-box deliveries, no vendor lock-in baked into the architecture
-      — another engineering team can take over cleanly at any point.
+      schemas, the prompts, and any model artefacts produced. No black-box
+      deliveries, no vendor lock-in baked into the architecture — another
+      engineering team can take over cleanly at any point.
+  - question: You're solo — what about continuity if you're unavailable?
+    answer: >-
+      Real concern, addressed by design rather than by hand-wave. Every
+      project ships with clean code, written architecture docs, environment
+      runbooks, and a README that lets a senior engineer pick it up the
+      same day. For multi-month engagements I introduce a backup engineer
+      from my trusted network at kick-off, so if something happens you're
+      never stranded with a half-built system. Hand-off after launch is
+      part of the deliverable, not an afterthought.
   - question: What does post-launch support and monitoring look like?
     answer: >-
       Each platform ships with monitoring, alerting, and a runbook your
-      team can operate. Post-launch support is offered either as a
-      monthly retainer with a response SLA, or as a clean handover to
-      your in-house team after a knowledge-transfer week. Maintenance
-      includes bug fixes, dependency upgrades, model evaluation, and
-      small feature work scoped per cycle.
+      team can operate. Post-launch support is offered either as a monthly
+      retainer with a response SLA, or as a clean handover to your
+      in-house team after a knowledge-transfer week. Maintenance includes
+      bug fixes, dependency upgrades, model evaluation, and small feature
+      work scoped per cycle.
   - question: How long does a typical project take?
     answer: >-
       A production-ready MVP (custom SaaS, AI automation, or computer
       vision platform) typically ships in 6 to 12 weeks depending on
-      integrations and compliance scope. AI features for existing
-      products land in 3 to 4 weeks. Architecture reviews, audits, and
-      90-day technical roadmaps are produced in a single week. Every
-      phase ends with a written artefact you keep.
+      integrations and compliance scope. AI features for existing products
+      land in 3 to 4 weeks. Architecture reviews, audits, and 90-day
+      technical roadmaps are produced in a single week. Every phase ends
+      with a written artefact you keep.

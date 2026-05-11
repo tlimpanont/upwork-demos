@@ -8,7 +8,7 @@ const SITE_NAME = "Theuy Limpanont";
 const SITE_TITLE =
   "Enterprise AI and Custom Software Solutions · Theuy Limpanont";
 const SITE_DESCRIPTION =
-  "We design and develop AI-powered platforms, automation systems, and scalable SaaS applications that deliver measurable business results. Enterprise AI, computer vision, predictive analytics, ERP integration, and custom SaaS development.";
+  "Senior engineering partner designing and developing AI-powered platforms, automation systems, and scalable SaaS applications that deliver measurable business results. Enterprise AI, computer vision, predictive analytics, ERP integration, and custom SaaS development.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

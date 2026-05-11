@@ -1,12 +1,13 @@
 overline: Business solutions
-heading: What we build for enterprise teams
+heading: What I build for enterprise teams
 intro: >-
   Production-ready systems that automate operations, surface decisions, and
-  scale with the organization.
+  scale with the organization. Direct contact with the architect — no PMs in
+  the middle, no junior on the keyboard.
 items:
   - title: AI Automation Systems
     body: >-
-      Automate invoice processing, document handling, customer support, and
+      I automate invoice processing, document handling, customer support, and
       operational workflows so your team focuses on judgement, not data entry.
     bullets:
       - Structured extraction from PDFs and forms
@@ -16,8 +17,8 @@ items:
     icon: automation
   - title: Custom SaaS Platforms
     body: >-
-      Build secure, scalable multi-tenant platforms, portals, and subscription
-      applications — from auth and billing to dashboards.
+      I build secure, scalable multi-tenant platforms, portals, and
+      subscription applications — from auth and billing to dashboards.
     bullets:
       - Multi-tenant data with audit-grade isolation
       - Stripe billing, RBAC, workspace admin
@@ -26,7 +27,7 @@ items:
     icon: layers
   - title: Computer Vision Applications
     body: >-
-      Develop AI solutions for quality inspection, anomaly detection, and
+      I develop AI solutions for quality inspection, anomaly detection, and
       visual monitoring across manufacturing, energy, and healthcare imagery.
     bullets:
       - Open-vocabulary anomaly localization
@@ -46,8 +47,8 @@ items:
     icon: analytics
   - title: ERP and API Integrations
     body: >-
-      Connect SAP, Microsoft Dynamics, Exact Online, HubSpot, Salesforce, and
-      custom systems with reliable, monitored integrations.
+      I connect SAP, Microsoft Dynamics, Exact Online, HubSpot, Salesforce,
+      and custom systems with reliable, monitored integrations.
     bullets:
       - Two-way sync with idempotent retries
       - Schema-typed adapters per system

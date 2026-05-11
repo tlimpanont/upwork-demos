@@ -422,11 +422,11 @@ export default config({
           {
             label: fields.text({
               label: "Label",
-              defaultValue: "Discuss Your Project",
+              defaultValue: "Message on LinkedIn",
             }),
             href: fields.text({
               label: "Href",
-              defaultValue: "mailto:theuy.limpanont@gmail.com",
+              defaultValue: "https://www.linkedin.com/in/theuylimpanont/",
             }),
           },
           { label: "Secondary CTA" },

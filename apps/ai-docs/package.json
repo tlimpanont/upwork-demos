@@ -2,7 +2,7 @@
   "name": "ai-docs",
   "version": "0.1.0",
   "private": true,
-  "description": "Upload PDF invoices and business documents — AI extracts structured data (vendor, amounts, tax, line items) and indexes them for hybrid semantic + exact-numeric search.",
+  "description": "Upload PDF invoices and business documents \u2014 AI extracts structured data (vendor, amounts, tax, line items) and indexes them for hybrid semantic + exact-numeric search.",
   "keywords": [
     "nextjs",
     "ai",
@@ -23,7 +23,7 @@
     "typescript",
     "tailwindcss"
   ],
-  "author": "theuy.limpanont@gmail.com",
+  "author": "Theuy Limpanont",
   "license": "MIT",
   "scripts": {
     "dev": "next dev --turbopack -p 3002",

@@ -5,8 +5,7 @@
   "description": "AI-powered workflow automation demo: OpenAI classifies, deterministic rules route, dashboard shows the full pipeline.",
   "license": "MIT",
   "author": {
-    "name": "Theuy Limpanont",
-    "email": "theuy.limpanont@gmail.com"
+    "name": "Theuy Limpanont"
   },
   "engines": {
     "node": ">=20"

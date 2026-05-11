@@ -2,11 +2,10 @@
   "name": "saas-starter",
   "version": "0.1.0",
   "private": true,
-  "description": "Production-ready multi-tenant SaaS starter — auth, organizations, role-based access, Stripe billing, and an admin dashboard. Built with Next.js, MUI, NextAuth, Neon Postgres, and Stripe.",
+  "description": "Production-ready multi-tenant SaaS starter \u2014 auth, organizations, role-based access, Stripe billing, and an admin dashboard. Built with Next.js, MUI, NextAuth, Neon Postgres, and Stripe.",
   "license": "MIT",
   "author": {
-    "name": "Theuy Limpanont",
-    "email": "theuy.limpanont@gmail.com"
+    "name": "Theuy Limpanont"
   },
   "keywords": [
     "saas",

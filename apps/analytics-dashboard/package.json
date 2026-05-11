@@ -5,8 +5,7 @@
   "description": "AI-powered SaaS analytics demo: synthetic data + GraphQL + prediction engine + AI insights.",
   "license": "MIT",
   "author": {
-    "name": "Theuy Limpanont",
-    "email": "theuy.limpanont@gmail.com"
+    "name": "Theuy Limpanont"
   },
   "engines": {
     "node": ">=20"

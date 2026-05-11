@@ -5,8 +5,7 @@
   "description": "AI time-series image anomaly detection: upload chronological image sequences, annotate normal/anomalous regions, train an embedding-based detector on MongoDB Atlas Vector Search, and surface detections with heatmaps and bounding boxes.",
   "license": "MIT",
   "author": {
-    "name": "Theuy Limpanont",
-    "email": "theuy.limpanont@gmail.com"
+    "name": "Theuy Limpanont"
   },
   "engines": {
     "node": ">=20"

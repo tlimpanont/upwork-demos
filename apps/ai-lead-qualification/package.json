@@ -5,8 +5,7 @@
   "description": "AI-powered lead qualification + CRM automation demo: capture leads, score with OpenAI, fan out to mock HubSpot/Salesforce/Slack/email integrations, surface everything on a SaaS dashboard.",
   "license": "MIT",
   "author": {
-    "name": "Theuy Limpanont",
-    "email": "theuy.limpanont@gmail.com"
+    "name": "Theuy Limpanont"
   },
   "engines": {
     "node": ">=20"

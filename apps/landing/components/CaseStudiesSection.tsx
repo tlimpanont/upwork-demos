@@ -23,7 +23,7 @@ export default function CaseStudiesSection({ studies }: { studies: readonly Stud
   return (
     <Box
       component="section"
-      id="case-studies"
+      id="portfolio"
       sx={{
         py: { xs: 8, md: 12 },
         borderTop: "1px solid",
@@ -39,17 +39,17 @@ export default function CaseStudiesSection({ studies }: { studies: readonly Stud
             variant="overline"
             sx={{ color: "primary.light", letterSpacing: "0.18em", fontWeight: 700 }}
           >
-            Selected work
+            Featured portfolio projects
           </Typography>
           <Typography variant="h2" sx={{ fontSize: { xs: "2rem", md: "2.75rem" } }}>
-            What I've built
+            Flagship platforms in production
           </Typography>
           <Typography
             color="text.secondary"
             sx={{ maxWidth: 640, fontSize: { xs: "1rem", md: "1.1rem" } }}
           >
-            Detailed write-ups of the architectural choices, tradeoffs, and edge cases
-            behind real systems.
+            Real systems shipped end-to-end — the business gap each one closes, the
+            architecture behind it, and the tradeoffs that survived production.
           </Typography>
         </Stack>
 

@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
+import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 
 type HeroContent = {
   chip: string;
@@ -15,8 +16,7 @@ type HeroContent = {
   subheading: string;
   primaryCta: { label: string; href: string };
   secondaryCta: { label: string; href: string };
-  techLabels: readonly string[];
-  euRegionNote: string;
+  supportingBullets: readonly string[];
 };
 
 export default function HeroSection({ content }: { content: HeroContent }) {
@@ -81,13 +81,57 @@ export default function HeroSection({ content }: { content: HeroContent }) {
               variant="h6"
               color="text.secondary"
               sx={{
-                maxWidth: 560,
+                maxWidth: 620,
                 fontWeight: 400,
                 fontSize: { xs: "1.05rem", md: "1.15rem" },
               }}
             >
               {content.subheading}
             </Typography>
+
+            {content.supportingBullets.length > 0 && (
+              <Stack
+                component="ul"
+                spacing={1}
+                sx={{
+                  m: 0,
+                  p: 0,
+                  listStyle: "none",
+                  alignItems: { xs: "center", md: "flex-start" },
+                  maxWidth: 620,
+                  width: "100%",
+                  pt: 0.5,
+                }}
+              >
+                {content.supportingBullets.map((b) => (
+                  <Stack
+                    key={b}
+                    component="li"
+                    direction="row"
+                    spacing={1.25}
+                    sx={{
+                      alignItems: "flex-start",
+                      textAlign: { xs: "center", md: "left" },
+                    }}
+                  >
+                    <CheckCircleRoundedIcon
+                      sx={{
+                        color: "primary.light",
+                        fontSize: 20,
+                        mt: "2px",
+                        flexShrink: 0,
+                      }}
+                    />
+                    <Typography
+                      sx={{ color: "text.primary", fontSize: "0.98rem" }}
+                    >
+                      {b}
+                    </Typography>
+                  </Stack>
+                ))}
+              </Stack>
+            )}
+
             <Stack
               direction={{ xs: "column", sm: "row" }}
               spacing={2}
@@ -97,7 +141,7 @@ export default function HeroSection({ content }: { content: HeroContent }) {
                 size="large"
                 variant="contained"
                 href={content.primaryCta.href}
-                endIcon={<ArrowForwardRoundedIcon />}
+                startIcon={<CalendarMonthRoundedIcon />}
               >
                 {content.primaryCta.label}
               </Button>
@@ -105,7 +149,7 @@ export default function HeroSection({ content }: { content: HeroContent }) {
                 size="large"
                 variant="outlined"
                 href={content.secondaryCta.href}
-                startIcon={<CalendarMonthRoundedIcon />}
+                endIcon={<ArrowForwardRoundedIcon />}
                 sx={{
                   borderColor: "rgba(255, 255, 255, 0.32)",
                   color: "text.primary",
@@ -151,43 +195,6 @@ export default function HeroSection({ content }: { content: HeroContent }) {
             />
           </Box>
         </Stack>
-
-        <Stack
-          direction="row"
-          spacing={4}
-          sx={{
-            justifyContent: { xs: "center", md: "flex-start" },
-            flexWrap: "wrap",
-            pt: { xs: 5, md: 7 },
-          }}
-        >
-          {content.techLabels.map((label) => (
-            <Typography
-              key={label}
-              variant="caption"
-              sx={{
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                color: "text.secondary",
-                fontWeight: 600,
-              }}
-            >
-              {label}
-            </Typography>
-          ))}
-        </Stack>
-        <Typography
-          variant="caption"
-          sx={{
-            display: "block",
-            textAlign: { xs: "center", md: "left" },
-            color: "text.secondary",
-            opacity: 0.8,
-            pt: 1.5,
-          }}
-        >
-          {content.euRegionNote}
-        </Typography>
       </Container>
     </Box>
   );

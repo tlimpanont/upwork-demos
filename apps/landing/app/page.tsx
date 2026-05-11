@@ -7,19 +7,30 @@ import HeroSection from "@/components/HeroSection";
 import ServicesSection from "@/components/ServicesSection";
 import DemoShowcase from "@/components/DemoShowcase";
 import CaseStudiesSection from "@/components/CaseStudiesSection";
+import IndustriesSection from "@/components/IndustriesSection";
+import OutcomesSection from "@/components/OutcomesSection";
 import ArchitectureSection from "@/components/ArchitectureSection";
+import ProcessSection from "@/components/ProcessSection";
+import AboutSection from "@/components/AboutSection";
 import TrustSection from "@/components/TrustSection";
 import FAQSection from "@/components/FAQSection";
 import CTASection from "@/components/CTASection";
 import SiteFooter from "@/components/SiteFooter";
 
 export default async function HomePage() {
-  const reader = createReader(path.resolve(process.cwd(), "../.."), keystaticConfig);
+  const reader = createReader(
+    path.resolve(process.cwd(), "../.."),
+    keystaticConfig,
+  );
   const [
     hero,
     services,
     demoShowcase,
+    industries,
+    outcomes,
     architecture,
+    processContent,
+    about,
     faq,
     trust,
     cta,
@@ -28,7 +39,11 @@ export default async function HomePage() {
     reader.singletons.hero.readOrThrow(),
     reader.singletons.services.readOrThrow(),
     reader.singletons.demoShowcase.readOrThrow(),
+    reader.singletons.industries.readOrThrow(),
+    reader.singletons.outcomes.readOrThrow(),
     reader.singletons.architecture.readOrThrow(),
+    reader.singletons.process.readOrThrow(),
+    reader.singletons.about.readOrThrow(),
     reader.singletons.faq.readOrThrow(),
     reader.singletons.trust.readOrThrow(),
     reader.singletons.cta.readOrThrow(),
@@ -37,11 +52,15 @@ export default async function HomePage() {
 
   const featuredStudies = [...caseStudyEntries]
     .sort((a, b) => {
-      const aTime = a.entry.publishedAt ? new Date(a.entry.publishedAt).getTime() : 0;
-      const bTime = b.entry.publishedAt ? new Date(b.entry.publishedAt).getTime() : 0;
+      const aTime = a.entry.publishedAt
+        ? new Date(a.entry.publishedAt).getTime()
+        : 0;
+      const bTime = b.entry.publishedAt
+        ? new Date(b.entry.publishedAt).getTime()
+        : 0;
       return bTime - aTime;
     })
-    .slice(0, 3)
+    .slice(0, 6)
     .map(({ slug, entry }) => ({
       slug,
       title: entry.title,
@@ -59,7 +78,11 @@ export default async function HomePage() {
         <ServicesSection content={services} />
         <DemoShowcase content={demoShowcase} />
         <CaseStudiesSection studies={featuredStudies} />
+        <IndustriesSection content={industries} />
+        <OutcomesSection content={outcomes} />
         <ArchitectureSection content={architecture} />
+        <ProcessSection content={processContent} />
+        <AboutSection content={about} />
         <TrustSection content={trust} />
         <FAQSection content={faq} />
         <CTASection content={cta} />

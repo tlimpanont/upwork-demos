@@ -1,0 +1,36 @@
+overline: Business outcomes
+heading: Measurable results clients can expect
+intro: >-
+  Outcomes we plan toward, contractually scope against, and measure once the
+  platform is live.
+items:
+  - stat: 80%
+    title: Reduce manual processing time
+    body: >-
+      Document, invoice, and reporting work cut by up to 80% through structured
+      extraction and workflow automation.
+    icon: time
+  - stat: 95%
+    title: Improve detection accuracy
+    body: >-
+      Computer vision and predictive models that beat human eyeballing on
+      anomaly recall while staying explainable to reviewers.
+    icon: quality
+  - stat: Real-time
+    title: Operational visibility
+    body: >-
+      Executive dashboards with live KPIs, forecasting, and drill-down so
+      decisions stop waiting for the monthly report.
+    icon: visibility
+  - stat: Audit-ready
+    title: Accelerate compliance and reporting
+    body: >-
+      ESG, CSRD, financial, and operational reports produced from primary
+      data with the trail your auditors actually want to see.
+    icon: compliance
+  - stat: 10×
+    title: Scalable systems ready for growth
+    body: >-
+      Multi-tenant, monitored, deploy-anywhere architectures that survive a
+      10× customer or data volume without a rewrite.
+    icon: scale

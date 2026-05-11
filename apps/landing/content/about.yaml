@@ -1,0 +1,12 @@
+overline: About
+heading: A senior engineering partner, not an agency layer
+body: >-
+  I help organizations design and build advanced AI and software solutions
+  that automate operations, improve decision-making, and create scalable
+  digital products. Direct contact with the architect — no PMs in the
+  middle, no junior on the keyboard.
+bullets:
+  - 10+ years shipping enterprise software end-to-end
+  - Production AI systems in invoice processing, computer vision, predictive maintenance
+  - EU-region deployments available (Hetzner, AWS eu-central, Mistral)
+  - Hand-off documentation from day one — no vendor lock-in baked into the architecture

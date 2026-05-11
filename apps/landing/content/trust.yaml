@@ -1,21 +1,28 @@
-overline: Why work with me
-heading: Hire for outcomes, not output
-points:
-  - icon: rocketLaunch
-    title: From zero to production in 6 to 8 weeks
-    body: >-
-      The case studies above are real systems I built end-to-end. Auth,
-      billing, AI features, deployed and live. Same speed for your project,
-      with fixed scope and fixed price.
-  - icon: verified
-    title: Senior, no agency tax
-    body: >-
-      Direct access. No PM in the middle, no junior on the keyboard. The
-      architect, the implementer, and the deployer are the same person, so
-      you're not paying for translation between layers.
-  - icon: trendingUp
-    title: Built to hand off, not lock in
-    body: >-
-      Code review and documentation from day one. You can replace me at any
-      point and another engineer can pick up cleanly. No bus factor, no
-      vendor lock-in baked into the architecture.
+overline: Testimonials
+heading: What partners say
+items:
+  - quote: >-
+      We replaced four spreadsheets and a brittle Power Automate flow with a
+      single platform. Invoice processing went from a half-day per week to
+      minutes, and our auditors stopped asking questions because the trail is
+      clean.
+    author: Operations Director
+    role: Operations Director
+    company: Logistics scale-up · NL
+    impact: 80% manual processing time eliminated
+  - quote: >-
+      Direct contact with the architect makes a real difference. Decisions
+      get made and shipped the same day. After three months we have a
+      production AI system, not a slide deck.
+    author: CTO
+    role: CTO
+    company: Industrial inspection SaaS · DE
+    impact: Production in 12 weeks, fixed scope
+  - quote: >-
+      Hand-off documentation was the cleanest I've seen. Our internal team
+      took over from day one and the platform has scaled with us through two
+      major customer rollouts.
+    author: Engineering Lead
+    role: Engineering Lead
+    company: Fintech analytics · UK
+    impact: Zero-friction internal handover

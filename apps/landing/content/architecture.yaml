@@ -1,26 +1,46 @@
-overline: Architecture
-heading: Boring stack, modern tools
+overline: Technology stack
+heading: Proven tools, deployed at scale
 intro: >-
-  One coherent stack across every demo. Battle-tested infrastructure that
-  scales to production without a rewrite.
-layers:
-  - name: Vercel
-    detail: Serverless edge runtime
+  Battle-tested infrastructure across frontend, backend, AI, data, cloud, and
+  integration layers. Every choice picked for production reliability rather
+  than novelty.
+groups:
+  - name: Frontend
+    icon: frontend
+    items:
+      - Next.js
+      - React
+      - TypeScript
+      - Tailwind CSS
+  - name: Backend
+    icon: backend
+    items:
+      - Node.js
+      - Python
+      - Serverless architecture
+  - name: AI
+    icon: ai
+    items:
+      - OpenAI
+      - TensorFlow
+      - ONNX Runtime
+      - Computer Vision
+  - name: Data
+    icon: data
+    items:
+      - MongoDB
+      - PostgreSQL
+  - name: Cloud
     icon: cloud
-    accent: "#FFFFFF"
-  - name: OpenAI
-    detail: GPT-4o + embeddings
-    icon: psychology
-    accent: "#34D399"
-  - name: Pinecone
-    detail: Vector search
-    icon: hub
-    accent: "#A5B4FC"
-  - name: Neon Postgres
-    detail: Serverless SQL
-    icon: storage
-    accent: "#7DD3FC"
-  - name: Vercel Blob
-    detail: Object storage
-    icon: inventory
-    accent: "#FCD34D"
+    items:
+      - Vercel
+      - AWS
+      - Azure
+  - name: Integrations
+    icon: integrations
+    items:
+      - SAP
+      - Microsoft Dynamics
+      - Exact Online
+      - HubSpot
+      - Salesforce

@@ -1,0 +1,26 @@
+overline: Our process
+heading: From discovery to optimization
+intro: >-
+  A predictable engagement pattern from kickoff to long-term operations. Every
+  phase ends with a written artefact you keep.
+steps:
+  - title: Discovery
+    body: >-
+      Define objectives, requirements, and success metrics. You leave the call
+      with a one-page assessment.
+  - title: Design and Architecture
+    body: >-
+      Create scalable technical and product architecture, signed off before a
+      line of production code is written.
+  - title: Development
+    body: >-
+      Build the platform using modern technologies and best practices. Weekly
+      demos on a working URL, not slide decks.
+  - title: Deployment
+    body: >-
+      Deploy securely to cloud infrastructure with monitoring, alerting, and
+      a runbook your team can operate.
+  - title: Optimization
+    body: >-
+      Monitor performance, capture outcomes against the metrics from
+      Discovery, and continuously improve.

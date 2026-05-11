@@ -1,42 +1,66 @@
-overline: How I help
-heading: From idea to production-ready
+overline: Business solutions
+heading: What we build for enterprise teams
 intro: >-
-  Three things I'm hired for, plus the patterns I bring along so you don't
-  pay for me to reinvent the wheel each engagement.
+  Production-ready systems that automate operations, surface decisions, and
+  scale with the organization.
 items:
-  - title: AI-powered SaaS MVP
-    price: From €30,000
-    duration: "6–8 weeks · fixed scope, fixed price"
+  - title: AI Automation Systems
     body: >-
-      Your product, live and earning revenue. Auth, Stripe billing,
-      multi-tenant data, and your first AI feature, all deployed.
+      Automate invoice processing, document handling, customer support, and
+      operational workflows so your team focuses on judgement, not data entry.
     bullets:
-      - "Auth, RBAC, Stripe Checkout + webhooks"
-      - Multi-tenant Postgres with audit-grade isolation
-      - One AI feature integrated end-to-end
-      - Deployed on Vercel with monitoring
+      - Structured extraction from PDFs and forms
+      - Document classification and routing
+      - Customer-support copilots with grounded answers
+      - End-to-end workflow orchestration
+    icon: automation
+  - title: Custom SaaS Platforms
+    body: >-
+      Build secure, scalable multi-tenant platforms, portals, and subscription
+      applications — from auth and billing to dashboards.
+    bullets:
+      - Multi-tenant data with audit-grade isolation
+      - Stripe billing, RBAC, workspace admin
+      - Customer-facing dashboards and portals
+      - Cloud deployment with monitoring
     icon: layers
-  - title: AI feature for an existing SaaS
-    price: From €15,000
-    duration: "3–4 weeks · drop-in for live products"
+  - title: Computer Vision Applications
     body: >-
-      Add a production-grade AI capability (RAG, structured extraction, or
-      an agent) to your existing app, wired into your auth and billing.
+      Develop AI solutions for quality inspection, anomaly detection, and
+      visual monitoring across manufacturing, energy, and healthcare imagery.
     bullets:
-      - RAG with grounded citations
-      - Schema-typed extraction (Zod)
-      - Hybrid semantic + numeric search
-      - Eval harness + cost monitoring
-    icon: psychology
-  - title: AI audit & roadmap
-    price: "€125 / hour · from €4,000"
-    duration: "1 week · diagnostic + 90-day plan"
+      - Open-vocabulary anomaly localization
+      - Annotation pipelines with human-in-the-loop
+      - Heatmap + bounding-box review UIs
+      - Edge or cloud deployment paths
+    icon: vision
+  - title: Data Analytics Dashboards
     body: >-
-      Senior architectural review of your current system or AI strategy. You
-      walk away with a written plan you can hand to any team.
+      Executive dashboards for KPI tracking, forecasting, and operational
+      insights — backed by your existing data warehouse or operational stores.
     bullets:
-      - Code & architecture review
-      - AI cost / quality / latency analysis
-      - 90-day technical roadmap
-      - "Optional: implementation handover"
-    icon: accountTree
+      - Real-time KPIs with drill-down
+      - Forecasting + anomaly callouts
+      - Role-based access and export
+      - GraphQL or REST APIs for downstream use
+    icon: analytics
+  - title: ERP and API Integrations
+    body: >-
+      Connect SAP, Microsoft Dynamics, Exact Online, HubSpot, Salesforce, and
+      custom systems with reliable, monitored integrations.
+    bullets:
+      - Two-way sync with idempotent retries
+      - Schema-typed adapters per system
+      - Audit log of every payload
+      - Webhook + scheduled-job orchestration
+    icon: integration
+  - title: Predictive AI Systems
+    body: >-
+      Predictive maintenance, fraud detection, demand forecasting, and risk
+      models — trained on your data and deployed with monitoring.
+    bullets:
+      - Feature pipelines from sensor / transaction data
+      - Model training + evaluation harness
+      - Drift detection and retraining schedule
+      - Real-time inference behind your API
+    icon: predictive

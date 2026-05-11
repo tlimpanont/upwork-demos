@@ -1,0 +1,27 @@
+overline: Industries we serve
+heading: Built for regulated, complex operations
+intro: >-
+  Sectors where data volume, compliance burden, or operational complexity
+  demand more than a spreadsheet or off-the-shelf SaaS.
+items:
+  - name: Manufacturing
+    icon: factory
+    note: Quality inspection, predictive maintenance, MES integration.
+  - name: Logistics and Ports
+    icon: logistics
+    note: Document automation, ETA forecasting, terminal operations.
+  - name: Energy and Utilities
+    icon: energy
+    note: Solar / grid inspection, demand forecasting, asset monitoring.
+  - name: Financial Services
+    icon: finance
+    note: Fraud detection, compliance reporting, risk models.
+  - name: Healthcare
+    icon: healthcare
+    note: Imaging triage, clinical workflow automation, HIPAA-ready stacks.
+  - name: Agriculture and Food
+    icon: agriculture
+    note: Crop monitoring, yield forecasting, supply-chain traceability.
+  - name: Professional Services
+    icon: professional
+    note: Document AI, billing automation, client portals.

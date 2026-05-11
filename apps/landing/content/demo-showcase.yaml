@@ -1,10 +1,6 @@
-overline: Live capabilities
-heading: See the stack in production
+overline: Featured projects
+heading: Flagship platforms shipping today
 intro: >-
-  Real working systems built on the same patterns I ship to clients:
-  customer-support AI, document processing, multi-tenant SaaS, an AI
-  analytics dashboard with a forecasting engine and GraphQL API,
-  AI-assisted incident triage with Slack delivery, and an AI lead
-  qualifier that scores inbound and fans out to your CRM in seconds.
-  Each one runs on the same Vercel + Postgres + AI stack I use in
-  production.
+  Real production systems built for AI automation, computer vision,
+  sustainability reporting, predictive maintenance, and multi-tenant SaaS
+  analytics. Each one closes a measurable business gap, not a demo loop.

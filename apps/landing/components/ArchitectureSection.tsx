@@ -1,32 +1,34 @@
+import type { SvgIconComponent } from "@mui/icons-material";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import CloudRoundedIcon from "@mui/icons-material/CloudRounded";
+import Chip from "@mui/material/Chip";
+import CodeRoundedIcon from "@mui/icons-material/CodeRounded";
+import TerminalRoundedIcon from "@mui/icons-material/TerminalRounded";
 import PsychologyRoundedIcon from "@mui/icons-material/PsychologyRounded";
-import HubRoundedIcon from "@mui/icons-material/HubRounded";
 import StorageRoundedIcon from "@mui/icons-material/StorageRounded";
-import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
-import EastRoundedIcon from "@mui/icons-material/EastRounded";
+import CloudRoundedIcon from "@mui/icons-material/CloudRounded";
+import HubRoundedIcon from "@mui/icons-material/HubRounded";
 
-const ICONS: Record<string, React.ElementType> = {
+const ICONS: Record<string, SvgIconComponent> = {
+  frontend: CodeRoundedIcon,
+  backend: TerminalRoundedIcon,
+  ai: PsychologyRoundedIcon,
+  data: StorageRoundedIcon,
   cloud: CloudRoundedIcon,
-  psychology: PsychologyRoundedIcon,
-  hub: HubRoundedIcon,
-  storage: StorageRoundedIcon,
-  inventory: InventoryRoundedIcon,
+  integrations: HubRoundedIcon,
 };
 
 type ArchitectureContent = {
   overline: string;
   heading: string;
   intro: string;
-  layers: readonly {
+  groups: readonly {
     name: string;
-    detail: string;
+    items: readonly string[];
     icon: string;
-    accent: string;
   }[];
 };
 
@@ -38,7 +40,7 @@ export default function ArchitectureSection({
   return (
     <Box
       component="section"
-      id="architecture"
+      id="technology"
       sx={{
         py: { xs: 8, md: 12 },
         bgcolor: "rgba(255, 255, 255, 0.02)",
@@ -49,15 +51,26 @@ export default function ArchitectureSection({
       <Container>
         <Stack
           spacing={1.5}
-          sx={{ alignItems: "center", textAlign: "center", mb: { xs: 5, md: 7 } }}
+          sx={{
+            alignItems: "center",
+            textAlign: "center",
+            mb: { xs: 5, md: 7 },
+          }}
         >
           <Typography
             variant="overline"
-            sx={{ color: "primary.light", letterSpacing: "0.18em", fontWeight: 700 }}
+            sx={{
+              color: "primary.light",
+              letterSpacing: "0.18em",
+              fontWeight: 700,
+            }}
           >
             {content.overline}
           </Typography>
-          <Typography variant="h2" sx={{ fontSize: { xs: "2rem", md: "2.75rem" } }}>
+          <Typography
+            variant="h2"
+            sx={{ fontSize: { xs: "2rem", md: "2.75rem" } }}
+          >
             {content.heading}
           </Typography>
           <Typography
@@ -68,73 +81,80 @@ export default function ArchitectureSection({
           </Typography>
         </Stack>
 
-        <Stack
-          direction={{ xs: "column", md: "row" }}
-          spacing={{ xs: 2, md: 1.5 }}
-          sx={{ alignItems: "stretch", justifyContent: "center" }}
+        <Box
+          sx={{
+            display: "grid",
+            gap: { xs: 2.5, md: 3 },
+            gridTemplateColumns: {
+              xs: "1fr",
+              sm: "repeat(2, 1fr)",
+              md: "repeat(3, 1fr)",
+            },
+          }}
         >
-          {content.layers.map((layer, idx) => {
-            const Icon = ICONS[layer.icon] ?? CloudRoundedIcon;
+          {content.groups.map((g) => {
+            const Icon = ICONS[g.icon] ?? CodeRoundedIcon;
             return (
-              <Stack
-                key={layer.name}
-                direction={{ xs: "row", md: "row" }}
-                spacing={{ xs: 1.5, md: 1 }}
-                sx={{ alignItems: "center", flex: 1 }}
+              <Paper
+                key={g.name}
+                variant="outlined"
+                sx={{
+                  p: { xs: 2.5, md: 3 },
+                  borderRadius: 3,
+                  bgcolor: "background.paper",
+                }}
               >
-                <Paper
-                  variant="outlined"
-                  sx={{
-                    flex: 1,
-                    p: { xs: 2.5, md: 3 },
-                    borderRadius: 3,
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    textAlign: "center",
-                    gap: 1,
-                    bgcolor: "background.paper",
-                    transition: "transform 180ms ease, border-color 180ms ease",
-                    "&:hover": {
-                      transform: "translateY(-2px)",
-                      borderColor: layer.accent,
-                    },
-                  }}
-                >
-                  <Box
-                    sx={{
-                      width: 48,
-                      height: 48,
-                      borderRadius: 2,
-                      display: "grid",
-                      placeItems: "center",
-                      bgcolor: `${layer.accent}1F`,
-                      color: layer.accent,
-                      mb: 0.5,
-                    }}
+                <Stack spacing={2}>
+                  <Stack
+                    direction="row"
+                    spacing={1.5}
+                    sx={{ alignItems: "center" }}
                   >
-                    <Icon />
-                  </Box>
-                  <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-                    {layer.name}
-                  </Typography>
-                  <Typography variant="caption" color="text.secondary">
-                    {layer.detail}
-                  </Typography>
-                </Paper>
-                {idx < content.layers.length - 1 && (
-                  <EastRoundedIcon
-                    sx={{
-                      color: "text.secondary",
-                      opacity: 0.5,
-                      display: { xs: "none", md: "block" },
-                    }}
-                  />
-                )}
-              </Stack>
+                    <Box
+                      sx={{
+                        width: 36,
+                        height: 36,
+                        borderRadius: 2,
+                        bgcolor: "rgba(165,180,252,0.14)",
+                        color: "primary.light",
+                        display: "grid",
+                        placeItems: "center",
+                      }}
+                    >
+                      <Icon fontSize="small" />
+                    </Box>
+                    <Typography
+                      variant="subtitle1"
+                      sx={{
+                        fontWeight: 700,
+                        letterSpacing: "0.04em",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      {g.name}
+                    </Typography>
+                  </Stack>
+                  <Stack direction="row" spacing={1} sx={{ flexWrap: "wrap", gap: 1 }}>
+                    {g.items.map((item) => (
+                      <Chip
+                        key={item}
+                        label={item}
+                        size="small"
+                        sx={{
+                          bgcolor: "rgba(255,255,255,0.04)",
+                          borderColor: "divider",
+                          border: "1px solid",
+                          color: "text.primary",
+                          fontWeight: 500,
+                        }}
+                      />
+                    ))}
+                  </Stack>
+                </Stack>
+              </Paper>
             );
           })}
-        </Stack>
+        </Box>
       </Container>
     </Box>
   );

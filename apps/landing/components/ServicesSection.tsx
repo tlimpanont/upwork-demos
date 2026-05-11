@@ -4,12 +4,22 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
+import AutoFixHighRoundedIcon from "@mui/icons-material/AutoFixHighRounded";
 import LayersRoundedIcon from "@mui/icons-material/LayersRounded";
+import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
+import InsightsRoundedIcon from "@mui/icons-material/InsightsRounded";
+import HubRoundedIcon from "@mui/icons-material/HubRounded";
+import OnlinePredictionRoundedIcon from "@mui/icons-material/OnlinePredictionRounded";
 import PsychologyRoundedIcon from "@mui/icons-material/PsychologyRounded";
 import AccountTreeRoundedIcon from "@mui/icons-material/AccountTreeRounded";
 
 const ICONS: Record<string, SvgIconComponent> = {
+  automation: AutoFixHighRoundedIcon,
   layers: LayersRoundedIcon,
+  vision: VisibilityRoundedIcon,
+  analytics: InsightsRoundedIcon,
+  integration: HubRoundedIcon,
+  predictive: OnlinePredictionRoundedIcon,
   psychology: PsychologyRoundedIcon,
   accountTree: AccountTreeRoundedIcon,
 };
@@ -20,15 +30,17 @@ type ServicesContent = {
   intro: string;
   items: readonly {
     title: string;
-    price: string;
-    duration: string;
     body: string;
     bullets: readonly string[];
     icon: string;
   }[];
 };
 
-export default function ServicesSection({ content }: { content: ServicesContent }) {
+export default function ServicesSection({
+  content,
+}: {
+  content: ServicesContent;
+}) {
   return (
     <Box
       component="section"
@@ -42,15 +54,26 @@ export default function ServicesSection({ content }: { content: ServicesContent 
       <Container>
         <Stack
           spacing={1.5}
-          sx={{ alignItems: "center", textAlign: "center", mb: { xs: 5, md: 7 } }}
+          sx={{
+            alignItems: "center",
+            textAlign: "center",
+            mb: { xs: 5, md: 7 },
+          }}
         >
           <Typography
             variant="overline"
-            sx={{ color: "primary.light", letterSpacing: "0.18em", fontWeight: 700 }}
+            sx={{
+              color: "primary.light",
+              letterSpacing: "0.18em",
+              fontWeight: 700,
+            }}
           >
             {content.overline}
           </Typography>
-          <Typography variant="h2" sx={{ fontSize: { xs: "2rem", md: "2.75rem" } }}>
+          <Typography
+            variant="h2"
+            sx={{ fontSize: { xs: "2rem", md: "2.75rem" } }}
+          >
             {content.heading}
           </Typography>
           <Typography
@@ -65,17 +88,21 @@ export default function ServicesSection({ content }: { content: ServicesContent 
           sx={{
             display: "grid",
             gap: { xs: 3, md: 4 },
-            gridTemplateColumns: { xs: "1fr", md: "repeat(3, 1fr)" },
+            gridTemplateColumns: {
+              xs: "1fr",
+              sm: "repeat(2, 1fr)",
+              md: "repeat(3, 1fr)",
+            },
           }}
         >
-          {content.items.map(({ title, price, duration, body, bullets, icon }) => {
-            const Icon = ICONS[icon] ?? LayersRoundedIcon;
+          {content.items.map(({ title, body, bullets, icon }) => {
+            const Icon = ICONS[icon] ?? AutoFixHighRoundedIcon;
             return (
               <Paper
                 key={title}
                 variant="outlined"
                 sx={{
-                  p: { xs: 3, md: 4 },
+                  p: { xs: 3, md: 3.5 },
                   borderRadius: 3,
                   height: "100%",
                   display: "flex",
@@ -96,25 +123,13 @@ export default function ServicesSection({ content }: { content: ServicesContent 
                   >
                     <Icon />
                   </Box>
-                  <Stack spacing={0.5}>
-                    <Typography variant="h5" component="h3" sx={{ fontWeight: 700 }}>
-                      {title}
-                    </Typography>
-                    <Typography sx={{ color: "primary.light", fontWeight: 700 }}>
-                      {price}
-                    </Typography>
-                    <Typography
-                      variant="caption"
-                      sx={{
-                        color: "text.secondary",
-                        letterSpacing: "0.06em",
-                        textTransform: "uppercase",
-                        fontWeight: 600,
-                      }}
-                    >
-                      {duration}
-                    </Typography>
-                  </Stack>
+                  <Typography
+                    variant="h5"
+                    component="h3"
+                    sx={{ fontWeight: 700, fontSize: "1.2rem" }}
+                  >
+                    {title}
+                  </Typography>
                   <Typography color="text.secondary">{body}</Typography>
                   <Stack
                     component="ul"
@@ -124,7 +139,7 @@ export default function ServicesSection({ content }: { content: ServicesContent 
                       p: 0,
                       listStyle: "none",
                       color: "text.secondary",
-                      pt: 1,
+                      pt: 0.5,
                     }}
                   >
                     {bullets.map((b) => (

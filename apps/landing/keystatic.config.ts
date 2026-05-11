@@ -14,67 +14,74 @@ export default config({
       schema: {
         chip: fields.text({
           label: "Eyebrow chip",
-          defaultValue: "Production-ready demos · built for clients",
+          defaultValue: "Enterprise AI · Custom software · Production-ready",
         }),
         headingLead: fields.text({
           label: "Heading (regular)",
-          defaultValue: "AI-Powered SaaS Systems",
+          defaultValue: "Enterprise AI and",
         }),
         headingAccent: fields.text({
           label: "Heading (gradient)",
-          defaultValue: "Ready for Production",
+          defaultValue: "Custom Software Solutions",
         }),
         subheading: fields.text({
           label: "Subheading",
           multiline: true,
           defaultValue:
-            "Customer Support AI, Document Processing, and multi-tenant SaaS platforms. Three working systems, one consistent stack, deployed on Vercel.",
+            "We design and develop AI-powered platforms, automation systems, and scalable SaaS applications that deliver measurable business results.",
         }),
-        primaryCta: fields.object({
-          label: fields.text({ label: "Label", defaultValue: "View Demos" }),
-          href: fields.text({ label: "Href", defaultValue: "#demos" }),
-        }, { label: "Primary CTA" }),
-        secondaryCta: fields.object({
-          label: fields.text({ label: "Label", defaultValue: "Book a Call" }),
-          href: fields.text({ label: "Href", defaultValue: "#contact" }),
-        }, { label: "Secondary CTA" }),
-        techLabels: fields.array(
-          fields.text({ label: "Label" }),
+        supportingBullets: fields.array(
+          fields.text({ label: "Bullet" }),
           {
-            label: "Tech stack labels",
+            label: "Supporting bullets",
             itemLabel: (props) => props.value,
-          }
+          },
         ),
-        euRegionNote: fields.text({
-          label: "EU-region note",
-          multiline: true,
-          defaultValue:
-            "EU-region deployments available: Hetzner, AWS eu-central, Mistral",
-        }),
+        primaryCta: fields.object(
+          {
+            label: fields.text({
+              label: "Label",
+              defaultValue: "Book a Discovery Call",
+            }),
+            href: fields.text({ label: "Href", defaultValue: "#contact" }),
+          },
+          { label: "Primary CTA" },
+        ),
+        secondaryCta: fields.object(
+          {
+            label: fields.text({
+              label: "Label",
+              defaultValue: "View Portfolio",
+            }),
+            href: fields.text({ label: "Href", defaultValue: "#portfolio" }),
+          },
+          { label: "Secondary CTA" },
+        ),
       },
     }),
 
     services: singleton({
-      label: "Services",
+      label: "Business solutions",
       path: "apps/landing/content/services",
       format: { data: "yaml" },
       schema: {
-        overline: fields.text({ label: "Overline", defaultValue: "How I help" }),
+        overline: fields.text({
+          label: "Overline",
+          defaultValue: "Business solutions",
+        }),
         heading: fields.text({
           label: "Heading",
-          defaultValue: "From idea to production-ready",
+          defaultValue: "What we build for enterprise teams",
         }),
         intro: fields.text({
           label: "Intro",
           multiline: true,
           defaultValue:
-            "Three things I'm hired for, plus the patterns I bring along so you don't pay for me to reinvent the wheel each engagement.",
+            "Production-ready systems that automate operations, surface decisions, and scale with the organization.",
         }),
         items: fields.array(
           fields.object({
             title: fields.text({ label: "Title" }),
-            price: fields.text({ label: "Price" }),
-            duration: fields.text({ label: "Duration / scope" }),
             body: fields.text({ label: "Body", multiline: true }),
             bullets: fields.array(fields.text({ label: "Bullet" }), {
               label: "Bullets",
@@ -83,84 +90,245 @@ export default config({
             icon: fields.select({
               label: "Icon",
               options: [
-                { label: "Layers", value: "layers" },
-                { label: "Psychology", value: "psychology" },
+                { label: "Automation", value: "automation" },
+                { label: "SaaS / layers", value: "layers" },
+                { label: "Computer vision", value: "vision" },
+                { label: "Analytics", value: "analytics" },
+                { label: "Integration", value: "integration" },
+                { label: "Predictive", value: "predictive" },
+                { label: "AI / psychology", value: "psychology" },
                 { label: "Account tree", value: "accountTree" },
               ],
-              defaultValue: "layers",
+              defaultValue: "automation",
             }),
           }),
           {
-            label: "Services",
+            label: "Solutions",
             itemLabel: (props) => props.fields.title.value,
-          }
+          },
         ),
       },
     }),
 
     demoShowcase: singleton({
-      label: "Demo showcase",
+      label: "Featured projects intro",
       path: "apps/landing/content/demo-showcase",
       format: { data: "yaml" },
       schema: {
         overline: fields.text({
           label: "Overline",
-          defaultValue: "Live capabilities",
+          defaultValue: "Featured projects",
         }),
         heading: fields.text({
           label: "Heading",
-          defaultValue: "See the stack in production",
+          defaultValue: "Flagship platforms shipping today",
         }),
         intro: fields.text({
           label: "Intro",
           multiline: true,
           defaultValue:
-            "Three real working systems built on the same patterns I ship to clients: customer-support AI, document processing, and multi-tenant SaaS. Each runs on the same Vercel + Postgres + AI stack I use in production.",
+            "Real production systems we've built for AI automation, computer vision, sustainability reporting, predictive maintenance, and multi-tenant SaaS analytics.",
         }),
       },
     }),
 
-    architecture: singleton({
-      label: "Architecture",
-      path: "apps/landing/content/architecture",
+    industries: singleton({
+      label: "Industries",
+      path: "apps/landing/content/industries",
       format: { data: "yaml" },
       schema: {
-        overline: fields.text({ label: "Overline", defaultValue: "Architecture" }),
+        overline: fields.text({
+          label: "Overline",
+          defaultValue: "Industries we serve",
+        }),
         heading: fields.text({
           label: "Heading",
-          defaultValue: "Boring stack, modern tools",
+          defaultValue: "Built for regulated, complex operations",
         }),
         intro: fields.text({
           label: "Intro",
           multiline: true,
           defaultValue:
-            "One coherent stack across all three demos. Battle-tested infrastructure that scales to production without a rewrite.",
+            "Sectors where data volume, compliance burden, or operational complexity demand more than a spreadsheet or off-the-shelf SaaS.",
         }),
-        layers: fields.array(
+        items: fields.array(
           fields.object({
-            name: fields.text({ label: "Name" }),
-            detail: fields.text({ label: "Detail" }),
+            name: fields.text({ label: "Industry name" }),
+            note: fields.text({ label: "One-line note", multiline: true }),
             icon: fields.select({
               label: "Icon",
               options: [
-                { label: "Cloud", value: "cloud" },
-                { label: "Psychology", value: "psychology" },
-                { label: "Hub", value: "hub" },
-                { label: "Storage", value: "storage" },
-                { label: "Inventory", value: "inventory" },
+                { label: "Factory / manufacturing", value: "factory" },
+                { label: "Logistics / shipping", value: "logistics" },
+                { label: "Energy", value: "energy" },
+                { label: "Finance", value: "finance" },
+                { label: "Healthcare", value: "healthcare" },
+                { label: "Agriculture", value: "agriculture" },
+                { label: "Professional services", value: "professional" },
               ],
-              defaultValue: "cloud",
-            }),
-            accent: fields.text({
-              label: "Accent (hex)",
-              defaultValue: "#FFFFFF",
+              defaultValue: "factory",
             }),
           }),
           {
-            label: "Layers",
+            label: "Industries",
             itemLabel: (props) => props.fields.name.value,
-          }
+          },
         ),
+      },
+    }),
+
+    outcomes: singleton({
+      label: "Business outcomes",
+      path: "apps/landing/content/outcomes",
+      format: { data: "yaml" },
+      schema: {
+        overline: fields.text({
+          label: "Overline",
+          defaultValue: "Business outcomes",
+        }),
+        heading: fields.text({
+          label: "Heading",
+          defaultValue: "Measurable results clients can expect",
+        }),
+        intro: fields.text({
+          label: "Intro",
+          multiline: true,
+          defaultValue:
+            "Outcomes we plan toward, contractually scope against, and measure once the platform is live.",
+        }),
+        items: fields.array(
+          fields.object({
+            stat: fields.text({
+              label: "Headline stat (short)",
+              description: "Example: 80% · 3x · audit-ready",
+            }),
+            title: fields.text({ label: "Title" }),
+            body: fields.text({ label: "Body", multiline: true }),
+            icon: fields.select({
+              label: "Icon",
+              options: [
+                { label: "Time / efficiency", value: "time" },
+                { label: "Quality / target", value: "quality" },
+                { label: "Visibility / chart", value: "visibility" },
+                { label: "Compliance", value: "compliance" },
+                { label: "Scale", value: "scale" },
+              ],
+              defaultValue: "time",
+            }),
+          }),
+          {
+            label: "Outcomes",
+            itemLabel: (props) => props.fields.title.value,
+          },
+        ),
+      },
+    }),
+
+    architecture: singleton({
+      label: "Technology stack",
+      path: "apps/landing/content/architecture",
+      format: { data: "yaml" },
+      schema: {
+        overline: fields.text({
+          label: "Overline",
+          defaultValue: "Technology stack",
+        }),
+        heading: fields.text({
+          label: "Heading",
+          defaultValue: "Proven tools, deployed at scale",
+        }),
+        intro: fields.text({
+          label: "Intro",
+          multiline: true,
+          defaultValue:
+            "Battle-tested infrastructure across frontend, backend, AI, data, cloud, and integration layers. Every choice picked for production reliability, not novelty.",
+        }),
+        groups: fields.array(
+          fields.object({
+            name: fields.text({
+              label: "Group name",
+              description: "Frontend, Backend, AI, Data, Cloud, Integrations",
+            }),
+            items: fields.array(fields.text({ label: "Item" }), {
+              label: "Items",
+              itemLabel: (props) => props.value,
+            }),
+            icon: fields.select({
+              label: "Icon",
+              options: [
+                { label: "Frontend", value: "frontend" },
+                { label: "Backend", value: "backend" },
+                { label: "AI", value: "ai" },
+                { label: "Data", value: "data" },
+                { label: "Cloud", value: "cloud" },
+                { label: "Integrations", value: "integrations" },
+              ],
+              defaultValue: "frontend",
+            }),
+          }),
+          {
+            label: "Groups",
+            itemLabel: (props) => props.fields.name.value,
+          },
+        ),
+      },
+    }),
+
+    process: singleton({
+      label: "Process",
+      path: "apps/landing/content/process",
+      format: { data: "yaml" },
+      schema: {
+        overline: fields.text({
+          label: "Overline",
+          defaultValue: "Our process",
+        }),
+        heading: fields.text({
+          label: "Heading",
+          defaultValue: "From discovery to optimization",
+        }),
+        intro: fields.text({
+          label: "Intro",
+          multiline: true,
+          defaultValue:
+            "A predictable engagement pattern from kickoff to long-term operations. Every phase ends with a written artefact you keep.",
+        }),
+        steps: fields.array(
+          fields.object({
+            title: fields.text({ label: "Title" }),
+            body: fields.text({ label: "Body", multiline: true }),
+          }),
+          {
+            label: "Steps",
+            itemLabel: (props) => props.fields.title.value,
+          },
+        ),
+      },
+    }),
+
+    about: singleton({
+      label: "About",
+      path: "apps/landing/content/about",
+      format: { data: "yaml" },
+      schema: {
+        overline: fields.text({
+          label: "Overline",
+          defaultValue: "About",
+        }),
+        heading: fields.text({
+          label: "Heading",
+          defaultValue: "A senior engineering partner, not an agency layer",
+        }),
+        body: fields.text({
+          label: "Body",
+          multiline: true,
+          defaultValue:
+            "I help organizations design and build advanced AI and software solutions that automate operations, improve decision-making, and create scalable digital products. Direct contact with the architect, no PMs in the middle.",
+        }),
+        bullets: fields.array(fields.text({ label: "Bullet" }), {
+          label: "Bullets",
+          itemLabel: (props) => props.value,
+        }),
       },
     }),
 
@@ -175,7 +343,7 @@ export default config({
         }),
         heading: fields.text({
           label: "Heading",
-          defaultValue: "Things clients ask before booking",
+          defaultValue: "Questions before the first call",
         }),
         items: fields.array(
           fields.object({
@@ -185,76 +353,84 @@ export default config({
           {
             label: "Items",
             itemLabel: (props) => props.fields.question.value,
-          }
+          },
         ),
       },
     }),
 
     trust: singleton({
-      label: "Trust",
+      label: "Testimonials",
       path: "apps/landing/content/trust",
       format: { data: "yaml" },
       schema: {
         overline: fields.text({
           label: "Overline",
-          defaultValue: "Why this matters",
+          defaultValue: "Testimonials",
         }),
         heading: fields.text({
           label: "Heading",
-          defaultValue: "Demos that ship, not toys",
+          defaultValue: "What partners say",
         }),
-        points: fields.array(
+        items: fields.array(
           fields.object({
-            icon: fields.select({
-              label: "Icon",
-              options: [
-                { label: "Verified", value: "verified" },
-                { label: "Trending up", value: "trendingUp" },
-                { label: "Rocket launch", value: "rocketLaunch" },
-              ],
-              defaultValue: "verified",
+            quote: fields.text({ label: "Quote", multiline: true }),
+            author: fields.text({ label: "Author name" }),
+            role: fields.text({ label: "Role" }),
+            company: fields.text({ label: "Company" }),
+            impact: fields.text({
+              label: "Impact tag",
+              description: "Short stat or outcome (optional)",
             }),
-            title: fields.text({ label: "Title" }),
-            body: fields.text({ label: "Body", multiline: true }),
           }),
           {
-            label: "Points",
-            itemLabel: (props) => props.fields.title.value,
-          }
+            label: "Testimonials",
+            itemLabel: (props) => props.fields.author.value,
+          },
         ),
       },
     }),
 
     cta: singleton({
-      label: "CTA",
+      label: "Final CTA",
       path: "apps/landing/content/cta",
       format: { data: "yaml" },
       schema: {
         heading: fields.text({
           label: "Heading",
-          defaultValue: "Let's build your system",
+          defaultValue: "Ready to Build Your Next AI or Software Solution?",
         }),
         body: fields.text({
           label: "Body",
           multiline: true,
           defaultValue:
-            "Available for SaaS builds, AI integrations, and platform engineering work. Start with a 30-minute call. No pitch deck, just a working session.",
+            "Let's discuss how automation, AI, and custom software can help your organization grow.",
         }),
-        primaryCta: fields.object({
-          label: fields.text({ label: "Label", defaultValue: "Hire on Upwork" }),
-          href: fields.text({
-            label: "Href",
-            defaultValue:
-              "https://www.upwork.com/freelancers/~01e2fb2cd37f32f0ad?viewMode=1",
-          }),
-        }, { label: "Primary CTA" }),
-        secondaryCta: fields.object({
-          label: fields.text({ label: "Label", defaultValue: "Email me" }),
-          href: fields.text({
-            label: "Href",
-            defaultValue: "mailto:theuy.limpanont@gmail.com",
-          }),
-        }, { label: "Secondary CTA" }),
+        primaryCta: fields.object(
+          {
+            label: fields.text({
+              label: "Label",
+              defaultValue: "Book a Discovery Call",
+            }),
+            href: fields.text({
+              label: "Href",
+              defaultValue: "https://cal.com/theuy",
+            }),
+          },
+          { label: "Primary CTA" },
+        ),
+        secondaryCta: fields.object(
+          {
+            label: fields.text({
+              label: "Label",
+              defaultValue: "Discuss Your Project",
+            }),
+            href: fields.text({
+              label: "Href",
+              defaultValue: "mailto:theuy.limpanont@gmail.com",
+            }),
+          },
+          { label: "Secondary CTA" },
+        ),
       },
     }),
   },
@@ -284,6 +460,5 @@ export default config({
         body: fields.markdoc({ label: "Body" }),
       },
     }),
-
   },
 });

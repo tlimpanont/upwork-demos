@@ -5,9 +5,10 @@ import "./globals.css";
 
 const SITE_URL = "https://upwork-demos-landing.vercel.app";
 const SITE_NAME = "Theuy Limpanont";
-const SITE_TITLE = "Theuy Limpanont · Senior full-stack and AI engineer";
+const SITE_TITLE =
+  "Enterprise AI and Custom Software Solutions · Theuy Limpanont";
 const SITE_DESCRIPTION =
-  "Freelance senior engineer building production-grade web platforms and AI systems for SaaS founders and product teams. Typed APIs, real auth, real billing, AI workflows that ship.";
+  "We design and develop AI-powered platforms, automation systems, and scalable SaaS applications that deliver measurable business results. Enterprise AI, computer vision, predictive analytics, ERP integration, and custom SaaS development.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -19,16 +20,16 @@ export const metadata: Metadata = {
   applicationName: SITE_NAME,
   generator: "Next.js",
   keywords: [
-    "freelance engineer",
-    "senior full-stack developer",
-    "AI engineer",
-    "RAG developer",
-    "Next.js consultant",
-    "TypeScript",
-    "Stripe integration",
-    "multi-tenant SaaS",
-    "Netherlands",
-    "freelance Nederland",
+    "Enterprise AI Development",
+    "Custom Software Development",
+    "AI Automation Solutions",
+    "Computer Vision Development",
+    "Predictive Analytics",
+    "SaaS Development",
+    "ERP Integration",
+    "Analytics Dashboard Development",
+    "Multi-tenant SaaS",
+    "AI Engineering",
   ],
   authors: [
     {

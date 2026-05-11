@@ -1,23 +1,18 @@
-chip: "Available · accepting one project this quarter"
-headingLead: Senior full-stack
-headingAccent: and AI engineer
+chip: "Enterprise AI · Custom software · Production-ready"
+headingLead: Enterprise AI and
+headingAccent: Custom Software Solutions
 subheading: >-
-  I'm Theuy, a senior full-stack and AI engineer based in the Netherlands. I
-  work with scale-ups and product teams across Europe on the parts that
-  decide whether software lasts: typed APIs, secure auth, billing that
-  survives an audit, AI features that hold up in production. Direct contact,
-  async-first.
+  We design and develop AI-powered platforms, automation systems, and scalable
+  SaaS applications that deliver measurable business results.
+supportingBullets:
+  - Reduce manual work with intelligent automation
+  - Detect anomalies and quality issues using computer vision
+  - Build scalable SaaS products and internal platforms
+  - Integrate seamlessly with ERP, CRM, and third-party systems
+  - Gain real-time insights with analytics dashboards
 primaryCta:
-  label: See my work
-  href: "#demos"
-secondaryCta:
-  label: Book a call
+  label: Book a Discovery Call
   href: "#contact"
-techLabels:
-  - Next.js 16
-  - OpenAI
-  - GraphQL
-  - Pinecone
-  - Neon Postgres
-  - Vercel
-euRegionNote: "EU-region deployments available: Hetzner, AWS eu-central, Mistral"
+secondaryCta:
+  label: View Portfolio
+  href: "#portfolio"

@@ -1,6 +1,6 @@
 ---
-title: Rule-driven image anomaly detection with vision-language localization
-summary: Plain-English detection rules drive an open-vocabulary vision model (Grounding DINO via Replicate, gpt-4o-mini fallback) that pins anomalies on inspection imagery. Few-shot crops from confirmed annotations feed each call, a Konva canvas with one-click accept/reject closes the review loop, and a Jobs page surfaces every concurrent pipeline run with phase-level progress.
+title: AI-Powered Time-Series Image Anomaly Detection Platform
+summary: Inspection teams upload chronological image sequences, write a plain-English detection rule, and an open-vocabulary vision model (Grounding DINO with a gpt-4o-mini fallback) pins anomalies for human review. Annotation canvas, accept/reject workflow, and a Jobs page surface every detection run with phase-level progress.
 client: Portfolio demo
 stack:
   - Next.js 16
@@ -17,7 +17,9 @@ stack:
 publishedAt: 2026-05-11
 ---
 
-For inspection-heavy teams that have piles of imagery (solar arrays, weld stations, X-rays, ag-tech flyovers) and want a reviewable second opinion before a human looks. The interesting design choice is **rule-first detection**: every project ships with a one-sentence natural-language detection rule, and an open-vocabulary vision model localizes anomalies that match the rule. The model's output then auto-flows into the Annotate canvas as machine suggestions, where a reviewer accepts or overrides each one in two clicks.
+**Business outcome.** Inspection teams in solar, manufacturing, healthcare, and agriculture cut visual review time while keeping humans in the loop on every call. The vision model proposes; the reviewer confirms or corrects with a single click; the corrections feed the next run. No labelled training set required to start — a one-sentence rule is enough — and every detection lands with a timestamp, an audit trail, and an exportable report for compliance.
+
+Built for inspection-heavy teams with piles of imagery (solar arrays, weld stations, chest X-rays, ag-tech flyovers) that want a reviewable AI second opinion before a human looks. The platform's design choice is **rule-first detection**: every project ships with a plain-English detection rule, and an open-vocabulary vision model localizes anomalies that match the rule. Outputs auto-flow into the annotate canvas as machine suggestions, where the reviewer accepts or overrides each one in two clicks.
 
 ## Pipeline
 

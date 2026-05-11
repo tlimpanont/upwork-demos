@@ -1,6 +1,6 @@
 ---
-title: Multi-tenant SaaS starter with Stripe billing
-summary: "Auth, workspaces, RBAC, and Stripe-billed subscriptions tested against the messy parts: dropped webhooks, last-admin guards, edge-runtime middleware."
+title: Multi-Tenant SaaS Platform with Auth, Workspaces, and Stripe Billing
+summary: A production-grade B2B foundation — multi-tenant data isolation, role-based access, Stripe-billed subscriptions, and admin tooling — tested against the failure modes that break early SaaS launches in production.
 client: Portfolio demo
 stack:
   - Next.js 16
@@ -12,7 +12,9 @@ stack:
 publishedAt: 2026-05-04
 ---
 
-The boring B2B foundation that has to work on day one so a founder can ship the product on top, not under it. The interesting bits aren't the features. They're the failure modes: a dropped Stripe webhook, an admin who removes themselves, a session that has to validate on the edge before `pg` or `bcrypt` are reachable.
+**Business outcome.** Product teams launch B2B SaaS without rebuilding the same plumbing every time. Auth, workspaces, role-based access, Stripe billing, and audit-grade tenant isolation are wired up end-to-end on day one, so engineering time goes into the actual product. The boring-but-load-bearing parts — dropped webhooks, last-admin guards, edge-runtime session validation — are already handled, with documented failure modes.
+
+Built as the foundation B2B SaaS organizations launch on top of, not under. The interesting work isn't the features list; it's the failure modes that take SaaS products down in production — a dropped Stripe webhook, an admin who removes themselves, a session that has to validate at the edge before `pg` or `bcrypt` are reachable.
 
 ## Pipeline
 

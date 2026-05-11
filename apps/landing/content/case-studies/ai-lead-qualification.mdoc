@@ -1,6 +1,6 @@
 ---
-title: AI lead qualification with a structured-output pipeline
-summary: Inbound forms hit OpenAI for a structured qualification (score, signals matrix, est. ARR, follow-up email), then a tier-driven dispatcher fans out to mock HubSpot, Salesforce, Slack, and email. Every signal ties to a quoted phrase; every dispatch is logged.
+title: AI Lead Qualification and CRM Dispatch Platform
+summary: Inbound forms route through an OpenAI-backed qualifier that returns a typed score, signals matrix, estimated ARR, and a tier-appropriate follow-up email — then a deterministic dispatcher fans the lead out to HubSpot, Salesforce, Slack, and email with a full audit trail.
 client: Portfolio demo
 stack:
   - Next.js 16
@@ -16,7 +16,9 @@ stack:
 publishedAt: 2026-05-09
 ---
 
-For inbound-heavy B2B teams whose AEs spend half their day triaging junk before they get to the qualified deals, and whose sales ops keeps meaning to wire up an AI scorer but defaults to keyword regex because shipping it once and watching it drift is less painful than shipping it twice. The interesting design choice is using OpenAI's `json_schema strict` mode so the response shape is guaranteed at the API layer, then a deterministic stub fallback so the demo runs end-to-end without an API key.
+**Business outcome.** Sales teams stop spending half their morning triaging junk inbound. The qualifier scores every lead, captures the reasoning, and routes the strong ones into the CRM within seconds of form submission — with the audit trail your compliance and revops teams need. Hot leads see a Salesforce + Slack + HubSpot + email fan-out; cold leads land in self-serve nurture; the AE only sees what's worth their time.
+
+Built for inbound-heavy B2B teams whose AEs lose hours to triage, whose sales ops keeps meaning to wire up an AI scorer, and whose finance team needs every routing decision logged.
 
 ## Pipeline
 

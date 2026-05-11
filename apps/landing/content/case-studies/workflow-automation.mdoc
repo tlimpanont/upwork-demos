@@ -1,6 +1,6 @@
 ---
-title: AI-assisted incident triage for the support inbox
-summary: Every ticket is classified by OpenAI; a deterministic rules engine routes the urgent few (fraud, outages, security) into Slack so humans see them in seconds, not after the next queue scan.
+title: AI Workflow Automation for Support and Incident Triage
+summary: Every inbound ticket is classified by an LLM into a typed structure, then a deterministic rules engine routes the urgent few — fraud, outages, security — into Slack within seconds. Operations sees critical issues immediately instead of waiting for the next queue scan.
 client: Portfolio demo
 stack:
   - Next.js 16
@@ -14,7 +14,9 @@ stack:
 publishedAt: 2026-05-05
 ---
 
-For internal-tools teams that already have an OpenAI key, a Slack workspace, and a queue of tickets, and want the pipeline they keep meaning to build but don't have time to build a fourth time. The interesting design choice is the boundary: the LLM produces a structured classification, never a routing decision; rules decide where it goes; types make it impossible to skip a stage.
+**Business outcome.** Support, operations, and security teams stop missing the tickets that matter. The pipeline classifies every inbound message into a typed shape, applies deterministic routing rules (fraud → fraud channel, outage → incident-response Slack, billing → finance queue), and posts the urgent ones to the right human within seconds. Triage time drops, response SLAs hold, and the routing decision is fully auditable because it isn't an LLM call — it's a rule.
+
+Built for internal-tools, support, and security teams that need an AI triage layer they can actually defend in production. The platform's design choice is the boundary: the LLM produces a structured classification, never a routing decision; rules decide where the ticket goes; types make it impossible to skip a stage.
 
 ## Pipeline
 

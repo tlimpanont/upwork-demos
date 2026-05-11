@@ -1,6 +1,6 @@
 ---
-title: PDF invoice extraction with hybrid semantic + numeric search
-summary: Schema-typed extraction from invoices, embedded for semantic search and indexed for SQL range queries. One search box routes both.
+title: AI Invoice Processing and ERP Integration Platform
+summary: Automates PDF invoice intake, validates extracted fields against a strict schema, and exposes one search box that routes both content queries ("contracts mentioning indemnity") and numeric range queries ("unpaid invoices over €10k") to the right store.
 client: Portfolio demo
 stack:
   - Next.js 16
@@ -11,7 +11,9 @@ stack:
 publishedAt: 2026-05-04
 ---
 
-For accounts-payable and ops teams that need to query a pile of invoice PDFs by content *and* by amount, like "unpaid invoices over €10k" or "contracts mentioning indemnity", without a manual data-entry step in between. The extraction is typed strictly enough that you never store a half-parsed invoice.
+**Business outcome.** Accounts-payable and ops teams stop keying invoices into ERPs by hand. Structured extraction lifts vendor, totals, line items, and tax fields straight from the PDF, validated against a Zod schema so a half-parsed row never reaches the system of record. Procurement, finance, and audit can search the same archive by content and by amount without a separate database query.
+
+Built for accounts-payable and operations teams that process a steady volume of supplier invoices and need to query them by both content and amount — "unpaid invoices over €10k", "contracts mentioning indemnity" — without manual data-entry sitting between the PDF inbox and the ERP.
 
 ## Pipeline
 

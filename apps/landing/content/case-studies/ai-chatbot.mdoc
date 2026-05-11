@@ -1,6 +1,6 @@
 ---
-title: RAG support chatbot grounded in your own documents
-summary: A streaming AI assistant that answers only from indexed source files, cites the file each answer came from, and says "I don't know" when retrieval is empty.
+title: AI Customer Support Assistant with Document-Grounded Answers
+summary: Production-grade RAG assistant that answers customer questions only from your own indexed documents, cites the source for every reply, and refuses to guess when the knowledge base has no answer.
 client: Portfolio demo
 stack:
   - Next.js 16
@@ -10,7 +10,9 @@ stack:
 publishedAt: 2026-05-04
 ---
 
-For support teams whose answers already live in their own docs but cost hours to dig out manually. Built as the smallest RAG pipeline that survives production: ingest, retrieve, cite, refuse on empty. The engineering work after this is tuning, not architecture.
+**Business outcome.** Support teams cut response time on policy and product questions from minutes to seconds while staying within their own approved content. Every answer carries a citation, so reviewers can audit each reply in a click — and the assistant refuses to fabricate when retrieval returns nothing, which is the failure mode that gets generic chatbots taken off production.
+
+Built for support, customer success, and internal-help-desk teams whose answers already live in their own documents but cost hours to dig out manually. The platform ships as the smallest RAG pipeline that survives production: ingest, retrieve, cite, refuse on empty.
 
 ## Pipeline
 

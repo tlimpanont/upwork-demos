@@ -12,7 +12,12 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
 export const metadata = {
-  title: "Case studies · AI + SaaS Demo Platform",
+  // Bare title — the root layout appends "· Theuy Limpanont" via the
+  // title template, so the rendered tab reads "Case studies · Theuy
+  // Limpanont" instead of the previous double-suffixed mess.
+  title: "Case studies",
+  description:
+    "Production AI and software platforms shipped end-to-end: invoice processing, image anomaly detection, lead qualification, analytics dashboards, multi-tenant SaaS, and workflow automation.",
 };
 
 export default async function CaseStudiesIndexPage() {

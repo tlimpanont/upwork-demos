@@ -3,7 +3,8 @@ import path from "node:path";
 import { ImageResponse } from "next/og";
 
 export const runtime = "nodejs";
-export const alt = "Theuy Limpanont · Senior full-stack and AI engineer";
+export const alt =
+  "Enterprise AI and Custom Software Solutions · Theuy Limpanont";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -33,8 +34,8 @@ export default async function OpenGraphImage() {
       >
         <img
           src={portraitSrc}
-          width={340}
-          height={340}
+          width={300}
+          height={300}
           style={{
             borderRadius: "50%",
             objectFit: "cover",
@@ -65,18 +66,18 @@ export default async function OpenGraphImage() {
           </div>
           <div
             style={{
-              fontSize: 68,
+              fontSize: 60,
               fontWeight: 800,
               lineHeight: 1.05,
               letterSpacing: "-0.02em",
               color: "#FFFFFF",
             }}
           >
-            Senior full-stack
+            Enterprise AI and
           </div>
           <div
             style={{
-              fontSize: 68,
+              fontSize: 60,
               fontWeight: 800,
               lineHeight: 1.05,
               letterSpacing: "-0.02em",
@@ -84,37 +85,38 @@ export default async function OpenGraphImage() {
               marginTop: 4,
             }}
           >
-            and AI engineer
+            Custom Software Solutions
           </div>
           <div
             style={{
-              fontSize: 26,
+              fontSize: 24,
               lineHeight: 1.4,
               color: "rgba(255,255,255,0.78)",
               marginTop: 28,
-              maxWidth: 600,
+              maxWidth: 620,
             }}
           >
-            Production-grade web platforms and AI systems for SaaS founders
-            and product teams.
+            AI automation, computer vision, predictive analytics, and
+            scalable SaaS platforms — built end-to-end as a senior
+            engineering partner.
           </div>
           <div
             style={{
               display: "flex",
-              gap: 28,
+              gap: 24,
               marginTop: 36,
-              fontSize: 18,
+              fontSize: 17,
               fontWeight: 600,
               letterSpacing: "0.16em",
               textTransform: "uppercase",
               color: "rgba(255,255,255,0.55)",
+              flexWrap: "wrap",
             }}
           >
-            <span>Next.js</span>
-            <span>OpenAI</span>
-            <span>Pinecone</span>
-            <span>Postgres</span>
-            <span>Vercel</span>
+            <span>AI Automation</span>
+            <span>Computer Vision</span>
+            <span>SaaS</span>
+            <span>ERP Integration</span>
           </div>
         </div>
       </div>

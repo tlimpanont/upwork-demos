@@ -44,14 +44,15 @@ export const metadata: Metadata = {
     canonical: SITE_URL,
   },
   openGraph: {
-    type: "profile",
+    // "website" is the right type for a business / portfolio site;
+    // "profile" is reserved for personal-profile pages and changes how
+    // some social previews render the card.
+    type: "website",
     locale: "en_US",
     url: SITE_URL,
     siteName: SITE_NAME,
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    firstName: "Theuy",
-    lastName: "Limpanont",
     // OG image is auto-detected from app/opengraph-image.tsx
   },
   twitter: {

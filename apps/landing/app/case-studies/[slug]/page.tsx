@@ -15,11 +15,49 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import MermaidDiagram from "@/components/MermaidDiagram";
 import { markdocConfig } from "@/lib/markdoc-config";
+import type { Metadata } from "next";
 
 export async function generateStaticParams() {
   const reader = createReader(path.resolve(process.cwd(), "../.."), keystaticConfig);
   const entries = await reader.collections.caseStudies.all();
   return entries.map(({ slug }) => ({ slug }));
+}
+
+// Per-case-study metadata so each one has its own page title, search
+// snippet, and social preview text instead of inheriting the site
+// default. Falls back gracefully if Keystatic can't read the entry.
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const reader = createReader(
+    path.resolve(process.cwd(), "../.."),
+    keystaticConfig,
+  );
+  const entry = await reader.collections.caseStudies.read(slug);
+  if (!entry) return {};
+  const title = entry.title;
+  const description = entry.summary;
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      url: `/case-studies/${slug}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+    alternates: {
+      canonical: `/case-studies/${slug}`,
+    },
+  };
 }
 
 export default async function CaseStudyDetailPage({

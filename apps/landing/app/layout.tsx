@@ -1,9 +1,13 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import Providers from "./Providers";
 import "./globals.css";
 
-const SITE_URL = "https://upwork-demos-landing.vercel.app";
+const SITE_URL = "https://theuy.nl";
+const LINKEDIN_PARTNER_ID = process.env.NEXT_PUBLIC_LINKEDIN_PARTNER_ID;
 const SITE_NAME = "Theuy Limpanont";
 const SITE_TITLE =
   "Enterprise AI and Custom Software Solutions · Theuy Limpanont";
@@ -93,6 +97,36 @@ export default function RootLayout({
       </head>
       <body>
         <Providers>{children}</Providers>
+        <Analytics />
+        <SpeedInsights />
+        {LINKEDIN_PARTNER_ID ? (
+          <>
+            <Script id="linkedin-insight-init" strategy="afterInteractive">
+              {`_linkedin_partner_id = "${LINKEDIN_PARTNER_ID}";
+window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+window._linkedin_data_partner_ids.push(_linkedin_partner_id);`}
+            </Script>
+            <Script id="linkedin-insight-loader" strategy="afterInteractive">
+              {`(function(l) {
+if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])};
+window.lintrk.q=[]}
+var s = document.getElementsByTagName("script")[0];
+var b = document.createElement("script");
+b.type = "text/javascript";b.async = true;
+b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+s.parentNode.insertBefore(b, s);})(window.lintrk);`}
+            </Script>
+            <noscript>
+              <img
+                height="1"
+                width="1"
+                style={{ display: "none" }}
+                alt=""
+                src={`https://px.ads.linkedin.com/collect/?pid=${LINKEDIN_PARTNER_ID}&fmt=gif`}
+              />
+            </noscript>
+          </>
+        ) : null}
       </body>
     </html>
   );

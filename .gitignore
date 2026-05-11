@@ -54,3 +54,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+
+# linkedin post drafts (kept local)
+linkedin-posts/**/*.md

@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import BoltRoundedIcon from "@mui/icons-material/BoltRounded";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import ThemeToggle from "./ThemeToggle";
+import { CAL_URL, withUtm } from "@/lib/utm";
 
 export default function SiteHeader() {
   return (
@@ -81,7 +82,7 @@ export default function SiteHeader() {
           >
             <ThemeToggle />
             <Button
-              href="https://cal.com/theuy"
+              href={withUtm(CAL_URL, { campaign: "header", content: "book-a-call" })}
               variant="contained"
               size="small"
               startIcon={<CalendarMonthRoundedIcon />}

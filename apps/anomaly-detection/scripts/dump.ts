@@ -22,6 +22,13 @@ import { get } from "@vercel/blob";
 const BASELINE_DIR = resolve(__dirname, "baseline");
 const IMAGES_DIR = resolve(BASELINE_DIR, "images");
 
+// Email of the user whose projects make up the demo baseline. Anything
+// owned by other accounts (your personal test user, etc.) is ignored on
+// dump so re-running dump after a re-seed doesn't accumulate duplicates.
+const DEMO_EMAIL = (
+  process.env.DEMO_USER_EMAIL ?? "demo@anomaly.local"
+).toLowerCase();
+
 type ProjectDoc = {
   _id: ObjectId;
   ownerId: ObjectId;
@@ -80,15 +87,30 @@ async function main() {
     await client.connect();
     const db = client.db(dbName);
 
+    // Locate the demo user first; we only dump projects they own.
+    const demoUser = await db
+      .collection<{ _id: ObjectId; email: string }>("users")
+      .findOne({ email: DEMO_EMAIL });
+    if (!demoUser) {
+      console.warn(
+        `[dump] no user with email ${DEMO_EMAIL} found — nothing to dump.` +
+          " Run `npm run db:seed` once to create the demo user, then re-run dump.",
+      );
+      return;
+    }
+
     const projects = await db
       .collection<ProjectDoc>("projects")
-      .find({})
+      .find({ ownerId: demoUser._id })
       .toArray();
     if (projects.length === 0) {
-      console.log("[dump] no projects found — nothing to dump.");
+      console.log(`[dump] no projects owned by ${DEMO_EMAIL} — nothing to dump.`);
       return;
     }
     const projectIds = projects.map((p) => p._id);
+    console.log(
+      `[dump] dumping ${projects.length} project(s) owned by ${DEMO_EMAIL}.`,
+    );
 
     const [sequences, images, annotations] = await Promise.all([
       db

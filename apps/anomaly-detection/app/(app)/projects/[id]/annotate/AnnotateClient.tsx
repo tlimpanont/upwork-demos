@@ -19,7 +19,7 @@ import {
   saveAnnotationAction,
 } from "./actions";
 import type { Annotation } from "@/lib/db/schemas";
-import { formatDateUTC } from "@/lib/utils/date";
+import { formatShortDateTimeUTC } from "@/lib/utils/date";
 
 // Konva touches `window`/canvas, so the whole canvas component is client-only.
 const AnnotationCanvas = dynamic(
@@ -156,7 +156,7 @@ export function AnnotateClient({
                 <span className="flex flex-col">
                   <span className="truncate">{i.sequenceName}</span>
                   <span className="text-[10px] text-muted-foreground">
-                    {formatDateUTC(i.capturedAt)}
+                    {formatShortDateTimeUTC(i.capturedAt)}
                   </span>
                 </span>
                 <span className="rounded-full bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">

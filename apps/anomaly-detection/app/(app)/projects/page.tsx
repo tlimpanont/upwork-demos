@@ -13,6 +13,7 @@ import {
   getProjectStats,
   listProjectsForOwner,
 } from "@/lib/db/repos/projects";
+import { formatShortDateTimeUTC } from "@/lib/utils/date";
 import { Button } from "@/components/ui/Button";
 import {
   Card,
@@ -125,13 +126,7 @@ export default async function ProjectsPage() {
                       ) : null}
                     </div>
                     <div className="flex items-center justify-between text-xs text-muted-foreground">
-                      <span>
-                        Updated{" "}
-                        {p.updatedAt.toLocaleDateString(undefined, {
-                          month: "short",
-                          day: "numeric",
-                        })}
-                      </span>
+                      <span>Updated {formatShortDateTimeUTC(p.updatedAt)}</span>
                       <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                     </div>
                   </CardContent>

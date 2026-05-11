@@ -13,7 +13,7 @@ import {
   X,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { formatDateUTC } from "@/lib/utils/date";
+import { formatShortDateTimeUTC } from "@/lib/utils/date";
 import {
   Card,
   CardContent,
@@ -369,7 +369,7 @@ export function DetectClient({
                 <span className="flex flex-col">
                   <span className="truncate">{i.sequenceName}</span>
                   <span className="text-[10px] text-muted-foreground">
-                    {formatDateUTC(i.capturedAt)}
+                    {formatShortDateTimeUTC(i.capturedAt)}
                   </span>
                 </span>
                 <ImageStatusBadge detection={det} inFlight={isQueued} />

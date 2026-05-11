@@ -2,13 +2,13 @@ import { NextResponse, type NextRequest } from "next/server";
 import { requireUser } from "@/lib/api";
 import { findImageById } from "@/lib/db/repos/images";
 import { findProjectById } from "@/lib/db/repos/projects";
-import { urlForKey } from "@/lib/storage/blob";
+import { streamBlob } from "@/lib/storage/blob";
 
 export const runtime = "nodejs";
 
-// Server-side proxy: fetches the blob server-side and streams it back. The
-// client never sees the raw blob URL, even though the underlying Vercel Blob
-// storage is public-by-key. Authorization is owner-scoped on the project.
+// Server-side proxy: pulls the blob through the @vercel/blob SDK (which
+// auto-attaches the read-write token) and streams it to the browser. The
+// raw blob URL never leaves the server, and authorization is owner-scoped.
 export async function GET(
   _request: NextRequest,
   { params }: { params: Promise<{ id: string }> },
@@ -25,17 +25,13 @@ export async function GET(
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
-  const url = await urlForKey(image.blobKey);
-  if (!url) {
+  const blob = await streamBlob(image.blobKey);
+  if (!blob) {
     return NextResponse.json({ error: "Blob missing" }, { status: 404 });
   }
-  const upstream = await fetch(url);
-  if (!upstream.ok || !upstream.body) {
-    return NextResponse.json({ error: "Upstream error" }, { status: 502 });
-  }
-  return new Response(upstream.body, {
+  return new Response(blob.stream, {
     headers: {
-      "content-type": upstream.headers.get("content-type") ?? "application/octet-stream",
+      "content-type": blob.contentType,
       "cache-control": "private, max-age=300",
     },
   });

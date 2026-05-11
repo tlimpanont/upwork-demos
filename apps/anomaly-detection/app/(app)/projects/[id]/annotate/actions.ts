@@ -7,6 +7,7 @@ import {
   deleteAnnotation,
   ensureAnnotationIndexes,
   insertAnnotation,
+  promoteAiAnnotation,
 } from "@/lib/db/repos/annotations";
 import { findImageById } from "@/lib/db/repos/images";
 import { findProjectById } from "@/lib/db/repos/projects";
@@ -78,6 +79,30 @@ export async function deleteAnnotationAction(input: {
   const project = await findProjectById(doc.projectId.toHexString(), user.id);
   if (!project) return { ok: false };
   const ok = await deleteAnnotation(idResult.data, project._id);
+  if (ok) revalidatePath(`/projects/${project._id}/annotate`);
+  return { ok };
+}
+
+// "Accept" an AI suggestion: flips source ai → human-correction so it
+// survives the next detect run and counts as signed-off ground truth.
+export async function acceptAiAnnotationAction(input: {
+  annotationId: string;
+}): Promise<{ ok: boolean }> {
+  const idResult = idSchema.safeParse(input.annotationId);
+  if (!idResult.success) return { ok: false };
+  const user = await requireUser();
+  const dbiMod = await import("@/lib/db/mongo");
+  const { ObjectId } = await import("mongodb");
+  const dbi = await dbiMod.db();
+  const doc = await dbi
+    .collection<{ _id: import("mongodb").ObjectId; projectId: import("mongodb").ObjectId }>(
+      "annotations",
+    )
+    .findOne({ _id: new ObjectId(idResult.data) });
+  if (!doc) return { ok: false };
+  const project = await findProjectById(doc.projectId.toHexString(), user.id);
+  if (!project) return { ok: false };
+  const ok = await promoteAiAnnotation(idResult.data, project._id);
   if (ok) revalidatePath(`/projects/${project._id}/annotate`);
   return { ok };
 }

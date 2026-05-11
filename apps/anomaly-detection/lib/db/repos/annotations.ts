@@ -92,6 +92,85 @@ export async function deleteAnnotation(
   return result.deletedCount === 1;
 }
 
+// Clears AI-sourced annotations for an image. Used before persisting a
+// fresh detection run so the canvas always reflects the latest model output
+// instead of stacking suggestions on top of each other.
+export async function deleteAiAnnotationsForImage(
+  imageId: string,
+): Promise<number> {
+  if (!ObjectId.isValid(imageId)) return 0;
+  const collection = (await db()).collection("annotations");
+  const result = await collection.deleteMany({
+    imageId: new ObjectId(imageId),
+    source: "ai",
+  });
+  return result.deletedCount;
+}
+
+// Pulls a small set of reviewer-confirmed anomaly annotations from the
+// project to feed the vision model as few-shot visual examples. We
+// deliberately exclude "ai" source — only annotations the human has
+// drawn or accepted — so the model learns from confirmed ground truth.
+export async function listReferenceAnomalies(
+  projectId: string,
+  limit = 3,
+): Promise<
+  Array<{
+    imageId: string;
+    bbox: { x: number; y: number; width: number; height: number };
+  }>
+> {
+  if (!ObjectId.isValid(projectId)) return [];
+  const collection = (await db()).collection<AnnotationDoc>("annotations");
+  const docs = await collection
+    .find({
+      projectId: new ObjectId(projectId),
+      label: "anomaly",
+      source: { $in: ["human", "human-correction"] },
+      "shape.type": "bounding_box",
+    })
+    .sort({ createdAt: -1 })
+    .limit(limit)
+    .toArray();
+  const out: Array<{
+    imageId: string;
+    bbox: { x: number; y: number; width: number; height: number };
+  }> = [];
+  for (const d of docs) {
+    if (d.shape.type !== "bounding_box") continue;
+    out.push({
+      imageId: d.imageId.toHexString(),
+      bbox: {
+        x: d.shape.x,
+        y: d.shape.y,
+        width: d.shape.width,
+        height: d.shape.height,
+      },
+    });
+  }
+  return out;
+}
+
+// Locks an AI suggestion in as reviewer-confirmed ground truth. The
+// annotation flips from source="ai" to "human-correction" so it survives
+// the next detect run and feeds training as a sign-off.
+export async function promoteAiAnnotation(
+  id: string,
+  projectId: string,
+): Promise<boolean> {
+  if (!ObjectId.isValid(id) || !ObjectId.isValid(projectId)) return false;
+  const collection = (await db()).collection("annotations");
+  const result = await collection.updateOne(
+    {
+      _id: new ObjectId(id),
+      projectId: new ObjectId(projectId),
+      source: "ai",
+    },
+    { $set: { source: "human-correction" } },
+  );
+  return result.modifiedCount === 1;
+}
+
 export async function ensureAnnotationIndexes(): Promise<void> {
   const collection = (await db()).collection("annotations");
   await collection.createIndex({ imageId: 1, createdAt: 1 });

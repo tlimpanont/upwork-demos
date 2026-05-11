@@ -1,60 +1,68 @@
 ---
-title: Image-sequence anomaly detection on MongoDB Atlas Vector Search
-summary: Caption-then-embed pipeline that learns from a project's normal frames and scores new images by cosine distance from the centroid. Per-tile heatmaps, polygon annotations, and a human-correction loop that feeds back into the next training run.
+title: Rule-driven image anomaly detection with vision-language localization
+summary: Plain-English detection rules drive an open-vocabulary vision model (Grounding DINO via Replicate, gpt-4o-mini fallback) that pins anomalies on inspection imagery. Few-shot crops from confirmed annotations feed each call, a Konva canvas with one-click accept/reject closes the review loop, and a Jobs page surfaces every concurrent pipeline run with phase-level progress.
 client: Portfolio demo
 stack:
   - Next.js 16
   - React 19
   - MongoDB Atlas
-  - Atlas Vector Search
+  - Replicate
+  - Grounding DINO
   - OpenAI gpt-4o-mini
-  - text-embedding-3-small
+  - sharp
   - react-konva
-  - Vercel Blob
+  - Vercel Blob (private)
   - Auth.js v5
   - Recharts
-publishedAt: 2026-05-10
+publishedAt: 2026-05-11
 ---
 
-For inspection-heavy teams that already have piles of "before" imagery (solar arrays, weld stations, X-rays, ag-tech flyovers) and need a reviewable second opinion before a human looks. The interesting design choice is caption-then-embed: a vision model writes a one-paragraph description of the image (or region), and a text embedder turns that into the vector. Image embeddings come and go at OpenAI; this two-step path is stable and the intermediate caption is a free diagnostic when you're debugging a false positive.
+For inspection-heavy teams that have piles of imagery (solar arrays, weld stations, X-rays, ag-tech flyovers) and want a reviewable second opinion before a human looks. The interesting design choice is **rule-first detection**: every project ships with a one-sentence natural-language detection rule, and an open-vocabulary vision model localizes anomalies that match the rule. The model's output then auto-flows into the Annotate canvas as machine suggestions, where a reviewer accepts or overrides each one in two clicks.
 
 ## Pipeline
 
 ```mermaid
 flowchart LR
-  A[Upload sequence] --> B[Private<br/>Vercel Blob]
+  A[Upload sequence] --> B[(Private<br/>Vercel Blob)]
   B --> C[Annotate<br/>react-konva]
-  C --> D[gpt-4o-mini<br/>caption per region]
-  D --> E[text-embedding-3-small<br/>1536-dim vector]
-  E --> F[(Atlas Vector<br/>Search index)]
-  F --> G[Train: centroid +<br/>μ + 2σ threshold]
-  H[New image] --> I[Whole-image embed]
-  I --> J{Below threshold?}
-  J -- yes --> K[Mark normal]
-  J -- no --> L[4×4 tile sweep]
-  L --> M[BFS bbox derivation]
-  M --> N[Heatmap + bboxes]
-  N --> O[Reviewer approves<br/>or corrects]
-  O --> C
+  D[Detection rule] --> E
+  C -. confirmed examples .-> E[vision-judge]
+  B --> E
+  E -- Replicate token --> F[Grounding DINO<br/>pixel-precise bboxes]
+  E -- fallback --> G[gpt-4o-mini<br/>few-shot crops]
+  E -- no keys --> H[Deterministic stub]
+  F --> I[Normalize 0..1 -> px]
+  G --> I
+  H --> I
+  I --> J[Detection row<br/>status: pending -> completed]
+  J --> K[source: 'ai'<br/>annotations on canvas]
+  K --> L[Reviewer accepts<br/>or overrides]
+  L --> C
+  J --> M[(PipelineRun<br/>phase log)]
 ```
 
 ## What's built
 
-- **Caption-then-embed training.** `gpt-4o-mini` captions each annotation region in plain English ("close-up of a solar panel cell with diagonal cracking and soot deposit"). `text-embedding-3-small` turns the caption into a 1536-dim vector stored in MongoDB with `projectId` + `label` filters. The vector index is defined once at `db/atlas-vector-index.json` and provisioned via `npm run db:vector-index`.
-- **Sequence-aware split.** Train/val/test is 60/20/20 by `sequenceId`, not per-image. Frames from one capture flight stay in one partition, so the val/test metrics don't quietly inflate from temporal autocorrelation across adjacent frames.
-- **Centroid + threshold model.** The normal split is averaged into a single centroid; the threshold is `mean + 2σ` over the held-out normal cosine distances, floored at `0.05`. Precision, recall, and F1 are computed on the held-out anomalies. Every model row records its version, threshold, and metrics so dashboards can diff them.
-- **Whole-image-first detection.** Before paying for 16 tile embeddings, score the whole image once. If it's below threshold, write a single "normal" result and stop. If it's above, run a 4×4 sweep, project tile distances into a heatmap grid, and derive bounding boxes via a connected-component BFS over alarm-scoring tiles.
-- **Konva annotation canvas.** `react-konva` mounted client-only (`dynamic({ ssr: false })`) with a discriminated-union shape schema: `bounding_box` is drag-to-create, `polygon` is click-to-add + double-click-to-close. Every annotation tags `source: "human" | "human-correction"`.
-- **Review loop that closes.** The detect page shows the source image with a translucent-red heatmap and bbox overlays. Reviewers approve as-is or relabel; either path writes new annotations with `source: "human-correction"` so the next training run picks them up. Approving a "normal" detection is a no-op by design — there's nothing to learn from a confirmed normal.
-- **Stub fallback for cold installs.** When `OPENAI_API_KEY` is unset, the embedder falls back to a deterministic hash-based pseudo-embedding (FNV-style). The training + detection pipelines run end-to-end so the demo works on a fresh clone before you've wired Atlas.
+- **Description-driven detection.** Each project carries a plain-English rule ("darkened or cracked solar cells, soot streaks, broken cell strings"). Detection routes through `lib/ai/vision-judge.ts:judgeImageAgainstRule`, which prefers **Grounding DINO** via Replicate (pixel-precise open-vocabulary localization) and falls back to **gpt-4o-mini** in JSON mode. With no keys, a deterministic FNV-style stub still produces regions so the demo runs end-to-end on a fresh clone.
+- **Few-shot from confirmed annotations.** Before each gpt-4o-mini call the detect route fetches the 3 most recent `human` / `human-correction` anomaly annotations, crops them via `sharp().rotate().extract()`, and attaches them to the prompt as *"Confirmed anomaly examples from this project (use these as visual reference)"*. The model now sees both the rule and concrete pixel evidence of what your project considers an anomaly. Skipped on the Grounding DINO path (text-only model; its pixel precision makes few-shot less necessary).
+- **AI annotations + accept/reject loop.** Each detection writes its regions as `source: "ai"` annotations on the Konva canvas, rendered as a coloured dot with a small label (not a bounding box — vision models eyeball coordinates and a misleading rectangle reads worse than a marker). Reviewers click ✓ to promote a suggestion to ground truth (`source: "human-correction"`) so the next detect run can't overwrite it, or 🗑 to reject, or draw a new box to replace it. Re-running detect clears stale AI suggestions on that image but never touches human-authored annotations.
+- **EXIF-aware coordinate frame.** Browsers auto-apply EXIF orientation when reading uploaded images, so the natural width/height stored at upload time is post-rotation. Sharp does not auto-rotate by default — without an explicit `.rotate()` call, `extract()` cuts from the raw byte frame and crops drift on every phone/drone JPEG. The `cropToDataUrl` helper applies `.rotate()` before metadata + extract, and `orientedImageForKey` does the same for the target image passed to the vision model. All coordinate systems agree.
+- **Pipeline Jobs page.** Every long-running operation writes a `PipelineRun` row with named phases that get upserted as state transitions happen. Training runs show six phases (prepare regions → embed annotations → split → fit centroid → evaluate → save), detection runs show seven (queued → reserve → load few-shot → call vision → clear stale → save detection → write annotations), each with structured meta (counts, identifiers, backend, region count, confidence, reasoning). The Jobs page polls every 1.5s while any run is `running` and stops automatically when nothing's active.
+- **Streaming step-by-step training.** The train route returns `application/x-ndjson` — one JSON event per line — and the panel renders a live pipeline checklist. Embedding is parallelized 5-way against OpenAI, cutting wall time ~5× on a typical 25-annotation run. A failed phase turns red and the error sits inline.
+- **Per-annotation split fallback.** Sequence-aware 60/20/20 split (clean, no temporal leakage) for projects with ≥ 3 sequences. Falls back to a shuffled per-annotation split for sparse projects so metrics aren't stuck at 0%; the model card flags the fallback with an amber chip + warning so the optimism is visible at a glance.
+- **Detection lifecycle status.** Every Detection carries `status: "pending" | "completed" | "failed"`. The detect route reserves the row before the vision call so other tabs see the run in flight; clients fan multi-image batches out 3-wide with live status badges on each image. Failed calls render red with the error text, not a half-empty bbox.
+- **Carousel sequence viewer.** Fixed-size stage (560 × 360, centered) with prev/next overlay buttons, keyboard navigation, dot indicators under 12 frames, and a scrolling thumbnail strip with auto-centred active above. Deterministic image ordering — `(sequenceId, capturedAt, _id)` — so the Annotate and Detect sidebars line up with the gallery exactly.
+- **Hydration-safe dates everywhere.** All client-component date strings go through `lib/utils/date.ts` (UTC, no locale dependency). No more SSR/client mismatch warnings on the Annotate, Detect, or Jobs pages.
 - **JSON / CSV / PDF export.** A reports route emits the full detection log in three formats; `pdfkit` renders a one-page summary with model metadata and the top 200 detection rows for sharing with stakeholders.
 
 ## Tradeoffs
 
-- **Caption-then-embed vs. direct image embeddings.** Two API calls per region instead of one, plus a measurable token bill on a busy day. Bought in exchange for an intermediate human-readable caption that makes false positives diagnose themselves, and a vector store you can swap to any text embedder without re-architecting.
-- **Centroid + threshold, not a classifier.** One-class anomaly detection: cheap, transparent, and works from a few dozen normals. Trades raw accuracy for cold-start speed and explainability. If a project accumulates thousands of labeled anomalies, swap the model layer for a fine-tuned classifier — the schema and review loop don't have to move.
-- **4×4 tile grid, not a learned segmenter.** Hand-tuned spatial resolution. Good enough to point a reviewer at the right corner of the frame; not pixel-precise. The BFS step merges contiguous alarm tiles into bounding boxes, so the UI shows regions rather than blocky cells.
-- **Vercel Blob proxy, not direct URLs.** Images are served through an authenticated `/api/images/[id]/file` proxy so blob URLs never leak. Adds one server hop per render in exchange for not having to think about signed-URL expiry.
-- **Atlas Vector Search, not pgvector.** Picked because the rest of the data model fits naturally into MongoDB documents (heatmap cells as flat arrays, annotation shapes as discriminated unions). The price is a stronger vendor lock-in than Postgres + pgvector would have been.
+- **Rule-driven, not learned end-to-end.** A plain-English rule is fast to set up, transparent in the UI, and works on a single uploaded image with zero training. The cost: rule wording matters, and recall on dataset-specific patterns depends on how well the user articulates "what counts as anomalous". The few-shot crops mitigate this — confirmed annotations teach the model in-context without retraining anything.
+- **Grounding DINO over a generic VLM for localization.** Replicate-hosted Grounding DINO returns pixel-precise boxes because that's what it's trained for. gpt-4o-mini is great at deciding *whether* a rule matches but eyeballs coordinates badly. The route prefers GD whenever `REPLICATE_API_TOKEN` is set and falls back gracefully — a Replicate cold-start adds ~10–30s, subsequent calls inside a warm window are sub-second. Cost is ~$0.005/image.
+- **Markers over bounding boxes in the UI.** Even with Grounding DINO, the demo renders AI results as a pin + label rather than a rectangle. A box implies pixel-precision the model can't always deliver; a marker reads as "look here" honestly. Human-drawn shapes still render as the box / polygon the user actually drew.
+- **Centroid pipeline kept for metrics.** The original caption-then-embed + centroid pipeline still runs at train time and produces precision / recall / F1 against held-out annotations. It also serves as the detection backend when a project has no rule. So the demo carries two backends; the schema and Jobs page handle both modes uniformly.
+- **EXIF normalization on every detect call.** Decoding through sharp + re-encoding the rotated bytes is a ~50ms overhead per detection. Worth it: without it, every phone/drone JPEG with an EXIF orientation tag silently misplaces few-shot crops, and the model's accuracy collapses for reasons that don't show up anywhere except by squinting at the dots.
+- **Vercel Blob private store.** Uploads use `access: "private"`; reads go through the SDK's authenticated `get()` in a server-side proxy so URLs never leak. Adds one hop per image render in exchange for not having to think about signed-URL expiry — and it's the only way to keep medical/industrial source imagery genuinely private on Vercel infra.
+- **Per-annotation split fallback over 0% metrics.** Strict sequence-aware splits prevent temporal leakage but produce nothing to evaluate on small projects with one sequence. Falling back to a shuffled per-annotation split surfaces meaningful numbers earlier, at the cost of mild optimism — the UI says so explicitly with an amber chip.
 
 [Live demo →](/anomaly-detection)

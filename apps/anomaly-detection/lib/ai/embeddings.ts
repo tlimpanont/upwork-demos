@@ -89,6 +89,33 @@ export async function embedImage(input: {
   }
 }
 
+// Embeds plain text directly (no vision step). Used for the project's
+// natural-language detection rule: the description embedding becomes the
+// "anomaly anchor" against which image-caption embeddings are scored.
+export async function embedText(text: string): Promise<EmbedResult> {
+  const seed = text.trim();
+  if (!seed) {
+    return { vector: stubVector("__empty__"), caption: null, source: "stub" };
+  }
+  if (!process.env.OPENAI_API_KEY) {
+    return { vector: stubVector(seed), caption: seed, source: "stub" };
+  }
+  try {
+    const embedding = await client().embeddings.create({
+      model: EMBEDDING_MODEL,
+      input: seed,
+      dimensions: EMBEDDING_DIM,
+    });
+    const vector = embedding.data[0]?.embedding;
+    if (!vector || vector.length !== EMBEDDING_DIM) {
+      return { vector: stubVector(seed), caption: seed, source: "stub" };
+    }
+    return { vector, caption: seed, source: "openai" };
+  } catch {
+    return { vector: stubVector(seed), caption: seed, source: "stub" };
+  }
+}
+
 // Stable, low-quality vector derived from the image URL bytes. Lets the
 // pipeline run end-to-end without an API key. Detection won't be meaningful
 // against this; it's purely a "demo runs" affordance.

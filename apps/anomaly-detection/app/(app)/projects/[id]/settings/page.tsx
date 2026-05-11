@@ -38,6 +38,7 @@ export default async function ProjectSettingsPage({
               id: project._id,
               name: project.name,
               description: project.description,
+              anomalyDescription: project.anomalyDescription,
               domain: project.domain,
             }}
           />

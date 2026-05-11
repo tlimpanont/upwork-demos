@@ -1,5 +1,5 @@
-import { cosineDistance } from "./training";
-import type { Detection } from "@/lib/db/schemas";
+import { scoreEmbedding } from "./training";
+import type { Detection, Model } from "@/lib/db/schemas";
 
 export type Tile = {
   col: number;
@@ -37,19 +37,24 @@ export function generateGrid(
   return tiles;
 }
 
-// Normalize per-tile cosine distances into [0..1] anomaly scores using the
-// model's threshold as the midpoint. Anything >= 2*threshold pegs at 1.0.
+// Normalize per-tile anomaly scores into [0..1] using whatever scoring
+// method the model is set up for (centroid distance, description-distance,
+// or the refined combination). Each cell is the `confidence` returned by
+// scoreEmbedding for that tile's vector.
 export function tilesToHeatmap(
   cols: number,
   rows: number,
-  centroid: number[],
-  threshold: number,
+  model: Pick<
+    Model,
+    "centroid" | "threshold" | "descriptionEmbedding" | "algorithm"
+  >,
   vectors: number[][],
 ): { heatmap: NonNullable<Detection["heatmap"]>; cells: number[] } {
   const cells = vectors.map((v) => {
-    const distance = cosineDistance(centroid, v);
-    const score = distance / Math.max(0.01, 2 * threshold);
-    return Math.min(1, Math.max(0, score));
+    const { isAnomaly, confidence } = scoreEmbedding(model, v);
+    // Heatmap cells weight visible alarm intensity; pin non-anomaly tiles
+    // close to zero so the overlay doesn't paint the whole image red.
+    return Math.min(1, Math.max(0, isAnomaly ? confidence : confidence * 0.2));
   });
   return {
     heatmap: { cols, rows, cells },

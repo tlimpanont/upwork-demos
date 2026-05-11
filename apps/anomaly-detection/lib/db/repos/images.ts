@@ -26,6 +26,13 @@ function toImage(doc: ImageDoc): Image {
   };
 }
 
+// Ordering convention used everywhere in the app:
+//   - Within a sequence: ascending capturedAt, with _id as the tiebreaker
+//     so the order is deterministic even when many images share the same
+//     timestamp (common when filenames carry only a date).
+//   - Across the whole project: group by sequenceId first, then apply the
+//     same per-sequence order. This makes the Annotate and Detect sidebars
+//     line up with each sequence's gallery viewer.
 export async function listImagesForSequence(
   sequenceId: string,
 ): Promise<Image[]> {
@@ -33,7 +40,7 @@ export async function listImagesForSequence(
   const collection = (await db()).collection<ImageDoc>("images");
   const docs = await collection
     .find({ sequenceId: new ObjectId(sequenceId) })
-    .sort({ capturedAt: 1 })
+    .sort({ capturedAt: 1, _id: 1 })
     .toArray();
   return docs.map(toImage);
 }
@@ -45,7 +52,7 @@ export async function listImagesForProject(
   const collection = (await db()).collection<ImageDoc>("images");
   const docs = await collection
     .find({ projectId: new ObjectId(projectId) })
-    .sort({ capturedAt: 1 })
+    .sort({ sequenceId: 1, capturedAt: 1, _id: 1 })
     .toArray();
   return docs.map(toImage);
 }

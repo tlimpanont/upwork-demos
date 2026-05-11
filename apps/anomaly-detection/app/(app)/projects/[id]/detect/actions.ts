@@ -12,9 +12,28 @@ import {
   setDetectionReviewed,
 } from "@/lib/db/repos/detections";
 import { findImageById } from "@/lib/db/repos/images";
-import { findProjectById } from "@/lib/db/repos/projects";
+import { findProjectById, updateProject } from "@/lib/db/repos/projects";
 
 const idSchema = z.string().regex(/^[0-9a-fA-F]{24}$/);
+
+// Lets the user edit the project's detection rule directly from the Detect
+// page. Routes through updateProject so all permissioning lives in one
+// place. Empty/whitespace-only rules clear the rule.
+export async function setProjectRuleAction(input: {
+  projectId: string;
+  rule: string;
+}): Promise<{ ok: boolean; error?: string }> {
+  const parsed = idSchema.safeParse(input.projectId);
+  if (!parsed.success) return { ok: false, error: "Invalid project id" };
+  const user = await requireUser();
+  const trimmed = input.rule.trim().slice(0, 2000);
+  const updated = await updateProject(parsed.data, user.id, {
+    anomalyDescription: trimmed.length === 0 ? null : trimmed,
+  });
+  if (!updated) return { ok: false, error: "Project not found" };
+  revalidatePath(`/projects/${parsed.data}/detect`);
+  return { ok: true };
+}
 
 export async function approveDetectionAction(input: {
   detectionId: string;

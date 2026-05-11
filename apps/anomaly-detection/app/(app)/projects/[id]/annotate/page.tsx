@@ -81,6 +81,7 @@ export default async function AnnotatePage({
         label: a.label,
         shape: a.shape,
         comment: a.comment,
+        source: a.source,
       }))}
       initialImageId={initialImageId}
     />

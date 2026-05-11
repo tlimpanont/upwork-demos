@@ -9,6 +9,9 @@ import {
   Line,
   Circle,
   Group,
+  Label as KonvaLabel,
+  Tag as KonvaTag,
+  Text as KonvaText,
 } from "react-konva";
 import type Konva from "konva";
 import type { Annotation } from "@/lib/db/schemas";
@@ -22,6 +25,7 @@ type Existing = {
   id: string;
   label: Annotation["label"];
   shape: Annotation["shape"];
+  source: Annotation["source"];
 };
 
 export function AnnotationCanvas({
@@ -198,6 +202,29 @@ export function AnnotationCanvas({
           {existing.map((a) => {
             const stroke =
               a.label === "anomaly" ? ANOMALY_STROKE : NORMAL_STROKE;
+            const isAi = a.source === "ai";
+
+            // AI annotations: drop the bbox (vision models eyeball coords
+            // anyway) and just pin a marker + label at the center of the
+            // region. Reviewers see "look here, anomaly" without an
+            // imprecise rectangle suggesting a tighter fit than the model
+            // can actually deliver.
+            if (isAi) {
+              const center = shapeCenter(a.shape);
+              return (
+                <AiMarker
+                  key={a.id}
+                  cx={center.x}
+                  cy={center.y}
+                  scale={scale}
+                  color={stroke}
+                  label={a.label}
+                />
+              );
+            }
+
+            // Human + human-correction annotations: render the precise
+            // shape the user actually drew.
             if (a.shape.type === "bounding_box") {
               return (
                 <Rect
@@ -261,4 +288,70 @@ export function AnnotationCanvas({
       </Stage>
     </div>
   );
+}
+
+// Small filled dot + text tag pinned next to a region center. All radii
+// and paddings are divided by `scale` so the marker looks the same size
+// regardless of how zoomed-in the canvas is.
+function AiMarker({
+  cx,
+  cy,
+  scale,
+  color,
+  label,
+}: {
+  cx: number;
+  cy: number;
+  scale: number;
+  color: string;
+  label: string;
+}) {
+  const dot = 5 / scale;
+  const ring = 8 / scale;
+  const offset = 12 / scale;
+  return (
+    <Group x={cx} y={cy} listening={false}>
+      <Circle radius={ring} fill={color} opacity={0.25} />
+      <Circle
+        radius={dot}
+        fill={color}
+        stroke="#0b0f19"
+        strokeWidth={1.5 / scale}
+      />
+      <KonvaLabel x={offset} y={-dot}>
+        <KonvaTag
+          fill={color}
+          cornerRadius={2 / scale}
+          shadowColor="#000"
+          shadowBlur={4 / scale}
+          shadowOpacity={0.4}
+        />
+        <KonvaText
+          text={label}
+          fontSize={12 / scale}
+          fontStyle="600"
+          padding={3 / scale}
+          fill="#0b0f19"
+        />
+      </KonvaLabel>
+    </Group>
+  );
+}
+
+function shapeCenter(shape: Annotation["shape"]): { x: number; y: number } {
+  if (shape.type === "bounding_box") {
+    return {
+      x: shape.x + shape.width / 2,
+      y: shape.y + shape.height / 2,
+    };
+  }
+  // Polygon: centroid of the vertex list.
+  let sx = 0;
+  let sy = 0;
+  for (const p of shape.points) {
+    sx += p.x;
+    sy += p.y;
+  }
+  const n = Math.max(1, shape.points.length);
+  return { x: sx / n, y: sy / n };
 }

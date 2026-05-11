@@ -7,9 +7,12 @@ type ModelDoc = {
   projectId: ObjectId;
   version: string;
   algorithm: Model["algorithm"];
-  centroid: number[];
+  centroid: number[] | null;
+  description: string | null;
+  descriptionEmbedding: number[] | null;
   threshold: number;
   metrics: Model["metrics"];
+  split?: Model["split"];
   status: Model["status"];
   createdAt: Date;
 };
@@ -21,8 +24,11 @@ function toModel(doc: ModelDoc): Model {
     version: doc.version,
     algorithm: doc.algorithm,
     centroid: doc.centroid,
+    description: doc.description ?? null,
+    descriptionEmbedding: doc.descriptionEmbedding ?? null,
     threshold: doc.threshold,
     metrics: doc.metrics,
+    split: doc.split ?? null,
     status: doc.status,
     createdAt: doc.createdAt,
   };
@@ -55,18 +61,25 @@ export async function findLatestCompletedModel(
 export async function insertModel(input: {
   projectId: string;
   version: string;
-  centroid: number[];
+  algorithm: Model["algorithm"];
+  centroid: number[] | null;
+  description: string | null;
+  descriptionEmbedding: number[] | null;
   threshold: number;
   metrics: Model["metrics"];
+  split?: Model["split"];
   status: Model["status"];
 }): Promise<Model> {
   const doc = {
     projectId: new ObjectId(input.projectId),
     version: input.version,
-    algorithm: "openai-embedding-centroid" as const,
+    algorithm: input.algorithm,
     centroid: input.centroid,
+    description: input.description,
+    descriptionEmbedding: input.descriptionEmbedding,
     threshold: input.threshold,
     metrics: input.metrics,
+    split: input.split ?? null,
     status: input.status,
     createdAt: new Date(),
   };

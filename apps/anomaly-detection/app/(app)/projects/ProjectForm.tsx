@@ -26,6 +26,7 @@ export type ProjectFormProps =
         id: string;
         name: string;
         description: string | null;
+        anomalyDescription: string | null;
         domain: string;
       };
     };
@@ -69,13 +70,32 @@ export function ProjectForm(props: ProjectFormProps) {
         <textarea
           id="description"
           name="description"
-          rows={4}
-          placeholder="What kind of anomalies should this detector catch?"
+          rows={3}
+          placeholder="Short notes about the project — what you're inspecting, where the imagery comes from."
           defaultValue={
             props.mode === "edit" ? (props.initial.description ?? "") : ""
           }
           className="flex w-full rounded-md border border-border bg-input/40 px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         />
+      </div>
+      <div className="space-y-2">
+        <Label htmlFor="anomalyDescription">Detection rule</Label>
+        <textarea
+          id="anomalyDescription"
+          name="anomalyDescription"
+          rows={4}
+          placeholder="Describe in plain English what counts as anomalous. Example: 'darkened or cracked solar cells, soot streaks, broken cell strings.'"
+          defaultValue={
+            props.mode === "edit"
+              ? (props.initial.anomalyDescription ?? "")
+              : ""
+          }
+          className="flex w-full rounded-md border border-border bg-input/40 px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        />
+        <p className="text-xs text-muted-foreground">
+          Drives zero-shot detection: a saved rule lets Detect run before you
+          annotate. Annotations refine the rule on top.
+        </p>
       </div>
       {state?.error ? (
         <p className="text-sm text-destructive">{state.error}</p>

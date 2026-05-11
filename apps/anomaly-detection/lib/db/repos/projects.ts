@@ -7,6 +7,7 @@ type ProjectDoc = {
   ownerId: ObjectId;
   name: string;
   description: string | null;
+  anomalyDescription?: string | null;
   domain: Project["domain"];
   createdAt: Date;
   updatedAt: Date;
@@ -18,6 +19,7 @@ function toProject(doc: ProjectDoc): Project {
     ownerId: doc.ownerId.toHexString(),
     name: doc.name,
     description: doc.description,
+    anomalyDescription: doc.anomalyDescription ?? null,
     domain: doc.domain,
     createdAt: doc.createdAt,
     updatedAt: doc.updatedAt,
@@ -50,6 +52,7 @@ export async function insertProject(input: {
   ownerId: string;
   name: string;
   description: string | null;
+  anomalyDescription?: string | null;
   domain: Project["domain"];
 }): Promise<Project> {
   const now = new Date();
@@ -57,6 +60,7 @@ export async function insertProject(input: {
     ownerId: new ObjectId(input.ownerId),
     name: input.name,
     description: input.description,
+    anomalyDescription: input.anomalyDescription ?? null,
     domain: input.domain,
     createdAt: now,
     updatedAt: now,
@@ -69,7 +73,12 @@ export async function insertProject(input: {
 export async function updateProject(
   id: string,
   ownerId: string,
-  patch: { name?: string; description?: string | null; domain?: Project["domain"] },
+  patch: {
+    name?: string;
+    description?: string | null;
+    anomalyDescription?: string | null;
+    domain?: Project["domain"];
+  },
 ): Promise<Project | null> {
   if (!ObjectId.isValid(id)) return null;
   const collection = (await db()).collection<ProjectDoc>("projects");

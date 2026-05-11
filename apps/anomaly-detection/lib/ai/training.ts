@@ -31,23 +31,39 @@ export type Split = {
   train: Embedding[];
   validation: Embedding[];
   test: Embedding[];
+  // "sequence" = each sequence stays in one bucket (clean, no leakage)
+  // "annotation" = shuffled per-annotation 60/20/20 (used as a fallback
+  //   when sequence diversity is too low to produce non-empty val/test
+  //   buckets). Adjacent frames may straddle the train/test line, so the
+  //   resulting metrics can be optimistic — the Train UI flags this.
+  mode: "sequence" | "annotation";
 };
 
+// Below this many sequences, the sequence-aware split would leave the
+// validation/test buckets empty (all sequences land in train) and metrics
+// stay at 0. We fall back to a per-annotation split instead.
+const MIN_SEQUENCES_FOR_SEQUENCE_SPLIT = 3;
+
 // Sequence-aware split: every embedding from one sequence stays in one
-// partition. Ratios are train 0.6 / val 0.2 / test 0.2 by sequence count,
-// rounded so the train split always has ≥1 sequence.
+// partition. Ratios are train 0.6 / val 0.2 / test 0.2 by sequence count.
+// Falls back to a shuffled per-annotation split when the project has
+// fewer than 3 sequences (so the demo still produces meaningful metrics
+// for small datasets, with a leakage warning surfaced in the UI).
 export function splitBySequence(embeddings: Embedding[]): Split {
   const bySeq = new Map<string, Embedding[]>();
   for (const e of embeddings) {
-    // The vector store carries imageId; we re-derive sequenceId by joining
-    // upstream of this function (callers pass sequenceId on Embedding via
-    // Mongo-side projection — see route handler).
-    const key = (e as Embedding & { sequenceId?: string }).sequenceId ?? e.imageId;
+    const key =
+      (e as Embedding & { sequenceId?: string }).sequenceId ?? e.imageId;
     const list = bySeq.get(key) ?? [];
     list.push(e);
     bySeq.set(key, list);
   }
   const sequenceIds = [...bySeq.keys()].sort();
+
+  if (sequenceIds.length < MIN_SEQUENCES_FOR_SEQUENCE_SPLIT) {
+    return splitByAnnotation(embeddings);
+  }
+
   const trainCount = Math.max(1, Math.floor(sequenceIds.length * 0.6));
   const valCount = Math.max(0, Math.floor(sequenceIds.length * 0.2));
   const trainSet = new Set(sequenceIds.slice(0, trainCount));
@@ -55,13 +71,56 @@ export function splitBySequence(embeddings: Embedding[]): Split {
     sequenceIds.slice(trainCount, trainCount + valCount),
   );
 
-  const split: Split = { train: [], validation: [], test: [] };
+  const split: Split = {
+    train: [],
+    validation: [],
+    test: [],
+    mode: "sequence",
+  };
   for (const [seq, list] of bySeq) {
     if (trainSet.has(seq)) split.train.push(...list);
     else if (valSet.has(seq)) split.validation.push(...list);
     else split.test.push(...list);
   }
   return split;
+}
+
+// Deterministic shuffled 60/20/20 split over the annotations themselves.
+// Used when sequence diversity is too low. Deterministic so re-running the
+// same training run produces the same metrics; the seed is derived from
+// the embedding ids so different projects don't all see the same order.
+function splitByAnnotation(embeddings: Embedding[]): Split {
+  const sorted = [...embeddings].sort((a, b) =>
+    a._id.localeCompare(b._id),
+  );
+  // Fisher-Yates with a hash-derived seed for determinism.
+  const seed = sorted.reduce(
+    (acc, e) => (acc * 31 + (e._id.charCodeAt(0) | 0)) >>> 0,
+    2166136261 >>> 0,
+  );
+  let state = seed || 1;
+  const rand = () => {
+    state ^= state << 13;
+    state ^= state >>> 17;
+    state ^= state << 5;
+    state >>>= 0;
+    return state / 0xffffffff;
+  };
+  for (let i = sorted.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [sorted[i], sorted[j]] = [sorted[j], sorted[i]];
+  }
+
+  const n = sorted.length;
+  const trainEnd = Math.max(1, Math.floor(n * 0.6));
+  const valEnd = Math.max(trainEnd, Math.floor(n * 0.8));
+
+  return {
+    train: sorted.slice(0, trainEnd),
+    validation: sorted.slice(trainEnd, valEnd),
+    test: sorted.slice(valEnd),
+    mode: "annotation",
+  };
 }
 
 export function computeCentroidAndThreshold(
@@ -79,6 +138,93 @@ export function computeCentroidAndThreshold(
   // homogeneous training set doesn't yield a 0 threshold.
   const threshold = Math.max(0.05, mean + 2 * sigma);
   return { centroid, threshold, sigma };
+}
+
+// Zero-shot threshold: how close (cosine distance) an image embedding has
+// to be to the description embedding to count as a description match.
+// Empirically tuned for text-embedding-3-small — captions of the same
+// scene tend to land within 0.30–0.40 of each other.
+export const DESCRIPTION_THRESHOLD = 0.35;
+
+export type ScoredEmbedding = {
+  // Cosine distance from the normal centroid. Null when there is no
+  // centroid (description-only model).
+  centroidDistance: number | null;
+  // Cosine distance from the description embedding. Null when there is no
+  // description embedding (legacy centroid-only model).
+  descriptionDistance: number | null;
+  // True when the embedding crosses the model's anomaly bar. For refined
+  // (centroid + description) models, both signals have to agree.
+  isAnomaly: boolean;
+  // 0..1 score for the UI, higher = stronger anomaly call.
+  confidence: number;
+};
+
+// Single decision function for every detection mode. Keeps the route
+// handler from juggling three cases inline.
+export function scoreEmbedding(
+  model: Pick<
+    Model,
+    "centroid" | "threshold" | "descriptionEmbedding" | "algorithm"
+  >,
+  vector: number[],
+): ScoredEmbedding {
+  const centroidDistance = model.centroid
+    ? cosineDistance(model.centroid, vector)
+    : null;
+  const descriptionDistance = model.descriptionEmbedding
+    ? cosineDistance(model.descriptionEmbedding, vector)
+    : null;
+
+  // Description-only (zero-shot): close to description = anomaly.
+  if (centroidDistance === null && descriptionDistance !== null) {
+    const isAnomaly = descriptionDistance <= DESCRIPTION_THRESHOLD;
+    const confidence = Math.max(
+      0,
+      Math.min(1, 1 - descriptionDistance / DESCRIPTION_THRESHOLD),
+    );
+    return { centroidDistance, descriptionDistance, isAnomaly, confidence };
+  }
+
+  // Centroid-only (legacy): far from normal = anomaly.
+  if (centroidDistance !== null && descriptionDistance === null) {
+    const isAnomaly = centroidDistance >= model.threshold;
+    const confidence = isAnomaly
+      ? Math.min(1, centroidDistance / (2 * model.threshold))
+      : Math.max(0, Math.min(1, 1 - centroidDistance / model.threshold));
+    return { centroidDistance, descriptionDistance, isAnomaly, confidence };
+  }
+
+  // Refined: both signals must agree. The description acts as a precision
+  // filter on top of the centroid threshold — far from normal *and*
+  // matching the rule.
+  if (centroidDistance !== null && descriptionDistance !== null) {
+    const farFromNormal = centroidDistance >= model.threshold;
+    const matchesRule = descriptionDistance <= DESCRIPTION_THRESHOLD;
+    const isAnomaly = farFromNormal && matchesRule;
+    const centroidScore = Math.min(
+      1,
+      centroidDistance / (2 * model.threshold),
+    );
+    const descriptionScore = Math.max(
+      0,
+      1 - descriptionDistance / DESCRIPTION_THRESHOLD,
+    );
+    // Geometric mean: the anomaly call only earns high confidence when
+    // *both* signals lean strong.
+    const confidence = isAnomaly
+      ? Math.sqrt(centroidScore * descriptionScore)
+      : Math.max(0, 1 - Math.max(centroidDistance, descriptionDistance));
+    return { centroidDistance, descriptionDistance, isAnomaly, confidence };
+  }
+
+  // No model state at all — caller should have short-circuited.
+  return {
+    centroidDistance,
+    descriptionDistance,
+    isAnomaly: false,
+    confidence: 0,
+  };
 }
 
 export type EvalMetrics = Model["metrics"];

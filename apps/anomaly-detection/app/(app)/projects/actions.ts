@@ -23,6 +23,7 @@ const DomainEnum = z.enum([
 const createSchema = z.object({
   name: z.string().min(1).max(120),
   description: z.string().max(2000).optional().nullable(),
+  anomalyDescription: z.string().max(2000).optional().nullable(),
   domain: DomainEnum.default("other"),
 });
 
@@ -38,6 +39,7 @@ export async function createProjectAction(
   const parsed = createSchema.safeParse({
     name: formData.get("name"),
     description: formData.get("description") || null,
+    anomalyDescription: formData.get("anomalyDescription") || null,
     domain: formData.get("domain") || "other",
   });
   if (!parsed.success) {
@@ -48,6 +50,7 @@ export async function createProjectAction(
     ownerId: user.id,
     name: parsed.data.name,
     description: parsed.data.description ?? null,
+    anomalyDescription: parsed.data.anomalyDescription ?? null,
     domain: parsed.data.domain,
   });
   revalidatePath("/projects");
@@ -63,6 +66,7 @@ export async function updateProjectAction(
     id: formData.get("id"),
     name: formData.get("name"),
     description: formData.get("description") || null,
+    anomalyDescription: formData.get("anomalyDescription") || null,
     domain: formData.get("domain") || "other",
   });
   if (!parsed.success) {
@@ -71,6 +75,7 @@ export async function updateProjectAction(
   const updated = await updateProject(parsed.data.id, user.id, {
     name: parsed.data.name,
     description: parsed.data.description ?? null,
+    anomalyDescription: parsed.data.anomalyDescription ?? null,
     domain: parsed.data.domain,
   });
   if (!updated) return { error: "Project not found." };

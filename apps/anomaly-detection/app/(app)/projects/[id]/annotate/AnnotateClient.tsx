@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { Trash2 } from "lucide-react";
+import { Check, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Label } from "@/components/ui/Label";
 import {
@@ -14,10 +14,12 @@ import {
   CardTitle,
 } from "@/components/ui/Card";
 import {
-  saveAnnotationAction,
+  acceptAiAnnotationAction,
   deleteAnnotationAction,
+  saveAnnotationAction,
 } from "./actions";
 import type { Annotation } from "@/lib/db/schemas";
+import { formatDateUTC } from "@/lib/utils/date";
 
 // Konva touches `window`/canvas, so the whole canvas component is client-only.
 const AnnotationCanvas = dynamic(
@@ -48,6 +50,7 @@ export type AnnotationSummary = {
   label: Annotation["label"];
   shape: Annotation["shape"];
   comment: string | null;
+  source: Annotation["source"];
 };
 
 export type Tool = "select" | "bbox" | "polygon";
@@ -119,6 +122,13 @@ export function AnnotateClient({
     });
   }
 
+  function handleAcceptAi(annotationId: string) {
+    startTransition(async () => {
+      await acceptAiAnnotationAction({ annotationId });
+      router.refresh();
+    });
+  }
+
   return (
     <div className="grid gap-4 lg:grid-cols-[260px_1fr_280px]">
       <Card className="self-start">
@@ -146,7 +156,7 @@ export function AnnotateClient({
                 <span className="flex flex-col">
                   <span className="truncate">{i.sequenceName}</span>
                   <span className="text-[10px] text-muted-foreground">
-                    {new Date(i.capturedAt).toLocaleDateString()}
+                    {formatDateUTC(i.capturedAt)}
                   </span>
                 </span>
                 <span className="rounded-full bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">
@@ -174,6 +184,7 @@ export function AnnotateClient({
             id: a.id,
             label: a.label,
             shape: a.shape,
+            source: a.source,
           }))}
           tool={tool}
           label={label}
@@ -211,7 +222,11 @@ export function AnnotateClient({
                 imageAnnotations.map((a) => (
                   <li
                     key={a.id}
-                    className="flex items-center justify-between gap-2 rounded-md border border-border/40 px-2 py-1.5 text-xs"
+                    className={`flex items-center justify-between gap-2 rounded-md border px-2 py-1.5 text-xs ${
+                      a.source === "ai"
+                        ? "border-dashed border-chart-3/60 bg-chart-3/5"
+                        : "border-border/40"
+                    }`}
                   >
                     <span className="flex items-center gap-1.5">
                       <span
@@ -221,17 +236,41 @@ export function AnnotateClient({
                             : "bg-chart-2"
                         }`}
                       />
-                      {a.label} · {a.shape.type === "bounding_box" ? "box" : "polygon"}
+                      {a.label} ·{" "}
+                      {a.shape.type === "bounding_box" ? "box" : "polygon"}
+                      {a.source === "ai" ? (
+                        <span className="ml-1 rounded-sm border border-chart-3/40 px-1 py-px text-[9px] uppercase tracking-wider text-chart-3">
+                          AI
+                        </span>
+                      ) : a.source === "human-correction" ? (
+                        <span className="ml-1 rounded-sm border border-primary/40 px-1 py-px text-[9px] uppercase tracking-wider text-primary">
+                          review
+                        </span>
+                      ) : null}
                     </span>
-                    <button
-                      type="button"
-                      onClick={() => handleDelete(a.id)}
-                      disabled={isPending}
-                      className="text-muted-foreground hover:text-destructive"
-                      aria-label="Delete annotation"
-                    >
-                      <Trash2 className="h-3 w-3" />
-                    </button>
+                    <span className="flex items-center gap-1">
+                      {a.source === "ai" ? (
+                        <button
+                          type="button"
+                          onClick={() => handleAcceptAi(a.id)}
+                          disabled={isPending}
+                          className="text-muted-foreground hover:text-chart-2"
+                          aria-label="Accept AI suggestion as ground truth"
+                          title="Accept — locks in as human-correction so the next detect run won't overwrite it"
+                        >
+                          <Check className="h-3.5 w-3.5" />
+                        </button>
+                      ) : null}
+                      <button
+                        type="button"
+                        onClick={() => handleDelete(a.id)}
+                        disabled={isPending}
+                        className="text-muted-foreground hover:text-destructive"
+                        aria-label="Delete annotation"
+                      >
+                        <Trash2 className="h-3 w-3" />
+                      </button>
+                    </span>
                   </li>
                 ))
               )}

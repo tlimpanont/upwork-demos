@@ -3,10 +3,15 @@
 import { useEffect, useRef, useState } from "react";
 import type { DetectionView } from "./DetectClient";
 
-// Renders the source image with the optional heatmap drawn on a canvas
-// overlay (translucent red, intensity = score), plus result bounding boxes
-// stroked over the top. Width is computed from the container; height is
-// scaled to keep the image's aspect ratio.
+// Renders the source image with a small marker + label pinned next to each
+// identified region. The model's bbox coords are still used to position the
+// pin (the center of the bbox) but we don't draw the box itself — the
+// vision model's coordinates aren't precise enough for a meaningful
+// rectangle, and a pin reads as "look here" without misleading the viewer
+// about exact extent.
+
+const ANOMALY_COLOR = "#f87171";
+const NORMAL_COLOR = "#22d3a8";
 
 export function DetectionOverlay({
   imageId,
@@ -20,7 +25,6 @@ export function DetectionOverlay({
   detection: DetectionView | null;
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const heatmapRef = useRef<HTMLCanvasElement | null>(null);
   const [renderedWidth, setRenderedWidth] = useState(0);
 
   useEffect(() => {
@@ -37,28 +41,32 @@ export function DetectionOverlay({
   const scale = renderedWidth && width ? Math.min(1, renderedWidth / width) : 1;
   const renderedHeight = height * scale;
 
-  useEffect(() => {
-    const canvas = heatmapRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-    canvas.width = width;
-    canvas.height = height;
-    ctx.clearRect(0, 0, width, height);
-
-    if (!detection?.heatmap) return;
-    const { cols, rows, cells } = detection.heatmap;
-    const tileW = width / cols;
-    const tileH = height / rows;
-    for (let r = 0; r < rows; r++) {
-      for (let c = 0; c < cols; c++) {
-        const score = cells[r * cols + c];
-        if (score <= 0) continue;
-        ctx.fillStyle = `rgba(239, 68, 68, ${Math.min(0.65, score * 0.65)})`;
-        ctx.fillRect(c * tileW, r * tileH, tileW, tileH);
-      }
-    }
-  }, [detection, width, height]);
+  // Whole-image "normal" results carry a bbox spanning the entire frame —
+  // a pin at its center would be confusing, so we suppress markers for
+  // those and show the verdict in the right-hand Review card instead.
+  const markers = detection
+    ? detection.results
+        .filter((r) => {
+          if (r.label !== "anomaly") return false;
+          const coversAll =
+            r.bbox.x <= 1 &&
+            r.bbox.y <= 1 &&
+            r.bbox.width >= width - 2 &&
+            r.bbox.height >= height - 2;
+          return !coversAll;
+        })
+        .map((r, i) => {
+          const cx = r.bbox.x + r.bbox.width / 2;
+          const cy = r.bbox.y + r.bbox.height / 2;
+          return {
+            key: i,
+            label: r.label,
+            confidence: r.confidence,
+            cxPct: (cx / width) * 100,
+            cyPct: (cy / height) * 100,
+          };
+        })
+    : [];
 
   return (
     <div
@@ -72,42 +80,38 @@ export function DetectionOverlay({
         alt=""
         className="block h-auto w-full"
       />
-      <canvas
-        ref={heatmapRef}
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          pointerEvents: "none",
-        }}
-      />
-      {detection
-        ? detection.results.map((r, i) => {
-            const stroke = r.label === "anomaly" ? "#f87171" : "#22d3a8";
-            return (
-              <div
-                key={i}
-                className="pointer-events-none absolute"
-                style={{
-                  left: `${(r.bbox.x / width) * 100}%`,
-                  top: `${(r.bbox.y / height) * 100}%`,
-                  width: `${(r.bbox.width / width) * 100}%`,
-                  height: `${(r.bbox.height / height) * 100}%`,
-                  border: `2px solid ${stroke}`,
-                  background: `${stroke}1A`,
-                }}
-              >
-                <span
-                  className="absolute -top-5 left-0 rounded-sm px-1.5 py-0.5 text-[10px] font-medium"
-                  style={{ background: stroke, color: "#0b0f19" }}
-                >
-                  {r.label} · {(r.confidence * 100).toFixed(0)}%
-                </span>
-              </div>
-            );
-          })
-        : null}
+      {markers.map((m) => {
+        const color = m.label === "anomaly" ? ANOMALY_COLOR : NORMAL_COLOR;
+        return (
+          <div
+            key={m.key}
+            className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2"
+            style={{
+              left: `${m.cxPct}%`,
+              top: `${m.cyPct}%`,
+            }}
+          >
+            {/* Dot + pulsing halo so the marker is visible on busy
+                backgrounds without being a wall of red. */}
+            <span className="relative flex h-3 w-3 items-center justify-center">
+              <span
+                className="absolute inline-flex h-3 w-3 animate-ping rounded-full opacity-60"
+                style={{ background: color }}
+              />
+              <span
+                className="relative inline-flex h-2.5 w-2.5 rounded-full ring-2 ring-black/60"
+                style={{ background: color }}
+              />
+            </span>
+            <span
+              className="absolute left-3 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-sm px-1.5 py-0.5 text-[10px] font-medium shadow-sm"
+              style={{ background: color, color: "#0b0f19" }}
+            >
+              {m.label} · {(m.confidence * 100).toFixed(0)}%
+            </span>
+          </div>
+        );
+      })}
     </div>
   );
 }

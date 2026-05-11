@@ -12,6 +12,7 @@ const TABS: Tab[] = [
   { label: "Annotate", suffix: "/annotate" },
   { label: "Train", suffix: "/train" },
   { label: "Detect", suffix: "/detect" },
+  { label: "Jobs", suffix: "/jobs" },
   { label: "Reports", suffix: "/reports" },
   { label: "Settings", suffix: "/settings" },
 ];

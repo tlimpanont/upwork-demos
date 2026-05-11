@@ -3,7 +3,10 @@ import { notFound } from "next/navigation";
 import { ImageIcon } from "lucide-react";
 import { requireUser } from "@/lib/api";
 import { findProjectById } from "@/lib/db/repos/projects";
-import { listSequencesForProject } from "@/lib/db/repos/sequences";
+import {
+  countImagesPerSequence,
+  listSequencesForProject,
+} from "@/lib/db/repos/sequences";
 import {
   Card,
   CardContent,
@@ -12,6 +15,8 @@ import {
   CardTitle,
 } from "@/components/ui/Card";
 import { CreateSequenceForm } from "./CreateSequenceForm";
+
+export const dynamic = "force-dynamic";
 
 export default async function SequencesIndexPage({
   params,
@@ -22,7 +27,10 @@ export default async function SequencesIndexPage({
   const user = await requireUser();
   const project = await findProjectById(id, user.id);
   if (!project) notFound();
-  const sequences = await listSequencesForProject(id);
+  const [sequences, imageCounts] = await Promise.all([
+    listSequencesForProject(id),
+    countImagesPerSequence(id),
+  ]);
 
   return (
     <div className="space-y-6">
@@ -42,22 +50,25 @@ export default async function SequencesIndexPage({
               </p>
             ) : (
               <ul className="space-y-2">
-                {sequences.map((s) => (
-                  <li key={s._id}>
-                    <Link
-                      href={`/projects/${project._id}/sequences/${s._id}`}
-                      className="flex items-center justify-between rounded-md border border-border/60 bg-card/40 px-3 py-2 text-sm transition-colors hover:border-primary/60"
-                    >
-                      <span className="flex items-center gap-2">
-                        <ImageIcon className="h-4 w-4 text-primary" />
-                        {s.name}
-                      </span>
-                      <span className="text-xs text-muted-foreground">
-                        {s.imageCount} {s.imageCount === 1 ? "image" : "images"}
-                      </span>
-                    </Link>
-                  </li>
-                ))}
+                {sequences.map((s) => {
+                  const count = imageCounts.get(s._id) ?? 0;
+                  return (
+                    <li key={s._id}>
+                      <Link
+                        href={`/projects/${project._id}/sequences/${s._id}`}
+                        className="flex items-center justify-between rounded-md border border-border/60 bg-card/40 px-3 py-2 text-sm transition-colors hover:border-primary/60"
+                      >
+                        <span className="flex items-center gap-2">
+                          <ImageIcon className="h-4 w-4 text-primary" />
+                          {s.name}
+                        </span>
+                        <span className="text-xs text-muted-foreground">
+                          {count} {count === 1 ? "image" : "images"}
+                        </span>
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             )}
           </CardContent>

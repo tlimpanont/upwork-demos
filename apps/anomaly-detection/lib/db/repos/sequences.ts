@@ -105,3 +105,23 @@ export async function ensureSequenceIndexes(): Promise<void> {
   const collection = (await db()).collection("sequences");
   await collection.createIndex({ projectId: 1, createdAt: -1 });
 }
+
+// Returns a map of sequenceId -> live image count for every sequence in
+// the project. Computed via an aggregation rather than reading the stored
+// `imageCount` field, which can drift if deleteImageCascade fires without
+// the corresponding bumpImageCount call.
+export async function countImagesPerSequence(
+  projectId: string,
+): Promise<Map<string, number>> {
+  if (!ObjectId.isValid(projectId)) return new Map();
+  const collection = (await db()).collection("images");
+  const cursor = collection.aggregate<{ _id: ObjectId; count: number }>([
+    { $match: { projectId: new ObjectId(projectId) } },
+    { $group: { _id: "$sequenceId", count: { $sum: 1 } } },
+  ]);
+  const out = new Map<string, number>();
+  for await (const row of cursor) {
+    out.set(row._id.toHexString(), row.count);
+  }
+  return out;
+}

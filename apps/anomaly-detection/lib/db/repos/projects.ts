@@ -107,3 +107,77 @@ export async function ensureProjectIndexes(): Promise<void> {
   const collection = (await db()).collection("projects");
   await collection.createIndex({ ownerId: 1, updatedAt: -1 });
 }
+
+export type ProjectStats = {
+  sequences: number;
+  images: number;
+  annotations: number;
+  anomalies: number;
+};
+
+// Live count aggregation for the project list card badges. Runs four
+// $group queries in parallel and returns a map keyed by projectId. Using
+// live counts means a project with deleted images can never show a stale
+// non-zero number, and a fresh detection won't trail the cache.
+export async function getProjectStats(
+  projectIds: string[],
+): Promise<Map<string, ProjectStats>> {
+  const out = new Map<string, ProjectStats>();
+  if (projectIds.length === 0) return out;
+  const oids = projectIds
+    .filter((id) => ObjectId.isValid(id))
+    .map((id) => new ObjectId(id));
+  if (oids.length === 0) return out;
+  const dbi = await db();
+
+  const [seqRows, imgRows, annoRows] = await Promise.all([
+    dbi
+      .collection("sequences")
+      .aggregate<{ _id: ObjectId; count: number }>([
+        { $match: { projectId: { $in: oids } } },
+        { $group: { _id: "$projectId", count: { $sum: 1 } } },
+      ])
+      .toArray(),
+    dbi
+      .collection("images")
+      .aggregate<{ _id: ObjectId; count: number }>([
+        { $match: { projectId: { $in: oids } } },
+        { $group: { _id: "$projectId", count: { $sum: 1 } } },
+      ])
+      .toArray(),
+    dbi
+      .collection("annotations")
+      .aggregate<{
+        _id: { projectId: ObjectId; label: "normal" | "anomaly" };
+        count: number;
+      }>([
+        { $match: { projectId: { $in: oids } } },
+        {
+          $group: {
+            _id: { projectId: "$projectId", label: "$label" },
+            count: { $sum: 1 },
+          },
+        },
+      ])
+      .toArray(),
+  ]);
+
+  for (const id of projectIds) {
+    out.set(id, { sequences: 0, images: 0, annotations: 0, anomalies: 0 });
+  }
+  for (const row of seqRows) {
+    const stats = out.get(row._id.toHexString());
+    if (stats) stats.sequences = row.count;
+  }
+  for (const row of imgRows) {
+    const stats = out.get(row._id.toHexString());
+    if (stats) stats.images = row.count;
+  }
+  for (const row of annoRows) {
+    const stats = out.get(row._id.projectId.toHexString());
+    if (!stats) continue;
+    stats.annotations += row.count;
+    if (row._id.label === "anomaly") stats.anomalies += row.count;
+  }
+  return out;
+}

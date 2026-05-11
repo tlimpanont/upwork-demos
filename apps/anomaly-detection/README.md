@@ -75,14 +75,47 @@ cp .env.example .env.local
 # Provision the Atlas Vector Search index (idempotent; legacy centroid path)
 npm run db:vector-index
 
-# Seed a demo user + three demo projects
+# Restore the baseline demo dataset (or scaffold a fallback skeleton)
 npm run db:seed
 
 # Boot the app on http://localhost:3007
 npm run dev
 ```
 
-Sign in as `demo@anomaly.local` / `demo1234`.
+Sign in as `demo@anomaly.local` / `demo1234` — the login page also has a
+**Sign in as demo** button that fills the form and submits in one click.
+
+## Demo dataset (dump / restore)
+
+The repo ships with a baseline dataset under `scripts/baseline/` that
+`npm run db:seed` restores into the demo workspace. The baseline includes
+projects, sequences, images, annotations, and detection rules captured at
+a known good state, so a fresh deploy can show off the full workflow
+without manual setup.
+
+- **Snapshot the current state** (Mongo + the bytes of every image in
+  Vercel Blob):
+  ```bash
+  npm run db:dump
+  ```
+  This writes `scripts/baseline/baseline.json` plus
+  `scripts/baseline/images/<imageId>.jpg`. AI annotations are promoted
+  to `human-correction` on the way out so the seeded baseline starts
+  with confirmed ground truth, not stale machine suggestions.
+
+- **Restore the baseline**:
+  ```bash
+  npm run db:seed
+  ```
+  Drops the demo user's existing data, re-uploads each baseline image
+  into the current blob store under fresh keys, and re-inserts every
+  project / sequence / image / annotation with new ObjectIds.
+  Embeddings, models, detections, and pipeline runs are intentionally
+  *not* restored — they're regenerated on first use.
+
+- If `scripts/baseline/baseline.json` is missing, `db:seed` falls back to
+  a 3-project skeleton (solar / manufacturing / medical) with empty
+  sequences. Useful for the very first run before a dump exists.
 
 Pages of interest:
 

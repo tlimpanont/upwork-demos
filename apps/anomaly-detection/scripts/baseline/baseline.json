@@ -1,0 +1,4618 @@
+{
+  "version": 1,
+  "generatedAt": "2026-05-11T12:45:58.527Z",
+  "projects": [
+    {
+      "slug": "6a00e090c9e61645182fa64d",
+      "name": "Solar Farm — Module Hotspots",
+      "description": "Thermal imagery of a 12 MW PV array. Train against clean module sweeps from before commissioning, then sweep weekly inspection flights for hotspots, soiling streaks, and PID-pattern shading.",
+      "anomalyDescription": null,
+      "domain": "solar"
+    },
+    {
+      "slug": "6a00e090c9e61645182fa64e",
+      "name": "Manufacturing — Weld Bead Inspection",
+      "description": "Robot-cell stills from the post-weld station. Normal beads form the training set; flag undercut, porosity, and spatter clusters before parts move to paint.",
+      "anomalyDescription": null,
+      "domain": "manufacturing"
+    },
+    {
+      "slug": "6a00e090c9e61645182fa64f",
+      "name": "Medical — Chest X-Ray Triage",
+      "description": "Anonymized chest radiographs for clinician-in-the-loop triage. Trained on radiologist-confirmed normals; surfaces candidate regions for review rather than diagnoses.",
+      "anomalyDescription": null,
+      "domain": "medical"
+    },
+    {
+      "slug": "6a01c15df63486714ee3636a",
+      "name": "Solar project",
+      "description": null,
+      "anomalyDescription": "dark spot, crack, soot streak, debris",
+      "domain": "solar"
+    }
+  ],
+  "sequences": [
+    {
+      "projectSlug": "6a00e090c9e61645182fa64d",
+      "slug": "6a00e0903792cb44051dbb00",
+      "name": "Weekly inspection — 2025-09-09"
+    },
+    {
+      "projectSlug": "6a00e090c9e61645182fa64d",
+      "slug": "6a00e0903792cb44051dbaff",
+      "name": "Weekly inspection — 2025-09-02"
+    },
+    {
+      "projectSlug": "6a00e090c9e61645182fa64d",
+      "slug": "6a00e0903792cb44051dbafe",
+      "name": "Baseline sweep — 2025-08-12"
+    },
+    {
+      "projectSlug": "6a00e090c9e61645182fa64e",
+      "slug": "6a00e0903792cb44051dbb03",
+      "name": "Line B — Calibration run"
+    },
+    {
+      "projectSlug": "6a00e090c9e61645182fa64e",
+      "slug": "6a00e0903792cb44051dbb02",
+      "name": "Line A — Shift 2"
+    },
+    {
+      "projectSlug": "6a00e090c9e61645182fa64e",
+      "slug": "6a00e0903792cb44051dbb01",
+      "name": "Line A — Shift 1"
+    },
+    {
+      "projectSlug": "6a00e090c9e61645182fa64f",
+      "slug": "6a00e0903792cb44051dbb05",
+      "name": "Cohort B — 2025-Q4"
+    },
+    {
+      "projectSlug": "6a00e090c9e61645182fa64f",
+      "slug": "6a00e0903792cb44051dbb04",
+      "name": "Cohort A — 2025-Q3"
+    },
+    {
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c16df63486714ee3636b",
+      "name": "SiteA "
+    }
+  ],
+  "images": [
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1b7f63486714ee3636c",
+      "bytesFile": "6a01c1b7f63486714ee3636c.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1b7f63486714ee3636d",
+      "bytesFile": "6a01c1b7f63486714ee3636d.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1b7f63486714ee3636e",
+      "bytesFile": "6a01c1b7f63486714ee3636e.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1b8f63486714ee3636f",
+      "bytesFile": "6a01c1b8f63486714ee3636f.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1b9f63486714ee36370",
+      "bytesFile": "6a01c1b9f63486714ee36370.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1b9f63486714ee36371",
+      "bytesFile": "6a01c1b9f63486714ee36371.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1b9f63486714ee36372",
+      "bytesFile": "6a01c1b9f63486714ee36372.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1baf63486714ee36373",
+      "bytesFile": "6a01c1baf63486714ee36373.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1baf63486714ee36374",
+      "bytesFile": "6a01c1baf63486714ee36374.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1bbf63486714ee36375",
+      "bytesFile": "6a01c1bbf63486714ee36375.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1bbf63486714ee36376",
+      "bytesFile": "6a01c1bbf63486714ee36376.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1bbf63486714ee36377",
+      "bytesFile": "6a01c1bbf63486714ee36377.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1bcf63486714ee36378",
+      "bytesFile": "6a01c1bcf63486714ee36378.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1bcf63486714ee36379",
+      "bytesFile": "6a01c1bcf63486714ee36379.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1bdf63486714ee3637a",
+      "bytesFile": "6a01c1bdf63486714ee3637a.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1bdf63486714ee3637b",
+      "bytesFile": "6a01c1bdf63486714ee3637b.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1bef63486714ee3637c",
+      "bytesFile": "6a01c1bef63486714ee3637c.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1bef63486714ee3637d",
+      "bytesFile": "6a01c1bef63486714ee3637d.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1bef63486714ee3637e",
+      "bytesFile": "6a01c1bef63486714ee3637e.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1bff63486714ee3637f",
+      "bytesFile": "6a01c1bff63486714ee3637f.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1bff63486714ee36380",
+      "bytesFile": "6a01c1bff63486714ee36380.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1bff63486714ee36381",
+      "bytesFile": "6a01c1bff63486714ee36381.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1c0f63486714ee36382",
+      "bytesFile": "6a01c1c0f63486714ee36382.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1c0f63486714ee36383",
+      "bytesFile": "6a01c1c0f63486714ee36383.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1c1f63486714ee36384",
+      "bytesFile": "6a01c1c1f63486714ee36384.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1c1f63486714ee36385",
+      "bytesFile": "6a01c1c1f63486714ee36385.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1c1f63486714ee36386",
+      "bytesFile": "6a01c1c1f63486714ee36386.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1c2f63486714ee36387",
+      "bytesFile": "6a01c1c2f63486714ee36387.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1c2f63486714ee36388",
+      "bytesFile": "6a01c1c2f63486714ee36388.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1c2f63486714ee36389",
+      "bytesFile": "6a01c1c2f63486714ee36389.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1c3f63486714ee3638a",
+      "bytesFile": "6a01c1c3f63486714ee3638a.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1c3f63486714ee3638b",
+      "bytesFile": "6a01c1c3f63486714ee3638b.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1c3f63486714ee3638c",
+      "bytesFile": "6a01c1c3f63486714ee3638c.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1c4f63486714ee3638d",
+      "bytesFile": "6a01c1c4f63486714ee3638d.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1c5f63486714ee3638e",
+      "bytesFile": "6a01c1c5f63486714ee3638e.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1c5f63486714ee3638f",
+      "bytesFile": "6a01c1c5f63486714ee3638f.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1c6f63486714ee36390",
+      "bytesFile": "6a01c1c6f63486714ee36390.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1c6f63486714ee36391",
+      "bytesFile": "6a01c1c6f63486714ee36391.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1c6f63486714ee36392",
+      "bytesFile": "6a01c1c6f63486714ee36392.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1c7f63486714ee36393",
+      "bytesFile": "6a01c1c7f63486714ee36393.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1c7f63486714ee36394",
+      "bytesFile": "6a01c1c7f63486714ee36394.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1c7f63486714ee36395",
+      "bytesFile": "6a01c1c7f63486714ee36395.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1c8f63486714ee36396",
+      "bytesFile": "6a01c1c8f63486714ee36396.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1c9f63486714ee36397",
+      "bytesFile": "6a01c1c9f63486714ee36397.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1c9f63486714ee36398",
+      "bytesFile": "6a01c1c9f63486714ee36398.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1c9f63486714ee36399",
+      "bytesFile": "6a01c1c9f63486714ee36399.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1c9f63486714ee3639a",
+      "bytesFile": "6a01c1c9f63486714ee3639a.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1caf63486714ee3639b",
+      "bytesFile": "6a01c1caf63486714ee3639b.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1caf63486714ee3639c",
+      "bytesFile": "6a01c1caf63486714ee3639c.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1cbf63486714ee3639d",
+      "bytesFile": "6a01c1cbf63486714ee3639d.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1cbf63486714ee3639e",
+      "bytesFile": "6a01c1cbf63486714ee3639e.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1ccf63486714ee3639f",
+      "bytesFile": "6a01c1ccf63486714ee3639f.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1ccf63486714ee363a0",
+      "bytesFile": "6a01c1ccf63486714ee363a0.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1ccf63486714ee363a1",
+      "bytesFile": "6a01c1ccf63486714ee363a1.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1cdf63486714ee363a2",
+      "bytesFile": "6a01c1cdf63486714ee363a2.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1cdf63486714ee363a3",
+      "bytesFile": "6a01c1cdf63486714ee363a3.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:32.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1cef63486714ee363a4",
+      "bytesFile": "6a01c1cef63486714ee363a4.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1cef63486714ee363a5",
+      "bytesFile": "6a01c1cef63486714ee363a5.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1cef63486714ee363a6",
+      "bytesFile": "6a01c1cef63486714ee363a6.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1cff63486714ee363a7",
+      "bytesFile": "6a01c1cff63486714ee363a7.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1cff63486714ee363a8",
+      "bytesFile": "6a01c1cff63486714ee363a8.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1d0f63486714ee363a9",
+      "bytesFile": "6a01c1d0f63486714ee363a9.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1d0f63486714ee363aa",
+      "bytesFile": "6a01c1d0f63486714ee363aa.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1d1f63486714ee363ab",
+      "bytesFile": "6a01c1d1f63486714ee363ab.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1d1f63486714ee363ac",
+      "bytesFile": "6a01c1d1f63486714ee363ac.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1d1f63486714ee363ad",
+      "bytesFile": "6a01c1d1f63486714ee363ad.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1d2f63486714ee363ae",
+      "bytesFile": "6a01c1d2f63486714ee363ae.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1d2f63486714ee363af",
+      "bytesFile": "6a01c1d2f63486714ee363af.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1d2f63486714ee363b0",
+      "bytesFile": "6a01c1d2f63486714ee363b0.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1d3f63486714ee363b1",
+      "bytesFile": "6a01c1d3f63486714ee363b1.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1d3f63486714ee363b2",
+      "bytesFile": "6a01c1d3f63486714ee363b2.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1d4f63486714ee363b3",
+      "bytesFile": "6a01c1d4f63486714ee363b3.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1d4f63486714ee363b4",
+      "bytesFile": "6a01c1d4f63486714ee363b4.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1d4f63486714ee363b5",
+      "bytesFile": "6a01c1d4f63486714ee363b5.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1d5f63486714ee363b6",
+      "bytesFile": "6a01c1d5f63486714ee363b6.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1d5f63486714ee363b7",
+      "bytesFile": "6a01c1d5f63486714ee363b7.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1d5f63486714ee363b8",
+      "bytesFile": "6a01c1d5f63486714ee363b8.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1d6f63486714ee363b9",
+      "bytesFile": "6a01c1d6f63486714ee363b9.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1d6f63486714ee363ba",
+      "bytesFile": "6a01c1d6f63486714ee363ba.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1d7f63486714ee363bb",
+      "bytesFile": "6a01c1d7f63486714ee363bb.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1d7f63486714ee363bc",
+      "bytesFile": "6a01c1d7f63486714ee363bc.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1d7f63486714ee363bd",
+      "bytesFile": "6a01c1d7f63486714ee363bd.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1d7f63486714ee363be",
+      "bytesFile": "6a01c1d7f63486714ee363be.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1d8f63486714ee363bf",
+      "bytesFile": "6a01c1d8f63486714ee363bf.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1d8f63486714ee363c0",
+      "bytesFile": "6a01c1d8f63486714ee363c0.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1d9f63486714ee363c1",
+      "bytesFile": "6a01c1d9f63486714ee363c1.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1d9f63486714ee363c2",
+      "bytesFile": "6a01c1d9f63486714ee363c2.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1daf63486714ee363c3",
+      "bytesFile": "6a01c1daf63486714ee363c3.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1daf63486714ee363c4",
+      "bytesFile": "6a01c1daf63486714ee363c4.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1dbf63486714ee363c5",
+      "bytesFile": "6a01c1dbf63486714ee363c5.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1dbf63486714ee363c6",
+      "bytesFile": "6a01c1dbf63486714ee363c6.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1dbf63486714ee363c7",
+      "bytesFile": "6a01c1dbf63486714ee363c7.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1dcf63486714ee363c8",
+      "bytesFile": "6a01c1dcf63486714ee363c8.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1dcf63486714ee363c9",
+      "bytesFile": "6a01c1dcf63486714ee363c9.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1ddf63486714ee363ca",
+      "bytesFile": "6a01c1ddf63486714ee363ca.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1ddf63486714ee363cb",
+      "bytesFile": "6a01c1ddf63486714ee363cb.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1def63486714ee363cc",
+      "bytesFile": "6a01c1def63486714ee363cc.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1def63486714ee363cd",
+      "bytesFile": "6a01c1def63486714ee363cd.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1dff63486714ee363ce",
+      "bytesFile": "6a01c1dff63486714ee363ce.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1dff63486714ee363cf",
+      "bytesFile": "6a01c1dff63486714ee363cf.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e0f63486714ee363d0",
+      "bytesFile": "6a01c1e0f63486714ee363d0.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e0f63486714ee363d1",
+      "bytesFile": "6a01c1e0f63486714ee363d1.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e0f63486714ee363d2",
+      "bytesFile": "6a01c1e0f63486714ee363d2.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e1f63486714ee363d3",
+      "bytesFile": "6a01c1e1f63486714ee363d3.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e1f63486714ee363d4",
+      "bytesFile": "6a01c1e1f63486714ee363d4.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e2f63486714ee363d5",
+      "bytesFile": "6a01c1e2f63486714ee363d5.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e2f63486714ee363d6",
+      "bytesFile": "6a01c1e2f63486714ee363d6.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e3f63486714ee363d7",
+      "bytesFile": "6a01c1e3f63486714ee363d7.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e3f63486714ee363d8",
+      "bytesFile": "6a01c1e3f63486714ee363d8.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e3f63486714ee363d9",
+      "bytesFile": "6a01c1e3f63486714ee363d9.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e4f63486714ee363da",
+      "bytesFile": "6a01c1e4f63486714ee363da.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e4f63486714ee363db",
+      "bytesFile": "6a01c1e4f63486714ee363db.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e4f63486714ee363dc",
+      "bytesFile": "6a01c1e4f63486714ee363dc.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e5f63486714ee363dd",
+      "bytesFile": "6a01c1e5f63486714ee363dd.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e5f63486714ee363de",
+      "bytesFile": "6a01c1e5f63486714ee363de.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e6f63486714ee363df",
+      "bytesFile": "6a01c1e6f63486714ee363df.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e6f63486714ee363e0",
+      "bytesFile": "6a01c1e6f63486714ee363e0.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e6f63486714ee363e1",
+      "bytesFile": "6a01c1e6f63486714ee363e1.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e7f63486714ee363e2",
+      "bytesFile": "6a01c1e7f63486714ee363e2.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e7f63486714ee363e3",
+      "bytesFile": "6a01c1e7f63486714ee363e3.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e7f63486714ee363e4",
+      "bytesFile": "6a01c1e7f63486714ee363e4.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e8f63486714ee363e5",
+      "bytesFile": "6a01c1e8f63486714ee363e5.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e8f63486714ee363e6",
+      "bytesFile": "6a01c1e8f63486714ee363e6.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e8f63486714ee363e7",
+      "bytesFile": "6a01c1e8f63486714ee363e7.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e9f63486714ee363e8",
+      "bytesFile": "6a01c1e9f63486714ee363e8.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e9f63486714ee363e9",
+      "bytesFile": "6a01c1e9f63486714ee363e9.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1e9f63486714ee363ea",
+      "bytesFile": "6a01c1e9f63486714ee363ea.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1eaf63486714ee363eb",
+      "bytesFile": "6a01c1eaf63486714ee363eb.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1eaf63486714ee363ec",
+      "bytesFile": "6a01c1eaf63486714ee363ec.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1ebf63486714ee363ed",
+      "bytesFile": "6a01c1ebf63486714ee363ed.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1ebf63486714ee363ee",
+      "bytesFile": "6a01c1ebf63486714ee363ee.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1ecf63486714ee363ef",
+      "bytesFile": "6a01c1ecf63486714ee363ef.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1ecf63486714ee363f0",
+      "bytesFile": "6a01c1ecf63486714ee363f0.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1ecf63486714ee363f1",
+      "bytesFile": "6a01c1ecf63486714ee363f1.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1edf63486714ee363f2",
+      "bytesFile": "6a01c1edf63486714ee363f2.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1edf63486714ee363f3",
+      "bytesFile": "6a01c1edf63486714ee363f3.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1eef63486714ee363f4",
+      "bytesFile": "6a01c1eef63486714ee363f4.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1eef63486714ee363f5",
+      "bytesFile": "6a01c1eef63486714ee363f5.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1eff63486714ee363f6",
+      "bytesFile": "6a01c1eff63486714ee363f6.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1eff63486714ee363f7",
+      "bytesFile": "6a01c1eff63486714ee363f7.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1f0f63486714ee363f8",
+      "bytesFile": "6a01c1f0f63486714ee363f8.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1f0f63486714ee363f9",
+      "bytesFile": "6a01c1f0f63486714ee363f9.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1f0f63486714ee363fa",
+      "bytesFile": "6a01c1f0f63486714ee363fa.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1f1f63486714ee363fb",
+      "bytesFile": "6a01c1f1f63486714ee363fb.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1f1f63486714ee363fc",
+      "bytesFile": "6a01c1f1f63486714ee363fc.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1f2f63486714ee363fd",
+      "bytesFile": "6a01c1f2f63486714ee363fd.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1f2f63486714ee363fe",
+      "bytesFile": "6a01c1f2f63486714ee363fe.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1f2f63486714ee363ff",
+      "bytesFile": "6a01c1f2f63486714ee363ff.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1f3f63486714ee36400",
+      "bytesFile": "6a01c1f3f63486714ee36400.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1f3f63486714ee36401",
+      "bytesFile": "6a01c1f3f63486714ee36401.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1f4f63486714ee36402",
+      "bytesFile": "6a01c1f4f63486714ee36402.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1f4f63486714ee36403",
+      "bytesFile": "6a01c1f4f63486714ee36403.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1f4f63486714ee36404",
+      "bytesFile": "6a01c1f4f63486714ee36404.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1f5f63486714ee36405",
+      "bytesFile": "6a01c1f5f63486714ee36405.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1f5f63486714ee36406",
+      "bytesFile": "6a01c1f5f63486714ee36406.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1f6f63486714ee36407",
+      "bytesFile": "6a01c1f6f63486714ee36407.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1f6f63486714ee36408",
+      "bytesFile": "6a01c1f6f63486714ee36408.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1f7f63486714ee36409",
+      "bytesFile": "6a01c1f7f63486714ee36409.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1f7f63486714ee3640a",
+      "bytesFile": "6a01c1f7f63486714ee3640a.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1f7f63486714ee3640b",
+      "bytesFile": "6a01c1f7f63486714ee3640b.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1f8f63486714ee3640c",
+      "bytesFile": "6a01c1f8f63486714ee3640c.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1f8f63486714ee3640d",
+      "bytesFile": "6a01c1f8f63486714ee3640d.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1f9f63486714ee3640e",
+      "bytesFile": "6a01c1f9f63486714ee3640e.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1f9f63486714ee3640f",
+      "bytesFile": "6a01c1f9f63486714ee3640f.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1f9f63486714ee36410",
+      "bytesFile": "6a01c1f9f63486714ee36410.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1faf63486714ee36411",
+      "bytesFile": "6a01c1faf63486714ee36411.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1faf63486714ee36412",
+      "bytesFile": "6a01c1faf63486714ee36412.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1faf63486714ee36413",
+      "bytesFile": "6a01c1faf63486714ee36413.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1fbf63486714ee36414",
+      "bytesFile": "6a01c1fbf63486714ee36414.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1fbf63486714ee36415",
+      "bytesFile": "6a01c1fbf63486714ee36415.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1fcf63486714ee36416",
+      "bytesFile": "6a01c1fcf63486714ee36416.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1fcf63486714ee36417",
+      "bytesFile": "6a01c1fcf63486714ee36417.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1fcf63486714ee36418",
+      "bytesFile": "6a01c1fcf63486714ee36418.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1fdf63486714ee36419",
+      "bytesFile": "6a01c1fdf63486714ee36419.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1fdf63486714ee3641a",
+      "bytesFile": "6a01c1fdf63486714ee3641a.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1fdf63486714ee3641b",
+      "bytesFile": "6a01c1fdf63486714ee3641b.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1fef63486714ee3641c",
+      "bytesFile": "6a01c1fef63486714ee3641c.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1fef63486714ee3641d",
+      "bytesFile": "6a01c1fef63486714ee3641d.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1fff63486714ee3641e",
+      "bytesFile": "6a01c1fff63486714ee3641e.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c1fff63486714ee3641f",
+      "bytesFile": "6a01c1fff63486714ee3641f.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c200f63486714ee36420",
+      "bytesFile": "6a01c200f63486714ee36420.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c200f63486714ee36421",
+      "bytesFile": "6a01c200f63486714ee36421.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c200f63486714ee36422",
+      "bytesFile": "6a01c200f63486714ee36422.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c201f63486714ee36423",
+      "bytesFile": "6a01c201f63486714ee36423.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c201f63486714ee36424",
+      "bytesFile": "6a01c201f63486714ee36424.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c201f63486714ee36425",
+      "bytesFile": "6a01c201f63486714ee36425.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c202f63486714ee36426",
+      "bytesFile": "6a01c202f63486714ee36426.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c202f63486714ee36427",
+      "bytesFile": "6a01c202f63486714ee36427.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c203f63486714ee36428",
+      "bytesFile": "6a01c203f63486714ee36428.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c203f63486714ee36429",
+      "bytesFile": "6a01c203f63486714ee36429.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c203f63486714ee3642a",
+      "bytesFile": "6a01c203f63486714ee3642a.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    },
+    {
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "slug": "6a01c204f63486714ee3642b",
+      "bytesFile": "6a01c204f63486714ee3642b.jpg",
+      "width": 1280,
+      "height": 720,
+      "capturedAt": "2026-05-10T21:04:33.000Z"
+    }
+  ],
+  "annotations": [
+    {
+      "imageSlug": "6a01c1cbf63486714ee3639d",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 751.0943396226415,
+        "y": 313.830623788616,
+        "width": 101.43396226415086,
+        "height": 62.76612475772316
+      },
+      "comment": null,
+      "source": "human"
+    },
+    {
+      "imageSlug": "6a01c1b7f63486714ee3636c",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "normal",
+      "shape": {
+        "type": "bounding_box",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 720
+      },
+      "comment": "Corrected to normal via detection review",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1b7f63486714ee3636c",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "normal",
+      "shape": {
+        "type": "bounding_box",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 720
+      },
+      "comment": "Corrected to normal via detection review",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1baf63486714ee36374",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "normal",
+      "shape": {
+        "type": "bounding_box",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 720
+      },
+      "comment": "Corrected to normal via detection review",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1bbf63486714ee36375",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "normal",
+      "shape": {
+        "type": "bounding_box",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 720
+      },
+      "comment": "Corrected to normal via detection review",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1bef63486714ee3637d",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "normal",
+      "shape": {
+        "type": "bounding_box",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 720
+      },
+      "comment": "Corrected to normal via detection review",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1bff63486714ee3637f",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "normal",
+      "shape": {
+        "type": "bounding_box",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 720
+      },
+      "comment": "Corrected to normal via detection review",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1c6f63486714ee36390",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 777.6603773584906,
+        "y": 325.90103239587046,
+        "width": 48.30188679245282,
+        "height": 48.2816344290178
+      },
+      "comment": null,
+      "source": "human"
+    },
+    {
+      "imageSlug": "6a01c1c6f63486714ee36391",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 777.6603773584906,
+        "y": 330.7291958387722,
+        "width": 45.88679245283015,
+        "height": 38.62530754321426
+      },
+      "comment": null,
+      "source": "human"
+    },
+    {
+      "imageSlug": "6a01c202f63486714ee36427",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 577.2075471698113,
+        "y": 197.95470115897314,
+        "width": 516.8301886792453,
+        "height": 335.557359281674
+      },
+      "comment": null,
+      "source": "human"
+    },
+    {
+      "imageSlug": "6a01c203f63486714ee36429",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 560.3018867924528,
+        "y": 202.78286460187496,
+        "width": 553.0566037735849,
+        "height": 309.00246034571416
+      },
+      "comment": null,
+      "source": "human"
+    },
+    {
+      "imageSlug": "6a01c1d4f63486714ee363b5",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 748.6792452830189,
+        "y": 313.830623788616,
+        "width": 103.84905660377353,
+        "height": 82.0787785293303
+      },
+      "comment": null,
+      "source": "human"
+    },
+    {
+      "imageSlug": "6a01c1d5f63486714ee363b7",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 751.0943396226415,
+        "y": 318.65878723151775,
+        "width": 128,
+        "height": 70.00836992207587
+      },
+      "comment": null,
+      "source": "human"
+    },
+    {
+      "imageSlug": "6a01c1dbf63486714ee363c5",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 712.4528301886793,
+        "y": 306.58837862426327,
+        "width": 181.13207547169804,
+        "height": 132.7744946797991
+      },
+      "comment": null,
+      "source": "human"
+    },
+    {
+      "imageSlug": "6a01c201f63486714ee36424",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 574.7924528301887,
+        "y": 222.09551837348207,
+        "width": 526.4905660377358,
+        "height": 306.5883786242633
+      },
+      "comment": null,
+      "source": "human"
+    },
+    {
+      "imageSlug": "6a01c1baf63486714ee36374",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 704,
+        "y": 396.00000000000006,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image shows dark spots on the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1bef63486714ee3637d",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 320,
+        "y": 324,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image shows dark spots on the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1bef63486714ee3637d",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 704,
+        "y": 251.99999999999997,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image shows dark spots on the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1bff63486714ee3637f",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 448,
+        "y": 324,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image shows distinct dark spots on the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1bff63486714ee3637f",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 704,
+        "y": 396.00000000000006,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image shows distinct dark spots on the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1c4f63486714ee3638d",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 576,
+        "y": 396.00000000000006,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image shows a dark spot on one of the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1c5f63486714ee3638e",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 576,
+        "y": 180,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image shows a dark spot on one of the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1c6f63486714ee36390",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 576,
+        "y": 396.00000000000006,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image shows a dark spot on one of the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1c6f63486714ee36391",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 576,
+        "y": 396.00000000000006,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image shows a dark spot on one of the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1c6f63486714ee36392",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 324,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image contains a dark spot on one of the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1c7f63486714ee36393",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image contains a dark spot on one of the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1c7f63486714ee36394",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image contains a dark spot on one of the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1c7f63486714ee36395",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 324,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image shows a dark spot on one of the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1c9f63486714ee36397",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image shows a dark spot on one of the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1c8f63486714ee36396",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image shows a dark spot on one of the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1c9f63486714ee36398",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image shows a dark spot on one of the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1c9f63486714ee36399",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 64,
+        "height": 21.599999999999998
+      },
+      "comment": "The image contains a distinct dark spot on the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1c9f63486714ee3639a",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image shows a distinct dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1caf63486714ee3639b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 288,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image shows a distinct dark spot on the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1caf63486714ee3639c",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 324,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image contains a distinct dark spot on one of the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1cbf63486714ee3639d",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 960,
+        "y": 324,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image shows a distinct dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1cbf63486714ee3639e",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 324,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image shows a distinct dark spot on the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1ccf63486714ee3639f",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 324,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image shows a distinct dark spot on the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1ccf63486714ee363a0",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image contains a distinct dark spot on the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1ccf63486714ee363a1",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image shows a distinct dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1cdf63486714ee363a2",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 960,
+        "y": 324,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image shows a distinct dark spot on one of the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1cdf63486714ee363a3",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image shows a distinct dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1cef63486714ee363a4",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 396.00000000000006,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image shows a dark spot on the solar panels, indicating a potential anomaly.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1cef63486714ee363a5",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image shows a distinct dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1cef63486714ee363a6",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image shows a distinct dark spot on the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1cff63486714ee363a8",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 324,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image shows a distinct dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1d0f63486714ee363a9",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1cff63486714ee363a7",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 324,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image shows a distinct dark spot on the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1d0f63486714ee363aa",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 324,
+        "width": 64,
+        "height": 36
+      },
+      "comment": "The image contains a distinct dark spot on the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1d1f63486714ee363ab",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image shows a distinct dark spot on the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1d1f63486714ee363ac",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image shows a distinct dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1d1f63486714ee363ad",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1d2f63486714ee363ae",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 324,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1d2f63486714ee363af",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1d2f63486714ee363b0",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 324,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1d3f63486714ee363b1",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 324,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image shows a distinct dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1d3f63486714ee363b2",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1d4f63486714ee363b4",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 288,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1d4f63486714ee363b5",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image shows a distinct dark spot on the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1d4f63486714ee363b3",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1d5f63486714ee363b6",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1d5f63486714ee363b7",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1d5f63486714ee363b8",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1d6f63486714ee363b9",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1d7f63486714ee363bb",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1d6f63486714ee363ba",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 288,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1d7f63486714ee363bc",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1d7f63486714ee363bd",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 288,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1d7f63486714ee363be",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1d8f63486714ee363bf",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 288,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1d8f63486714ee363c0",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 288,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image shows a distinct dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1d9f63486714ee363c1",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 288,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1d9f63486714ee363c2",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 288,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1daf63486714ee363c3",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 288,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1dbf63486714ee363c5",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1daf63486714ee363c4",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 288,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1dbf63486714ee363c6",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 180,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1dbf63486714ee363c7",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 288,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1dcf63486714ee363c8",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 288,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1dcf63486714ee363c9",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 288,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1ddf63486714ee363ca",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1ddf63486714ee363cb",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1def63486714ee363cc",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 288,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1dff63486714ee363ce",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1def63486714ee363cd",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 288,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panels.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1dff63486714ee363cf",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e0f63486714ee363d0",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 288,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e0f63486714ee363d1",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e0f63486714ee363d2",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 324,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e1f63486714ee363d3",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 288,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e2f63486714ee363d5",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 288,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e1f63486714ee363d4",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e2f63486714ee363d6",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e3f63486714ee363d7",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e3f63486714ee363d8",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 288,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e3f63486714ee363d9",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 288,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e4f63486714ee363da",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e4f63486714ee363db",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 251.99999999999997,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e4f63486714ee363dc",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e5f63486714ee363dd",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 288,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e5f63486714ee363de",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 324,
+        "width": 192,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e6f63486714ee363e0",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e6f63486714ee363e1",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 288,
+        "width": 192,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e7f63486714ee363e2",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 324,
+        "width": 192,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e7f63486714ee363e3",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 288,
+        "width": 192,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e6f63486714ee363df",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 288,
+        "width": 192,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e7f63486714ee363e4",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e8f63486714ee363e5",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e8f63486714ee363e6",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 288,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e8f63486714ee363e7",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 360,
+        "width": 192,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e9f63486714ee363e9",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 576,
+        "y": 324,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e9f63486714ee363e8",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 360,
+        "width": 192,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1e9f63486714ee363ea",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 324,
+        "width": 192,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1eaf63486714ee363eb",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 288,
+        "width": 192,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1eaf63486714ee363ec",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 192,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1ebf63486714ee363ed",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1ebf63486714ee363ee",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1ecf63486714ee363f0",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 288,
+        "width": 192,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1ecf63486714ee363f1",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1edf63486714ee363f2",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1edf63486714ee363f3",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1ecf63486714ee363ef",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 192,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1eef63486714ee363f4",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 288,
+        "width": 192,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1eef63486714ee363f5",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 288,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1eff63486714ee363f6",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 288,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1eff63486714ee363f7",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 192,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1f0f63486714ee363f8",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1f0f63486714ee363f9",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 288,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1f0f63486714ee363fa",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 192,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1f1f63486714ee363fb",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 360,
+        "width": 256,
+        "height": 144
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1f1f63486714ee363fc",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 360,
+        "width": 192,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1f2f63486714ee363fd",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 288,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1f2f63486714ee363fe",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 288,
+        "width": 192,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1f2f63486714ee363ff",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 360,
+        "width": 256,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1f3f63486714ee36400",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 360,
+        "width": 256,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot and potential crack on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1f3f63486714ee36401",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 288,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1f4f63486714ee36402",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 288,
+        "width": 256,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1f4f63486714ee36403",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 704,
+        "y": 288,
+        "width": 192,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot and crack on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1f5f63486714ee36405",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 288,
+        "width": 192,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot and crack on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1f4f63486714ee36404",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 288,
+        "width": 256,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1f5f63486714ee36406",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 832,
+        "y": 288,
+        "width": 192,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1f6f63486714ee36407",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 576,
+        "y": 251.99999999999997,
+        "width": 192,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1f6f63486714ee36408",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 360,
+        "width": 256,
+        "height": 144
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1f7f63486714ee36409",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 360,
+        "width": 256,
+        "height": 144
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1f7f63486714ee3640b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 704,
+        "y": 288,
+        "width": 192,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1f7f63486714ee3640a",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 360,
+        "width": 256,
+        "height": 144
+      },
+      "comment": "The image clearly shows a dark spot and crack on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1f8f63486714ee3640c",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 360,
+        "width": 256,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot and crack on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1f8f63486714ee3640d",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 704,
+        "y": 288,
+        "width": 192,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1f9f63486714ee3640f",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 360,
+        "width": 128,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot and crack on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1f9f63486714ee3640e",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 704,
+        "y": 288,
+        "width": 192,
+        "height": 72
+      },
+      "comment": "The image clearly shows a dark spot and crack on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1f9f63486714ee36410",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 360,
+        "width": 256,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1faf63486714ee36411",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 360,
+        "width": 256,
+        "height": 144
+      },
+      "comment": "The image clearly shows a dark spot and crack on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1faf63486714ee36412",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 360,
+        "width": 256,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot and crack on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1faf63486714ee36413",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 360,
+        "width": 256,
+        "height": 144
+      },
+      "comment": "The image clearly shows a dark spot and crack on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1fbf63486714ee36414",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 360,
+        "width": 256,
+        "height": 144
+      },
+      "comment": "The image clearly shows a dark spot and crack on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1fbf63486714ee36415",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 360,
+        "width": 256,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1fcf63486714ee36416",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 288,
+        "width": 256,
+        "height": 144
+      },
+      "comment": "The image clearly shows a dark spot and damage on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1fcf63486714ee36417",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 640,
+        "y": 288,
+        "width": 256,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot and damage on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1fcf63486714ee36418",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 360,
+        "width": 256,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1fdf63486714ee36419",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 288,
+        "width": 256,
+        "height": 144
+      },
+      "comment": "The image clearly shows a dark spot and crack on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1fdf63486714ee3641a",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 360,
+        "width": 256,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1fdf63486714ee3641b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 360,
+        "width": 256,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot and crack on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1fef63486714ee3641d",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 360,
+        "width": 256,
+        "height": 144
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1fef63486714ee3641c",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 360,
+        "width": 256,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot and damage on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1fff63486714ee3641e",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 288,
+        "width": 256,
+        "height": 144
+      },
+      "comment": "The image clearly shows a dark spot and damage on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1fff63486714ee3641f",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 288,
+        "width": 256,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot and crack on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c200f63486714ee36420",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 288,
+        "width": 256,
+        "height": 144
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c200f63486714ee36421",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 288,
+        "width": 256,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel, indicating damage.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c200f63486714ee36422",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 288,
+        "width": 256,
+        "height": 144
+      },
+      "comment": "The image clearly shows a dark spot on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c201f63486714ee36423",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 288,
+        "width": 256,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot and crack on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c201f63486714ee36424",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 288,
+        "width": 256,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot and crack on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c201f63486714ee36425",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 288,
+        "width": 256,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot and crack on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c202f63486714ee36426",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 288,
+        "width": 256,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot and crack on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c202f63486714ee36427",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 288,
+        "width": 256,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot and crack on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c203f63486714ee36428",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 288,
+        "width": 256,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot and crack on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c203f63486714ee36429",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 360,
+        "width": 256,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot and damage on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c203f63486714ee3642a",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 288,
+        "width": 256,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot and crack on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c204f63486714ee3642b",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 512,
+        "y": 288,
+        "width": 256,
+        "height": 108
+      },
+      "comment": "The image clearly shows a dark spot and crack on the solar panel.",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1b7f63486714ee3636c",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "normal",
+      "shape": {
+        "type": "bounding_box",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 720
+      },
+      "comment": "Corrected to normal via detection review",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1baf63486714ee36374",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "normal",
+      "shape": {
+        "type": "bounding_box",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 720
+      },
+      "comment": "Corrected to normal via detection review",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1bbf63486714ee36375",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "normal",
+      "shape": {
+        "type": "bounding_box",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 720
+      },
+      "comment": "Corrected to normal via detection review",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1bef63486714ee3637d",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "normal",
+      "shape": {
+        "type": "bounding_box",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 720
+      },
+      "comment": "Corrected to normal via detection review",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1bff63486714ee3637f",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "normal",
+      "shape": {
+        "type": "bounding_box",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 720
+      },
+      "comment": "Corrected to normal via detection review",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1c4f63486714ee3638d",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 720
+      },
+      "comment": "Corrected to anomaly via detection review",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1c5f63486714ee3638e",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 720
+      },
+      "comment": "Corrected to anomaly via detection review",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1c5f63486714ee3638f",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 720
+      },
+      "comment": "Corrected to anomaly via detection review",
+      "source": "human-correction"
+    },
+    {
+      "imageSlug": "6a01c1c6f63486714ee36390",
+      "projectSlug": "6a01c15df63486714ee3636a",
+      "sequenceSlug": "6a01c16df63486714ee3636b",
+      "label": "anomaly",
+      "shape": {
+        "type": "bounding_box",
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 720
+      },
+      "comment": "Corrected to anomaly via detection review",
+      "source": "human-correction"
+    }
+  ]
+}

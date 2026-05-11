@@ -32,9 +32,29 @@ export default function MermaidDiagram({ source }: { source: string }) {
           securityLevel: "strict",
           theme: isLight ? "default" : "dark",
           fontFamily: "inherit",
+          // Bigger base font + more node spacing so text in the flowchart
+          // nodes stays readable when the diagram is rendered inside the
+          // case-study reading column.
+          fontSize: 18,
+          flowchart: {
+            nodeSpacing: 60,
+            rankSpacing: 70,
+            padding: 16,
+            useMaxWidth: false,
+          },
           themeVariables: isLight
-            ? { primaryColor: "#EEF2FF", primaryBorderColor: "#4338CA", lineColor: "#4338CA" }
-            : { primaryColor: "#1E293B", primaryBorderColor: "#A5B4FC", lineColor: "#A5B4FC" },
+            ? {
+                fontSize: "18px",
+                primaryColor: "#EEF2FF",
+                primaryBorderColor: "#4338CA",
+                lineColor: "#4338CA",
+              }
+            : {
+                fontSize: "18px",
+                primaryColor: "#1E293B",
+                primaryBorderColor: "#A5B4FC",
+                lineColor: "#A5B4FC",
+              },
         });
 
         if (cancelled || !ref.current) return;
@@ -69,8 +89,17 @@ export default function MermaidDiagram({ source }: { source: string }) {
         sx={{
           display: "flex",
           justifyContent: "center",
-          minHeight: 80,
-          "& svg": { maxWidth: "100%", height: "auto" },
+          alignItems: "center",
+          // Generous min-height so even simple flowcharts get a big-enough
+          // canvas to read at a comfortable text size. The SVG grows up
+          // to fill it while preserving its own aspect ratio.
+          minHeight: { xs: 360, sm: 460, md: 560 },
+          overflow: "auto",
+          "& svg": {
+            maxWidth: "100%",
+            height: "auto",
+            minHeight: { xs: 320, sm: 420, md: 520 },
+          },
         }}
       />
       {error && (

@@ -23,9 +23,13 @@ export async function generateStaticParams() {
   return entries.map(({ slug }) => ({ slug }));
 }
 
+const AUTHOR_NAME = "Theuy Limpanont";
+const AUTHOR_URL = "https://www.linkedin.com/in/theuylimpanont/";
+
 // Per-case-study metadata so each one has its own page title, search
-// snippet, and social preview text instead of inheriting the site
-// default. Falls back gracefully if Keystatic can't read the entry.
+// snippet, social preview text, and article-level OG fields instead of
+// inheriting the site default. Falls back gracefully if Keystatic can't
+// read the entry.
 export async function generateMetadata({
   params,
 }: {
@@ -40,14 +44,24 @@ export async function generateMetadata({
   if (!entry) return {};
   const title = entry.title;
   const description = entry.summary;
+  const url = `/case-studies/${slug}`;
+  const publishedTime = entry.publishedAt
+    ? new Date(entry.publishedAt).toISOString()
+    : undefined;
   return {
     title,
     description,
+    keywords: [...entry.stack, entry.client, "Case study"],
+    authors: [{ name: AUTHOR_NAME, url: AUTHOR_URL }],
     openGraph: {
       title,
       description,
       type: "article",
-      url: `/case-studies/${slug}`,
+      url,
+      publishedTime,
+      authors: [AUTHOR_URL],
+      tags: [...entry.stack],
+      section: entry.client,
     },
     twitter: {
       card: "summary_large_image",
@@ -55,7 +69,7 @@ export async function generateMetadata({
       description,
     },
     alternates: {
-      canonical: `/case-studies/${slug}`,
+      canonical: url,
     },
   };
 }
@@ -76,8 +90,42 @@ export default async function CaseStudyDetailPage({
     components: { MermaidDiagram },
   });
 
+  // JSON-LD lets Google parse this as a TechArticle and surface rich
+  // results (headline, author, date, tags) in search and on platforms
+  // that consume schema.org metadata.
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    headline: entry.title,
+    description: entry.summary,
+    author: {
+      "@type": "Person",
+      name: AUTHOR_NAME,
+      url: AUTHOR_URL,
+    },
+    publisher: {
+      "@type": "Person",
+      name: AUTHOR_NAME,
+      url: AUTHOR_URL,
+    },
+    datePublished: entry.publishedAt
+      ? new Date(entry.publishedAt).toISOString()
+      : undefined,
+    keywords: entry.stack.join(", "),
+    about: entry.client,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `/case-studies/${slug}`,
+    },
+  };
+
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <SiteHeader />
       <Box component="main" sx={{ flexGrow: 1, py: { xs: 6, md: 10 } }}>
         <Container maxWidth="md">

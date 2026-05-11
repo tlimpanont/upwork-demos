@@ -94,7 +94,10 @@ export default function MermaidDiagram({ source }: { source: string }) {
       }}
     >
       <TransformWrapper
-        initialScale={1}
+        // Open fully zoomed-out so the whole diagram is visible on mount;
+        // reviewers zoom IN to inspect a region rather than panning around
+        // a 1× view that's already taller than the stage.
+        initialScale={0.5}
         minScale={0.5}
         maxScale={4}
         wheel={{ step: 0.15 }}

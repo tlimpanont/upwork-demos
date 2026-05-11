@@ -145,7 +145,11 @@ export default function MermaidDiagram({ source }: { source: string }) {
                   height: "100%",
                   display: "flex",
                   alignItems: "center",
-                  justifyContent: "center",
+                  // Anchor the SVG to the left side of the stage so the
+                  // leftmost (typically the "start") nodes of the flowchart
+                  // sit at the user's reading edge. They pan rightward to
+                  // follow the flow.
+                  justifyContent: "flex-start",
                 }}
               >
                 {/* Outer gutter around the SVG so the diagram's edges

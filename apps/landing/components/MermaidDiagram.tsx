@@ -99,14 +99,21 @@ export default function MermaidDiagram({ source }: { source: string }) {
         maxScale={4}
         wheel={{ step: 0.15 }}
         doubleClick={{ mode: "reset" }}
+        // Two layers of "no easing":
+        //   - panning.velocityDisabled stops the gesture from picking up
+        //     speed mid-drag.
+        //   - velocityAnimation.disabled stops the post-release glide
+        //     (the bounce/snap-back the user was seeing).
+        // With both off, the SVG stops dead where the cursor stopped.
         panning={{ velocityDisabled: true }}
+        velocityAnimation={{ disabled: true }}
       >
         {({ zoomIn, zoomOut, resetTransform }) => (
           <>
             <Box
               sx={{
                 position: "relative",
-                height: { xs: 360, sm: 460, md: 560 },
+                height: { xs: 250, sm: 250, md: 250 },
                 overflow: "hidden",
                 borderRadius: 2,
                 bgcolor: "transparent",

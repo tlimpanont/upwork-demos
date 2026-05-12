@@ -1,6 +1,7 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect, useState } from "react";
+import type { ChangeEvent } from "react";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
@@ -10,11 +11,23 @@ import Alert from "@mui/material/Alert";
 import Typography from "@mui/material/Typography";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
-import { sendContactMessage, type ContactState } from "./actions";
+import {
+  sendContactMessage,
+  type ContactState,
+  type ContactValues,
+} from "./actions";
 import { PROJECT_TYPES } from "./project-types";
 import { CAL_URL, withUtm } from "@/lib/utm";
 
 const INITIAL: ContactState = { status: "idle" };
+
+const INITIAL_VALUES: Required<ContactValues> = {
+  name: "",
+  email: "",
+  company: "",
+  projectType: "AI Automation",
+  message: "",
+};
 
 // Shared `sx` for every input on the form. Matches the rest of the
 // landing site's component aesthetic:
@@ -108,6 +121,33 @@ export default function ContactForm() {
     INITIAL,
   );
 
+  // Controlled inputs so the form survives a re-render after a server
+  // action runs. React resets uncontrolled form fields between
+  // submissions; mirroring values in state (and re-hydrating from
+  // state.values whenever the server echoes them back on error) keeps
+  // the user's typing intact and only the error helper text changes.
+  const [values, setValues] =
+    useState<Required<ContactValues>>(INITIAL_VALUES);
+
+  useEffect(() => {
+    if (state.status === "error" && state.values) {
+      setValues((current) => ({
+        name: state.values?.name ?? current.name,
+        email: state.values?.email ?? current.email,
+        company: state.values?.company ?? current.company,
+        projectType:
+          state.values?.projectType ?? current.projectType,
+        message: state.values?.message ?? current.message,
+      }));
+    }
+  }, [state]);
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setValues((current) => ({ ...current, [e.target.name]: e.target.value }));
+  };
+
   if (state.status === "success") {
     return (
       <Alert
@@ -163,6 +203,8 @@ export default function ContactForm() {
           required
           fullWidth
           autoComplete="name"
+          value={values.name}
+          onChange={handleChange}
           error={!!fieldErrors.name}
           helperText={fieldErrors.name}
           slotProps={{ inputLabel: { shrink: true } }}
@@ -176,6 +218,8 @@ export default function ContactForm() {
           required
           fullWidth
           autoComplete="email"
+          value={values.email}
+          onChange={handleChange}
           error={!!fieldErrors.email}
           helperText={fieldErrors.email}
           slotProps={{ inputLabel: { shrink: true } }}
@@ -189,6 +233,8 @@ export default function ContactForm() {
           placeholder="Optional"
           fullWidth
           autoComplete="organization"
+          value={values.company}
+          onChange={handleChange}
           error={!!fieldErrors.company}
           helperText={fieldErrors.company}
           slotProps={{ inputLabel: { shrink: true } }}
@@ -198,7 +244,8 @@ export default function ContactForm() {
           name="projectType"
           label="Project type"
           select
-          defaultValue="AI Automation"
+          value={values.projectType}
+          onChange={handleChange}
           fullWidth
           error={!!fieldErrors.projectType}
           helperText={fieldErrors.projectType}
@@ -261,6 +308,8 @@ export default function ContactForm() {
         fullWidth
         multiline
         minRows={5}
+        value={values.message}
+        onChange={handleChange}
         error={!!fieldErrors.message}
         helperText={fieldErrors.message ?? "Min 10 characters. Max 4000."}
         slotProps={{ inputLabel: { shrink: true } }}

@@ -27,10 +27,25 @@ const inputSchema = z.object({
     .max(4000, "Message is too long; keep it under 4000 characters"),
 });
 
+export type ContactValues = {
+  name?: string;
+  email?: string;
+  company?: string;
+  projectType?: string;
+  message?: string;
+};
+
 export type ContactState =
   | { status: "idle" }
   | { status: "success" }
-  | { status: "error"; error: string; fieldErrors?: Record<string, string> };
+  | {
+      status: "error";
+      error: string;
+      fieldErrors?: Record<string, string>;
+      // Echo submitted values back so the client can re-hydrate the
+      // form inputs instead of dropping the user's typing on error.
+      values?: ContactValues;
+    };
 
 // Generic outward-facing error so we don't leak provider-specific details
 // (quota messages, "domain not verified", etc.) to the client. The real
@@ -51,12 +66,20 @@ export async function sendContactMessage(
     return { status: "success" };
   }
 
+  const submitted: ContactValues = {
+    name: String(formData.get("name") ?? ""),
+    email: String(formData.get("email") ?? ""),
+    company: String(formData.get("company") ?? ""),
+    projectType: String(formData.get("projectType") ?? ""),
+    message: String(formData.get("message") ?? ""),
+  };
+
   const parsed = inputSchema.safeParse({
-    name: formData.get("name"),
-    email: formData.get("email"),
-    company: formData.get("company") ?? "",
-    projectType: formData.get("projectType") ?? "Other",
-    message: formData.get("message"),
+    name: submitted.name,
+    email: submitted.email,
+    company: submitted.company,
+    projectType: submitted.projectType || "Other",
+    message: submitted.message,
   });
 
   if (!parsed.success) {
@@ -71,6 +94,7 @@ export async function sendContactMessage(
       status: "error",
       error: "Please check the highlighted fields.",
       fieldErrors,
+      values: submitted,
     };
   }
 
@@ -82,7 +106,7 @@ export async function sendContactMessage(
     console.error(
       "[contact] RESEND_API_KEY or RESEND_TO_EMAIL not configured.",
     );
-    return { status: "error", error: GENERIC_SEND_ERROR };
+    return { status: "error", error: GENERIC_SEND_ERROR, values: submitted };
   }
 
 
@@ -126,12 +150,12 @@ export async function sendContactMessage(
     });
     if (result.error) {
       console.error("[contact] Resend error:", result.error);
-      return { status: "error", error: GENERIC_SEND_ERROR };
+      return { status: "error", error: GENERIC_SEND_ERROR, values: submitted };
     }
     return { status: "success" };
   } catch (err) {
     console.error("[contact] Unexpected error sending message:", err);
-    return { status: "error", error: GENERIC_SEND_ERROR };
+    return { status: "error", error: GENERIC_SEND_ERROR, values: submitted };
   }
 }
 

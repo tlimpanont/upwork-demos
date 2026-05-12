@@ -26,6 +26,16 @@ export async function generateStaticParams() {
 const AUTHOR_NAME = "Theuy Limpanont";
 const AUTHOR_URL = "https://www.linkedin.com/in/theuylimpanont/";
 
+// Google + social previews truncate descriptions past ~160 chars; the
+// authored summary is longer because it doubles as the visible page
+// intro. Clip at a word boundary for the meta tag only.
+function clip(text: string, max = 155): string {
+  if (text.length <= max) return text;
+  const sliced = text.slice(0, max - 1);
+  const lastSpace = sliced.lastIndexOf(" ");
+  return (lastSpace > 60 ? sliced.slice(0, lastSpace) : sliced).trimEnd() + "…";
+}
+
 // Per-case-study metadata so each one has its own page title, search
 // snippet, social preview text, and article-level OG fields instead of
 // inheriting the site default. Falls back gracefully if Keystatic can't
@@ -43,7 +53,7 @@ export async function generateMetadata({
   const entry = await reader.collections.caseStudies.read(slug);
   if (!entry) return {};
   const title = entry.title;
-  const description = entry.summary;
+  const description = clip(entry.summary);
   const url = `/case-studies/${slug}`;
   const publishedTime = entry.publishedAt
     ? new Date(entry.publishedAt).toISOString()

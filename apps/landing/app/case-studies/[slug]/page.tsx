@@ -64,6 +64,12 @@ export async function generateMetadata({
     keywords: [...entry.stack, entry.client, "Case study"],
     authors: [{ name: AUTHOR_NAME, url: AUTHOR_URL }],
     openGraph: {
+      // Next merges the page metadata with the root metadata at the
+      // top level, but `openGraph` itself is replaced wholesale — so we
+      // re-state the site-wide fields (siteName, locale) here, alongside
+      // the article-specific ones below.
+      siteName: "Theuy Limpanont",
+      locale: "en_US",
       title,
       description,
       type: "article",

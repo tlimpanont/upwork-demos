@@ -1,10 +1,23 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
+import { Inter } from "next/font/google";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Providers from "./Providers";
 import "./globals.css";
+
+// Font init lives in the server-rendered layout so Next can emit a
+// proper <link rel="preload"> for the font file. Previously this ran
+// from theme.ts (a "use client" module), which prevented preload and
+// hurt LCP. Restricting weights to the four actually used (400 body,
+// 600 buttons / chips, 700 h3-h4, 800 h1-h2) trims the font payload.
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 const SITE_URL = "https://theuy.nl";
 const LINKEDIN_PARTNER_ID = process.env.NEXT_PUBLIC_LINKEDIN_PARTNER_ID;
@@ -94,7 +107,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
       <head>
         <InitColorSchemeScript attribute="data" defaultMode="system" />
       </head>

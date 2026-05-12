@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Providers from "./Providers";
@@ -83,21 +82,15 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0B0F19" },
-    { media: "(prefers-color-scheme: light)", color: "#FFFFFF" },
-  ],
-  colorScheme: "light dark",
+  themeColor: "#0B0F19",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <InitColorSchemeScript attribute="data" defaultMode="system" />
-      </head>
+    <html lang="en" data-mui-color-scheme="dark" suppressHydrationWarning>
       <body>
         <Providers>{children}</Providers>
         <Analytics />

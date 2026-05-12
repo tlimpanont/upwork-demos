@@ -7,7 +7,6 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import BoltRoundedIcon from "@mui/icons-material/BoltRounded";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
-import ThemeToggle from "./ThemeToggle";
 import MobileMenu from "./MobileMenu";
 import { CAL_URL, withUtm } from "@/lib/utm";
 
@@ -81,7 +80,6 @@ export default function SiteHeader() {
             spacing={1}
             sx={{ alignItems: "center", ml: { xs: 1, md: 3 } }}
           >
-            <ThemeToggle />
             <Button
               href={withUtm(CAL_URL, { campaign: "header", content: "book-a-call" })}
               variant="contained"

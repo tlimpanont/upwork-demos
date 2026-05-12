@@ -9,7 +9,6 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Button from "@mui/material/Button";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import { CAL_URL, withUtm } from "@/lib/utm";
 import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
@@ -84,7 +83,7 @@ export default function ContactPage() {
               Prefer a faster path?
             </Typography>
             <Button
-              href={withUtm(CAL_URL, { campaign: "contact-page", content: "book-a-call" })}
+              href="https://cal.com/theuy"
               variant="outlined"
               size="small"
               startIcon={<CalendarMonthRoundedIcon />}

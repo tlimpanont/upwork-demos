@@ -17,7 +17,6 @@ import {
   type ContactValues,
 } from "./actions";
 import { PROJECT_TYPES } from "./project-types";
-import { CAL_URL, withUtm } from "@/lib/utm";
 
 const INITIAL: ContactState = { status: "idle" };
 
@@ -167,10 +166,7 @@ export default function ContactForm() {
           Meanwhile, if you&apos;d like a slot on the calendar directly:&nbsp;
           <Box
             component="a"
-            href={withUtm(CAL_URL, {
-              campaign: "contact-form",
-              content: "post-submit",
-            })}
+            href="https://cal.com/theuy"
             sx={{
               fontWeight: 600,
               color: "primary.main",

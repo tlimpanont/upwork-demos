@@ -8,7 +8,6 @@ import Box from "@mui/material/Box";
 import BoltRoundedIcon from "@mui/icons-material/BoltRounded";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import MobileMenu from "./MobileMenu";
-import { CAL_URL, withUtm } from "@/lib/utm";
 
 export default function SiteHeader() {
   return (
@@ -91,7 +90,7 @@ export default function SiteHeader() {
             sx={{ alignItems: "center", ml: { xs: 1, md: 3 } }}
           >
             <Button
-              href={withUtm(CAL_URL, { campaign: "header", content: "book-a-call" })}
+              href="https://cal.com/theuy"
               variant="contained"
               size="small"
               startIcon={<CalendarMonthRoundedIcon />}

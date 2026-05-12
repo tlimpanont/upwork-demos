@@ -8,7 +8,6 @@ import Chip from "@mui/material/Chip";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
-import { withUtmIfExternal } from "@/lib/utm";
 
 type HeroContent = {
   chip: string;
@@ -141,10 +140,7 @@ export default function HeroSection({ content }: { content: HeroContent }) {
               <Button
                 size="large"
                 variant="contained"
-                href={withUtmIfExternal(content.primaryCta.href, {
-                  campaign: "hero",
-                  content: "primary-cta",
-                })}
+                href={content.primaryCta.href}
                 startIcon={<CalendarMonthRoundedIcon />}
               >
                 {content.primaryCta.label}
@@ -152,10 +148,7 @@ export default function HeroSection({ content }: { content: HeroContent }) {
               <Button
                 size="large"
                 variant="outlined"
-                href={withUtmIfExternal(content.secondaryCta.href, {
-                  campaign: "hero",
-                  content: "secondary-cta",
-                })}
+                href={content.secondaryCta.href}
                 endIcon={<ArrowForwardRoundedIcon />}
                 sx={{
                   borderColor: "rgba(255, 255, 255, 0.32)",

@@ -12,7 +12,6 @@ import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import BoltRoundedIcon from "@mui/icons-material/BoltRounded";
-import { CAL_URL, withUtm } from "@/lib/utm";
 
 const NAV_ITEMS = [
   { label: "Services", href: "/#services" },
@@ -132,10 +131,7 @@ export default function MobileMenu() {
               fullWidth
               size="large"
               variant="contained"
-              href={withUtm(CAL_URL, {
-                campaign: "mobile-menu",
-                content: "book-a-call",
-              })}
+              href="https://cal.com/theuy"
               startIcon={<CalendarMonthRoundedIcon />}
               onClick={close}
             >

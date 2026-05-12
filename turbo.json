@@ -34,8 +34,7 @@
         "CRON_SECRET",
         "RESEND_API_KEY",
         "RESEND_TO_EMAIL",
-        "RESEND_FROM_EMAIL",
-        "NEXT_PUBLIC_LINKEDIN_PARTNER_ID"
+        "RESEND_FROM_EMAIL"
       ]
     },
     "build": {
@@ -64,8 +63,7 @@
         "CRON_SECRET",
         "RESEND_API_KEY",
         "RESEND_TO_EMAIL",
-        "RESEND_FROM_EMAIL",
-        "NEXT_PUBLIC_LINKEDIN_PARTNER_ID"
+        "RESEND_FROM_EMAIL"
       ]
     },
     "lint": {

@@ -7,7 +7,6 @@ import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
-import { withUtmIfExternal } from "@/lib/utm";
 
 type CTAContent = {
   heading: string;
@@ -103,10 +102,7 @@ export default function CTASection({ content }: { content: CTAContent }) {
               <Button
                 size="large"
                 variant="contained"
-                href={withUtmIfExternal(content.primaryCta.href, {
-                  campaign: "cta-section",
-                  content: "primary-cta",
-                })}
+                href={content.primaryCta.href}
                 startIcon={<CalendarMonthRoundedIcon />}
                 sx={{
                   bgcolor: "common.white",
@@ -120,10 +116,7 @@ export default function CTASection({ content }: { content: CTAContent }) {
               <Button
                 size="large"
                 variant="outlined"
-                href={withUtmIfExternal(content.secondaryCta.href, {
-                  campaign: "cta-section",
-                  content: "secondary-cta",
-                })}
+                href={content.secondaryCta.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 endIcon={<ArrowForwardRoundedIcon />}

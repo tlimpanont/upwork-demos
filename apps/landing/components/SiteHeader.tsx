@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import BoltRoundedIcon from "@mui/icons-material/BoltRounded";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import ThemeToggle from "./ThemeToggle";
+import MobileMenu from "./MobileMenu";
 import { CAL_URL, withUtm } from "@/lib/utm";
 
 export default function SiteHeader() {
@@ -86,9 +87,13 @@ export default function SiteHeader() {
               variant="contained"
               size="small"
               startIcon={<CalendarMonthRoundedIcon />}
+              sx={{ display: { xs: "none", md: "inline-flex" } }}
             >
               Book a call
             </Button>
+            <Box sx={{ display: { xs: "flex", md: "none" } }}>
+              <MobileMenu />
+            </Box>
           </Stack>
         </Toolbar>
       </Container>

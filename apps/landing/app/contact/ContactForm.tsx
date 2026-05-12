@@ -30,8 +30,8 @@ const INITIAL: ContactState = { status: "idle" };
 // row of mixed field types reads as one consistent line. Total visible
 // height = INPUT_HEIGHT (content) + 2 * INPUT_PAD_Y (padding outside the
 // content box thanks to box-sizing: content-box below).
-const INPUT_HEIGHT = 30;
-const INPUT_PAD_Y = "16px";
+const INPUT_HEIGHT = 40;
+const INPUT_PAD_Y = "20px";
 const INPUT_PAD_X = "14px";
 
 const fieldSx = {

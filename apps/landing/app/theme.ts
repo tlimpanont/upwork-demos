@@ -1,12 +1,12 @@
 "use client";
 
 import { createTheme } from "@mui/material/styles";
+import { Inter } from "next/font/google";
 
-// Font is initialised in app/layout.tsx (server component) so Next can
-// emit a proper preload link and ship only the weights we actually use.
-// Here we just consume the CSS variable it exposes.
-const FONT_FAMILY =
-  "var(--font-inter), system-ui, -apple-system, Segoe UI, Roboto, sans-serif";
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 const theme = createTheme({
   cssVariables: {
@@ -78,7 +78,7 @@ const theme = createTheme({
   },
   shape: { borderRadius: 12 },
   typography: {
-    fontFamily: FONT_FAMILY,
+    fontFamily: inter.style.fontFamily,
     h1: { fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1.05 },
     h2: { fontWeight: 800, letterSpacing: "-0.025em", lineHeight: 1.1 },
     h3: { fontWeight: 700, letterSpacing: "-0.02em" },
@@ -113,22 +113,12 @@ const theme = createTheme({
     MuiAppBar: {
       defaultProps: { elevation: 0, color: "transparent", position: "sticky" },
       styleOverrides: {
-        // backdrop-filter blur is GPU-expensive and noticeably hurts FPS
-        // on low-end mobile. Skip it below the md breakpoint and lean on
-        // a slightly more opaque background instead — the visual delta
-        // is negligible at phone widths.
         root: ({ theme }) => ({
+          backdropFilter: "saturate(180%) blur(12px)",
           borderBottom: "1px solid var(--mui-palette-divider)",
-          backgroundColor: "rgba(11, 15, 25, 0.92)",
-          [theme.breakpoints.up("md")]: {
-            backdropFilter: "saturate(180%) blur(12px)",
-            backgroundColor: "rgba(11, 15, 25, 0.72)",
-          },
+          backgroundColor: "rgba(11, 15, 25, 0.72)",
           ...theme.applyStyles("light", {
-            backgroundColor: "rgba(255, 255, 255, 0.95)",
-            [theme.breakpoints.up("md")]: {
-              backgroundColor: "rgba(255, 255, 255, 0.85)",
-            },
+            backgroundColor: "rgba(255, 255, 255, 0.85)",
           }),
         }),
       },

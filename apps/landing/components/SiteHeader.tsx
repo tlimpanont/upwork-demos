@@ -16,9 +16,18 @@ export default function SiteHeader() {
       <Container>
         <Toolbar disableGutters sx={{ minHeight: { xs: 64, md: 72 } }}>
           <Stack
+            component="a"
+            href="/"
+            aria-label="Theuy Limpanont, home"
             direction="row"
             spacing={1.25}
-            sx={{ alignItems: "center", flexGrow: 1 }}
+            sx={{
+              alignItems: "center",
+              textDecoration: "none",
+              color: "inherit",
+              transition: "opacity 120ms ease",
+              "&:hover": { opacity: 0.85 },
+            }}
           >
             <Box
               sx={{
@@ -37,6 +46,7 @@ export default function SiteHeader() {
               Theuy Limpanont
             </Typography>
           </Stack>
+          <Box sx={{ flexGrow: 1 }} />
           <Stack
             direction="row"
             spacing={3}

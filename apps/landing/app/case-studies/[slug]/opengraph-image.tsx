@@ -111,13 +111,19 @@ export default async function CaseStudyOpenGraphImage({
           <div
             style={{
               display: "flex",
-              fontSize: 22,
+              alignItems: "center",
+              padding: "10px 22px",
+              borderRadius: 999,
+              background:
+                "linear-gradient(90deg, rgba(165,180,252,0.22), rgba(125,211,252,0.18))",
+              border: "1px solid rgba(165,180,252,0.55)",
+              fontSize: 20,
               fontWeight: 700,
-              color: "#7DD3FC",
-              letterSpacing: "-0.01em",
+              color: "#FFFFFF",
+              letterSpacing: "0.01em",
             }}
           >
-            theuy.limpanont
+            Read on theuy.nl →
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Theuy Limpanont · Enterprise AI and Custom Software",
     short_name: "Theuy Limpanont",
     description:
-      "Senior engineering partner designing AI-powered platforms, automation systems, and scalable SaaS applications that deliver measurable business results.",
+      "Senior engineering partner shipping AI platforms, automation, and SaaS that deliver measurable enterprise outcomes.",
     start_url: "/",
     display: "standalone",
     background_color: "#0B0F19",

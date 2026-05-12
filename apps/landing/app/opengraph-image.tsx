@@ -104,7 +104,7 @@ export default async function OpenGraphImage() {
             style={{
               display: "flex",
               gap: 24,
-              marginTop: 36,
+              marginTop: 32,
               fontSize: 17,
               fontWeight: 600,
               letterSpacing: "0.16em",
@@ -117,6 +117,25 @@ export default async function OpenGraphImage() {
             <span>Computer Vision</span>
             <span>SaaS</span>
             <span>ERP Integration</span>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              alignSelf: "flex-start",
+              marginTop: 28,
+              padding: "12px 26px",
+              borderRadius: 999,
+              background:
+                "linear-gradient(90deg, rgba(165,180,252,0.22), rgba(125,211,252,0.18))",
+              border: "1px solid rgba(165,180,252,0.55)",
+              fontSize: 22,
+              fontWeight: 700,
+              color: "#FFFFFF",
+              letterSpacing: "0.02em",
+            }}
+          >
+            Book a discovery call → theuy.nl
           </div>
         </div>
       </div>

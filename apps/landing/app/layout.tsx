@@ -11,8 +11,11 @@ const LINKEDIN_PARTNER_ID = process.env.NEXT_PUBLIC_LINKEDIN_PARTNER_ID;
 const SITE_NAME = "Theuy Limpanont";
 const SITE_TITLE =
   "Enterprise AI and Custom Software Solutions · Theuy Limpanont";
+// Keep this between 110 and 160 chars — that's the sweet spot for
+// Google snippets and social previews. Longer descriptions get
+// truncated; shorter ones leave keyword real estate on the table.
 const SITE_DESCRIPTION =
-  "Senior engineering partner designing and developing AI-powered platforms, automation systems, and scalable SaaS applications that deliver measurable business results. Enterprise AI, computer vision, predictive analytics, ERP integration, and custom SaaS development.";
+  "Senior engineering partner shipping AI platforms, automation, and SaaS that deliver measurable enterprise outcomes. Book a discovery call.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

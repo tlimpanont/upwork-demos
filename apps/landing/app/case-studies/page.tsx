@@ -10,6 +10,7 @@ import { createReader } from "@keystatic/core/reader";
 import keystaticConfig from "../../keystatic.config";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import TrackClick from "@/components/TrackClick";
 
 export const metadata = {
   // Bare title — the root layout appends "· Theuy Limpanont" via the
@@ -52,8 +53,12 @@ export default async function CaseStudiesIndexPage() {
           ) : (
             <Stack spacing={3}>
               {sorted.map(({ slug, entry }) => (
-                <Link
+                <TrackClick
                   key={slug}
+                  event="case_study_click"
+                  data={{ slug }}
+                >
+                <Link
                   href={`/case-studies/${slug}`}
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
@@ -108,6 +113,7 @@ export default async function CaseStudiesIndexPage() {
                   </Stack>
                   </Paper>
                 </Link>
+                </TrackClick>
               ))}
             </Stack>
           )}

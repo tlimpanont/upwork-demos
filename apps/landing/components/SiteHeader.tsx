@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import BoltRoundedIcon from "@mui/icons-material/BoltRounded";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import MobileMenu from "./MobileMenu";
+import TrackClick from "./TrackClick";
 
 export default function SiteHeader() {
   return (
@@ -51,53 +52,63 @@ export default function SiteHeader() {
             spacing={3}
             sx={{ alignItems: "center", display: { xs: "none", md: "flex" } }}
           >
-            <Typography
-              component="a"
-              href="/#services"
-              variant="body2"
-              sx={{ color: "text.secondary", "&:hover": { color: "text.primary" } }}
-            >
-              Services
-            </Typography>
-            <Typography
-              component="a"
-              href="/#demos"
-              variant="body2"
-              sx={{ color: "text.secondary", "&:hover": { color: "text.primary" } }}
-            >
-              Work
-            </Typography>
-            <Typography
-              component="a"
-              href="/case-studies"
-              variant="body2"
-              sx={{ color: "text.secondary", "&:hover": { color: "text.primary" } }}
-            >
-              Case studies
-            </Typography>
-            <Typography
-              component="a"
-              href="/contact"
-              variant="body2"
-              sx={{ color: "text.secondary", "&:hover": { color: "text.primary" } }}
-            >
-              Contact
-            </Typography>
+            <TrackClick event="nav_click" data={{ target: "services", surface: "desktop" }}>
+              <Typography
+                component="a"
+                href="/#services"
+                variant="body2"
+                sx={{ color: "text.secondary", "&:hover": { color: "text.primary" } }}
+              >
+                Services
+              </Typography>
+            </TrackClick>
+            <TrackClick event="nav_click" data={{ target: "work", surface: "desktop" }}>
+              <Typography
+                component="a"
+                href="/#demos"
+                variant="body2"
+                sx={{ color: "text.secondary", "&:hover": { color: "text.primary" } }}
+              >
+                Work
+              </Typography>
+            </TrackClick>
+            <TrackClick event="nav_click" data={{ target: "case_studies", surface: "desktop" }}>
+              <Typography
+                component="a"
+                href="/case-studies"
+                variant="body2"
+                sx={{ color: "text.secondary", "&:hover": { color: "text.primary" } }}
+              >
+                Case studies
+              </Typography>
+            </TrackClick>
+            <TrackClick event="nav_click" data={{ target: "contact", surface: "desktop" }}>
+              <Typography
+                component="a"
+                href="/contact"
+                variant="body2"
+                sx={{ color: "text.secondary", "&:hover": { color: "text.primary" } }}
+              >
+                Contact
+              </Typography>
+            </TrackClick>
           </Stack>
           <Stack
             direction="row"
             spacing={1}
             sx={{ alignItems: "center", ml: { xs: 1, md: 3 } }}
           >
-            <Button
-              href="https://cal.com/theuy"
-              variant="contained"
-              size="small"
-              startIcon={<CalendarMonthRoundedIcon />}
-              sx={{ display: { xs: "none", md: "inline-flex" } }}
-            >
-              Book a call
-            </Button>
+            <TrackClick event="cta_book_a_call" data={{ surface: "header" }}>
+              <Button
+                href="https://cal.com/theuy"
+                variant="contained"
+                size="small"
+                startIcon={<CalendarMonthRoundedIcon />}
+                sx={{ display: { xs: "none", md: "inline-flex" } }}
+              >
+                Book a call
+              </Button>
+            </TrackClick>
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
               <MobileMenu />
             </Box>

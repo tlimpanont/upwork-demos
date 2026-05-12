@@ -1,7 +1,8 @@
 "use client";
 
-import { useActionState, useEffect, useState } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import type { ChangeEvent } from "react";
+import { track } from "@vercel/analytics";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
@@ -128,6 +129,11 @@ export default function ContactForm() {
   const [values, setValues] =
     useState<Required<ContactValues>>(INITIAL_VALUES);
 
+  // Fire Vercel Analytics events as the action result transitions.
+  // useRef guards against double-firing under React 19 Strict Mode and
+  // against re-firing on unrelated re-renders that don't change state.
+  const lastTrackedStatus = useRef<typeof state.status | null>(null);
+
   useEffect(() => {
     if (state.status === "error" && state.values) {
       setValues((current) => ({
@@ -139,7 +145,23 @@ export default function ContactForm() {
         message: state.values?.message ?? current.message,
       }));
     }
-  }, [state]);
+    if (state.status === "success" && lastTrackedStatus.current !== "success") {
+      track("contact_form_submitted", {
+        project_type: values.projectType || "Other",
+      });
+      lastTrackedStatus.current = "success";
+    } else if (
+      state.status === "error" &&
+      lastTrackedStatus.current !== "error"
+    ) {
+      track("contact_form_error", {
+        kind: state.fieldErrors && Object.keys(state.fieldErrors).length > 0
+          ? "validation"
+          : "send",
+      });
+      lastTrackedStatus.current = "error";
+    }
+  }, [state, values.projectType]);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,

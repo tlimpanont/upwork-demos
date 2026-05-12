@@ -9,6 +9,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Button from "@mui/material/Button";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import TrackClick from "@/components/TrackClick";
 import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
@@ -82,24 +83,28 @@ export default function ContactPage() {
             <Typography variant="body2" color="text.secondary">
               Prefer a faster path?
             </Typography>
-            <Button
-              href="https://cal.com/theuy"
-              variant="outlined"
-              size="small"
-              startIcon={<CalendarMonthRoundedIcon />}
-            >
-              Book a discovery call
-            </Button>
-            <Button
-              href="https://www.linkedin.com/in/theuylimpanont/"
-              target="_blank"
-              rel="noopener noreferrer"
-              variant="text"
-              size="small"
-              startIcon={<LinkedInIcon />}
-            >
-              Message on LinkedIn
-            </Button>
+            <TrackClick event="cta_book_a_call" data={{ surface: "contact_page" }}>
+              <Button
+                href="https://cal.com/theuy"
+                variant="outlined"
+                size="small"
+                startIcon={<CalendarMonthRoundedIcon />}
+              >
+                Book a discovery call
+              </Button>
+            </TrackClick>
+            <TrackClick event="social_click" data={{ target: "linkedin", surface: "contact_page" }}>
+              <Button
+                href="https://www.linkedin.com/in/theuylimpanont/"
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="text"
+                size="small"
+                startIcon={<LinkedInIcon />}
+              >
+                Message on LinkedIn
+              </Button>
+            </TrackClick>
           </Stack>
         </Container>
       </Box>

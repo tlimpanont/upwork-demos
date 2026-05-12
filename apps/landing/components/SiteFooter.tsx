@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import TrackClick from "./TrackClick";
 
 export default function SiteFooter() {
   const year = new Date().getFullYear();
@@ -36,21 +37,33 @@ export default function SiteFooter() {
             spacing={2.5}
             sx={{ alignItems: "center" }}
           >
-            <FooterLink href="/#services">Services</FooterLink>
-            <FooterLink href="/#demos">Work</FooterLink>
-            <FooterLink href="/case-studies">Case studies</FooterLink>
-            <FooterLink href="/contact">Contact</FooterLink>
+            <TrackClick event="nav_click" data={{ target: "services", surface: "footer" }}>
+              <FooterLink href="/#services">Services</FooterLink>
+            </TrackClick>
+            <TrackClick event="nav_click" data={{ target: "work", surface: "footer" }}>
+              <FooterLink href="/#demos">Work</FooterLink>
+            </TrackClick>
+            <TrackClick event="nav_click" data={{ target: "case_studies", surface: "footer" }}>
+              <FooterLink href="/case-studies">Case studies</FooterLink>
+            </TrackClick>
+            <TrackClick event="nav_click" data={{ target: "contact", surface: "footer" }}>
+              <FooterLink href="/contact">Contact</FooterLink>
+            </TrackClick>
             <Stack direction="row" spacing={0.5} sx={{ ml: 0.5 }}>
-              <SocialIcon
-                href="https://github.com/tlimpanont"
-                label="GitHub"
-                icon={<GitHubIcon fontSize="small" />}
-              />
-              <SocialIcon
-                href="https://www.linkedin.com/in/theuylimpanont/"
-                label="LinkedIn"
-                icon={<LinkedInIcon fontSize="small" />}
-              />
+              <TrackClick event="social_click" data={{ target: "github", surface: "footer" }}>
+                <SocialIcon
+                  href="https://github.com/tlimpanont"
+                  label="GitHub"
+                  icon={<GitHubIcon fontSize="small" />}
+                />
+              </TrackClick>
+              <TrackClick event="social_click" data={{ target: "linkedin", surface: "footer" }}>
+                <SocialIcon
+                  href="https://www.linkedin.com/in/theuylimpanont/"
+                  label="LinkedIn"
+                  icon={<LinkedInIcon fontSize="small" />}
+                />
+              </TrackClick>
             </Stack>
           </Stack>
         </Stack>

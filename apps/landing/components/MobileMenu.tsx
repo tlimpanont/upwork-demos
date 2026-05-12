@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { track } from "@vercel/analytics";
 import IconButton from "@mui/material/IconButton";
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
@@ -14,20 +15,24 @@ import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import BoltRoundedIcon from "@mui/icons-material/BoltRounded";
 
 const NAV_ITEMS = [
-  { label: "Services", href: "/#services" },
-  { label: "Work", href: "/#demos" },
-  { label: "Case studies", href: "/case-studies" },
-  { label: "Contact", href: "/contact" },
+  { label: "Services", href: "/#services", target: "services" },
+  { label: "Work", href: "/#demos", target: "work" },
+  { label: "Case studies", href: "/case-studies", target: "case_studies" },
+  { label: "Contact", href: "/contact", target: "contact" },
 ];
 
 export default function MobileMenu() {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
+  const openMenu = () => {
+    track("mobile_menu_open");
+    setOpen(true);
+  };
 
   return (
     <>
       <IconButton
-        onClick={() => setOpen(true)}
+        onClick={openMenu}
         aria-label="Open menu"
         edge="end"
         sx={{ color: "text.primary" }}
@@ -108,7 +113,10 @@ export default function MobileMenu() {
                 key={item.href}
                 component={Link}
                 href={item.href}
-                onClick={close}
+                onClick={() => {
+                  track("nav_click", { target: item.target, surface: "mobile" });
+                  close();
+                }}
                 sx={{
                   fontSize: "1.25rem",
                   fontWeight: 600,
@@ -133,7 +141,10 @@ export default function MobileMenu() {
               variant="contained"
               href="https://cal.com/theuy"
               startIcon={<CalendarMonthRoundedIcon />}
-              onClick={close}
+              onClick={() => {
+                track("cta_book_a_call", { surface: "mobile_menu" });
+                close();
+              }}
             >
               Book a call
             </Button>

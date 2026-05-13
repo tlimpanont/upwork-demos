@@ -1,10 +1,10 @@
-chip: "Enterprise AI · Custom software · Senior engineering partner"
+chip: Enterprise AI · Custom software · Senior engineering partner
 headingLead: Enterprise AI and
 headingAccent: Custom Software Solutions
 subheading: >-
-  I design and develop AI-powered platforms, automation systems, and scalable
-  SaaS applications that deliver measurable business results — as a senior
-  engineering partner, not an agency layer.
+  HELLO!!!! I design and develop AI-powered platforms, automation systems, and
+  scalable SaaS applications that deliver measurable business results — as a
+  senior engineering partner, not an agency layer.
 supportingBullets:
   - Reduce manual work with intelligent automation
   - Detect anomalies and quality issues using computer vision
@@ -13,7 +13,7 @@ supportingBullets:
   - Gain real-time insights with analytics dashboards
 primaryCta:
   label: Book a Discovery Call
-  href: "https://cal.com/theuy"
+  href: https://cal.com/theuy
 secondaryCta:
   label: View Portfolio
-  href: "#portfolio"
+  href: '#portfolio'

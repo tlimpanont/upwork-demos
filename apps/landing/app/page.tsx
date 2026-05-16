@@ -6,7 +6,6 @@ import SiteHeader from "@/components/SiteHeader";
 import HeroSection from "@/components/HeroSection";
 import ServicesSection from "@/components/ServicesSection";
 import DemoShowcase from "@/components/DemoShowcase";
-import CaseStudiesSection from "@/components/CaseStudiesSection";
 import IndustriesSection from "@/components/IndustriesSection";
 import OutcomesSection from "@/components/OutcomesSection";
 import ArchitectureSection from "@/components/ArchitectureSection";
@@ -34,7 +33,6 @@ export default async function HomePage() {
     faq,
     trust,
     cta,
-    caseStudyEntries,
   ] = await Promise.all([
     reader.singletons.hero.readOrThrow(),
     reader.singletons.services.readOrThrow(),
@@ -47,28 +45,7 @@ export default async function HomePage() {
     reader.singletons.faq.readOrThrow(),
     reader.singletons.trust.readOrThrow(),
     reader.singletons.cta.readOrThrow(),
-    reader.collections.caseStudies.all(),
   ]);
-
-  const featuredStudies = [...caseStudyEntries]
-    .sort((a, b) => {
-      const aTime = a.entry.publishedAt
-        ? new Date(a.entry.publishedAt).getTime()
-        : 0;
-      const bTime = b.entry.publishedAt
-        ? new Date(b.entry.publishedAt).getTime()
-        : 0;
-      return bTime - aTime;
-    })
-    .slice(0, 6)
-    .map(({ slug, entry }) => ({
-      slug,
-      title: entry.title,
-      summary: entry.summary,
-      client: entry.client,
-      stack: entry.stack,
-      publishedAt: entry.publishedAt,
-    }));
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
@@ -77,7 +54,6 @@ export default async function HomePage() {
         <HeroSection content={hero} />
         <ServicesSection content={services} />
         <DemoShowcase content={demoShowcase} />
-        <CaseStudiesSection studies={featuredStudies} />
         <IndustriesSection content={industries} />
         <OutcomesSection content={outcomes} />
         <ArchitectureSection content={architecture} />

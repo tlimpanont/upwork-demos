@@ -1,6 +1,6 @@
 overline: Featured projects
-heading: Flagship platforms I've shipped
+heading: Flagship platforms shipped end-to-end
 intro: >-
-  Real production systems built end-to-end for AI automation, computer vision,
-  multi-tenant SaaS analytics, and AI-driven workflow automation. Each one
-  closes a measurable business gap, not a demo loop.
+  Real systems built end-to-end. Each card opens a live demo you can break, or
+  a written case study covering the business gap it closes, the architecture
+  behind it, and the tradeoffs that survived production.

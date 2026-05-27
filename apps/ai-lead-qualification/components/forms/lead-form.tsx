@@ -4,6 +4,7 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckCircle2, Loader2, Sparkles } from "lucide-react";
+import { track } from "@vercel/analytics";
 
 import {
   leadFormSchema,
@@ -56,7 +57,14 @@ export function LeadForm() {
     const r = await submitLead(values);
     setResult(r);
     setSubmitting(false);
-    if (r.ok) reset({ services: [] });
+    if (r.ok) {
+      track("lead_qualified", {
+        services_count: values.services?.length ?? 0,
+        has_budget: Boolean(values.budget),
+        has_company_size: Boolean(values.companySize),
+      });
+      reset({ services: [] });
+    }
   });
 
   if (result?.ok) {

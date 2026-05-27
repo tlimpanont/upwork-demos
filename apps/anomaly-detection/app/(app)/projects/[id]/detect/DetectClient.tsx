@@ -1,7 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useCallback, useMemo, useState, useTransition } from "react";
+import { useCallback, useMemo, useRef, useState, useTransition } from "react";
+import { track } from "@vercel/analytics";
 import {
   AlertCircle,
   Check,
@@ -119,6 +120,7 @@ export function DetectClient({
   const [ruleSavedAt, setRuleSavedAt] = useState<number | null>(null);
   const [ruleError, setRuleError] = useState<string | null>(null);
   const [, startTransition] = useTransition();
+  const hasTrackedDetection = useRef(false);
 
   // Index detections by imageId so the sidebar list can show per-image
   // status without scanning the array each render.
@@ -171,6 +173,10 @@ export function DetectClient({
         if (body.detection?._id) {
           setLatestDetectionId(body.detection._id);
         }
+        if (!hasTrackedDetection.current) {
+          hasTrackedDetection.current = true;
+          track("anomaly_detection_run", { mode: mode.kind });
+        }
       } finally {
         setInFlight((cur) => {
           const next = new Set(cur);
@@ -179,7 +185,7 @@ export function DetectClient({
         });
       }
     },
-    [projectId],
+    [projectId, mode.kind],
   );
 
   async function handleDetect() {

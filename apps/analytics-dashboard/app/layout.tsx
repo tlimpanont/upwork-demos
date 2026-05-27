@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
+import { Analytics } from "@vercel/analytics/next";
 import Providers from "./Providers";
 import "./globals.css";
 
@@ -19,6 +20,7 @@ export default function RootLayout({
       </head>
       <body>
         <Providers>{children}</Providers>
+        <Analytics />
       </body>
     </html>
   );

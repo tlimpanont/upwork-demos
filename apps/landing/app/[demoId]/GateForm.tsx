@@ -92,8 +92,11 @@ export default function GateForm({ demoId, demoName, returnTo }: GateFormProps) 
   useEffect(() => {
     if (viewedRef.current) return;
     viewedRef.current = true;
-    track("demo_gate_viewed", { demo_id: demoId });
-  }, [demoId]);
+    track("demo_gate_viewed", {
+      demo_id: demoId,
+      deep_linked: Boolean(returnTo),
+    });
+  }, [demoId, returnTo]);
 
   // Fire demo_gate_submitted / demo_gate_error on action result transitions.
   const lastTrackedStatus = useRef<typeof state.status | null>(null);
@@ -109,7 +112,10 @@ export default function GateForm({ demoId, demoName, returnTo }: GateFormProps) 
       state.status === "success" &&
       lastTrackedStatus.current !== "success"
     ) {
-      track("demo_gate_submitted", { demo_id: demoId });
+      track("demo_gate_submitted", {
+        demo_id: demoId,
+        deep_linked: Boolean(returnTo),
+      });
       lastTrackedStatus.current = "success";
       // Short delay so the analytics beacon has a chance to flush before
       // we navigate the tab away. Vercel Analytics uses sendBeacon under

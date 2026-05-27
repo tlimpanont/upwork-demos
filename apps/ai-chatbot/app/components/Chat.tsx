@@ -1,16 +1,35 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import {
   AssistantRuntimeProvider,
   ThreadPrimitive,
   MessagePrimitive,
   ComposerPrimitive,
   useMessagePartText,
+  useThread,
 } from "@assistant-ui/react";
 import { useChatRuntime } from "@assistant-ui/react-ai-sdk";
+import { track } from "@vercel/analytics";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Link from "next/link";
+
+// Fires `chatbot_message_sent` once per user message. Lives inside the
+// runtime provider so it can observe thread state; renders nothing.
+function ChatEngagementTracker() {
+  const userMessageCount = useThread(
+    (s) => s.messages.filter((m) => m.role === "user").length,
+  );
+  const lastTracked = useRef(0);
+  useEffect(() => {
+    if (userMessageCount > lastTracked.current) {
+      track("chatbot_message_sent", { index: userMessageCount });
+      lastTracked.current = userMessageCount;
+    }
+  }, [userMessageCount]);
+  return null;
+}
 
 function UserTextPart() {
   const { text } = useMessagePartText();
@@ -90,6 +109,7 @@ export default function Chat() {
 
   return (
     <AssistantRuntimeProvider runtime={runtime}>
+      <ChatEngagementTracker />
       <div className="flex flex-col h-screen bg-gray-50">
         <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -51,6 +52,7 @@ export default function RootLayout({
         <footer className="text-center text-xs text-gray-500 py-6 border-t border-gray-200">
           AI Document Processing System · Powered by OpenAI + Vercel
         </footer>
+        <Analytics />
       </body>
     </html>
   );

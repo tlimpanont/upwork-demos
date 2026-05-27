@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { track } from "@vercel/analytics";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
@@ -67,6 +68,7 @@ export default function GraphQlPlayground() {
   const [query, setQuery] = useState(EXAMPLES[0].query);
   const [result, setResult] = useState<string>("");
   const [running, setRunning] = useState(false);
+  const hasTrackedRun = useRef(false);
 
   const onPickExample = (idx: number) => {
     setTab(idx);
@@ -76,6 +78,12 @@ export default function GraphQlPlayground() {
 
   const run = async () => {
     setRunning(true);
+    if (!hasTrackedRun.current) {
+      hasTrackedRun.current = true;
+      track("analytics_query_run", {
+        example: EXAMPLES[tab]?.label ?? "custom",
+      });
+    }
     try {
       const res = await fetch("/api/graphql", {
         method: "POST",

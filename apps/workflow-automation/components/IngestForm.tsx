@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { track } from "@vercel/analytics";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
@@ -66,6 +67,7 @@ export default function IngestForm() {
   const [running, setRunning] = useState(false);
   const [result, setResult] = useState<IngestResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const hasTrackedRun = useRef(false);
 
   const submit = async () => {
     setRunning(true);
@@ -82,6 +84,13 @@ export default function IngestForm() {
         setError(json.error ?? "Request failed");
       } else {
         setResult(json);
+        if (!hasTrackedRun.current) {
+          hasTrackedRun.current = true;
+          track("workflow_ingest_run", {
+            type,
+            routed_to: json.routedTo ?? "none",
+          });
+        }
         // Re-render the server tree so the new row shows up in the table.
         router.refresh();
       }

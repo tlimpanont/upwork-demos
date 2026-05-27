@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import { track } from "@vercel/analytics";
 import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -14,8 +15,15 @@ export default function SignupForm() {
     null,
   );
 
+  // Fires on submit intent. The success path redirects server-side to
+  // /dashboard, so this is the last point we can fire from the client.
+  const wrappedAction = (formData: FormData) => {
+    track("saas_signup_submitted");
+    return formAction(formData);
+  };
+
   return (
-    <Box component="form" action={formAction} noValidate>
+    <Box component="form" action={wrappedAction} noValidate>
       <Stack spacing={2}>
         {state?.error ? <Alert severity="error">{state.error}</Alert> : null}
         <TextField name="name" label="Full name" autoComplete="name" required />

@@ -31,6 +31,7 @@
     "@mui/material": "^9.0.0",
     "@mui/material-nextjs": "^9.0.0",
     "@prisma/client": "^6.18.0",
+    "@vercel/analytics": "^2.0.1",
     "graphql": "^16.11.0",
     "graphql-yoga": "^5.16.0",
     "next": "16.2.4",

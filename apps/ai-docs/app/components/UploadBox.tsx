@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, DragEvent, ChangeEvent } from "react";
+import { track } from "@vercel/analytics";
 
 type FileStatus = "queued" | "uploading" | "processing" | "processed" | "failed";
 
@@ -24,6 +25,7 @@ export default function UploadBox({ onUploadComplete }: UploadBoxProps) {
   const [entries, setEntries] = useState<FileEntry[]>([]);
   const [isWorking, setIsWorking] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const hasTrackedProcessed = useRef(false);
 
   function updateEntry(key: string, patch: Partial<FileEntry>) {
     setEntries((prev) => prev.map((e) => (e.key === key ? { ...e, ...patch } : e)));
@@ -50,6 +52,12 @@ export default function UploadBox({ onUploadComplete }: UploadBoxProps) {
       if (!processRes.ok) throw new Error(processData.error);
 
       updateEntry(entry.key, { status: "processed" });
+      if (!hasTrackedProcessed.current) {
+        hasTrackedProcessed.current = true;
+        track("docs_document_processed", {
+          size_kb: Math.round(entry.file.size / 1024),
+        });
+      }
       onUploadComplete?.();
     } catch (err) {
       updateEntry(entry.key, {

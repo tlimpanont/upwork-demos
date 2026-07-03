@@ -4,7 +4,6 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Button from "@mui/material/Button";
 import SiteHeader from "@/components/SiteHeader";
@@ -83,16 +82,6 @@ export default function ContactPage() {
             <Typography variant="body2" color="text.secondary">
               Prefer a faster path?
             </Typography>
-            <TrackClick event="cta_book_a_call" data={{ surface: "contact_page" }}>
-              <Button
-                href="https://cal.com/theuy"
-                variant="outlined"
-                size="small"
-                startIcon={<CalendarMonthRoundedIcon />}
-              >
-                Book a discovery call
-              </Button>
-            </TrackClick>
             <TrackClick event="social_click" data={{ target: "linkedin", surface: "contact_page" }}>
               <Button
                 href="https://www.linkedin.com/in/theuylimpanont/"

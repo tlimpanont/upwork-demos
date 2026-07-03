@@ -3,10 +3,8 @@ import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import BoltRoundedIcon from "@mui/icons-material/BoltRounded";
-import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import MobileMenu from "./MobileMenu";
 import TrackClick from "./TrackClick";
 
@@ -98,17 +96,6 @@ export default function SiteHeader() {
             spacing={1}
             sx={{ alignItems: "center", ml: { xs: 1, md: 3 } }}
           >
-            <TrackClick event="cta_book_a_call" data={{ surface: "header" }}>
-              <Button
-                href="https://cal.com/theuy"
-                variant="contained"
-                size="small"
-                startIcon={<CalendarMonthRoundedIcon />}
-                sx={{ display: { xs: "none", md: "inline-flex" } }}
-              >
-                Book a call
-              </Button>
-            </TrackClick>
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
               <MobileMenu />
             </Box>

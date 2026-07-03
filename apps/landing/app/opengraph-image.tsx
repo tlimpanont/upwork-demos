@@ -135,7 +135,7 @@ export default async function OpenGraphImage() {
               letterSpacing: "0.02em",
             }}
           >
-            Book a discovery call → theuy.nl
+            Get in touch → theuy.nl
           </div>
         </div>
       </div>

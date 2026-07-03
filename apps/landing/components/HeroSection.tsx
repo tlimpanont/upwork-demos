@@ -6,7 +6,6 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
-import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import TrackClick from "./TrackClick";
 
@@ -138,30 +137,12 @@ export default function HeroSection({ content }: { content: HeroContent }) {
               spacing={2}
               sx={{ pt: 1, width: { xs: "100%", sm: "auto" } }}
             >
-              <TrackClick event="cta_book_a_call" data={{ surface: "hero" }}>
-                <Button
-                  size="large"
-                  variant="contained"
-                  href={content.primaryCta.href}
-                  startIcon={<CalendarMonthRoundedIcon />}
-                >
-                  {content.primaryCta.label}
-                </Button>
-              </TrackClick>
               <TrackClick event="cta_secondary" data={{ surface: "hero", target: content.secondaryCta.href }}>
               <Button
                 size="large"
-                variant="outlined"
+                variant="contained"
                 href={content.secondaryCta.href}
                 endIcon={<ArrowForwardRoundedIcon />}
-                sx={{
-                  borderColor: "rgba(255, 255, 255, 0.32)",
-                  color: "text.primary",
-                  "&:hover": {
-                    borderColor: "text.primary",
-                    bgcolor: "rgba(255, 255, 255, 0.06)",
-                  },
-                }}
               >
                 {content.secondaryCta.label}
               </Button>

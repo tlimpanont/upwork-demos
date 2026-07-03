@@ -12,7 +12,7 @@ const SITE_TITLE =
 // Google snippets and social previews. Longer descriptions get
 // truncated; shorter ones leave keyword real estate on the table.
 const SITE_DESCRIPTION =
-  "Senior engineering partner shipping AI platforms, automation, and SaaS that deliver measurable enterprise outcomes. Book a discovery call.";
+  "Senior engineering partner shipping AI platforms, automation, and SaaS that deliver measurable enterprise outcomes. Get in touch.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

@@ -185,19 +185,6 @@ export default function ContactForm() {
         </Typography>
         <Typography variant="body2">
           I&apos;ll reply within one working day, often the same day.
-          Meanwhile, if you&apos;d like a slot on the calendar directly:&nbsp;
-          <Box
-            component="a"
-            href="https://cal.com/theuy"
-            sx={{
-              fontWeight: 600,
-              color: "primary.main",
-              textDecoration: "underline",
-            }}
-          >
-            book a discovery call
-          </Box>
-          .
         </Typography>
       </Alert>
     );

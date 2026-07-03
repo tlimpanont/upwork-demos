@@ -8,10 +8,8 @@ import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import BoltRoundedIcon from "@mui/icons-material/BoltRounded";
 
 const NAV_ITEMS = [
@@ -133,22 +131,6 @@ export default function MobileMenu() {
               </Typography>
             ))}
           </Stack>
-
-          <Box sx={{ pt: 3 }}>
-            <Button
-              fullWidth
-              size="large"
-              variant="contained"
-              href="https://cal.com/theuy"
-              startIcon={<CalendarMonthRoundedIcon />}
-              onClick={() => {
-                track("cta_book_a_call", { surface: "mobile_menu" });
-                close();
-              }}
-            >
-              Book a call
-            </Button>
-          </Box>
         </Box>
       </Drawer>
     </>

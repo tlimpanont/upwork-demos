@@ -6,7 +6,6 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
-import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import TrackClick from "./TrackClick";
 
 type CTAContent = {
@@ -100,37 +99,17 @@ export default function CTASection({ content }: { content: CTAContent }) {
               spacing={2}
               sx={{ width: { xs: "100%", md: "auto" } }}
             >
-              <TrackClick event="cta_book_a_call" data={{ surface: "cta_section" }}>
-                <Button
-                  size="large"
-                  variant="contained"
-                  href={content.primaryCta.href}
-                  startIcon={<CalendarMonthRoundedIcon />}
-                  sx={{
-                    bgcolor: "common.white",
-                    color: "#1F1B6B",
-                    fontWeight: 700,
-                    "&:hover": { bgcolor: "rgba(255,255,255,0.92)" },
-                  }}
-                >
-                  {content.primaryCta.label}
-                </Button>
-              </TrackClick>
               <TrackClick event="cta_secondary" data={{ surface: "cta_section", target: content.secondaryCta.href }}>
               <Button
                 size="large"
-                variant="outlined"
+                variant="contained"
                 href={content.secondaryCta.href}
-                target="_blank"
-                rel="noopener noreferrer"
                 endIcon={<ArrowForwardRoundedIcon />}
                 sx={{
-                  borderColor: "rgba(255,255,255,0.7)",
-                  color: "common.white",
-                  "&:hover": {
-                    borderColor: "common.white",
-                    bgcolor: "rgba(255,255,255,0.08)",
-                  },
+                  bgcolor: "common.white",
+                  color: "#1F1B6B",
+                  fontWeight: 700,
+                  "&:hover": { bgcolor: "rgba(255,255,255,0.92)" },
                 }}
               >
                 {content.secondaryCta.label}
